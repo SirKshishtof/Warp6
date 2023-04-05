@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.start = new System.Windows.Forms.Button();
+            this.OnPosition = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Go = new System.Windows.Forms.RadioButton();
             this.Power = new System.Windows.Forms.RadioButton();
-            this.MorePower = new System.Windows.Forms.Button();
-            this.LessPower = new System.Windows.Forms.Button();
-            this.ShowPower = new System.Windows.Forms.TextBox();
+            this.MoreSpeed = new System.Windows.Forms.Button();
+            this.LessSpeed = new System.Windows.Forms.Button();
+            this.ShowSpeed = new System.Windows.Forms.TextBox();
             this.Ship1 = new System.Windows.Forms.RadioButton();
             this.Ship2 = new System.Windows.Forms.RadioButton();
             this.Ship3 = new System.Windows.Forms.RadioButton();
@@ -45,23 +45,30 @@
             this.Ship9 = new System.Windows.Forms.RadioButton();
             this.Ship8 = new System.Windows.Forms.RadioButton();
             this.Ship7 = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupAction = new System.Windows.Forms.GroupBox();
+            this.groupShip = new System.Windows.Forms.GroupBox();
+            this.Rules = new System.Windows.Forms.Button();
+            this.ShipInCenterLabel = new System.Windows.Forms.Label();
+            this.YoursShipsCenterLabel = new System.Windows.Forms.Label();
+            this.EnemyShipsCenterLebel = new System.Windows.Forms.Label();
+            this.YoursShipsCenterTextbox = new System.Windows.Forms.TextBox();
+            this.EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupAction.SuspendLayout();
+            this.groupShip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // start
+            // OnPosition
             // 
-            this.start.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.start.Location = new System.Drawing.Point(224, 642);
-            this.start.Name = "start";
-            this.start.Size = new System.Drawing.Size(114, 46);
-            this.start.TabIndex = 0;
-            this.start.Text = "Ход!";
-            this.start.UseVisualStyleBackColor = true;
-            this.start.Click += new System.EventHandler(this.start_Click);
+            this.OnPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OnPosition.Location = new System.Drawing.Point(152, 640);
+            this.OnPosition.Name = "OnPosition";
+            this.OnPosition.Size = new System.Drawing.Size(268, 46);
+            this.OnPosition.TabIndex = 0;
+            this.OnPosition.Text = "На позицию";
+            this.OnPosition.UseVisualStyleBackColor = true;
+            this.OnPosition.Visible = false;
+            this.OnPosition.Click += new System.EventHandler(this.OnPosition_Click);
             // 
             // pictureBox1
             // 
@@ -96,33 +103,36 @@
             this.Power.UseVisualStyleBackColor = true;
             this.Power.CheckedChanged += new System.EventHandler(this.Power_CheckedChanged);
             // 
-            // MorePower
+            // MoreSpeed
             // 
-            this.MorePower.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MorePower.Location = new System.Drawing.Point(418, 481);
-            this.MorePower.Name = "MorePower";
-            this.MorePower.Size = new System.Drawing.Size(42, 46);
-            this.MorePower.TabIndex = 4;
-            this.MorePower.Text = ">";
-            this.MorePower.UseVisualStyleBackColor = true;
+            this.MoreSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MoreSpeed.Location = new System.Drawing.Point(418, 481);
+            this.MoreSpeed.Name = "MoreSpeed";
+            this.MoreSpeed.Size = new System.Drawing.Size(42, 46);
+            this.MoreSpeed.TabIndex = 4;
+            this.MoreSpeed.Text = ">";
+            this.MoreSpeed.UseVisualStyleBackColor = true;
+            this.MoreSpeed.Visible = false;
             // 
-            // LessPower
+            // LessSpeed
             // 
-            this.LessPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LessPower.Location = new System.Drawing.Point(360, 482);
-            this.LessPower.Name = "LessPower";
-            this.LessPower.Size = new System.Drawing.Size(42, 45);
-            this.LessPower.TabIndex = 5;
-            this.LessPower.Text = "<";
-            this.LessPower.UseVisualStyleBackColor = true;
+            this.LessSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LessSpeed.Location = new System.Drawing.Point(360, 482);
+            this.LessSpeed.Name = "LessSpeed";
+            this.LessSpeed.Size = new System.Drawing.Size(42, 45);
+            this.LessSpeed.TabIndex = 5;
+            this.LessSpeed.Text = "<";
+            this.LessSpeed.UseVisualStyleBackColor = true;
+            this.LessSpeed.Visible = false;
             // 
-            // ShowPower
+            // ShowSpeed
             // 
-            this.ShowPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ShowPower.Location = new System.Drawing.Point(360, 431);
-            this.ShowPower.Name = "ShowPower";
-            this.ShowPower.Size = new System.Drawing.Size(100, 45);
-            this.ShowPower.TabIndex = 6;
+            this.ShowSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ShowSpeed.Location = new System.Drawing.Point(360, 431);
+            this.ShowSpeed.Name = "ShowSpeed";
+            this.ShowSpeed.Size = new System.Drawing.Size(100, 45);
+            this.ShowSpeed.TabIndex = 6;
+            this.ShowSpeed.Visible = false;
             // 
             // Ship1
             // 
@@ -223,58 +233,134 @@
             this.Ship7.Text = "7";
             this.Ship7.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupAction
             // 
-            this.groupBox1.Controls.Add(this.Power);
-            this.groupBox1.Controls.Add(this.Go);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 414);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(315, 150);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Выбор дейстивя";
+            this.groupAction.Controls.Add(this.Power);
+            this.groupAction.Controls.Add(this.Go);
+            this.groupAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupAction.Location = new System.Drawing.Point(12, 414);
+            this.groupAction.Name = "groupAction";
+            this.groupAction.Size = new System.Drawing.Size(315, 150);
+            this.groupAction.TabIndex = 7;
+            this.groupAction.TabStop = false;
+            this.groupAction.Text = "Выбор действия";
+            this.groupAction.Visible = false;
             // 
-            // groupBox2
+            // groupShip
             // 
-            this.groupBox2.Controls.Add(this.Ship9);
-            this.groupBox2.Controls.Add(this.Ship8);
-            this.groupBox2.Controls.Add(this.Ship7);
-            this.groupBox2.Controls.Add(this.Ship6);
-            this.groupBox2.Controls.Add(this.Ship5);
-            this.groupBox2.Controls.Add(this.Ship4);
-            this.groupBox2.Controls.Add(this.Ship3);
-            this.groupBox2.Controls.Add(this.Ship2);
-            this.groupBox2.Controls.Add(this.Ship1);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox2.Location = new System.Drawing.Point(139, 150);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(292, 231);
-            this.groupBox2.TabIndex = 17;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Корабли";
+            this.groupShip.Controls.Add(this.Ship9);
+            this.groupShip.Controls.Add(this.Ship8);
+            this.groupShip.Controls.Add(this.Ship7);
+            this.groupShip.Controls.Add(this.Ship6);
+            this.groupShip.Controls.Add(this.Ship5);
+            this.groupShip.Controls.Add(this.Ship4);
+            this.groupShip.Controls.Add(this.Ship3);
+            this.groupShip.Controls.Add(this.Ship2);
+            this.groupShip.Controls.Add(this.Ship1);
+            this.groupShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupShip.Location = new System.Drawing.Point(139, 150);
+            this.groupShip.Name = "groupShip";
+            this.groupShip.Size = new System.Drawing.Size(292, 231);
+            this.groupShip.TabIndex = 17;
+            this.groupShip.TabStop = false;
+            this.groupShip.Text = "Корабли";
+            this.groupShip.Visible = false;
+            // 
+            // Rules
+            // 
+            this.Rules.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.Rules.Location = new System.Drawing.Point(12, 12);
+            this.Rules.Name = "Rules";
+            this.Rules.Size = new System.Drawing.Size(138, 43);
+            this.Rules.TabIndex = 18;
+            this.Rules.Text = "Правила";
+            this.Rules.UseVisualStyleBackColor = true;
+            this.Rules.Click += new System.EventHandler(this.Rules_Click);
+            // 
+            // ShipInCenterLabel
+            // 
+            this.ShipInCenterLabel.AutoSize = true;
+            this.ShipInCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.ShipInCenterLabel.Location = new System.Drawing.Point(129, 779);
+            this.ShipInCenterLabel.Name = "ShipInCenterLabel";
+            this.ShipInCenterLabel.Size = new System.Drawing.Size(302, 39);
+            this.ShipInCenterLabel.TabIndex = 19;
+            this.ShipInCenterLabel.Text = "Корабли в центре";
+            this.ShipInCenterLabel.Visible = false;
+            // 
+            // YoursShipsCenterLabel
+            // 
+            this.YoursShipsCenterLabel.AutoSize = true;
+            this.YoursShipsCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.YoursShipsCenterLabel.Location = new System.Drawing.Point(173, 831);
+            this.YoursShipsCenterLabel.Name = "YoursShipsCenterLabel";
+            this.YoursShipsCenterLabel.Size = new System.Drawing.Size(105, 39);
+            this.YoursShipsCenterLabel.TabIndex = 20;
+            this.YoursShipsCenterLabel.Text = "Ваши";
+            this.YoursShipsCenterLabel.Visible = false;
+            // 
+            // EnemyShipsCenterLebel
+            // 
+            this.EnemyShipsCenterLebel.AutoSize = true;
+            this.EnemyShipsCenterLebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.EnemyShipsCenterLebel.Location = new System.Drawing.Point(71, 885);
+            this.EnemyShipsCenterLebel.Name = "EnemyShipsCenterLebel";
+            this.EnemyShipsCenterLebel.Size = new System.Drawing.Size(207, 39);
+            this.EnemyShipsCenterLebel.TabIndex = 21;
+            this.EnemyShipsCenterLebel.Text = "Противника";
+            this.EnemyShipsCenterLebel.Visible = false;
+            // 
+            // YoursShipsCenterTextbox
+            // 
+            this.YoursShipsCenterTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.YoursShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.YoursShipsCenterTextbox.Location = new System.Drawing.Point(294, 828);
+            this.YoursShipsCenterTextbox.Name = "YoursShipsCenterTextbox";
+            this.YoursShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
+            this.YoursShipsCenterTextbox.TabIndex = 22;
+            this.YoursShipsCenterTextbox.Text = "9";
+            this.YoursShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.YoursShipsCenterTextbox.Visible = false;
+            // 
+            // EnemyShipsCenterTextbox
+            // 
+            this.EnemyShipsCenterTextbox.AcceptsReturn = true;
+            this.EnemyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.EnemyShipsCenterTextbox.Location = new System.Drawing.Point(294, 882);
+            this.EnemyShipsCenterTextbox.Name = "EnemyShipsCenterTextbox";
+            this.EnemyShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
+            this.EnemyShipsCenterTextbox.TabIndex = 23;
+            this.EnemyShipsCenterTextbox.Text = "9";
+            this.EnemyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.EnemyShipsCenterTextbox.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.ShowPower);
-            this.Controls.Add(this.LessPower);
-            this.Controls.Add(this.MorePower);
+            this.Controls.Add(this.EnemyShipsCenterTextbox);
+            this.Controls.Add(this.YoursShipsCenterTextbox);
+            this.Controls.Add(this.EnemyShipsCenterLebel);
+            this.Controls.Add(this.YoursShipsCenterLabel);
+            this.Controls.Add(this.ShipInCenterLabel);
+            this.Controls.Add(this.Rules);
+            this.Controls.Add(this.groupShip);
+            this.Controls.Add(this.groupAction);
+            this.Controls.Add(this.ShowSpeed);
+            this.Controls.Add(this.LessSpeed);
+            this.Controls.Add(this.MoreSpeed);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.start);
+            this.Controls.Add(this.OnPosition);
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupAction.ResumeLayout(false);
+            this.groupAction.PerformLayout();
+            this.groupShip.ResumeLayout(false);
+            this.groupShip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,14 +368,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button start;
+        private System.Windows.Forms.Button OnPosition;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.RadioButton Go;
         private System.Windows.Forms.RadioButton Power;
-        private System.Windows.Forms.Button MorePower;
-        private System.Windows.Forms.Button LessPower;
-        private System.Windows.Forms.TextBox ShowPower;
+        private System.Windows.Forms.Button MoreSpeed;
+        private System.Windows.Forms.Button LessSpeed;
+        private System.Windows.Forms.TextBox ShowSpeed;
         private System.Windows.Forms.RadioButton Ship1;
         private System.Windows.Forms.RadioButton Ship2;
         private System.Windows.Forms.RadioButton Ship3;
@@ -299,8 +385,14 @@
         private System.Windows.Forms.RadioButton Ship9;
         private System.Windows.Forms.RadioButton Ship8;
         private System.Windows.Forms.RadioButton Ship7;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupAction;
+        private System.Windows.Forms.GroupBox groupShip;
+        private System.Windows.Forms.Button Rules;
+        private System.Windows.Forms.Label ShipInCenterLabel;
+        private System.Windows.Forms.Label YoursShipsCenterLabel;
+        private System.Windows.Forms.Label EnemyShipsCenterLebel;
+        private System.Windows.Forms.TextBox YoursShipsCenterTextbox;
+        private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
     }
 }
 
