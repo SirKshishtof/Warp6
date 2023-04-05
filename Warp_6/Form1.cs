@@ -763,16 +763,17 @@ namespace Warp_6
             DialogResult result = MessageBox.Show(Mes, "Правила", MessageBoxButtons.OK);
 
             groupShip.Visible = true;
-            //groupAction.Visible = true;
-            //ShowSpeed.Visible = true;
-            //MoreSpeed.Visible = true;
-            //LessSpeed.Visible = true;
             OnPosition.Visible = true;
-            //ShipInCenterLabel.Visible = true;
-            //YoursShipsCenterLabel.Visible = true;
-            //EnemyShipsCenterLebel.Visible = true;
-            //YoursShipsCenterTextbox.Visible = true;
-            //EnemyShipsCenterTextbox.Visible = true;
+
+            groupAction.Visible = true;
+            ShowSpeed.Visible = true;
+            MoreSpeed.Visible = true;
+            LessSpeed.Visible = true;
+            ShipInCenterLabel.Visible = true;
+            YoursShipsCenterLabel.Visible = true;
+            EnemyShipsCenterLebel.Visible = true;
+            YoursShipsCenterTextbox.Visible = true;
+            EnemyShipsCenterTextbox.Visible = true;
             Map();
         }
     }
