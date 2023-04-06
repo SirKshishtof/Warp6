@@ -177,7 +177,6 @@ namespace Warp_6
                 DrawDashLine(addres_dash[i]._external, addres_dash[i]._internal);
             }
 
-            graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
 
         int[] ArrZero(int[] Arr)
@@ -734,7 +733,7 @@ namespace Warp_6
                     count++;
                 }
             }
-            
+            Map();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -762,19 +761,21 @@ namespace Warp_6
             String Mes = "Космические корабли воюющих миров получили срочное\r\nсообщение из другой части галактики. Началась решающая битва.\r\n\r\nРезервные корабли, в которых нуждалась флотилия, поспешили на\r\nпомощь.\r\n\r\nЕдинственный для всех флотилий способ добраться туда — это\r\nпопасть на место сражения через гиперпространствемный тоннель,\r\nкоторый маходится в центре предательской чёрной дыры. Первая\r\nфлотилия, переправившая свои корабли в тоннель, выиграет битву.\r\n\r\nВы - командир межгалактической эскадрильи боевых космических\r\nкораблей, которые срочно нужно переправить через черную дыру,\r\nсоединяющую два конца нашей вселенной.\r\nВначале от вас требуется раставить свои корабли(Ваши корабли\r\nпоказываются зеленым цветом, а малеленькой цифрой\r\nобозмачается их номер) на позиции вас(у вас, памели упрьвления,\r\nони показываются как черные точки.\r\n\r\nНо противмик не дремлет, ему так же требуется переправить все\r\nсвои корабли через черную дыру из-за чего, в начале, ваши\r\nкорабли будут чередоваться: капитаны по очереди расставляют\r\n<вои корабли по внешней стороме спирали.\r\n\r\nУ вас в распоряжении есть три типа корабля. Нз приборной памели\r\nони отображаются как треугольник, квадрат и круг.\r\nУкаждого корабля есть скорость (большая цифра ма фигура),\r\nкоторая показывается на нем цифрой и может меняться.\r\nТреугольник: от 1 до 4\r\nКвадрат: от 1 до б\r\nКруг: от 1 до 8\r\nОт этой скорости зависит то, на сколько позиций может\r\nпродвимуться корабль.\r\n\r\nГлавное — умело пользоваться возможностью гиперперехода. Что\r\nэто такое? Количество ходов определяется скоростью корабля\r\nотображаемом ма нем, и когда корабль, сделав свой последний ход,\r\nпопадает ма занятое другим кораблем место, то он перемещается\r\nпо пунктирной линии на следующий внутренний виток орбиты.\r\n«Наступили» на корабль — ушли сразу ма круг ближе.\r\n\r\nЗа ход вы можете сделать одно из действий: передвимуть один\r\nкорабль или поменять у одного корабля скорость. Например, 3\r\nможно изменить нз 4 или наоборот: 4 на 3. Все зависит от вашей.\r\nцели и расположения кораблей соперника.\r\n\r\nКогда корабль окажется мз последнем витке орбиты, можно не\r\nснижать скорость, чтобы попасть в самое пекло чёрной дыры. Будет\r\nстрашно — закройте глаза. Все пилоты истребителей так делают.\r\nПобеждает капитан, отправивший шесть своих кораблей на другой\r\nконец вселенной.\r\n\r\nMay the Force be with you";
             DialogResult result = MessageBox.Show(Mes, "Правила", MessageBoxButtons.OK);
 
-            groupShip.Visible = true;
-            OnPosition.Visible = true;
-
-            groupAction.Visible = true;
-            ShowSpeed.Visible = true;
-            MoreSpeed.Visible = true;
-            LessSpeed.Visible = true;
-            ShipInCenterLabel.Visible = true;
-            YoursShipsCenterLabel.Visible = true;
-            EnemyShipsCenterLebel.Visible = true;
-            YoursShipsCenterTextbox.Visible = true;
-            EnemyShipsCenterTextbox.Visible = true;
-            Map();
+            if (!groupShip.Visible)
+            {
+                groupShip.Visible = true;
+                OnPosition.Visible = true;
+                //groupAction.Visible = true;
+                //ShowSpeed.Visible = true;
+                //MoreSpeed.Visible = true;
+                //LessSpeed.Visible = true;
+                //ShipInCenterLabel.Visible = true;
+                //YoursShipsCenterLabel.Visible = true;
+                //EnemyShipsCenterLebel.Visible = true;
+                //YoursShipsCenterTextbox.Visible = true;
+                //EnemyShipsCenterTextbox.Visible = true;
+                graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            }
         }
     }
 }
