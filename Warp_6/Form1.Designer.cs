@@ -54,6 +54,8 @@
             this.MyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             this.EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Start = new System.Windows.Forms.Button();
+            this.Step = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupAction.SuspendLayout();
             this.groupShip.SuspendLayout();
@@ -343,11 +345,36 @@
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 24;
             // 
+            // Start
+            // 
+            this.Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.Start.Location = new System.Drawing.Point(152, 640);
+            this.Start.Name = "Start";
+            this.Start.Size = new System.Drawing.Size(268, 46);
+            this.Start.TabIndex = 25;
+            this.Start.Text = "Начать игру";
+            this.Start.UseVisualStyleBackColor = true;
+            this.Start.Visible = false;
+            this.Start.Click += new System.EventHandler(this.Start_Click);
+            // 
+            // Step
+            // 
+            this.Step.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.Step.Location = new System.Drawing.Point(152, 640);
+            this.Step.Name = "Step";
+            this.Step.Size = new System.Drawing.Size(268, 46);
+            this.Step.TabIndex = 26;
+            this.Step.Text = "Ход";
+            this.Step.UseVisualStyleBackColor = true;
+            this.Step.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.Step);
+            this.Controls.Add(this.Start);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.EnemyShipsCenterTextbox);
             this.Controls.Add(this.MyShipsCenterTextbox);
@@ -404,6 +431,8 @@
         private System.Windows.Forms.TextBox MyShipsCenterTextbox;
         private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button Start;
+        private System.Windows.Forms.Button Step;
     }
 }
 

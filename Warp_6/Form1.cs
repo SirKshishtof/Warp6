@@ -62,8 +62,8 @@ namespace Warp_6
         short EnemyShipsInCenter = 0;
         short MyShipsInCenter = 0;
         short СurrentPoint = 126;
-        //float x = (float)position[EnemyShip[NumOfShip].position].x;
-        //float y = (float)position[EnemyShip[NumOfShip].position].y;
+        bool flag = false;
+
         void DrawDashLine(int a, int b)
         {
             graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y); 
@@ -239,7 +239,6 @@ namespace Warp_6
             int max = 0;
             int[] index = new int[9];
             List<int> list = new List<int>();
-            textBox1.Text = list.Count.ToString();
 
             for (int i = 0; i < 4; i++)
             {
@@ -275,7 +274,6 @@ namespace Warp_6
                 }
                 if (max != 0) { index[count] = 0; list.Add(count); };
             }
-            textBox1.Text = list.Count.ToString();
 
             max = 0;
             for (int i = 0; i < 3; i++)
@@ -853,6 +851,7 @@ namespace Warp_6
 
         private void OnPosition_Click(object sender, EventArgs e)
         {
+            OnPosition.Enabled= false;
             int NumOfShip = ShipSelection();
             if (NumOfShip != -1) 
             {
@@ -871,18 +870,12 @@ namespace Warp_6
                 }
                 else 
                 {
-                    //groupAction.Visible = true;
-                    //ShowSpeed.Visible = true;
-                    //MoreSpeed.Visible = true;
-                    //LessSpeed.Visible = true;
-                    //ShipInCenterLabel.Visible = true;
-                    //YoursShipsCenterLabel.Visible = true;
-                    //EnemyShipsCenterLebel.Visible = true;
-                    //YoursShipsCenterTextbox.Visible = true;
-                    //EnemyShipsCenterTextbox.Visible = true;
+                    OnPosition.Visible= false;
+                    Start.Visible = true;
                 }
 
             }
+            OnPosition.Enabled = true;
         }
 
         private void Power_CheckedChanged(object sender, EventArgs e)
@@ -935,13 +928,14 @@ namespace Warp_6
                     y += Shift;
                 }
 
-                if (/*rnd.Next() % 2 != 0*/ true)
+                if (rnd.Next() % 2 != 0)
                 {
                     Mes = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                     int NumOfShip = list[0];
                     SetsShip(EnemyShip[NumOfShip], NumOfShip, BrushGold);
                     WhiteRectangle(NumOfShip, true);
                     list.RemoveAt(0);
+                    flag = true;
                 }
                 else
                 {
@@ -952,6 +946,27 @@ namespace Warp_6
                 MessageBox.Show(Mes, "Кто начинает", MessageBoxButtons.OK);
 
             }
+        }
+
+
+        private void Start_Click(object sender, EventArgs e)
+        {
+            Start.Visible= false;
+            groupAction.Visible = true;
+            ShowSpeed.Visible = true;
+            MoreSpeed.Visible = true;
+            LessSpeed.Visible = true;
+            ShipInCenterLabel.Visible = true;
+            MyShipsCenterLabel.Visible = true;
+            EnemyShipsCenterLebel.Visible = true;
+            MyShipsCenterTextbox.Visible = true;
+            EnemyShipsCenterTextbox.Visible = true;
+            Step.Visible = true;
+
+            if (EnemyShip[])
+            //if (flag) { textBox1.Text = "Пык"; textBox1.BackColor = Color.LimeGreen; flag = false; }
+            //else { textBox1.Text = "Мык"; textBox1.BackColor = Color.Gold; flag = true; }
+
         }
     }
 }
