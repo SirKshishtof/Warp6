@@ -5,6 +5,7 @@ using System.Collections.Generic;
 //using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Reflection;
 //using System.Linq;
 //using System.Security.Cryptography;
 //using System.Text;
@@ -59,9 +60,10 @@ namespace Warp_6
         Addres_Dash[] addres_dash = new Addres_Dash[30];
 
         short EnemyShipsInCenter = 0;
-        double x;
-        double y;
-
+        short MyShipsInCenter = 0;
+        short СurrentPoint = 126;
+        //float x = (float)position[EnemyShip[NumOfShip].position].x;
+        //float y = (float)position[EnemyShip[NumOfShip].position].y;
         void DrawDashLine(int a, int b)
         {
             graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y); 
@@ -72,15 +74,13 @@ namespace Warp_6
             graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
         }
 
-        void DrawTriangle(SolidBrush brush, int index, int NumShip, int PowerOfShip)
+        void DrawTriangle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
         {
             String TextNumShip = Convert.ToString(NumShip);
             String TextPowerOfShip = Convert.ToString(PowerOfShip);
             Font FontNumShip = new Font("Arial", 10);
             Font FontPowerOfShip = new Font("Arial", 25 );
             float radius = 30;
-            float x = (float)position[index].x;
-            float y = (float)position[index].y;
             float Shift = (float)Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(radius / 2, 2));
             PointF TopPoint = new PointF(x, y - radius);
             PointF BottomLeftPoint = new PointF(x - Shift, y + (radius / 2));
@@ -89,36 +89,69 @@ namespace Warp_6
             graph_bitmap.FillPolygon(brush, curvePoints);
             graph_bitmap.DrawString( TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3)-4, y - (radius / 2)-4);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3 - 10) - 20, y - (radius / 2) + 15);
-            graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
         
-        void DrawRectangle(SolidBrush brush, int index, int NumShip, int PowerOfShip)
+        void DrawRectangle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
         {
             String TextNumShip = Convert.ToString(NumShip);
             String TextPowerOfShip = Convert.ToString(PowerOfShip);
             Font FontNumShip = new Font("Arial", 10);
             Font FontPowerOfShip = new Font("Arial", 25);
             float radius = 40;
-            float x = (float)position[index].x;
-            float y = (float)position[index].y;
             graph_bitmap.FillRectangle(brush, x - (radius / 2), y - (radius / 2), radius, radius);
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 1, y - (radius / 2) + 2);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 5, y - (radius / 2) + 14);
-            graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+            //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
         
-        void DrawCircle(SolidBrush brush, int index, int NumShip, int PowerOfShip)
+        void DrawCircle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
         {
             String TextNumShip = Convert.ToString(NumShip);
             String TextPowerOfShip = Convert.ToString(PowerOfShip);
             Font FontNumShip = new Font("Arial", 10);
             Font FontPowerOfShip = new Font("Arial", 25);
             float radius = 40;
-            float x = (float)position[index].x;
-            float y = (float)position[index].y;
             graph_bitmap.FillEllipse(brush, x - (radius / 2), y - (radius / 2), radius, radius);
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 1, y - (radius / 2) + 2);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 5, y - (radius / 2) + 14);
+        }
+        
+        void WhiteRectangle(int NumOfShip, bool Enemy)
+        {
+            float radius = 50;
+            float x = 50;
+            float y = 155 + 60 * (NumOfShip);
+
+            if (Enemy) { x = 1075; }
+
+            SolidBrush brush = new SolidBrush(Color.White);
+            
+            graph_bitmap.FillRectangle(brush, x - (radius / 2), y - (radius / 2), radius, radius);
+            graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+
+        }
+
+        void DrawEverything()
+        {
+            Map();
+            for (int i = 0; i < 4; i++)
+            {
+                DrawTriangle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
+                DrawTriangle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
+            }
+
+            for (int i = 4; i < 7; i++)
+            {
+                DrawRectangle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
+                DrawRectangle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
+            }
+
+            for (int i = 7; i < 9; i++)
+            {
+                DrawCircle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
+                DrawCircle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
+            }
             graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
 
@@ -136,8 +169,19 @@ namespace Warp_6
             return y;
         }
 
+        float X_(Ship Ship)//получение координаты х
+        {
+            return (float)position[Ship.position].x; ;
+        }
+
+        float Y_(Ship Ship)//получение координаты у
+        {
+            return (float)position[Ship.position].y; ;
+        }
         void Map()
         {
+            double x;
+            double y;
             const int Kof = 10;
             const double turn = 3.11;
             double pi = 0;
@@ -195,6 +239,8 @@ namespace Warp_6
             int max = 0;
             int[] index = new int[9];
             List<int> list = new List<int>();
+            textBox1.Text = list.Count.ToString();
+
             for (int i = 0; i < 4; i++)
             {
                 if (EnemyShip[i].speed > max)
@@ -229,8 +275,10 @@ namespace Warp_6
                 }
                 if (max != 0) { index[count] = 0; list.Add(count); };
             }
+            textBox1.Text = list.Count.ToString();
+
             max = 0;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -250,34 +298,9 @@ namespace Warp_6
             }
             return list;
         }
-        void AlexSetsShip()
+        void AlexMovesShip()
         {
-            int StartPoint = 0;
-            int NumOfShip = list[0];
-            list.RemoveAt(0);
-            EnemyShip[NumOfShip].position = StartPoint - 1;
-            switch (EnemyShip[NumOfShip].type)
-            {
-                case 1:
-                    {
-                        DrawTriangle(BrushGold, EnemyShip[NumOfShip].position, NumOfShip + 1, EnemyShip[NumOfShip].speed);
-                    }
-                    break;
-                case 2:
-                    {
-                        DrawRectangle(BrushGold, EnemyShip[NumOfShip].position, NumOfShip + 1, EnemyShip[NumOfShip].speed);
-                    }
-                    break;
-                case 3:
-                    {
-                        DrawCircle(BrushGold, EnemyShip[NumOfShip].position, NumOfShip + 1, EnemyShip[NumOfShip].speed);
-                    }
-                    break;
-            }
-        }
-        void AlexMove()
-        {
-            int BotMove = AlexMoveShip();
+            int BotMove = AlexСhoosesShip();
             int index = BotMove / 100;
             if ((BotMove / 10) % 10 == 0)
             {
@@ -598,7 +621,7 @@ namespace Warp_6
             }
             return index * 100;
         }
-        int AlexMoveShip()
+        int AlexСhoosesShip()
         {
             int index;
             index = HyperjumpToCenter();
@@ -625,6 +648,48 @@ namespace Warp_6
             return index;
         }
 
+        void SetsShip(Ship Ship, int NumOfShip, SolidBrush Brush)
+        {
+            Ship.position = СurrentPoint;
+            float x = X_(Ship);
+            float y = Y_(Ship);
+            switch (Ship.type)
+            {
+                case 1: { DrawTriangle(Brush, x, y, NumOfShip + 1, Ship.speed); } break;
+                case 2: { DrawRectangle(Brush, x, y, NumOfShip + 1, Ship.speed); } break;
+                case 3: { DrawCircle(Brush, x, y, NumOfShip + 1, Ship.speed); } break;
+            }
+            СurrentPoint--;
+        }
+
+        void RadioButtonOff(int index)
+        {
+            switch (index) 
+            { 
+                case 0: {Ship1.Checked = false; Ship1.Enabled = false; } break; 
+                case 1: {Ship2.Checked = false; Ship2.Enabled = false;} break;
+                case 2: {Ship3.Checked = false; Ship3.Enabled = false;} break;
+                case 3: {Ship4.Checked = false; Ship4.Enabled = false;} break;
+                case 4: {Ship5.Checked = false; Ship5.Enabled = false;} break;
+                case 5: {Ship6.Checked = false; Ship6.Enabled = false;} break;
+                case 6: {Ship7.Checked = false; Ship7.Enabled = false;} break;
+                case 7: {Ship8.Checked = false; Ship8.Enabled = false;} break;
+                case 8: {Ship9.Checked = false; Ship9.Enabled = false; } break;
+            }
+        }
+        int ShipSelection()
+        {
+            if (Ship1.Checked) { return 0; }
+            if (Ship2.Checked) { return 1; }
+            if (Ship3.Checked) { return 2; }
+            if (Ship4.Checked) { return 3; }
+            if (Ship5.Checked) { return 4; }
+            if (Ship6.Checked) { return 5; }
+            if (Ship7.Checked) { return 6; }
+            if (Ship8.Checked) { return 7; }
+            if (Ship9.Checked) { return 8; }
+            return -1;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -635,6 +700,7 @@ namespace Warp_6
             bitmap = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
             graph_bitmap = Graphics.FromImage(bitmap);
             graphics = pictureBox1.CreateGraphics();
+
             for (int i = 0; i < 126; i++)
             {
                 position[i] = new Position(); 
@@ -642,19 +708,62 @@ namespace Warp_6
             for (int i = 0; i < 9; i++)
             {
                 MyShip[i] = new Ship();
+                MyShip[i].InGame = false;
             }
             for (int i = 0; i < 9; i++)
             {
                 EnemyShip [i] = new Ship();
+                EnemyShip[i].InGame = false;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                MyShip[i] = new Ship();
+                MyShip[i].InGame = true;
+                MyShip[i].speed = rnd.Next()%4+1;
+                MyShip[i].type = 1;
+
+                EnemyShip[i] = new Ship();
+                EnemyShip[i].InGame = true;
+                EnemyShip[i].speed = rnd.Next() % 4 + 1; ;
+                EnemyShip[i].type = 1;
+            }
+
+            for (int i = 4; i < 7; i++)
+            {
+                MyShip[i] = new Ship();
+                MyShip[i].InGame = true;
+                MyShip[i].speed = rnd.Next() % 6 + 1;
+                MyShip[i].type = 2;
+
+                EnemyShip[i] = new Ship();
+                EnemyShip[i].InGame = true;
+                EnemyShip[i].speed = rnd.Next() % 6 + 1; ;
+                EnemyShip[i].type = 2;
+            }
+
+            for (int i = 7; i < 9; i++)
+            {
+                MyShip[i] = new Ship();
+                MyShip[i].InGame = true;
+                MyShip[i].speed = rnd.Next() % 8 + 1;
+                MyShip[i].type = 3;
+
+                EnemyShip[i] = new Ship();
+                EnemyShip[i].InGame = true;
+                EnemyShip[i].speed = rnd.Next() % 8 + 1; ;
+                EnemyShip[i].type = 3;
             }
 
             int[] index = new int[6];
             short count;
             short dest = 6;
+            double x;
+            double y;
             double pi;
             double start_angle;
             double step;
-
+            
             for (short i = 0; i < 6; i++)
             {
                 position[i].jump = -1;
@@ -733,8 +842,8 @@ namespace Warp_6
                     count++;
                 }
             }
-            Map();
 
+            list = EnemyShipSorting();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -744,7 +853,36 @@ namespace Warp_6
 
         private void OnPosition_Click(object sender, EventArgs e)
         {
-            Map();
+            int NumOfShip = ShipSelection();
+            if (NumOfShip != -1) 
+            {
+                SetsShip(MyShip[NumOfShip], NumOfShip, BrushLimeGreen);
+                RadioButtonOff(NumOfShip);
+
+                WhiteRectangle(NumOfShip, false);
+
+                if (list.Count > 0)
+                {
+                    Thread.Sleep(1000);
+                    NumOfShip = list[0];
+                    SetsShip(EnemyShip[NumOfShip], NumOfShip, BrushGold);
+                    WhiteRectangle(NumOfShip, true);
+                    list.RemoveAt(0);
+                }
+                else 
+                {
+                    //groupAction.Visible = true;
+                    //ShowSpeed.Visible = true;
+                    //MoreSpeed.Visible = true;
+                    //LessSpeed.Visible = true;
+                    //ShipInCenterLabel.Visible = true;
+                    //YoursShipsCenterLabel.Visible = true;
+                    //EnemyShipsCenterLebel.Visible = true;
+                    //YoursShipsCenterTextbox.Visible = true;
+                    //EnemyShipsCenterTextbox.Visible = true;
+                }
+
+            }
         }
 
         private void Power_CheckedChanged(object sender, EventArgs e)
@@ -759,27 +897,58 @@ namespace Warp_6
 
         private void Rules_Click(object sender, EventArgs e)
         {
+
             String Mes = "Космические корабли воюющих миров получили срочное\r\nсообщение из другой части галактики. Началась решающая битва.\r\n\r\nРезервные корабли, в которых нуждалась флотилия, поспешили на\r\nпомощь.\r\n\r\nЕдинственный для всех флотилий способ добраться туда — это\r\nпопасть на место сражения через гиперпространствемный тоннель,\r\nкоторый маходится в центре предательской чёрной дыры. Первая\r\nфлотилия, переправившая свои корабли в тоннель, выиграет битву.\r\n\r\nВы - командир межгалактической эскадрильи боевых космических\r\nкораблей, которые срочно нужно переправить через черную дыру,\r\nсоединяющую два конца нашей вселенной.\r\nВначале от вас требуется раставить свои корабли(Ваши корабли\r\nпоказываются зеленым цветом, а малеленькой цифрой\r\nобозмачается их номер) на позиции вас(у вас, памели упрьвления,\r\nони показываются как черные точки.\r\n\r\nНо противмик не дремлет, ему так же требуется переправить все\r\nсвои корабли через черную дыру из-за чего, в начале, ваши\r\nкорабли будут чередоваться: капитаны по очереди расставляют\r\n<вои корабли по внешней стороме спирали.\r\n\r\nУ вас в распоряжении есть три типа корабля. Нз приборной памели\r\nони отображаются как треугольник, квадрат и круг.\r\nУкаждого корабля есть скорость (большая цифра ма фигура),\r\nкоторая показывается на нем цифрой и может меняться.\r\nТреугольник: от 1 до 4\r\nКвадрат: от 1 до б\r\nКруг: от 1 до 8\r\nОт этой скорости зависит то, на сколько позиций может\r\nпродвимуться корабль.\r\n\r\nГлавное — умело пользоваться возможностью гиперперехода. Что\r\nэто такое? Количество ходов определяется скоростью корабля\r\nотображаемом ма нем, и когда корабль, сделав свой последний ход,\r\nпопадает ма занятое другим кораблем место, то он перемещается\r\nпо пунктирной линии на следующий внутренний виток орбиты.\r\n«Наступили» на корабль — ушли сразу ма круг ближе.\r\n\r\nЗа ход вы можете сделать одно из действий: передвимуть один\r\nкорабль или поменять у одного корабля скорость. Например, 3\r\nможно изменить нз 4 или наоборот: 4 на 3. Все зависит от вашей.\r\nцели и расположения кораблей соперника.\r\n\r\nКогда корабль окажется мз последнем витке орбиты, можно не\r\nснижать скорость, чтобы попасть в самое пекло чёрной дыры. Будет\r\nстрашно — закройте глаза. Все пилоты истребителей так делают.\r\nПобеждает капитан, отправивший шесть своих кораблей на другой\r\nконец вселенной.\r\n\r\nMay the Force be with you";
             MessageBox.Show(Mes, "Правила", MessageBoxButtons.OK);
-
             if (!groupShip.Visible)
             {
                 groupShip.Visible = true;
                 OnPosition.Visible = true;
-                //groupAction.Visible = true;
-                //ShowSpeed.Visible = true;
-                //MoreSpeed.Visible = true;
-                //LessSpeed.Visible = true;
-                //ShipInCenterLabel.Visible = true;
-                //YoursShipsCenterLabel.Visible = true;
-                //EnemyShipsCenterLebel.Visible = true;
-                //YoursShipsCenterTextbox.Visible = true;
-                //EnemyShipsCenterTextbox.Visible = true;
-                graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-
-                if (rnd.Next() % 2 != 0) { Mes = "О нет! Противник прибыл раньше вас! Вы ходите вторым."; }
-                else { Mes = "Вам повезло! Противник еще не прибыл! Вы ходите первым."; }
                 
+
+                Map();
+                СurrentPoint = 125;
+
+                float xLeft = 50;
+                float xRight = 1075;
+                float y = 160;
+                float Shift = 60;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    DrawTriangle(BrushLimeGreen, xLeft, y, i + 1, MyShip[i].speed);
+                    DrawTriangle(BrushGold, xRight, y, i + 1, EnemyShip[i].speed);
+                    y += Shift;
+                }
+
+                for (int i = 4; i < 7; i++)
+                {
+                    DrawRectangle(BrushLimeGreen, xLeft, y, i + 1, MyShip[i].speed);
+                    DrawRectangle(BrushGold, xRight, y, i + 1, EnemyShip[i].speed);
+                    y += Shift;
+                }
+
+                for (int i = 7; i < 9; i++)
+                {
+                    DrawCircle(BrushLimeGreen, xLeft, y, i + 1, MyShip[i].speed);
+                    DrawCircle(BrushGold, xRight, y, i + 1, EnemyShip[i].speed);
+                    y += Shift;
+                }
+
+                if (/*rnd.Next() % 2 != 0*/ true)
+                {
+                    Mes = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
+                    int NumOfShip = list[0];
+                    SetsShip(EnemyShip[NumOfShip], NumOfShip, BrushGold);
+                    WhiteRectangle(NumOfShip, true);
+                    list.RemoveAt(0);
+                }
+                else
+                {
+                    Mes = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
+                }
+
+                graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
                 MessageBox.Show(Mes, "Кто начинает", MessageBoxButtons.OK);
 
             }

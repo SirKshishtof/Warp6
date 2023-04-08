@@ -49,10 +49,11 @@
             this.groupShip = new System.Windows.Forms.GroupBox();
             this.Rules = new System.Windows.Forms.Button();
             this.ShipInCenterLabel = new System.Windows.Forms.Label();
-            this.YoursShipsCenterLabel = new System.Windows.Forms.Label();
+            this.MyShipsCenterLabel = new System.Windows.Forms.Label();
             this.EnemyShipsCenterLebel = new System.Windows.Forms.Label();
-            this.YoursShipsCenterTextbox = new System.Windows.Forms.TextBox();
+            this.MyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             this.EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupAction.SuspendLayout();
             this.groupShip.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Location = new System.Drawing.Point(511, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1499, 1080);
@@ -288,39 +290,39 @@
             this.ShipInCenterLabel.Text = "Корабли в центре";
             this.ShipInCenterLabel.Visible = false;
             // 
-            // YoursShipsCenterLabel
+            // MyShipsCenterLabel
             // 
-            this.YoursShipsCenterLabel.AutoSize = true;
-            this.YoursShipsCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.YoursShipsCenterLabel.Location = new System.Drawing.Point(173, 831);
-            this.YoursShipsCenterLabel.Name = "YoursShipsCenterLabel";
-            this.YoursShipsCenterLabel.Size = new System.Drawing.Size(105, 39);
-            this.YoursShipsCenterLabel.TabIndex = 20;
-            this.YoursShipsCenterLabel.Text = "Ваши";
-            this.YoursShipsCenterLabel.Visible = false;
+            this.MyShipsCenterLabel.AutoSize = true;
+            this.MyShipsCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.MyShipsCenterLabel.Location = new System.Drawing.Point(173, 831);
+            this.MyShipsCenterLabel.Name = "MyShipsCenterLabel";
+            this.MyShipsCenterLabel.Size = new System.Drawing.Size(105, 39);
+            this.MyShipsCenterLabel.TabIndex = 20;
+            this.MyShipsCenterLabel.Text = "Ваши";
+            this.MyShipsCenterLabel.Visible = false;
             // 
             // EnemyShipsCenterLebel
             // 
             this.EnemyShipsCenterLebel.AutoSize = true;
             this.EnemyShipsCenterLebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.EnemyShipsCenterLebel.Location = new System.Drawing.Point(71, 885);
+            this.EnemyShipsCenterLebel.Location = new System.Drawing.Point(71, 882);
             this.EnemyShipsCenterLebel.Name = "EnemyShipsCenterLebel";
             this.EnemyShipsCenterLebel.Size = new System.Drawing.Size(207, 39);
             this.EnemyShipsCenterLebel.TabIndex = 21;
             this.EnemyShipsCenterLebel.Text = "Противника";
             this.EnemyShipsCenterLebel.Visible = false;
             // 
-            // YoursShipsCenterTextbox
+            // MyShipsCenterTextbox
             // 
-            this.YoursShipsCenterTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            this.YoursShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.YoursShipsCenterTextbox.Location = new System.Drawing.Point(294, 828);
-            this.YoursShipsCenterTextbox.Name = "YoursShipsCenterTextbox";
-            this.YoursShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
-            this.YoursShipsCenterTextbox.TabIndex = 22;
-            this.YoursShipsCenterTextbox.Text = "9";
-            this.YoursShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.YoursShipsCenterTextbox.Visible = false;
+            this.MyShipsCenterTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            this.MyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.MyShipsCenterTextbox.Location = new System.Drawing.Point(294, 828);
+            this.MyShipsCenterTextbox.Name = "MyShipsCenterTextbox";
+            this.MyShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
+            this.MyShipsCenterTextbox.TabIndex = 22;
+            this.MyShipsCenterTextbox.Text = "9";
+            this.MyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.MyShipsCenterTextbox.Visible = false;
             // 
             // EnemyShipsCenterTextbox
             // 
@@ -334,15 +336,23 @@
             this.EnemyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.EnemyShipsCenterTextbox.Visible = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(348, 27);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.EnemyShipsCenterTextbox);
-            this.Controls.Add(this.YoursShipsCenterTextbox);
+            this.Controls.Add(this.MyShipsCenterTextbox);
             this.Controls.Add(this.EnemyShipsCenterLebel);
-            this.Controls.Add(this.YoursShipsCenterLabel);
+            this.Controls.Add(this.MyShipsCenterLabel);
             this.Controls.Add(this.ShipInCenterLabel);
             this.Controls.Add(this.Rules);
             this.Controls.Add(this.groupShip);
@@ -389,10 +399,11 @@
         private System.Windows.Forms.GroupBox groupShip;
         private System.Windows.Forms.Button Rules;
         private System.Windows.Forms.Label ShipInCenterLabel;
-        private System.Windows.Forms.Label YoursShipsCenterLabel;
+        private System.Windows.Forms.Label MyShipsCenterLabel;
         private System.Windows.Forms.Label EnemyShipsCenterLebel;
-        private System.Windows.Forms.TextBox YoursShipsCenterTextbox;
+        private System.Windows.Forms.TextBox MyShipsCenterTextbox;
         private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
