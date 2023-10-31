@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Zlotvorchestvo\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj": {}
+    "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj": {}
   },
   "projects": {
-    "D:\\Zlotvorchestvo\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj": {
+    "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Zlotvorchestvo\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
+        "projectUniqueName": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
         "projectName": "Warp_6Core",
-        "projectPath": "D:\\Zlotvorchestvo\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
+        "projectPath": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
         "packagesPath": "C:\\Users\\wessy\\.nuget\\packages\\",
-        "outputPath": "D:\\Zlotvorchestvo\\Coursework\\W6\\Warp_6Core\\obj\\",
+        "outputPath": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
