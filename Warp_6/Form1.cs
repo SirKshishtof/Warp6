@@ -22,6 +22,11 @@ namespace Warp_6
     {
         class Position
         {
+            public Position()
+            {
+                jump = -1;
+            }
+            
             public double pi;
             public double x;
             public double y;
@@ -31,6 +36,11 @@ namespace Warp_6
 
         class Ship
         {
+            public Ship(int type)
+            {
+                InGame = true;
+                this.type = type;
+            }
             public int position;
             public int type;
             public int speed;
@@ -132,28 +142,28 @@ namespace Warp_6
 
         }
 
-        void DrawEverything()
-        {
-            Map();
-            for (int i = 0; i < 4; i++)
-            {
-                DrawTriangle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
-                DrawTriangle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
-            }
+        //void DrawEverything()
+        //{
+        //    Map();
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        DrawTriangle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
+        //        DrawTriangle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
+        //    }
 
-            for (int i = 4; i < 7; i++)
-            {
-                DrawRectangle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
-                DrawRectangle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
-            }
+        //    for (int i = 4; i < 7; i++)
+        //    {
+        //        DrawRectangle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
+        //        DrawRectangle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
+        //    }
 
-            for (int i = 7; i < 9; i++)
-            {
-                DrawCircle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
-                DrawCircle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
-            }
-            graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-        }
+        //    for (int i = 7; i < 9; i++)
+        //    {
+        //        DrawCircle(BrushLimeGreen, X_(MyShip[i]), Y_(MyShip[i]), i + 1, MyShip[i].speed);
+        //        DrawCircle(BrushGold, X_(EnemyShip[i]), Y_(EnemyShip[i]), i + 1, EnemyShip[i].speed);
+        //    }
+        //    graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+        //}
 
         double PolarToX(double pi, double turn, int k)
         {
@@ -624,12 +634,16 @@ namespace Warp_6
             int index;
             index = HyperjumpToCenter();
             if (index != -1) { return index; }
+
             index = ToCenter();
             if (index != -1) { return index; }
+
             index = Hyperjump();
             if (index != -1) { return index; }
+
             index = HyperjumpInTheFuturePlus();
             if (index != -1) { return index; }
+
             index = HyperjumpInTheFutureMinus();
             if (index != -1) { return index; }
 
@@ -703,57 +717,35 @@ namespace Warp_6
             {
                 position[i] = new Position(); 
             }
-            for (int i = 0; i < 9; i++)
-            {
-                MyShip[i] = new Ship();
-                MyShip[i].InGame = false;
-            }
-            for (int i = 0; i < 9; i++)
-            {
-                EnemyShip [i] = new Ship();
-                EnemyShip[i].InGame = false;
-            }
 
             for (int i = 0; i < 4; i++)
             {
-                MyShip[i] = new Ship();
-                MyShip[i].InGame = true;
+                MyShip[i] = new Ship(1);
                 MyShip[i].speed = rnd.Next()%4+1;
-                MyShip[i].type = 1;
 
-                EnemyShip[i] = new Ship();
-                EnemyShip[i].InGame = true;
+                EnemyShip[i] = new Ship(1);
                 EnemyShip[i].speed = rnd.Next() % 4 + 1; ;
-                EnemyShip[i].type = 1;
             }
 
             for (int i = 4; i < 7; i++)
             {
-                MyShip[i] = new Ship();
-                MyShip[i].InGame = true;
+                MyShip[i] = new Ship(2);
                 MyShip[i].speed = rnd.Next() % 6 + 1;
-                MyShip[i].type = 2;
 
-                EnemyShip[i] = new Ship();
-                EnemyShip[i].InGame = true;
+                EnemyShip[i] = new Ship(2);
                 EnemyShip[i].speed = rnd.Next() % 6 + 1; ;
-                EnemyShip[i].type = 2;
             }
 
             for (int i = 7; i < 9; i++)
             {
-                MyShip[i] = new Ship();
-                MyShip[i].InGame = true;
+                MyShip[i] = new Ship(3);
                 MyShip[i].speed = rnd.Next() % 8 + 1;
-                MyShip[i].type = 3;
 
-                EnemyShip[i] = new Ship();
-                EnemyShip[i].InGame = true;
+                EnemyShip[i] = new Ship(3);
                 EnemyShip[i].speed = rnd.Next() % 8 + 1; ;
-                EnemyShip[i].type = 3;
             }
 
-            int[] index = new int[6];
+            int[] index = new int[6] { 0,1,2,3,4,5};
             short count;
             short dest = 6;
             double x;
@@ -963,9 +955,15 @@ namespace Warp_6
             EnemyShipsCenterTextbox.Visible = true;
             Step.Visible = true;
 
-            if (EnemyShip[])
+            if (flag) 
+            {
+                textBox1.Text = "Ход противника"; 
+                textBox1.BackColor = Color.Gold; flag = true;
+            }
+
+
             //if (flag) { textBox1.Text = "Пык"; textBox1.BackColor = Color.LimeGreen; flag = false; }
-            //else { textBox1.Text = "Мык"; textBox1.BackColor = Color.Gold; flag = true; }
+            //else {  }
 
         }
     }

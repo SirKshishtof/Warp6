@@ -1,0 +1,16 @@
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\bin\Debug\net7.0-windows\Warp_6Core.exe
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\bin\Debug\net7.0-windows\Warp_6Core.dll.config
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\bin\Debug\net7.0-windows\Warp_6Core.deps.json
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\bin\Debug\net7.0-windows\Warp_6Core.runtimeconfig.json
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\bin\Debug\net7.0-windows\Warp_6Core.dll
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\bin\Debug\net7.0-windows\Warp_6Core.pdb
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.Properties.Resources.resources
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.csproj.GenerateResource.cache
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.csproj.CoreCompileInputs.cache
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.dll
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\refint\Warp_6Core.dll
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.pdb
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.genruntimeconfig.cache
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\ref\Warp_6Core.dll
+D:\Zlotvorchestvo\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6.Form1.resources
