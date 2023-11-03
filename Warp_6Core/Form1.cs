@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
-
 
 namespace Warp_6
 {
@@ -12,8 +13,461 @@ namespace Warp_6
 
     public partial class Form1 : Form
     {
+        struct Addres_Dash
+        {
+            public int _external;
+            public int _internal;
+        }
+        struct Position
+        {
+            public Position()
+            {
+                jump = -1;
+                busy = false;
+            }
 
 
+            public double x;
+            public double y;
+            public int jump;
+            public bool busy;
+        }
+        struct Ship
+        {
+            public Ship(int type)
+            {
+                InGame = true;
+                this.type = type;
+            }
+            public int position;
+            public int type;
+            public int speed;
+            public bool InGame;
+        }
+        class Enemy
+        {
+            public Ship[] ship = new Ship[9];
+
+            public List<int> EnemyShipSorting()
+            {
+                int count = -1;
+                int max = 0;
+                int[] index = new int[9];
+                List<int> list = new List<int>();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (ship[i].speed > max)
+                    {
+                        max = ship[i].speed;
+                        count = i;
+                    }
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i != count)
+                    {
+                        ship[i].InGame = false;
+                    }
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    if (ship[i].InGame) { index[i] = ship[i].speed; }
+                    else { index[i] = 0; }
+                }
+
+                for (int i = 0; i < 9; i++)
+                {
+                    max = 0;
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (index[j] > max)
+                        {
+                            max = index[j];
+                            count = j;
+                        }
+                    }
+                    if (max != 0) { index[count] = 0; list.Add(count); };
+                }
+
+                max = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (ship[j].speed >= max && !ship[j].InGame)
+                        {
+                            max = ship[j].speed;
+                            count = j;
+                        }
+                    }
+                    ship[count].InGame = true;
+                    list.Add(count);
+                    max = 0;
+                }
+                for (int i = 0; i < 9; i++)
+                {
+                    ship[i].InGame = true;
+                }
+                return list;
+            }
+            /*{
+           public void AlexMovesShip(Position[] position)
+           {
+               int BotMove = AlexСhoosesShip();
+               int index = BotMove / 100;
+               if ((BotMove / 10) % 10 == 0)
+               {
+                   position[ship[index].position].busy = false;
+                   ship[index].position = ship[index].position - ship[index].speed;
+                   if (ship[index].position < 0)
+                   {
+                       ship[index].InGame = false;
+                       EnemyShipsInCenter++;
+                   }
+                   else
+                   {
+                       if (position[ship[index].position].busy) { ship[index].position = position[ship[index].position].jump; }
+                       while (position[ship[index].position].busy && ship[index].InGame == true)
+                       {
+                           if (position[ship[index].position].jump != -1)
+                           {
+                               ship[index].position = position[ship[index].position].jump;
+                           }
+                           else
+                           {
+                               ship[index].InGame = false;
+                               EnemyShipsInCenter++;
+                           }
+                       }
+                       position[ship[index].position].busy = true;
+                   }
+                   EnemyShipsCenterTextbox.Text = EnemyShipsInCenter.ToString();
+               }
+               else
+               {
+                   if (BotMove % 10 == 0) { ship[index].speed--; }
+                   else { ship[index].speed++; }
+               }
+               Thread.Sleep(2000);
+               //DrawEverything();
+           }
+           int HyperjumpToCenter()
+           {
+               //Может ли корабль попасть в центр через гипер прыжки
+               int[] SpeedOfShip = new int[9];
+               bool stop = false;
+               int index = 0;
+               int min = 126;
+               int count = 0;
+               SpeedOfShip = ArrZero(SpeedOfShip);
+               for (int i = 0; i < 9; i++)
+               {
+                   if (ship[i].InGame)
+                   {
+                       count = 0;
+                       index = ship[i].position - ship[i].speed;
+                       if (index > -1)
+                       {
+                           while (!stop)
+                           {
+                               if (position[index].busy)
+                               {
+                                   if (position[index].jump == -1)
+                                   {
+                                       SpeedOfShip[i]++;
+                                       stop = true;
+                                   }
+                                   else
+                                   {
+                                       index = position[index].jump;
+                                   }
+                               }
+                               else
+                               {
+                                   stop = true;
+                               }
+                               count++;
+                               if (count == 6) { stop = true; }
+                           }
+                       }
+                   }
+               }
+               stop = false;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (SpeedOfShip[i] == 1)
+                   {
+                       if (ship[i].position < min)
+                       {
+                           index = i;
+                           min = ship[i].position;
+                           stop = true;
+                       }
+                   }
+               }
+               if (stop) { return index * 100; }
+               else { return -1; }
+           }
+           int ToCenter()
+           {
+               int[] SpeedOfShip = new int[9];
+               bool stop;
+               int index = 0;
+               int min = 126;
+               SpeedOfShip = ArrZero(SpeedOfShip);
+               for (int i = 0; i < 9; i++)
+               {
+                   if (ship[i].InGame)
+                   {
+                       index = ship[i].position - ship[i].speed;
+                       if (index < 0) { SpeedOfShip[i]++; }
+                   }
+               }
+               stop = false;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (SpeedOfShip[i] == 1)
+                   {
+                       if (ship[i].position < min)
+                       {
+                           index = i;
+                           min = ship[i].position;
+                           stop = true;
+                       }
+                   }
+               }
+               if (stop) { return index * 100; }
+               else { return -1; }
+           }
+           int Hyperjump()
+           {
+               int[] SpeedOfShip = new int[9];
+               bool stop;
+               int index = 0;
+               int min;
+               int max = -1;
+               int count;
+               SpeedOfShip = ArrZero(SpeedOfShip);
+               for (int i = 0; i < 9; i++)
+               {
+                   if (ship[i].InGame)
+                   {
+                       count = 0;
+                       index = ship[i].position - ship[i].speed;
+                       if (index > -1)
+                       {
+                           stop = false;
+                           while (!stop)
+                           {
+                               if (position[index].busy)
+                               {
+                                   SpeedOfShip[i]++;
+                                   index = position[index].jump;
+                               }
+                               else
+                               {
+                                   stop = true;
+                               }
+                               count++;
+                               if (count == 6) { stop = true; }
+                           }
+                       }
+                   }
+               }
+               min = 10;
+               stop = false;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (SpeedOfShip[i] > 0)
+                   {
+                       if (SpeedOfShip[i] > max)
+                       {
+                           index = i;
+                           max = SpeedOfShip[i];
+                       }
+                       else
+                       {
+                           if (SpeedOfShip[i] == max)
+                           {
+                               if (ship[i].speed < min)
+                               {
+                                   index = i;
+                                   min = ship[i].speed;
+                               }
+                           }
+                       }
+                       stop = true;
+                   }
+               }
+               if (stop) { return index * 100; }
+               else { return -1; }
+           }
+           int HyperjumpInTheFuturePlus()
+           {
+               int[] SpeedOfShip = new int[9];
+               bool stop = false;
+               int index = 0;
+               int min = 10;
+               int count;
+               SpeedOfShip = ArrZero(SpeedOfShip);
+               for (int i = 0; i < 9; i++)
+               {
+                   if (ship[i].InGame && ship[i].speed != 1)
+                   {
+                       count = 0;
+                       index = ship[i].position - ship[i].speed - 1;
+                       if (index > -1)
+                       {
+                           while (!stop)
+                           {
+                               if (position[index].busy)
+                               {
+                                   if (position[index].jump == -1)
+                                   {
+                                       SpeedOfShip[i]++;
+                                       stop = true;
+                                   }
+                                   else
+                                   {
+                                       index = position[index].jump;
+                                   }
+                               }
+                               else
+                               {
+                                   stop = true;
+                               }
+                               count++;
+                               if (count == 6) { stop = true; }
+                           }
+                       }
+                   }
+               }
+               stop = false;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (SpeedOfShip[i] == 1)
+                   {
+                       if (ship[i].speed < min)
+                       {
+                           index = i;
+                           min = ship[i].speed;
+                           stop = true;
+                       }
+                   }
+               }
+               if (stop) { return index * 100 + 10 + 1; }
+               else { return -1; }
+           }
+           int HyperjumpInTheFutureMinus()
+           {
+               int[] SpeedOfShip = new int[9];
+               bool stop = false;
+               int index = 0;
+               int max = -1;
+               int count = 0;
+               SpeedOfShip = ArrZero(SpeedOfShip);
+               stop = false;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (ship[i].InGame && ((ship[i].type == 1 && ship[i].speed != 4) || (ship[i].type == 2 && ship[i].speed != 6) && (ship[i].type == 3 && ship[i].speed != 8)))
+                   {
+                       count = 0;
+                       index = ship[i].position - ship[i].speed + 1;
+                       if (index > -1)
+                       {
+                           while (!stop)
+                           {
+                               if (position[index].busy)
+                               {
+                                   if (position[index].jump == -1)
+                                   {
+                                       SpeedOfShip[i]++;
+                                       stop = true;
+                                   }
+                                   else
+                                   {
+                                       index = position[index].jump;
+                                   }
+                               }
+                               else
+                               {
+
+                                   stop = true;
+                               }
+                               count++;
+                               if (count == 6) { stop = true; }
+                           }
+                       }
+                   }
+               }
+               stop = false;
+               max = 0;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (SpeedOfShip[i] == 1)
+                   {
+                       if (ship[i].speed > max)
+                       {
+                           index = i;
+                           max = ship[i].speed;
+                           stop = true;
+                       }
+                   }
+               }
+               if (stop) { return index * 100 + 10 + 0; }
+               else { return -1; }
+           }
+           int Jump()
+           {
+               int index = 0;
+               int max = -1;
+               for (int i = 0; i < 9; i++)
+               {
+                   if (ship[i].InGame)
+                   {
+                       if (ship[i].speed > max)
+                       {
+                           index = i;
+                           max = ship[i].speed;
+                       }
+                   }
+               }
+               return index * 100;
+           }
+           int AlexСhoosesShip()
+           {
+               int index;
+               index = HyperjumpToCenter();
+               if (index != -1) { return index; }
+
+               index = ToCenter();
+               if (index != -1) { return index; }
+
+               index = Hyperjump();
+               if (index != -1) { return index; }
+
+               index = HyperjumpInTheFuturePlus();
+               if (index != -1) { return index; }
+
+               index = HyperjumpInTheFutureMinus();
+               if (index != -1) { return index; }
+
+               if (rnd.Next() % 100 < 30)
+               {
+                   bool flag = true;
+                   while (flag)
+                   {
+                       index = (rnd.Next() % 9) * 100;
+                       if (ship[index].InGame) { flag = false; }
+                   }
+               }
+               else { index = Jump(); }
+               return index;
+           }
+           }
+           */
+        }
 
         Graphics graphics;
         Graphics graph_bitmap;
@@ -33,13 +487,14 @@ namespace Warp_6
 
         short enemyShipsInCenter = 0;
         short myShipsInCenter = 0;
-        short currentPoint = 126;
-        short downwardShift = 20;
-        bool flag = false;
+        short currentPoint = 125;
+        short verticalShear = 20;//Сдвиг всей картинки относительно оси Y
+        //bool flag = false;
+        bool didTheSpeedChange = false;
         const double turn = 3.11;//Коффициент задающий поворот спирали и точек
         const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
-        const int fontSmall = 12;
-        const int fontBig = 25;
+        const int fontSmall = 12;//Шрифт меленькой цифры на фигуре
+        const int fontBig = 25;//Шрифт большой цифры на фигуре
 
         void DrawDashLine(int a, int b)
         {
@@ -94,13 +549,14 @@ namespace Warp_6
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
         }
 
-        void WhiteRectangle(int NumOfShip, bool Enemy)
+        void WhiteRectangle(int numOfShip, bool enemy)
         {
             float radius = 70;
-            float x = 50;
-            float y = 155 + 80 * (NumOfShip);
+            float x;
+            float y = 155 + 80 * (numOfShip);
 
-            if (Enemy) { x = 1300; }
+            if (enemy) { x = 1300; }
+            else { x = 50; }
 
             SolidBrush brush = new SolidBrush(Color.White);
 
@@ -109,6 +565,16 @@ namespace Warp_6
 
         }
 
+        void DrawShip(SolidBrush brush, Ship ship, int numOfShip)
+        {
+            switch (ship.type)
+            {
+                case 1: { DrawTriangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
+                case 2: { DrawRectangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
+                case 3: { DrawCircle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
+            }
+            graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+        }
         //void DrawEverything()
         //{
         //    Map();
@@ -175,7 +641,7 @@ namespace Warp_6
             {
                 x = PolarToX(pi);
                 y = PolarToY(pi);
-                DrawCircle(x, y + downwardShift, radius);
+                DrawCircle(x, y + verticalShear, radius);
                 pi += 0.001;
             }
 
@@ -208,11 +674,10 @@ namespace Warp_6
             return Arr;
         }
 
-
-
-        void SetsShip(Ship Ship, int NumOfShip, SolidBrush Brush)
+        void SetsShip(ref Ship Ship, int NumOfShip, ref short currentPoint, SolidBrush Brush)
         {
             Ship.position = currentPoint;
+            position[currentPoint].busy = true;
             float x = X_(Ship);
             float y = Y_(Ship);
             switch (Ship.type)
@@ -268,31 +733,41 @@ namespace Warp_6
                 position[i] = new Position();
             }
 
+            //for (int i = 125; i <= 125; i++)
+            //{
+            //    position[i] = new Position();
+            //}
+
+            //for (int i = 0; i < 126; i++)
+            //{
+            //    position[i] = new Position();
+            //}
+
             for (int i = 0; i < 4; i++)
             {
                 myShip[i] = new Ship(1);
-                myShip[i].speed = rnd.Next() % 4 + 1;
+                myShip[i].speed = rnd.Next() % 4 + 1;//Задание скорости корабля
 
                 enemy.ship[i] = new Ship(1);
-                enemy.ship[i].speed = rnd.Next() % 4 + 1; ;
+                enemy.ship[i].speed = rnd.Next() % 4 + 1; ;//Задание скорости корабля
             }
 
             for (int i = 4; i < 7; i++)
             {
                 myShip[i] = new Ship(2);
-                myShip[i].speed = rnd.Next() % 6 + 1;
+                myShip[i].speed = rnd.Next() % 6 + 1;//Задание скорости корабля
 
                 enemy.ship[i] = new Ship(2);
-                enemy.ship[i].speed = rnd.Next() % 6 + 1; ;
+                enemy.ship[i].speed = rnd.Next() % 6 + 1; ;//Задание скорости корабля
             }
 
             for (int i = 7; i < 9; i++)
             {
                 myShip[i] = new Ship(3);
-                myShip[i].speed = rnd.Next() % 8 + 1;
+                myShip[i].speed = rnd.Next() % 8 + 1;//Задание скорости корабля
 
                 enemy.ship[i] = new Ship(3);
-                enemy.ship[i].speed = rnd.Next() % 8 + 1; ;
+                enemy.ship[i].speed = rnd.Next() % 8 + 1; ;//Задание скорости корабля
             }
 
             int[] index = new int[6] { 0, 1, 2, 3, 4, 5 };
@@ -303,12 +778,6 @@ namespace Warp_6
             double pi;
             double start_angle;
             double step;
-
-            for (short i = 0; i < 6; i++)
-            {
-                position[i].jump = -1;
-                index[i] = i;
-            }
 
             count = 6;
             //Запоминатие прыжков
@@ -337,8 +806,7 @@ namespace Warp_6
                 }
             }
 
-
-            //Запоминание координат точек
+            //Сохранение координат точек
             pi = 3.7;
             start_angle = 1.047;
             count = 0;
@@ -350,8 +818,7 @@ namespace Warp_6
                 {
                     x = PolarToX(pi);
                     y = PolarToY(pi);
-                    position[count].pi = pi;
-                    position[count].y = y + downwardShift;
+                    position[count].y = y + verticalShear;
                     position[count].x = x;
                     position[count].busy = false;
                     count++;
@@ -360,7 +827,7 @@ namespace Warp_6
                 }
             }
 
-            //Запоминание координат пунктирных линий
+            //Сохранение координат пунктирных линий
             addres_dash[0]._external = 95;
             addres_dash[0]._internal = 0;
 
@@ -391,12 +858,13 @@ namespace Warp_6
         }
 
         private void OnPosition_Click(object sender, EventArgs e)
+
         {
             OnPosition.Enabled = false;
             int NumOfShip = ShipSelection();
             if (NumOfShip != -1)
             {
-                SetsShip(myShip[NumOfShip], NumOfShip, BrushLimeGreen);
+                SetsShip(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
                 RadioButtonOff(NumOfShip);
 
                 WhiteRectangle(NumOfShip, false);
@@ -405,9 +873,23 @@ namespace Warp_6
                 {
                     Thread.Sleep(1000);
                     NumOfShip = list[0];
-                    SetsShip(enemy.ship[NumOfShip], NumOfShip, BrushGold);
+                    SetsShip(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
                     WhiteRectangle(NumOfShip, true);
                     list.RemoveAt(0);
+                    if (list.Count == 0 &&
+                        !Ship1.Enabled &&
+                        !Ship2.Enabled &&
+                        !Ship3.Enabled &&
+                        !Ship4.Enabled &&
+                        !Ship5.Enabled &&
+                        !Ship6.Enabled &&
+                        !Ship7.Enabled &&
+                        !Ship8.Enabled &&
+                        !Ship9.Enabled)
+                    {
+                        OnPosition.Visible = false;
+                        Start.Visible = true;
+                    }
                 }
                 else
                 {
@@ -421,78 +903,85 @@ namespace Warp_6
 
         private void Power_CheckedChanged(object sender, EventArgs e)
         {
-            ShowSpeed.ReadOnly = false;
+            LessSpeed.Enabled = true;
+            MoreSpeed.Enabled = true;
         }
 
         private void Go_CheckedChanged(object sender, EventArgs e)
         {
-            ShowSpeed.ReadOnly = true;
+            LessSpeed.Enabled = false;
+            MoreSpeed.Enabled = false;
         }
-
         private void Rules_Click(object sender, EventArgs e)
         {
-
-            String Mes = "Космические корабли воюющих миров получили срочное\r\nсообщение из другой части галактики. Началась решающая битва.\r\nРезервные корабли, в которых нуждалась флотилия, поспешили на\r\nпомощь.\r\nЕдинственный для всех флотилий способ добраться туда — это\r\nпопасть на место сражения через гиперпространственный тоннель,\r\nкоторый маходится в центре предательской чёрной дыры. Первая\r\nфлотилия, переправившая свои корабли в тоннель, выиграет битву.\r\n\r\nВы - командир межгалактической эскадрильи боевых космических\r\nкораблей, которые срочно нужно переправить через черную дыру,\r\nсоединяющую два конца нашей вселенной. Вначале от вас требуется\r\nраставить свои корабли(Ваши корабли показываются зеленым цветом,\r\nа малеленькой цифрой обозначается их номер) на позиции(у вас,\r\nпанели управления, они показываются как черные точки.\r\nНо противмик не дремлет, ему так же требуется переправить все\r\nсвои корабли через черную дыру из-за чего, в начале, ваши\r\nкорабли будут чередоваться: капитаны по очереди расставляют\r\nсвои корабли по внешней стороне спирали.\r\n\r\nУ вас в распоряжении есть три типа корабля. На приборной панели\r\nони отображаются как треугольник, квадрат и круг.\r\nУкаждого корабля есть скорость (большая цифра на фигуре),\r\nкоторая показывается на нем цифрой и может меняться.\r\nТреугольник: от 1 до 4\r\nКвадрат: от 1 до б\r\nКруг: от 1 до 8\r\nОт этой скорости зависит то, на сколько позиций может\r\nпродвимуться корабль.\r\nГлавное — умело пользоваться возможностью гиперперехода. Что\r\nэто такое? Количество ходов определяется скоростью корабля\r\nотображаемом ма нем, и когда корабль, сделав свой последний ход,\r\nпопадает на занятое другим кораблем место, то он перемещается\r\nпо пунктирной линии на следующий внутренний виток орбиты.\r\nЗа ход вы можете сделать одно из действий: передвимуть один\r\nкорабль или поменять у одного корабля скорость.\r\n\r\nКогда корабль окажется на последнем витке орбиты, можно не\r\nснижать скорость, чтобы попасть в самое пекло чёрной дыры. Будет\r\nстрашно — закройте глаза. Все пилоты истребителей так делают.\r\nПобеждает капитан, отправивший шесть своих кораблей на другой\r\nконец вселенной.\r\n\r\nMay the Force be with you";
-            MessageBox.Show(Mes, "Правила");
-            if (!groupShip.Visible)
+            if (File.Exists(@"D:\Zlowolf\Coursework\Rules.txt"))
             {
-                groupShip.Visible = true;
-                OnPosition.Visible = true;
-
-
-                Map();
-                currentPoint = 125;
-
-                float xLeft = 50;
-                float xRight = 1300;
-                float y = 160;
-                float Shift = 80;
-
-                for (int i = 0; i < 4; i++)
+                StreamReader rulesFile = new StreamReader(@"D:\Zlowolf\Coursework\Rules.txt");
+                String mes = rulesFile.ReadToEnd();
+                rulesFile.Close();
+                MessageBox.Show(mes, "Правила");
+                if (!groupShip.Visible)
                 {
-                    DrawTriangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
-                    DrawTriangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
-                    y += Shift;
-                }
+                    groupShip.Visible = true;
+                    OnPosition.Visible = true;
 
-                for (int i = 4; i < 7; i++)
-                {
-                    DrawRectangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
-                    DrawRectangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
-                    y += Shift;
-                }
+                    Map();
 
-                for (int i = 7; i < 9; i++)
-                {
-                    DrawCircle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
-                    DrawCircle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
-                    y += Shift;
-                }
+                    float xLeft = 50;
+                    float xRight = 1300;
+                    float y = 160;
+                    float Shift = 80;
 
-                if (rnd.Next() % 2 != 0)
-                {
-                    Mes = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
-                    int NumOfShip = list[0];
-                    SetsShip(enemy.ship[NumOfShip], NumOfShip, BrushGold);
-                    WhiteRectangle(NumOfShip, true);
-                    list.RemoveAt(0);
-                    flag = true;
-                }
-                else
-                {
-                    Mes = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
-                }
+                    for (int i = 0; i < 4; i++)
+                    {
+                        DrawTriangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
+                        DrawTriangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
+                        y += Shift;
+                    }
 
-                graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-                MessageBox.Show(Mes, "Кто начинает");
+                    for (int i = 4; i < 7; i++)
+                    {
+                        DrawRectangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
+                        DrawRectangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
+                        y += Shift;
+                    }
 
+                    for (int i = 7; i < 9; i++)
+                    {
+                        DrawCircle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
+                        DrawCircle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
+                        y += Shift;
+                    }
+
+                    if (rnd.Next() % 2 != 0)
+                    {
+                        mes = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
+                        int NumOfShip = list[0];
+                        SetsShip(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
+                        WhiteRectangle(NumOfShip, true);
+                        list.RemoveAt(0);
+                    }
+                    else
+                    {
+                        mes = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
+                    }
+
+                    graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+                    MessageBox.Show(mes, "Кто начинает");
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Правил нет, но мы работаем над этим", "Что-то пошло не по плану");
+                Application.Exit();
             }
         }
-
-
         private void Start_Click(object sender, EventArgs e)
         {
             Start.Visible = false;
+            WhoGoes.Visible = true;
+            Go.Checked = true;
             groupAction.Visible = true;
             ShowSpeed.Visible = true;
             MoreSpeed.Visible = true;
@@ -503,17 +992,101 @@ namespace Warp_6
             MyShipsCenterTextbox.Visible = true;
             EnemyShipsCenterTextbox.Visible = true;
             Step.Visible = true;
+            Ship1.Enabled = true;
+            Ship2.Enabled = true;
+            Ship3.Enabled = true;
+            Ship4.Enabled = true;
+            Ship5.Enabled = true;
+            Ship6.Enabled = true;
+            Ship7.Enabled = true;
+            Ship8.Enabled = true;
+            Ship9.Enabled = true;
+            SpeedLable.Visible = true;
+            ShowSpeed.Text = "";
 
-            if (flag)
+            //if (flag)
+            //{
+            //    textBox1.Text = "Ход противника";
+            //    textBox1.BackColor = Color.Gold;
+            //}
+            //else
+            //{
+            //    textBox1.Text = "Ваш ход";
+            //    textBox1.BackColor = Color.LimeGreen;
+            //}
+        }
+        private void LessSpeed_Click(object sender, EventArgs e)
+        {
+            int NumOfShip = ShipSelection();
+
+            if (NumOfShip != -1)
             {
-                textBox1.Text = "Ход противника";
-                textBox1.BackColor = Color.Gold; flag = true;
+                if (myShip[NumOfShip].speed > 1)
+                {
+                    myShip[NumOfShip].speed--;
+                    if (!Go.Enabled)
+                    {
+                        Go.Enabled = true;
+                        MoreSpeed.Enabled = true;
+                    }
+                    else
+                    {
+                        LessSpeed.Enabled = false;
+                        Go.Enabled = false;
+                    }
+                    ShowSpeed.Text = myShip[NumOfShip].speed.ToString();
+                }
             }
+        }
+        private void MoreSpeed_Click(object sender, EventArgs e)
+        {
+            int NumOfShip = ShipSelection();
 
+            if (NumOfShip != -1)
+            {
+                if (myShip[NumOfShip].type == 1 && myShip[NumOfShip].speed < 4 ||
+                    myShip[NumOfShip].type == 2 && myShip[NumOfShip].speed < 6 ||
+                    myShip[NumOfShip].type == 3 && myShip[NumOfShip].speed < 8)
+                {
+                    myShip[NumOfShip].speed++;
+                    if (!Go.Enabled)
+                    {
+                        Go.Enabled = true;
+                        LessSpeed.Enabled = true;
+                    }
+                    else
+                    {
+                        MoreSpeed.Enabled = false;
+                        Go.Enabled = false;
+                    }
+                    ShowSpeed.Text = myShip[NumOfShip].speed.ToString();
+                }
+            }
+        }
+        private void Ship1_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[0].speed.ToString();
+        private void Ship2_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[1].speed.ToString();
+        private void Ship3_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[2].speed.ToString();
+        private void Ship4_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[3].speed.ToString();
+        private void Ship5_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[4].speed.ToString();
+        private void Ship6_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[5].speed.ToString();
+        private void Ship7_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[6].speed.ToString();
+        private void Ship8_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[7].speed.ToString();
+        private void Ship9_CheckedChanged(object sender, EventArgs e) => ShowSpeed.Text = myShip[8].speed.ToString();
 
-            //if (flag) { textBox1.Text = "Пык"; textBox1.BackColor = Color.LimeGreen; flag = false; }
-            //else {  }
-
+        private void Step_Click(object sender, EventArgs e)
+        {
+            Step.Enabled = false;
+            int NumOfShip = ShipSelection();
+            if (NumOfShip != -1)
+            {
+                myShip[NumOfShip].position -= myShip[NumOfShip].speed;
+                if (position[myShip[NumOfShip].position].busy) 
+                {
+                    myShip[NumOfShip].position = position[myShip[NumOfShip].position].jump; 
+                }
+                DrawShip(BrushLimeGreen, myShip[NumOfShip], NumOfShip);
+            }
+            Step.Enabled = true;
         }
     }
 }

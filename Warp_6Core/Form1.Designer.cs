@@ -53,9 +53,10 @@
             EnemyShipsCenterLebel = new System.Windows.Forms.Label();
             MyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
-            textBox1 = new System.Windows.Forms.TextBox();
+            WhoGoes = new System.Windows.Forms.TextBox();
             Start = new System.Windows.Forms.Button();
             Step = new System.Windows.Forms.Button();
+            SpeedLable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupAction.SuspendLayout();
             groupShip.SuspendLayout();
@@ -113,6 +114,7 @@
             // 
             // MoreSpeed
             // 
+            MoreSpeed.Enabled = false;
             MoreSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             MoreSpeed.Location = new System.Drawing.Point(418, 508);
             MoreSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -122,9 +124,11 @@
             MoreSpeed.Text = ">";
             MoreSpeed.UseVisualStyleBackColor = true;
             MoreSpeed.Visible = false;
+            MoreSpeed.Click += MoreSpeed_Click;
             // 
             // LessSpeed
             // 
+            LessSpeed.Enabled = false;
             LessSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             LessSpeed.Location = new System.Drawing.Point(360, 509);
             LessSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -134,6 +138,7 @@
             LessSpeed.Text = "<";
             LessSpeed.UseVisualStyleBackColor = true;
             LessSpeed.Visible = false;
+            LessSpeed.Click += LessSpeed_Click;
             // 
             // ShowSpeed
             // 
@@ -141,6 +146,7 @@
             ShowSpeed.Location = new System.Drawing.Point(360, 446);
             ShowSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ShowSpeed.Name = "ShowSpeed";
+            ShowSpeed.ReadOnly = true;
             ShowSpeed.Size = new System.Drawing.Size(100, 45);
             ShowSpeed.TabIndex = 6;
             ShowSpeed.Visible = false;
@@ -156,6 +162,7 @@
             Ship1.TabStop = true;
             Ship1.Text = "1";
             Ship1.UseVisualStyleBackColor = true;
+            Ship1.CheckedChanged += Ship1_CheckedChanged;
             // 
             // Ship2
             // 
@@ -168,6 +175,7 @@
             Ship2.TabStop = true;
             Ship2.Text = "2";
             Ship2.UseVisualStyleBackColor = true;
+            Ship2.CheckedChanged += Ship2_CheckedChanged;
             // 
             // Ship3
             // 
@@ -180,6 +188,7 @@
             Ship3.TabStop = true;
             Ship3.Text = "3";
             Ship3.UseVisualStyleBackColor = true;
+            Ship3.CheckedChanged += Ship3_CheckedChanged;
             // 
             // Ship6
             // 
@@ -192,6 +201,7 @@
             Ship6.TabStop = true;
             Ship6.Text = "6";
             Ship6.UseVisualStyleBackColor = true;
+            Ship6.CheckedChanged += Ship6_CheckedChanged;
             // 
             // Ship5
             // 
@@ -204,6 +214,7 @@
             Ship5.TabStop = true;
             Ship5.Text = "5";
             Ship5.UseVisualStyleBackColor = true;
+            Ship5.CheckedChanged += Ship5_CheckedChanged;
             // 
             // Ship4
             // 
@@ -216,6 +227,7 @@
             Ship4.TabStop = true;
             Ship4.Text = "4";
             Ship4.UseVisualStyleBackColor = true;
+            Ship4.CheckedChanged += Ship4_CheckedChanged;
             // 
             // Ship9
             // 
@@ -228,6 +240,7 @@
             Ship9.TabStop = true;
             Ship9.Text = "9";
             Ship9.UseVisualStyleBackColor = true;
+            Ship9.CheckedChanged += Ship9_CheckedChanged;
             // 
             // Ship8
             // 
@@ -240,6 +253,7 @@
             Ship8.TabStop = true;
             Ship8.Text = "8";
             Ship8.UseVisualStyleBackColor = true;
+            Ship8.CheckedChanged += Ship8_CheckedChanged;
             // 
             // Ship7
             // 
@@ -252,6 +266,7 @@
             Ship7.TabStop = true;
             Ship7.Text = "7";
             Ship7.UseVisualStyleBackColor = true;
+            Ship7.CheckedChanged += Ship7_CheckedChanged;
             // 
             // groupAction
             // 
@@ -306,7 +321,7 @@
             // 
             ShipInCenterLabel.AutoSize = true;
             ShipInCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ShipInCenterLabel.Location = new System.Drawing.Point(125, 817);
+            ShipInCenterLabel.Location = new System.Drawing.Point(129, 781);
             ShipInCenterLabel.Name = "ShipInCenterLabel";
             ShipInCenterLabel.Size = new System.Drawing.Size(302, 39);
             ShipInCenterLabel.TabIndex = 19;
@@ -317,7 +332,7 @@
             // 
             MyShipsCenterLabel.AutoSize = true;
             MyShipsCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MyShipsCenterLabel.Location = new System.Drawing.Point(169, 882);
+            MyShipsCenterLabel.Location = new System.Drawing.Point(173, 846);
             MyShipsCenterLabel.Name = "MyShipsCenterLabel";
             MyShipsCenterLabel.Size = new System.Drawing.Size(105, 39);
             MyShipsCenterLabel.TabIndex = 20;
@@ -328,7 +343,7 @@
             // 
             EnemyShipsCenterLebel.AutoSize = true;
             EnemyShipsCenterLebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            EnemyShipsCenterLebel.Location = new System.Drawing.Point(67, 945);
+            EnemyShipsCenterLebel.Location = new System.Drawing.Point(71, 909);
             EnemyShipsCenterLebel.Name = "EnemyShipsCenterLebel";
             EnemyShipsCenterLebel.Size = new System.Drawing.Size(207, 39);
             EnemyShipsCenterLebel.TabIndex = 21;
@@ -339,12 +354,13 @@
             // 
             MyShipsCenterTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
             MyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MyShipsCenterTextbox.Location = new System.Drawing.Point(290, 878);
+            MyShipsCenterTextbox.Location = new System.Drawing.Point(294, 842);
             MyShipsCenterTextbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MyShipsCenterTextbox.Name = "MyShipsCenterTextbox";
+            MyShipsCenterTextbox.ReadOnly = true;
             MyShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
             MyShipsCenterTextbox.TabIndex = 22;
-            MyShipsCenterTextbox.Text = "9";
+            MyShipsCenterTextbox.Text = "0";
             MyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             MyShipsCenterTextbox.Visible = false;
             // 
@@ -352,22 +368,25 @@
             // 
             EnemyShipsCenterTextbox.AcceptsReturn = true;
             EnemyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            EnemyShipsCenterTextbox.Location = new System.Drawing.Point(290, 945);
+            EnemyShipsCenterTextbox.Location = new System.Drawing.Point(294, 909);
             EnemyShipsCenterTextbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             EnemyShipsCenterTextbox.Name = "EnemyShipsCenterTextbox";
+            EnemyShipsCenterTextbox.ReadOnly = true;
             EnemyShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
             EnemyShipsCenterTextbox.TabIndex = 23;
-            EnemyShipsCenterTextbox.Text = "9";
+            EnemyShipsCenterTextbox.Text = "0";
             EnemyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             EnemyShipsCenterTextbox.Visible = false;
             // 
-            // textBox1
+            // WhoGoes
             // 
-            textBox1.Location = new System.Drawing.Point(360, 33);
-            textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(145, 27);
-            textBox1.TabIndex = 24;
+            WhoGoes.Location = new System.Drawing.Point(360, 33);
+            WhoGoes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            WhoGoes.Name = "WhoGoes";
+            WhoGoes.ReadOnly = true;
+            WhoGoes.Size = new System.Drawing.Size(145, 27);
+            WhoGoes.TabIndex = 24;
+            WhoGoes.Visible = false;
             // 
             // Start
             // 
@@ -393,15 +412,28 @@
             Step.Text = "Ход";
             Step.UseVisualStyleBackColor = true;
             Step.Visible = false;
+            Step.Click += Step_Click;
+            // 
+            // SpeedLable
+            // 
+            SpeedLable.AutoSize = true;
+            SpeedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            SpeedLable.Location = new System.Drawing.Point(344, 410);
+            SpeedLable.Name = "SpeedLable";
+            SpeedLable.Size = new System.Drawing.Size(138, 32);
+            SpeedLable.TabIndex = 27;
+            SpeedLable.Text = "Скорость";
+            SpeedLable.Visible = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(SpeedLable);
             Controls.Add(Step);
             Controls.Add(Start);
-            Controls.Add(textBox1);
+            Controls.Add(WhoGoes);
             Controls.Add(EnemyShipsCenterTextbox);
             Controls.Add(MyShipsCenterTextbox);
             Controls.Add(EnemyShipsCenterLebel);
@@ -456,9 +488,10 @@
         private System.Windows.Forms.Label EnemyShipsCenterLebel;
         private System.Windows.Forms.TextBox MyShipsCenterTextbox;
         private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox WhoGoes;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button Step;
+        private System.Windows.Forms.Label SpeedLable;
     }
 }
 
