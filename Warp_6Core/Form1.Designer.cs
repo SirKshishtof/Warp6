@@ -28,42 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             OnPosition = new System.Windows.Forms.Button();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             Go = new System.Windows.Forms.RadioButton();
-            Power = new System.Windows.Forms.RadioButton();
+            ChangeSpeed = new System.Windows.Forms.RadioButton();
             MoreSpeed = new System.Windows.Forms.Button();
             LessSpeed = new System.Windows.Forms.Button();
             ShowSpeed = new System.Windows.Forms.TextBox();
-            Ship1 = new System.Windows.Forms.RadioButton();
-            Ship2 = new System.Windows.Forms.RadioButton();
-            Ship3 = new System.Windows.Forms.RadioButton();
-            Ship6 = new System.Windows.Forms.RadioButton();
-            Ship5 = new System.Windows.Forms.RadioButton();
-            Ship4 = new System.Windows.Forms.RadioButton();
-            Ship9 = new System.Windows.Forms.RadioButton();
-            Ship8 = new System.Windows.Forms.RadioButton();
-            Ship7 = new System.Windows.Forms.RadioButton();
-            groupAction = new System.Windows.Forms.GroupBox();
-            groupShip = new System.Windows.Forms.GroupBox();
+            Ship_0 = new System.Windows.Forms.RadioButton();
+            Ship_1 = new System.Windows.Forms.RadioButton();
+            Ship_2 = new System.Windows.Forms.RadioButton();
+            Ship_5 = new System.Windows.Forms.RadioButton();
+            Ship_4 = new System.Windows.Forms.RadioButton();
+            Ship_3 = new System.Windows.Forms.RadioButton();
+            Ship_8 = new System.Windows.Forms.RadioButton();
+            Ship_7 = new System.Windows.Forms.RadioButton();
+            Ship_6 = new System.Windows.Forms.RadioButton();
+            GroupAction = new System.Windows.Forms.GroupBox();
+            GroupShip = new System.Windows.Forms.GroupBox();
             Rules = new System.Windows.Forms.Button();
             ShipInCenterLabel = new System.Windows.Forms.Label();
             MyShipsCenterLabel = new System.Windows.Forms.Label();
             EnemyShipsCenterLebel = new System.Windows.Forms.Label();
             MyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
-            WhoGoes = new System.Windows.Forms.TextBox();
             Start = new System.Windows.Forms.Button();
             Step = new System.Windows.Forms.Button();
             SpeedLable = new System.Windows.Forms.Label();
+            GameExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            groupAction.SuspendLayout();
-            groupShip.SuspendLayout();
+            GroupAction.SuspendLayout();
+            GroupShip.SuspendLayout();
             SuspendLayout();
             // 
             // OnPosition
             // 
+            OnPosition.BackColor = System.Drawing.SystemColors.Control;
             OnPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             OnPosition.Location = new System.Drawing.Point(139, 689);
             OnPosition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -71,14 +73,14 @@
             OnPosition.Size = new System.Drawing.Size(268, 58);
             OnPosition.TabIndex = 0;
             OnPosition.Text = "На позицию";
-            OnPosition.UseVisualStyleBackColor = true;
+            OnPosition.UseVisualStyleBackColor = false;
             OnPosition.Visible = false;
             OnPosition.Click += OnPosition_Click;
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = System.Drawing.Color.White;
-            pictureBox1.Location = new System.Drawing.Point(511, 1);
+            pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            pictureBox1.Location = new System.Drawing.Point(511, -1);
             pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(1389, 1055);
@@ -99,214 +101,229 @@
             Go.UseVisualStyleBackColor = true;
             Go.CheckedChanged += Go_CheckedChanged;
             // 
-            // Power
+            // ChangeSpeed
             // 
-            Power.AutoSize = true;
-            Power.Location = new System.Drawing.Point(20, 126);
-            Power.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Power.Name = "Power";
-            Power.Size = new System.Drawing.Size(202, 43);
-            Power.TabIndex = 3;
-            Power.TabStop = true;
-            Power.Text = "Мощность";
-            Power.UseVisualStyleBackColor = true;
-            Power.CheckedChanged += Power_CheckedChanged;
+            ChangeSpeed.AutoSize = true;
+            ChangeSpeed.Location = new System.Drawing.Point(20, 126);
+            ChangeSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            ChangeSpeed.Name = "ChangeSpeed";
+            ChangeSpeed.Size = new System.Drawing.Size(204, 82);
+            ChangeSpeed.TabIndex = 3;
+            ChangeSpeed.TabStop = true;
+            ChangeSpeed.Text = "Изменить \r\nскорость";
+            ChangeSpeed.UseVisualStyleBackColor = true;
+            ChangeSpeed.CheckedChanged += ChangeSpeed_CheckedChanged;
             // 
             // MoreSpeed
             // 
+            MoreSpeed.BackColor = System.Drawing.SystemColors.Control;
             MoreSpeed.Enabled = false;
             MoreSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MoreSpeed.Location = new System.Drawing.Point(418, 508);
+            MoreSpeed.Location = new System.Drawing.Point(428, 526);
             MoreSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MoreSpeed.Name = "MoreSpeed";
             MoreSpeed.Size = new System.Drawing.Size(42, 58);
             MoreSpeed.TabIndex = 4;
             MoreSpeed.Text = ">";
-            MoreSpeed.UseVisualStyleBackColor = true;
+            MoreSpeed.UseVisualStyleBackColor = false;
             MoreSpeed.Visible = false;
             MoreSpeed.Click += MoreSpeed_Click;
             // 
             // LessSpeed
             // 
+            LessSpeed.BackColor = System.Drawing.SystemColors.Control;
             LessSpeed.Enabled = false;
             LessSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            LessSpeed.Location = new System.Drawing.Point(360, 509);
+            LessSpeed.Location = new System.Drawing.Point(370, 527);
             LessSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             LessSpeed.Name = "LessSpeed";
             LessSpeed.Size = new System.Drawing.Size(42, 56);
             LessSpeed.TabIndex = 5;
             LessSpeed.Text = "<";
-            LessSpeed.UseVisualStyleBackColor = true;
+            LessSpeed.UseVisualStyleBackColor = false;
             LessSpeed.Visible = false;
             LessSpeed.Click += LessSpeed_Click;
             // 
             // ShowSpeed
             // 
+            ShowSpeed.BackColor = System.Drawing.Color.White;
             ShowSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ShowSpeed.Location = new System.Drawing.Point(360, 446);
+            ShowSpeed.Location = new System.Drawing.Point(370, 464);
             ShowSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ShowSpeed.Name = "ShowSpeed";
             ShowSpeed.ReadOnly = true;
             ShowSpeed.Size = new System.Drawing.Size(100, 45);
             ShowSpeed.TabIndex = 6;
+            ShowSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             ShowSpeed.Visible = false;
             // 
-            // Ship1
+            // Ship_0
             // 
-            Ship1.AutoSize = true;
-            Ship1.Location = new System.Drawing.Point(41, 80);
-            Ship1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship1.Name = "Ship1";
-            Ship1.Size = new System.Drawing.Size(57, 43);
-            Ship1.TabIndex = 8;
-            Ship1.TabStop = true;
-            Ship1.Text = "1";
-            Ship1.UseVisualStyleBackColor = true;
-            Ship1.CheckedChanged += Ship1_CheckedChanged;
+            Ship_0.AutoSize = true;
+            Ship_0.BackColor = System.Drawing.Color.Transparent;
+            Ship_0.Location = new System.Drawing.Point(41, 80);
+            Ship_0.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_0.Name = "Ship_0";
+            Ship_0.Size = new System.Drawing.Size(57, 43);
+            Ship_0.TabIndex = 8;
+            Ship_0.TabStop = true;
+            Ship_0.Text = "1";
+            Ship_0.UseVisualStyleBackColor = false;
+            Ship_0.CheckedChanged += Ship_0_CheckedChanged;
             // 
-            // Ship2
+            // Ship_1
             // 
-            Ship2.AutoSize = true;
-            Ship2.Location = new System.Drawing.Point(122, 80);
-            Ship2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship2.Name = "Ship2";
-            Ship2.Size = new System.Drawing.Size(57, 43);
-            Ship2.TabIndex = 9;
-            Ship2.TabStop = true;
-            Ship2.Text = "2";
-            Ship2.UseVisualStyleBackColor = true;
-            Ship2.CheckedChanged += Ship2_CheckedChanged;
+            Ship_1.AutoSize = true;
+            Ship_1.BackColor = System.Drawing.Color.Transparent;
+            Ship_1.Location = new System.Drawing.Point(122, 80);
+            Ship_1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_1.Name = "Ship_1";
+            Ship_1.Size = new System.Drawing.Size(57, 43);
+            Ship_1.TabIndex = 9;
+            Ship_1.TabStop = true;
+            Ship_1.Text = "2";
+            Ship_1.UseVisualStyleBackColor = false;
+            Ship_1.CheckedChanged += Ship_1_CheckedChanged;
             // 
-            // Ship3
+            // Ship_2
             // 
-            Ship3.AutoSize = true;
-            Ship3.Location = new System.Drawing.Point(196, 80);
-            Ship3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship3.Name = "Ship3";
-            Ship3.Size = new System.Drawing.Size(57, 43);
-            Ship3.TabIndex = 10;
-            Ship3.TabStop = true;
-            Ship3.Text = "3";
-            Ship3.UseVisualStyleBackColor = true;
-            Ship3.CheckedChanged += Ship3_CheckedChanged;
+            Ship_2.AutoSize = true;
+            Ship_2.BackColor = System.Drawing.Color.Transparent;
+            Ship_2.Location = new System.Drawing.Point(196, 80);
+            Ship_2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_2.Name = "Ship_2";
+            Ship_2.Size = new System.Drawing.Size(57, 43);
+            Ship_2.TabIndex = 10;
+            Ship_2.TabStop = true;
+            Ship_2.Text = "3";
+            Ship_2.UseVisualStyleBackColor = false;
+            Ship_2.CheckedChanged += Ship_2_CheckedChanged;
             // 
-            // Ship6
+            // Ship_5
             // 
-            Ship6.AutoSize = true;
-            Ship6.Location = new System.Drawing.Point(196, 141);
-            Ship6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship6.Name = "Ship6";
-            Ship6.Size = new System.Drawing.Size(57, 43);
-            Ship6.TabIndex = 13;
-            Ship6.TabStop = true;
-            Ship6.Text = "6";
-            Ship6.UseVisualStyleBackColor = true;
-            Ship6.CheckedChanged += Ship6_CheckedChanged;
+            Ship_5.AutoSize = true;
+            Ship_5.BackColor = System.Drawing.Color.Transparent;
+            Ship_5.Location = new System.Drawing.Point(196, 141);
+            Ship_5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_5.Name = "Ship_5";
+            Ship_5.Size = new System.Drawing.Size(57, 43);
+            Ship_5.TabIndex = 13;
+            Ship_5.TabStop = true;
+            Ship_5.Text = "6";
+            Ship_5.UseVisualStyleBackColor = false;
+            Ship_5.CheckedChanged += Ship_5_CheckedChanged;
             // 
-            // Ship5
+            // Ship_4
             // 
-            Ship5.AutoSize = true;
-            Ship5.Location = new System.Drawing.Point(122, 141);
-            Ship5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship5.Name = "Ship5";
-            Ship5.Size = new System.Drawing.Size(57, 43);
-            Ship5.TabIndex = 12;
-            Ship5.TabStop = true;
-            Ship5.Text = "5";
-            Ship5.UseVisualStyleBackColor = true;
-            Ship5.CheckedChanged += Ship5_CheckedChanged;
+            Ship_4.AutoSize = true;
+            Ship_4.BackColor = System.Drawing.Color.Transparent;
+            Ship_4.Location = new System.Drawing.Point(122, 141);
+            Ship_4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_4.Name = "Ship_4";
+            Ship_4.Size = new System.Drawing.Size(57, 43);
+            Ship_4.TabIndex = 12;
+            Ship_4.TabStop = true;
+            Ship_4.Text = "5";
+            Ship_4.UseVisualStyleBackColor = false;
+            Ship_4.CheckedChanged += Ship_4_CheckedChanged;
             // 
-            // Ship4
+            // Ship_3
             // 
-            Ship4.AutoSize = true;
-            Ship4.Location = new System.Drawing.Point(41, 141);
-            Ship4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship4.Name = "Ship4";
-            Ship4.Size = new System.Drawing.Size(57, 43);
-            Ship4.TabIndex = 11;
-            Ship4.TabStop = true;
-            Ship4.Text = "4";
-            Ship4.UseVisualStyleBackColor = true;
-            Ship4.CheckedChanged += Ship4_CheckedChanged;
+            Ship_3.AutoSize = true;
+            Ship_3.BackColor = System.Drawing.Color.Transparent;
+            Ship_3.Location = new System.Drawing.Point(41, 141);
+            Ship_3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_3.Name = "Ship_3";
+            Ship_3.Size = new System.Drawing.Size(57, 43);
+            Ship_3.TabIndex = 11;
+            Ship_3.TabStop = true;
+            Ship_3.Text = "4";
+            Ship_3.UseVisualStyleBackColor = false;
+            Ship_3.CheckedChanged += Ship_3_CheckedChanged;
             // 
-            // Ship9
+            // Ship_8
             // 
-            Ship9.AutoSize = true;
-            Ship9.Location = new System.Drawing.Point(196, 202);
-            Ship9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship9.Name = "Ship9";
-            Ship9.Size = new System.Drawing.Size(57, 43);
-            Ship9.TabIndex = 16;
-            Ship9.TabStop = true;
-            Ship9.Text = "9";
-            Ship9.UseVisualStyleBackColor = true;
-            Ship9.CheckedChanged += Ship9_CheckedChanged;
+            Ship_8.AutoSize = true;
+            Ship_8.BackColor = System.Drawing.Color.Transparent;
+            Ship_8.Location = new System.Drawing.Point(196, 202);
+            Ship_8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_8.Name = "Ship_8";
+            Ship_8.Size = new System.Drawing.Size(57, 43);
+            Ship_8.TabIndex = 16;
+            Ship_8.TabStop = true;
+            Ship_8.Text = "9";
+            Ship_8.UseVisualStyleBackColor = false;
+            Ship_8.CheckedChanged += Ship_8_CheckedChanged;
             // 
-            // Ship8
+            // Ship_7
             // 
-            Ship8.AutoSize = true;
-            Ship8.Location = new System.Drawing.Point(122, 202);
-            Ship8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship8.Name = "Ship8";
-            Ship8.Size = new System.Drawing.Size(57, 43);
-            Ship8.TabIndex = 15;
-            Ship8.TabStop = true;
-            Ship8.Text = "8";
-            Ship8.UseVisualStyleBackColor = true;
-            Ship8.CheckedChanged += Ship8_CheckedChanged;
+            Ship_7.AutoSize = true;
+            Ship_7.BackColor = System.Drawing.Color.Transparent;
+            Ship_7.Location = new System.Drawing.Point(122, 202);
+            Ship_7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_7.Name = "Ship_7";
+            Ship_7.Size = new System.Drawing.Size(57, 43);
+            Ship_7.TabIndex = 15;
+            Ship_7.TabStop = true;
+            Ship_7.Text = "8";
+            Ship_7.UseVisualStyleBackColor = false;
+            Ship_7.CheckedChanged += Ship_7_CheckedChanged;
             // 
-            // Ship7
+            // Ship_6
             // 
-            Ship7.AutoSize = true;
-            Ship7.Location = new System.Drawing.Point(41, 202);
-            Ship7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Ship7.Name = "Ship7";
-            Ship7.Size = new System.Drawing.Size(57, 43);
-            Ship7.TabIndex = 14;
-            Ship7.TabStop = true;
-            Ship7.Text = "7";
-            Ship7.UseVisualStyleBackColor = true;
-            Ship7.CheckedChanged += Ship7_CheckedChanged;
+            Ship_6.AutoSize = true;
+            Ship_6.BackColor = System.Drawing.Color.Transparent;
+            Ship_6.Location = new System.Drawing.Point(41, 202);
+            Ship_6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Ship_6.Name = "Ship_6";
+            Ship_6.Size = new System.Drawing.Size(57, 43);
+            Ship_6.TabIndex = 14;
+            Ship_6.TabStop = true;
+            Ship_6.Text = "7";
+            Ship_6.UseVisualStyleBackColor = false;
+            Ship_6.CheckedChanged += Ship_6_CheckedChanged;
             // 
             // groupAction
             // 
-            groupAction.Controls.Add(Power);
-            groupAction.Controls.Add(Go);
-            groupAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            groupAction.Location = new System.Drawing.Point(12, 425);
-            groupAction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            groupAction.Name = "groupAction";
-            groupAction.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            groupAction.Size = new System.Drawing.Size(315, 188);
-            groupAction.TabIndex = 7;
-            groupAction.TabStop = false;
-            groupAction.Text = "Выбор действия";
-            groupAction.Visible = false;
+            GroupAction.Controls.Add(ChangeSpeed);
+            GroupAction.Controls.Add(Go);
+            GroupAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GroupAction.Location = new System.Drawing.Point(12, 428);
+            GroupAction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GroupAction.Name = "groupAction";
+            GroupAction.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GroupAction.Size = new System.Drawing.Size(322, 218);
+            GroupAction.TabIndex = 7;
+            GroupAction.TabStop = false;
+            GroupAction.Text = "Выбор действия";
+            GroupAction.Visible = false;
             // 
-            // groupShip
+            // GroupShip
             // 
-            groupShip.Controls.Add(Ship9);
-            groupShip.Controls.Add(Ship8);
-            groupShip.Controls.Add(Ship7);
-            groupShip.Controls.Add(Ship6);
-            groupShip.Controls.Add(Ship5);
-            groupShip.Controls.Add(Ship4);
-            groupShip.Controls.Add(Ship3);
-            groupShip.Controls.Add(Ship2);
-            groupShip.Controls.Add(Ship1);
-            groupShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            groupShip.Location = new System.Drawing.Point(139, 95);
-            groupShip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            groupShip.Name = "groupShip";
-            groupShip.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            groupShip.Size = new System.Drawing.Size(292, 289);
-            groupShip.TabIndex = 17;
-            groupShip.TabStop = false;
-            groupShip.Text = "Корабли";
-            groupShip.Visible = false;
+            GroupShip.BackgroundImage = (System.Drawing.Image)resources.GetObject("GroupShip.BackgroundImage");
+            GroupShip.Controls.Add(Ship_8);
+            GroupShip.Controls.Add(Ship_7);
+            GroupShip.Controls.Add(Ship_6);
+            GroupShip.Controls.Add(Ship_5);
+            GroupShip.Controls.Add(Ship_4);
+            GroupShip.Controls.Add(Ship_3);
+            GroupShip.Controls.Add(Ship_2);
+            GroupShip.Controls.Add(Ship_1);
+            GroupShip.Controls.Add(Ship_0);
+            GroupShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GroupShip.Location = new System.Drawing.Point(139, 95);
+            GroupShip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GroupShip.Name = "GroupShip";
+            GroupShip.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GroupShip.Size = new System.Drawing.Size(292, 289);
+            GroupShip.TabIndex = 17;
+            GroupShip.TabStop = false;
+            GroupShip.Text = "Корабли";
+            GroupShip.Visible = false;
             // 
             // Rules
             // 
+            Rules.BackColor = System.Drawing.SystemColors.Control;
             Rules.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Rules.Location = new System.Drawing.Point(12, 15);
             Rules.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -314,7 +331,7 @@
             Rules.Size = new System.Drawing.Size(138, 54);
             Rules.TabIndex = 18;
             Rules.Text = "Правила";
-            Rules.UseVisualStyleBackColor = true;
+            Rules.UseVisualStyleBackColor = false;
             Rules.Click += Rules_Click;
             // 
             // ShipInCenterLabel
@@ -353,6 +370,7 @@
             // MyShipsCenterTextbox
             // 
             MyShipsCenterTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            MyShipsCenterTextbox.BackColor = System.Drawing.Color.White;
             MyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             MyShipsCenterTextbox.Location = new System.Drawing.Point(294, 842);
             MyShipsCenterTextbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -367,6 +385,7 @@
             // EnemyShipsCenterTextbox
             // 
             EnemyShipsCenterTextbox.AcceptsReturn = true;
+            EnemyShipsCenterTextbox.BackColor = System.Drawing.Color.White;
             EnemyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             EnemyShipsCenterTextbox.Location = new System.Drawing.Point(294, 909);
             EnemyShipsCenterTextbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -378,18 +397,9 @@
             EnemyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             EnemyShipsCenterTextbox.Visible = false;
             // 
-            // WhoGoes
-            // 
-            WhoGoes.Location = new System.Drawing.Point(360, 33);
-            WhoGoes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            WhoGoes.Name = "WhoGoes";
-            WhoGoes.ReadOnly = true;
-            WhoGoes.Size = new System.Drawing.Size(145, 27);
-            WhoGoes.TabIndex = 24;
-            WhoGoes.Visible = false;
-            // 
             // Start
             // 
+            Start.BackColor = System.Drawing.SystemColors.Control;
             Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Start.Location = new System.Drawing.Point(139, 689);
             Start.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -397,12 +407,13 @@
             Start.Size = new System.Drawing.Size(268, 58);
             Start.TabIndex = 25;
             Start.Text = "Начать игру";
-            Start.UseVisualStyleBackColor = true;
+            Start.UseVisualStyleBackColor = false;
             Start.Visible = false;
             Start.Click += Start_Click;
             // 
             // Step
             // 
+            Step.BackColor = System.Drawing.SystemColors.Control;
             Step.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Step.Location = new System.Drawing.Point(139, 689);
             Step.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -410,7 +421,7 @@
             Step.Size = new System.Drawing.Size(268, 58);
             Step.TabIndex = 26;
             Step.Text = "Ход";
-            Step.UseVisualStyleBackColor = true;
+            Step.UseVisualStyleBackColor = false;
             Step.Visible = false;
             Step.Click += Step_Click;
             // 
@@ -418,30 +429,44 @@
             // 
             SpeedLable.AutoSize = true;
             SpeedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            SpeedLable.Location = new System.Drawing.Point(344, 410);
+            SpeedLable.Location = new System.Drawing.Point(354, 428);
             SpeedLable.Name = "SpeedLable";
             SpeedLable.Size = new System.Drawing.Size(138, 32);
             SpeedLable.TabIndex = 27;
             SpeedLable.Text = "Скорость";
             SpeedLable.Visible = false;
             // 
+            // GameExit
+            // 
+            GameExit.BackColor = System.Drawing.SystemColors.Control;
+            GameExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GameExit.Location = new System.Drawing.Point(1713, 955);
+            GameExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GameExit.Name = "GameExit";
+            GameExit.Size = new System.Drawing.Size(177, 33);
+            GameExit.TabIndex = 28;
+            GameExit.Text = "Выйти из игры";
+            GameExit.UseVisualStyleBackColor = false;
+            GameExit.Click += GameExit_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(GameExit);
             Controls.Add(SpeedLable);
             Controls.Add(Step);
             Controls.Add(Start);
-            Controls.Add(WhoGoes);
             Controls.Add(EnemyShipsCenterTextbox);
             Controls.Add(MyShipsCenterTextbox);
             Controls.Add(EnemyShipsCenterLebel);
             Controls.Add(MyShipsCenterLabel);
             Controls.Add(ShipInCenterLabel);
             Controls.Add(Rules);
-            Controls.Add(groupShip);
-            Controls.Add(groupAction);
+            Controls.Add(GroupShip);
+            Controls.Add(GroupAction);
             Controls.Add(ShowSpeed);
             Controls.Add(LessSpeed);
             Controls.Add(MoreSpeed);
@@ -449,14 +474,14 @@
             Controls.Add(OnPosition);
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Гипер 6";
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            groupAction.ResumeLayout(false);
-            groupAction.PerformLayout();
-            groupShip.ResumeLayout(false);
-            groupShip.PerformLayout();
+            GroupAction.ResumeLayout(false);
+            GroupAction.PerformLayout();
+            GroupShip.ResumeLayout(false);
+            GroupShip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -467,31 +492,31 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.RadioButton Go;
-        private System.Windows.Forms.RadioButton Power;
+        private System.Windows.Forms.RadioButton ChangeSpeed;
         private System.Windows.Forms.Button MoreSpeed;
         private System.Windows.Forms.Button LessSpeed;
         private System.Windows.Forms.TextBox ShowSpeed;
-        private System.Windows.Forms.RadioButton Ship1;
-        private System.Windows.Forms.RadioButton Ship2;
-        private System.Windows.Forms.RadioButton Ship3;
-        private System.Windows.Forms.RadioButton Ship6;
-        private System.Windows.Forms.RadioButton Ship5;
-        private System.Windows.Forms.RadioButton Ship4;
-        private System.Windows.Forms.RadioButton Ship9;
-        private System.Windows.Forms.RadioButton Ship8;
-        private System.Windows.Forms.RadioButton Ship7;
-        private System.Windows.Forms.GroupBox groupAction;
-        private System.Windows.Forms.GroupBox groupShip;
+        private System.Windows.Forms.RadioButton Ship_0;
+        private System.Windows.Forms.RadioButton Ship_1;
+        private System.Windows.Forms.RadioButton Ship_2;
+        private System.Windows.Forms.RadioButton Ship_5;
+        private System.Windows.Forms.RadioButton Ship_4;
+        private System.Windows.Forms.RadioButton Ship_3;
+        private System.Windows.Forms.RadioButton Ship_8;
+        private System.Windows.Forms.RadioButton Ship_7;
+        private System.Windows.Forms.RadioButton Ship_6;
+        private System.Windows.Forms.GroupBox GroupAction;
+        private System.Windows.Forms.GroupBox GroupShip;
         private System.Windows.Forms.Button Rules;
         private System.Windows.Forms.Label ShipInCenterLabel;
         private System.Windows.Forms.Label MyShipsCenterLabel;
         private System.Windows.Forms.Label EnemyShipsCenterLebel;
         private System.Windows.Forms.TextBox MyShipsCenterTextbox;
         private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
-        private System.Windows.Forms.TextBox WhoGoes;
         private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button Step;
         private System.Windows.Forms.Label SpeedLable;
+        private System.Windows.Forms.Button GameExit;
     }
 }
 
