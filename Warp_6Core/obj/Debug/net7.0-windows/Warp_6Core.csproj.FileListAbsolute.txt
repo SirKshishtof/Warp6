@@ -30,3 +30,4 @@ D:\Zlowolf\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\refint\Warp_6Core.d
 D:\Zlowolf\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.pdb
 D:\Zlowolf\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.genruntimeconfig.cache
 D:\Zlowolf\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\ref\Warp_6Core.dll
+D:\Zlowolf\Coursework\W6\Warp_6Core\obj\Debug\net7.0-windows\Warp_6Core.Form2.resources

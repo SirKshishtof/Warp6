@@ -124,7 +124,7 @@
   <data name="GroupShip.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAASQAAAEhCAIAAABZVkoIAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAB1RJREFUeF7t2cFKVQsbx+EdJngBRyoddQPauG4gpxoNGlZQhKBIEFuoe2iiURBO
+        DAAACwwBP0AiyAAAB1RJREFUeF7t2cFKVQsbx+EdJngBRyoddQPauG4gpxoNGlZQhKBIEFuoe2iiURBO
         m0Q3kBQ0bO4oh0EjBw4T+xac93wgtMwm/73XWs8zEN3rFfZ73v071DmjX0CE2CBEbBAiNggRG4SIDULE
         BiFigxCxQYjYIERsECI2CBEbhIgNQsQGIWKDELFBiNggRGwQIjYIERuEiA1CxAYhYoMQsUGI2CBEbBAi
         NggRG4SIDULEBiFigxCxQYjYIERsECI2CBEbhIgNQsQGIWKDELFBiNggRGwQIjYIERuEiA1CxAYhYoMQ
@@ -158,6 +158,9 @@
         IjYIERuEiA1CxAYhYoMQsUGI2CBEbBAiNoj49et/0gN5EWQ/oaQAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>211, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>
