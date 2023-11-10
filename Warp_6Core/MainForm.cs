@@ -12,148 +12,41 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace Warp_6
 {
-    public partial class Form1 : Form
+
+    public partial class MainForm : Form
     {
-        struct Addres_Dash
-        {
-            public int _external;
-            public int _internal;
-        }
-        struct Position
-        {
-            public Position()
-            {
-                jump = -1;
-                busy = false;
-            }
-
-
-            public double x;
-            public double y;
-            public int jump;
-            public bool busy;
-        }
-        struct Ship
-        {
-            public Ship(short type)
-            {
-                InGame = true;
-                this.type = type;
-            }
-            public int position;
-            public short type;
-            public int speed;
-            public bool InGame;
-        }
-        class Enemy
-        {
-            public Ship[] ship = new Ship[9];
-            public List<short> list = new List<short>();
-            public void EnemyShipSorting()
-            {
-                if (list.Count != 0) { list.Clear(); }
-                short count = -1;
-                int max = 0;
-                int[] index = new int[9];
-
-                for (short i = 0; i < 4; i++)
-                {
-                    if (ship[i].speed > max)
-                    {
-                        max = ship[i].speed;
-                        count = i;
-                    }
-                }
-                for (int i = 0; i < 4; i++)
-                {
-                    if (i != count)
-                    {
-                        ship[i].InGame = false;
-                    }
-                }
-                for (int i = 0; i < 9; i++)
-                {
-                    if (ship[i].InGame) { index[i] = ship[i].speed; }
-                    else { index[i] = 0; }
-                }
-
-                for (int i = 0; i < 9; i++)
-                {
-                    max = 0;
-                    for (short j = 0; j < 9; j++)
-                    {
-                        if (index[j] > max)
-                        {
-                            max = index[j];
-                            count = j;
-                        }
-                    }
-                    if (max != 0) { index[count] = 0; list.Add(count); };
-                }
-
-                max = 0;
-                for (int i = 0; i < 3; i++)
-                {
-                    for (short j = 0; j < 4; j++)
-                    {
-                        if (ship[j].speed >= max && !ship[j].InGame)
-                        {
-                            max = ship[j].speed;
-                            count = j;
-                        }
-                    }
-                    ship[count].InGame = true;
-                    list.Add(count);
-                    max = 0;
-                }
-                for (int i = 0; i < 9; i++)
-                {
-                    ship[i].InGame = true;
-                }
-            }
-            private int[] ArrZero(int[] Arr)
-            {
-                int size = Arr.Length;
-                for (int i = 0; i < size; i++)
-                {
-                    Arr[i] = 0;
-                }
-                return Arr;
-            }
-        }
-
-        Graphics graphics;
-        Graphics graph_bitmap;
-        Bitmap bitmap;
-        SolidBrush BrushBlack = new SolidBrush(Color.Black);
-        SolidBrush BrushGold = new SolidBrush(Color.Gold);
-        SolidBrush BrushLimeGreen = new SolidBrush(Color.LimeGreen);
+        public Graphics graphics;
+        public Graphics graph_bitmap;
+        public Bitmap bitmap;
+        public SolidBrush BrushBlack = new SolidBrush(Color.Black);
+        public SolidBrush BrushGold = new SolidBrush(Color.Gold);
+        public SolidBrush BrushLimeGreen = new SolidBrush(Color.LimeGreen);
         Pen BlackPen = new Pen(Color.Black, 3);
         Addres_Dash[] addres_dash = new Addres_Dash[30];
 
         Position[] position = new Position[126];
-        Ship[] myShip = new Ship[9];
-        Enemy enemy = new Enemy();
-        Random rnd = new Random();
+        public Ship[] myShip = new Ship[9];
+        public Enemy enemy = new Enemy();
+        public Random rnd = new Random();
 
         short enemyShipsInCenter = 0;
         short myShipsInCenter = 0;
-        short currentPoint = 125;
+        public short currentPoint = 125;
         const short verticalShear = 20;//Сдвиг всей картинки относительно оси Y
         const double turn = 3.11;//Коффициент задающий поворот спирали и точек
         const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
         const int fontSmall = 12;//Шрифт меленькой цифры на фигуре
         const int fontBig = 25;//Шрифт большой цифры на фигуре
 
-        void DrawDashLine(int a, int b)
+        public void DrawDashLine(int a, int b)
         {
             graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y);
         }
-        void DrawCircle(double x, double y, float radius)
+        public void DrawCircle(double x, double y, float radius)
         {
             graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
         }
-        void DrawTriangle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
+        public void DrawTriangle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
         {
             string TextNumShip = Convert.ToString(NumShip);
             string TextPowerOfShip = Convert.ToString(PowerOfShip);
@@ -170,7 +63,7 @@ namespace Warp_6
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
             //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
-        void DrawRectangle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
+        public void DrawRectangle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
         {
             string TextNumShip = Convert.ToString(NumShip);
             string TextPowerOfShip = Convert.ToString(PowerOfShip);
@@ -182,7 +75,7 @@ namespace Warp_6
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
             //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
-        void DrawCircle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
+        public void DrawCircle(SolidBrush brush, float x, float y, int NumShip, int PowerOfShip)
         {
             string TextNumShip = Convert.ToString(NumShip);
             string TextPowerOfShip = Convert.ToString(PowerOfShip);
@@ -193,7 +86,7 @@ namespace Warp_6
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
         }
-        void WhiteRectangle(int numOfShip, bool enemy)
+        public void WhiteRectangle(int numOfShip, bool enemy)
         {
             float radius = 70;
             float x;
@@ -251,7 +144,7 @@ namespace Warp_6
         {
             return (float)position[Ship.position].y; ;
         }
-        void Map()
+        public void Map()
         {
             double x = 0;
             double y = 0;
@@ -311,9 +204,11 @@ namespace Warp_6
                 yOfPoint = (points[1].Y + points[2].Y) / 2;
                 graph_bitmap.FillPolygon(BrushBlack, points);
             }
-        }
 
-        void SetsShip(ref Ship Ship, int NumOfShip, ref short currentPoint, SolidBrush Brush)
+        }
+        void Draw() => graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+
+        public void SetsShip(ref Ship Ship, int NumOfShip, ref short currentPoint, SolidBrush Brush)
         {
             Ship.position = currentPoint;
             position[currentPoint].busy = true;
@@ -389,11 +284,11 @@ namespace Warp_6
             }
         }
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e) 
         {
             bitmap = new Bitmap(pictureBox1.Size.Width, pictureBox1.Size.Height);
             graph_bitmap = Graphics.FromImage(bitmap);
@@ -513,6 +408,7 @@ namespace Warp_6
         void AutoPos()
         {
             int NumOfShip;
+            NewGameButtonMainForm_Click(null, null);
             for (int i = 0; i < 10; i++)
             {
                 NumOfShip = i;
@@ -589,7 +485,6 @@ namespace Warp_6
                         {
                             OnPosition.Visible = false;
                             Start.Visible = true;
-
                         }
                     }
                     else
@@ -634,24 +529,14 @@ namespace Warp_6
             LessSpeed.Enabled = false;
             MoreSpeed.Enabled = false;
         }
-        private void NewGameButton_Click(object sender, EventArgs e)
+        public void NewGameButtonMainForm_Click(object sender, EventArgs e)
         {
-            NewGameButton.Visible = false;
-            DownloadGameButtom.Visible = false;
+            NewGameButtonMainForm.Visible = false;
             NewGameToolStripMenuItem.Enabled = true;
             SaveGameToolStripMenuItem.Enabled = true;
-            GameExit.Width = 177;
-            GameExit.Height = 33;
-            GameExit.Location = new Point(1713, 955);
-            GameExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12);
-
             GroupShip.Visible = true;
             OnPosition.Visible = true;
 
-            for (int i = 0; i < 10; i++)
-            {
-                listBox1.Items.Add(i.ToString());
-            }
             Map();
 
             float xLeft = 50;
@@ -696,7 +581,6 @@ namespace Warp_6
 
             graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
             MessageBox.Show(mes, "Кто начинает");
-
 
         }
         private void Start_Click(object sender, EventArgs e)
@@ -868,14 +752,15 @@ namespace Warp_6
             DialogResult result = MessageBox.Show("Вы точно хотите выйти из игры?", "Выход ли это?", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                result = MessageBox.Show("Сохранить прогресс игры?", "Сохранить?", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    StreamWriter rulesFile = new StreamWriter(@"D:\Zlowolf\Coursework\123.txt");
+                //result = MessageBox.Show("Сохранить прогресс игры?", "Сохранить?", MessageBoxButtons.YesNo);
+                //if (result == DialogResult.Yes)
+                //{
+                //    //StreamWriter rulesFile = new StreamWriter(@"D:\Zlowolf\Coursework\123.txt");
 
-                    string str = DateTime.Now.ToString();
-                }
-                else Application.Exit();
+                //    //string str = DateTime.Now.ToString();
+                //}
+                //else
+                Application.Exit();
             }
         }
 
@@ -890,7 +775,7 @@ namespace Warp_6
             }
         }
 
-        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
+        public void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OnPosition.Visible = true;
             Go.Checked = false;
@@ -999,7 +884,7 @@ namespace Warp_6
             MessageBox.Show(mes, "Кто начинает");
         }
 
-        private void SaveGameToolStripMenuItem_Click(object sender, EventArgs e)
+        public void SaveGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -1009,13 +894,113 @@ namespace Warp_6
 
         }
 
-        private void DownloadGameButtom_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) => Draw();
+    }
+    struct Addres_Dash
+    {
+        public int _external;
+        public int _internal;
+    }
+    struct Position
+    {
+        public Position()
         {
-
+            jump = -1;
+            busy = false;
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+
+        public double x;
+        public double y;
+        public int jump;
+        public bool busy;
+    }
+    public struct Ship
+    {
+        public Ship(short type)
         {
+            InGame = true;
+            this.type = type;
+        }
+        public int position;
+        public short type;
+        public int speed;
+        public bool InGame;
+    }
+    public class Enemy
+    {
+        public Ship[] ship = new Ship[9];
+        public List<short> list = new List<short>();
+        public void EnemyShipSorting()
+        {
+            if (list.Count != 0) { list.Clear(); }
+            short count = -1;
+            int max = 0;
+            int[] index = new int[9];
+
+            for (short i = 0; i < 4; i++)
+            {
+                if (ship[i].speed > max)
+                {
+                    max = ship[i].speed;
+                    count = i;
+                }
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (i != count)
+                {
+                    ship[i].InGame = false;
+                }
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                if (ship[i].InGame) { index[i] = ship[i].speed; }
+                else { index[i] = 0; }
+            }
+
+            for (int i = 0; i < 9; i++)
+            {
+                max = 0;
+                for (short j = 0; j < 9; j++)
+                {
+                    if (index[j] > max)
+                    {
+                        max = index[j];
+                        count = j;
+                    }
+                }
+                if (max != 0) { index[count] = 0; list.Add(count); };
+            }
+
+            max = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (short j = 0; j < 4; j++)
+                {
+                    if (ship[j].speed >= max && !ship[j].InGame)
+                    {
+                        max = ship[j].speed;
+                        count = j;
+                    }
+                }
+                ship[count].InGame = true;
+                list.Add(count);
+                max = 0;
+            }
+            for (int i = 0; i < 9; i++)
+            {
+                ship[i].InGame = true;
+            }
+        }
+        private int[] ArrZero(int[] Arr)
+        {
+            int size = Arr.Length;
+            for (int i = 0; i < size; i++)
+            {
+                Arr[i] = 0;
+            }
+            return Arr;
         }
     }
 }

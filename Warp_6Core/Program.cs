@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Warp_6Core;
 
 namespace Warp_6
 {
@@ -461,19 +462,20 @@ namespace Warp_6
     //    public int _internal;
     //}
 
-
+   
     internal static class Program
     {
+       
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
-
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MenuForm());
         }
+
     }
 }
