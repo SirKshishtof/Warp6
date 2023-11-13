@@ -47,25 +47,27 @@
             Ship_7 = new System.Windows.Forms.RadioButton();
             Ship_6 = new System.Windows.Forms.RadioButton();
             GroupAction = new System.Windows.Forms.GroupBox();
-            DownloadGameButtom = new System.Windows.Forms.Button();
-            GameExit = new System.Windows.Forms.Button();
             GroupShip = new System.Windows.Forms.GroupBox();
-            NewGameButton = new System.Windows.Forms.Button();
             ShipInCenterLabel = new System.Windows.Forms.Label();
             MyShipsCenterLabel = new System.Windows.Forms.Label();
             EnemyShipsCenterLebel = new System.Windows.Forms.Label();
             MyShipsCenterTextbox = new System.Windows.Forms.TextBox();
             EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
-            Start = new System.Windows.Forms.Button();
             Step = new System.Windows.Forms.Button();
             SpeedLable = new System.Windows.Forms.Label();
             AutoPosChB = new System.Windows.Forms.CheckBox();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
-            toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            RulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             NewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             SaveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             DownloadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            правилаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            GameExit = new System.Windows.Forms.Button();
+            NewGame = new System.Windows.Forms.Button();
+            DownloadGame = new System.Windows.Forms.Button();
+            Save = new System.Windows.Forms.ListBox();
+            SaveNameLabel = new System.Windows.Forms.Label();
+            SaveNameText = new System.Windows.Forms.TextBox();
+            SaveNameButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
@@ -76,7 +78,7 @@
             // 
             OnPosition.BackColor = System.Drawing.SystemColors.Control;
             OnPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            OnPosition.Location = new System.Drawing.Point(139, 689);
+            OnPosition.Location = new System.Drawing.Point(129, 400);
             OnPosition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             OnPosition.Name = "OnPosition";
             OnPosition.Size = new System.Drawing.Size(268, 58);
@@ -89,7 +91,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            pictureBox1.Location = new System.Drawing.Point(511, -1);
+            pictureBox1.Location = new System.Drawing.Point(513, 0);
             pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(1389, 1055);
@@ -128,7 +130,7 @@
             MoreSpeed.BackColor = System.Drawing.SystemColors.Control;
             MoreSpeed.Enabled = false;
             MoreSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MoreSpeed.Location = new System.Drawing.Point(444, 526);
+            MoreSpeed.Location = new System.Drawing.Point(441, 559);
             MoreSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MoreSpeed.Name = "MoreSpeed";
             MoreSpeed.Size = new System.Drawing.Size(42, 58);
@@ -143,7 +145,7 @@
             LessSpeed.BackColor = System.Drawing.SystemColors.Control;
             LessSpeed.Enabled = false;
             LessSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            LessSpeed.Location = new System.Drawing.Point(386, 527);
+            LessSpeed.Location = new System.Drawing.Point(383, 560);
             LessSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             LessSpeed.Name = "LessSpeed";
             LessSpeed.Size = new System.Drawing.Size(42, 56);
@@ -157,7 +159,7 @@
             // 
             ShowSpeed.BackColor = System.Drawing.Color.White;
             ShowSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ShowSpeed.Location = new System.Drawing.Point(386, 464);
+            ShowSpeed.Location = new System.Drawing.Point(383, 497);
             ShowSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ShowSpeed.Name = "ShowSpeed";
             ShowSpeed.ReadOnly = true;
@@ -175,7 +177,6 @@
             Ship_0.Name = "Ship_0";
             Ship_0.Size = new System.Drawing.Size(57, 43);
             Ship_0.TabIndex = 8;
-            Ship_0.TabStop = true;
             Ship_0.Text = "1";
             Ship_0.UseVisualStyleBackColor = false;
             Ship_0.CheckedChanged += Ship_0_CheckedChanged;
@@ -189,7 +190,6 @@
             Ship_1.Name = "Ship_1";
             Ship_1.Size = new System.Drawing.Size(57, 43);
             Ship_1.TabIndex = 9;
-            Ship_1.TabStop = true;
             Ship_1.Text = "2";
             Ship_1.UseVisualStyleBackColor = false;
             Ship_1.CheckedChanged += Ship_1_CheckedChanged;
@@ -203,7 +203,6 @@
             Ship_2.Name = "Ship_2";
             Ship_2.Size = new System.Drawing.Size(57, 43);
             Ship_2.TabIndex = 10;
-            Ship_2.TabStop = true;
             Ship_2.Text = "3";
             Ship_2.UseVisualStyleBackColor = false;
             Ship_2.CheckedChanged += Ship_2_CheckedChanged;
@@ -217,7 +216,6 @@
             Ship_5.Name = "Ship_5";
             Ship_5.Size = new System.Drawing.Size(57, 43);
             Ship_5.TabIndex = 13;
-            Ship_5.TabStop = true;
             Ship_5.Text = "6";
             Ship_5.UseVisualStyleBackColor = false;
             Ship_5.CheckedChanged += Ship_5_CheckedChanged;
@@ -231,7 +229,6 @@
             Ship_4.Name = "Ship_4";
             Ship_4.Size = new System.Drawing.Size(57, 43);
             Ship_4.TabIndex = 12;
-            Ship_4.TabStop = true;
             Ship_4.Text = "5";
             Ship_4.UseVisualStyleBackColor = false;
             Ship_4.CheckedChanged += Ship_4_CheckedChanged;
@@ -245,7 +242,6 @@
             Ship_3.Name = "Ship_3";
             Ship_3.Size = new System.Drawing.Size(57, 43);
             Ship_3.TabIndex = 11;
-            Ship_3.TabStop = true;
             Ship_3.Text = "4";
             Ship_3.UseVisualStyleBackColor = false;
             Ship_3.CheckedChanged += Ship_3_CheckedChanged;
@@ -259,7 +255,6 @@
             Ship_8.Name = "Ship_8";
             Ship_8.Size = new System.Drawing.Size(57, 43);
             Ship_8.TabIndex = 16;
-            Ship_8.TabStop = true;
             Ship_8.Text = "9";
             Ship_8.UseVisualStyleBackColor = false;
             Ship_8.CheckedChanged += Ship_8_CheckedChanged;
@@ -273,7 +268,6 @@
             Ship_7.Name = "Ship_7";
             Ship_7.Size = new System.Drawing.Size(57, 43);
             Ship_7.TabIndex = 15;
-            Ship_7.TabStop = true;
             Ship_7.Text = "8";
             Ship_7.UseVisualStyleBackColor = false;
             Ship_7.CheckedChanged += Ship_7_CheckedChanged;
@@ -287,7 +281,6 @@
             Ship_6.Name = "Ship_6";
             Ship_6.Size = new System.Drawing.Size(57, 43);
             Ship_6.TabIndex = 14;
-            Ship_6.TabStop = true;
             Ship_6.Text = "7";
             Ship_6.UseVisualStyleBackColor = false;
             Ship_6.CheckedChanged += Ship_6_CheckedChanged;
@@ -297,7 +290,7 @@
             GroupAction.Controls.Add(ChangeSpeed);
             GroupAction.Controls.Add(Go);
             GroupAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            GroupAction.Location = new System.Drawing.Point(28, 428);
+            GroupAction.Location = new System.Drawing.Point(28, 451);
             GroupAction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             GroupAction.Name = "GroupAction";
             GroupAction.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -306,32 +299,6 @@
             GroupAction.TabStop = false;
             GroupAction.Text = "Выбор действия";
             GroupAction.Visible = false;
-            // 
-            // DownloadGameButtom
-            // 
-            DownloadGameButtom.BackColor = System.Drawing.SystemColors.Control;
-            DownloadGameButtom.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            DownloadGameButtom.Location = new System.Drawing.Point(84, 515);
-            DownloadGameButtom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            DownloadGameButtom.Name = "DownloadGameButtom";
-            DownloadGameButtom.Size = new System.Drawing.Size(389, 48);
-            DownloadGameButtom.TabIndex = 34;
-            DownloadGameButtom.Text = "Загрузка игры";
-            DownloadGameButtom.UseVisualStyleBackColor = false;
-            DownloadGameButtom.Click += DownloadGameButtom_Click;
-            // 
-            // GameExit
-            // 
-            GameExit.BackColor = System.Drawing.SystemColors.Control;
-            GameExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8000011F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            GameExit.Location = new System.Drawing.Point(84, 580);
-            GameExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            GameExit.Name = "GameExit";
-            GameExit.Size = new System.Drawing.Size(389, 48);
-            GameExit.TabIndex = 28;
-            GameExit.Text = "Выйти из игры";
-            GameExit.UseVisualStyleBackColor = false;
-            GameExit.Click += GameExit_Click;
             // 
             // GroupShip
             // 
@@ -346,7 +313,7 @@
             GroupShip.Controls.Add(Ship_1);
             GroupShip.Controls.Add(Ship_0);
             GroupShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            GroupShip.Location = new System.Drawing.Point(139, 95);
+            GroupShip.Location = new System.Drawing.Point(115, 89);
             GroupShip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             GroupShip.Name = "GroupShip";
             GroupShip.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -355,19 +322,6 @@
             GroupShip.TabStop = false;
             GroupShip.Text = "Корабли";
             GroupShip.Visible = false;
-            // 
-            // NewGameButton
-            // 
-            NewGameButton.BackColor = System.Drawing.SystemColors.Control;
-            NewGameButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            NewGameButton.Location = new System.Drawing.Point(84, 450);
-            NewGameButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            NewGameButton.Name = "NewGameButton";
-            NewGameButton.Size = new System.Drawing.Size(389, 48);
-            NewGameButton.TabIndex = 18;
-            NewGameButton.Text = "Новая игра";
-            NewGameButton.UseVisualStyleBackColor = false;
-            NewGameButton.Click += NewGameButton_Click;
             // 
             // ShipInCenterLabel
             // 
@@ -432,25 +386,11 @@
             EnemyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             EnemyShipsCenterTextbox.Visible = false;
             // 
-            // Start
-            // 
-            Start.BackColor = System.Drawing.SystemColors.Control;
-            Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Start.Location = new System.Drawing.Point(139, 689);
-            Start.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Start.Name = "Start";
-            Start.Size = new System.Drawing.Size(268, 58);
-            Start.TabIndex = 25;
-            Start.Text = "Начать игру";
-            Start.UseVisualStyleBackColor = false;
-            Start.Visible = false;
-            Start.Click += Start_Click;
-            // 
             // Step
             // 
             Step.BackColor = System.Drawing.SystemColors.Control;
             Step.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            Step.Location = new System.Drawing.Point(139, 689);
+            Step.Location = new System.Drawing.Point(156, 692);
             Step.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Step.Name = "Step";
             Step.Size = new System.Drawing.Size(268, 58);
@@ -464,7 +404,7 @@
             // 
             SpeedLable.AutoSize = true;
             SpeedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            SpeedLable.Location = new System.Drawing.Point(370, 428);
+            SpeedLable.Location = new System.Drawing.Point(367, 461);
             SpeedLable.Name = "SpeedLable";
             SpeedLable.Size = new System.Drawing.Size(138, 32);
             SpeedLable.TabIndex = 27;
@@ -474,7 +414,7 @@
             // AutoPosChB
             // 
             AutoPosChB.AutoSize = true;
-            AutoPosChB.Location = new System.Drawing.Point(370, 31);
+            AutoPosChB.Location = new System.Drawing.Point(12, 369);
             AutoPosChB.Name = "AutoPosChB";
             AutoPosChB.Size = new System.Drawing.Size(126, 24);
             AutoPosChB.TabIndex = 29;
@@ -484,49 +424,119 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItem1, правилаToolStripMenuItem1 });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { RulesToolStripMenuItem, NewGameToolStripMenuItem, SaveGameToolStripMenuItem, DownloadGameToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new System.Drawing.Size(1902, 28);
             menuStrip1.TabIndex = 33;
             menuStrip1.Text = "menuStrip1";
             // 
-            // toolStripMenuItem1
+            // RulesToolStripMenuItem
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { NewGameToolStripMenuItem, SaveGameToolStripMenuItem, DownloadGameToolStripMenuItem });
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new System.Drawing.Size(57, 24);
-            toolStripMenuItem1.Text = "Игра";
+            RulesToolStripMenuItem.Name = "RulesToolStripMenuItem";
+            RulesToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
+            RulesToolStripMenuItem.Text = "Правила";
+            RulesToolStripMenuItem.Click += RulesToolStripMenuItem_Click;
             // 
             // NewGameToolStripMenuItem
             // 
-            NewGameToolStripMenuItem.Enabled = false;
             NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
-            NewGameToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            NewGameToolStripMenuItem.Size = new System.Drawing.Size(103, 24);
             NewGameToolStripMenuItem.Text = "Новая игра";
-            NewGameToolStripMenuItem.Click += NewGameToolStripMenuItem_Click;
+            NewGameToolStripMenuItem.Visible = false;
+            NewGameToolStripMenuItem.Click += NewGameToolStripMenuItem_Click_1;
             // 
             // SaveGameToolStripMenuItem
             // 
-            SaveGameToolStripMenuItem.Enabled = false;
             SaveGameToolStripMenuItem.Name = "SaveGameToolStripMenuItem";
-            SaveGameToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            SaveGameToolStripMenuItem.Size = new System.Drawing.Size(132, 24);
             SaveGameToolStripMenuItem.Text = "Сохранить игру";
+            SaveGameToolStripMenuItem.Visible = false;
             SaveGameToolStripMenuItem.Click += SaveGameToolStripMenuItem_Click;
             // 
             // DownloadGameToolStripMenuItem
             // 
             DownloadGameToolStripMenuItem.Name = "DownloadGameToolStripMenuItem";
-            DownloadGameToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            DownloadGameToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
             DownloadGameToolStripMenuItem.Text = "Загрузить игру";
+            DownloadGameToolStripMenuItem.Visible = false;
             DownloadGameToolStripMenuItem.Click += DownloadGameToolStripMenuItem_Click;
             // 
-            // правилаToolStripMenuItem1
+            // GameExit
             // 
-            правилаToolStripMenuItem1.Name = "правилаToolStripMenuItem1";
-            правилаToolStripMenuItem1.Size = new System.Drawing.Size(84, 24);
-            правилаToolStripMenuItem1.Text = "Правила";
-            правилаToolStripMenuItem1.Click += RulesToolStripMenuItem1_Click;
+            GameExit.BackColor = System.Drawing.SystemColors.Control;
+            GameExit.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GameExit.Location = new System.Drawing.Point(780, 565);
+            GameExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GameExit.Name = "GameExit";
+            GameExit.Size = new System.Drawing.Size(360, 66);
+            GameExit.TabIndex = 28;
+            GameExit.Text = "Выйти из игры";
+            GameExit.UseVisualStyleBackColor = false;
+            GameExit.Click += GameExit_Click;
+            // 
+            // NewGame
+            // 
+            NewGame.BackColor = System.Drawing.SystemColors.Control;
+            NewGame.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            NewGame.Location = new System.Drawing.Point(780, 369);
+            NewGame.Name = "NewGame";
+            NewGame.Size = new System.Drawing.Size(360, 66);
+            NewGame.TabIndex = 34;
+            NewGame.Text = "Новая игра";
+            NewGame.UseVisualStyleBackColor = false;
+            NewGame.Click += NewGame_Click;
+            // 
+            // DownloadGame
+            // 
+            DownloadGame.BackColor = System.Drawing.SystemColors.Control;
+            DownloadGame.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            DownloadGame.Location = new System.Drawing.Point(780, 468);
+            DownloadGame.Name = "DownloadGame";
+            DownloadGame.Size = new System.Drawing.Size(360, 66);
+            DownloadGame.TabIndex = 35;
+            DownloadGame.Text = "Загрузить игру";
+            DownloadGame.UseVisualStyleBackColor = false;
+            DownloadGame.Click += DownloadGame_Click;
+            // 
+            // Save
+            // 
+            Save.FormattingEnabled = true;
+            Save.ItemHeight = 20;
+            Save.Location = new System.Drawing.Point(1156, 211);
+            Save.Name = "Save";
+            Save.Size = new System.Drawing.Size(404, 604);
+            Save.TabIndex = 36;
+            Save.Visible = false;
+            // 
+            // SaveNameLabel
+            // 
+            SaveNameLabel.AutoSize = true;
+            SaveNameLabel.Location = new System.Drawing.Point(23, 39);
+            SaveNameLabel.Name = "SaveNameLabel";
+            SaveNameLabel.Size = new System.Drawing.Size(167, 20);
+            SaveNameLabel.TabIndex = 37;
+            SaveNameLabel.Text = "Название сохранения:";
+            SaveNameLabel.Visible = false;
+            // 
+            // SaveNameText
+            // 
+            SaveNameText.Location = new System.Drawing.Point(192, 36);
+            SaveNameText.Name = "SaveNameText";
+            SaveNameText.Size = new System.Drawing.Size(208, 27);
+            SaveNameText.TabIndex = 38;
+            SaveNameText.Visible = false;
+            // 
+            // SaveNameButton
+            // 
+            SaveNameButton.Location = new System.Drawing.Point(404, 35);
+            SaveNameButton.Name = "SaveNameButton";
+            SaveNameButton.Size = new System.Drawing.Size(94, 29);
+            SaveNameButton.TabIndex = 39;
+            SaveNameButton.Text = "Сохранить";
+            SaveNameButton.UseVisualStyleBackColor = true;
+            SaveNameButton.Visible = false;
+            SaveNameButton.Click += SaveNameButton_Click;
             // 
             // Form1
             // 
@@ -534,17 +544,21 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(SaveNameButton);
+            Controls.Add(SaveNameText);
+            Controls.Add(SaveNameLabel);
+            Controls.Add(OnPosition);
+            Controls.Add(Save);
+            Controls.Add(DownloadGame);
+            Controls.Add(NewGame);
             Controls.Add(GameExit);
-            Controls.Add(DownloadGameButtom);
             Controls.Add(AutoPosChB);
             Controls.Add(SpeedLable);
             Controls.Add(Step);
-            Controls.Add(Start);
             Controls.Add(EnemyShipsCenterTextbox);
             Controls.Add(MyShipsCenterTextbox);
             Controls.Add(EnemyShipsCenterLebel);
             Controls.Add(MyShipsCenterLabel);
-            Controls.Add(NewGameButton);
             Controls.Add(ShipInCenterLabel);
             Controls.Add(GroupShip);
             Controls.Add(GroupAction);
@@ -552,7 +566,6 @@
             Controls.Add(LessSpeed);
             Controls.Add(MoreSpeed);
             Controls.Add(pictureBox1);
-            Controls.Add(OnPosition);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -592,24 +605,26 @@
         private System.Windows.Forms.RadioButton Ship_6;
         private System.Windows.Forms.GroupBox GroupAction;
         private System.Windows.Forms.GroupBox GroupShip;
-        private System.Windows.Forms.Button NewGameButton;
         private System.Windows.Forms.Label ShipInCenterLabel;
         private System.Windows.Forms.Label MyShipsCenterLabel;
         private System.Windows.Forms.Label EnemyShipsCenterLebel;
         private System.Windows.Forms.TextBox MyShipsCenterTextbox;
         private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
-        private System.Windows.Forms.Button Start;
         private System.Windows.Forms.Button Step;
         private System.Windows.Forms.Label SpeedLable;
-        private System.Windows.Forms.Button GameExit;
         private System.Windows.Forms.CheckBox AutoPosChB;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem RulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NewGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DownloadGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem правилаToolStripMenuItem1;
-        private System.Windows.Forms.Button DownloadGameButtom;
+        private System.Windows.Forms.Button GameExit;
+        private System.Windows.Forms.Button NewGame;
+        private System.Windows.Forms.Button DownloadGame;
+        private System.Windows.Forms.ListBox Save;
+        private System.Windows.Forms.Label SaveNameLabel;
+        private System.Windows.Forms.TextBox SaveNameText;
+        private System.Windows.Forms.Button SaveNameButton;
     }
 }
 
