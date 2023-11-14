@@ -64,10 +64,12 @@
             GameExit = new System.Windows.Forms.Button();
             NewGame = new System.Windows.Forms.Button();
             DownloadGame = new System.Windows.Forms.Button();
-            Save = new System.Windows.Forms.ListBox();
+            SaveList = new System.Windows.Forms.ListBox();
             SaveNameLabel = new System.Windows.Forms.Label();
             SaveNameText = new System.Windows.Forms.TextBox();
-            SaveNameButton = new System.Windows.Forms.Button();
+            NameSaveButton = new System.Windows.Forms.Button();
+            InvalidСharactersLabel = new System.Windows.Forms.Label();
+            LoadingTheSelectedSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
@@ -499,15 +501,15 @@
             DownloadGame.UseVisualStyleBackColor = false;
             DownloadGame.Click += DownloadGame_Click;
             // 
-            // Save
+            // SaveList
             // 
-            Save.FormattingEnabled = true;
-            Save.ItemHeight = 20;
-            Save.Location = new System.Drawing.Point(1156, 211);
-            Save.Name = "Save";
-            Save.Size = new System.Drawing.Size(404, 604);
-            Save.TabIndex = 36;
-            Save.Visible = false;
+            SaveList.FormattingEnabled = true;
+            SaveList.ItemHeight = 20;
+            SaveList.Location = new System.Drawing.Point(1156, 171);
+            SaveList.Name = "SaveList";
+            SaveList.Size = new System.Drawing.Size(404, 404);
+            SaveList.TabIndex = 36;
+            SaveList.Visible = false;
             // 
             // SaveNameLabel
             // 
@@ -527,16 +529,40 @@
             SaveNameText.TabIndex = 38;
             SaveNameText.Visible = false;
             // 
-            // SaveNameButton
+            // NameSaveButton
             // 
-            SaveNameButton.Location = new System.Drawing.Point(404, 35);
-            SaveNameButton.Name = "SaveNameButton";
-            SaveNameButton.Size = new System.Drawing.Size(94, 29);
-            SaveNameButton.TabIndex = 39;
-            SaveNameButton.Text = "Сохранить";
-            SaveNameButton.UseVisualStyleBackColor = true;
-            SaveNameButton.Visible = false;
-            SaveNameButton.Click += SaveNameButton_Click;
+            NameSaveButton.Location = new System.Drawing.Point(404, 35);
+            NameSaveButton.Name = "NameSaveButton";
+            NameSaveButton.Size = new System.Drawing.Size(94, 29);
+            NameSaveButton.TabIndex = 39;
+            NameSaveButton.Text = "Сохранить";
+            NameSaveButton.UseVisualStyleBackColor = true;
+            NameSaveButton.Visible = false;
+            NameSaveButton.Click += NameSaveButton_Click;
+            // 
+            // InvalidСharactersLabel
+            // 
+            InvalidСharactersLabel.AutoSize = true;
+            InvalidСharactersLabel.ForeColor = System.Drawing.Color.Red;
+            InvalidСharactersLabel.Location = new System.Drawing.Point(154, 65);
+            InvalidСharactersLabel.Name = "InvalidСharactersLabel";
+            InvalidСharactersLabel.Size = new System.Drawing.Size(277, 20);
+            InvalidСharactersLabel.TabIndex = 40;
+            InvalidСharactersLabel.Text = "Недопустимые символы: \\ / : * ? \" < > |";
+            InvalidСharactersLabel.Visible = false;
+            // 
+            // LoadingTheSelectedSave
+            // 
+            LoadingTheSelectedSave.BackColor = System.Drawing.SystemColors.Control;
+            LoadingTheSelectedSave.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadingTheSelectedSave.Location = new System.Drawing.Point(1278, 587);
+            LoadingTheSelectedSave.Name = "LoadingTheSelectedSave";
+            LoadingTheSelectedSave.Size = new System.Drawing.Size(185, 44);
+            LoadingTheSelectedSave.TabIndex = 41;
+            LoadingTheSelectedSave.Text = "Загрузить";
+            LoadingTheSelectedSave.UseVisualStyleBackColor = false;
+            LoadingTheSelectedSave.Visible = false;
+            LoadingTheSelectedSave.Click += LoadingTheSelectedSave_Click;
             // 
             // Form1
             // 
@@ -544,11 +570,13 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
-            Controls.Add(SaveNameButton);
+            Controls.Add(LoadingTheSelectedSave);
+            Controls.Add(InvalidСharactersLabel);
+            Controls.Add(NameSaveButton);
             Controls.Add(SaveNameText);
             Controls.Add(SaveNameLabel);
             Controls.Add(OnPosition);
-            Controls.Add(Save);
+            Controls.Add(SaveList);
             Controls.Add(DownloadGame);
             Controls.Add(NewGame);
             Controls.Add(GameExit);
@@ -621,10 +649,12 @@
         private System.Windows.Forms.Button GameExit;
         private System.Windows.Forms.Button NewGame;
         private System.Windows.Forms.Button DownloadGame;
-        private System.Windows.Forms.ListBox Save;
+        private System.Windows.Forms.ListBox SaveList;
         private System.Windows.Forms.Label SaveNameLabel;
         private System.Windows.Forms.TextBox SaveNameText;
-        private System.Windows.Forms.Button SaveNameButton;
+        private System.Windows.Forms.Button NameSaveButton;
+        private System.Windows.Forms.Label InvalidСharactersLabel;
+        private System.Windows.Forms.Button LoadingTheSelectedSave;
     }
 }
 
