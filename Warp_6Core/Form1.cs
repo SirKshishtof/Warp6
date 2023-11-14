@@ -1111,7 +1111,6 @@ namespace Warp_6
                 else Application.Exit();
             }
         }
-
         private void Rules_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(@"D:\Zlowolf\Coursework\Rules.txt"))
