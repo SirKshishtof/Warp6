@@ -1145,6 +1145,8 @@ namespace Warp_6
             SpeedLable.Visible = false;
             GroupShip.Visible = true;
             OnPosition_Button.Visible = true;
+            myShipsInCenter = 0;
+            enemyShipsInCenter = 0;
 
             for (short i = 0; i < 9; i++)
             {
