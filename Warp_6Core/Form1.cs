@@ -944,6 +944,8 @@ namespace Warp_6
             GameExit_Buttom.Height = 33;
             GameExit_Buttom.Location = new Point(1713, 955);
             GameExit_Buttom.Font = new Font("Segoe UI", 12);
+            myShipsInCenter = 0;
+            enemyShipsInCenter = 0;
 
             InitializationAllShips();
             enemy.EnemyShipSorting();
@@ -1147,6 +1149,9 @@ namespace Warp_6
             OnPosition_Button.Visible = true;
             myShipsInCenter = 0;
             enemyShipsInCenter = 0;
+            enemyShipsInCenter = 0;
+            myShipsInCenter = 0;
+            currentPoint = 125;
 
             for (short i = 0; i < 9; i++)
             {
@@ -1158,10 +1163,6 @@ namespace Warp_6
             enemy.EnemyShipSorting();
             DrawMap();
             DrawingShipsOnSides();
-
-            enemyShipsInCenter = 0;
-            myShipsInCenter = 0;
-            currentPoint = 125;
             WhoGoesFirst();
         }
         private void SaveGame_ToolStripMenuItem_Click(object sender, EventArgs e)
