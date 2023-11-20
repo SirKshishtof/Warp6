@@ -132,7 +132,6 @@ namespace Warp_6
         Ship[] myShip = new Ship[9];
         Enemy enemy = new Enemy();
         Random rnd = new Random();
-
         System.Windows.Forms.RadioButton[] shipRadioButtons = new System.Windows.Forms.RadioButton[9];
 
         short enemyShipsInCenter = 0;
@@ -143,7 +142,9 @@ namespace Warp_6
         const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
         const short fontSmall = 12;//Шрифт меленькой цифры на фигуре
         const short fontBig = 25;//Шрифт большой цифры на фигуре
-
+        const string messageYouWin= "Вы победили! Вам удалось опередить противника и выиграть эту битву! Империя гордиться вами! Начать заного?";
+        const string messageBotWin = "Вы проиграли... Противник опередил вас и вы проиграли эту битву. Вы подвели империю. Начать заного?";
+        //graph_bitmap.DrawRectangle(BlackPen, x - (radius / 2), y - (radius / 2), radius, radius);
         void DrawDashLine(int a, int b)
         {
             graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y);
@@ -192,51 +193,17 @@ namespace Warp_6
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
         }
-        void DrawTriangle(SolidBrush brush, Ship ship, int NumShip)
+        void DrawShipFrame()
         {
-            string TextNumShip = Convert.ToString(NumShip);
-            string TextPowerOfShip = Convert.ToString(ship.speed);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
-            float radius = 40;
-            float Shift = (float)Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(radius / 2, 2));
-            float x = X_(ship);
-            float y = Y_(ship);
-            PointF TopPoint = new PointF(x, y - radius);
-            PointF BottomLeftPoint = new PointF(x - Shift, y + (radius / 2));
-            PointF BottomRightPoint = new PointF(x + Shift, y + (radius / 2));
-            PointF[] angelPoints = { TopPoint, BottomLeftPoint, BottomRightPoint };
-            graph_bitmap.FillPolygon(brush, angelPoints);
-            graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
-            graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
-            //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-        }
-        void DrawRectangle(SolidBrush brush, Ship ship, int numShip)
-        {
-            string TextNumShip = Convert.ToString(numShip);
-            string TextPowerOfShip = Convert.ToString(ship.speed);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
-            float radius = 50;
-            float x = X_(ship);
-            float y = Y_(ship);
-            graph_bitmap.FillRectangle(brush, x - (radius / 2), y - (radius / 2), radius, radius);
-            graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
-            graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
-            //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-        }
-        void DrawCircle(SolidBrush brush, Ship ship, int numShip)
-        {
-            string TextNumShip = Convert.ToString(numShip);
-            string TextPowerOfShip = Convert.ToString(ship.speed);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
-            float radius = 55;
-            float x = X_(ship);
-            float y = Y_(ship);
-            graph_bitmap.FillEllipse(brush, x - (radius / 2), y - (radius / 2), radius, radius);
-            graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
-            graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
+            BlackPen.DashStyle = DashStyle.Solid;
+            //graph_bitmap.DrawRectangle(BlackPen, x - (radius / 2), y - (radius / 2), radius, radius);
+            short numOfShip = ShipSelection();
+            //switch (myShip[numOfShip].type)
+            //{
+            //    case 1: { DrawTriangle(brush, ship, numOfShip + 1); } break;
+            //    case 2: { DrawRectangle(brush, ship, numOfShip + 1); } break;
+            //    case 3: { DrawCircle(brush, ship, numOfShip + 1); } break;
+            //}
         }
         void DrawMap()
         {
@@ -345,24 +312,24 @@ namespace Warp_6
             DrawMap();
             for (int i = 0; i < 4; i++)
             {
-                if (myShip[i].InGame) DrawTriangle(BrushLimeGreen, myShip[i], i + 1);
-                if (enemy.ship[i].InGame) DrawTriangle(BrushGold, enemy.ship[i], i + 1);
+                if (myShip[i].InGame) DrawTriangle(BrushLimeGreen, X_(myShip[i]), Y_(myShip[i]), i + 1, myShip[i].speed);
+                if (enemy.ship[i].InGame) DrawTriangle(BrushGold, X_(enemy.ship[i]), Y_(enemy.ship[i]), i + 1, enemy.ship[i].speed);
             }
 
             for (int i = 4; i < 7; i++)
             {
-                if (myShip[i].InGame) DrawRectangle(BrushLimeGreen, myShip[i], i + 1);
-                if (enemy.ship[i].InGame) DrawRectangle(BrushGold, enemy.ship[i], i + 1);
+                if (myShip[i].InGame) DrawRectangle(BrushLimeGreen, X_(myShip[i]), Y_(myShip[i]), i + 1, myShip[i].speed);
+                if (enemy.ship[i].InGame) DrawRectangle(BrushGold, X_(enemy.ship[i]), Y_(enemy.ship[i]), i + 1, enemy.ship[i].speed);
             }
 
             for (int i = 7; i < 9; i++)
             {
-                if (myShip[i].InGame) DrawCircle(BrushLimeGreen, myShip[i], i + 1);
-                if (enemy.ship[i].InGame) DrawCircle(BrushGold, enemy.ship[i], i + 1);
+                if (myShip[i].InGame) DrawCircle(BrushLimeGreen, X_(myShip[i]), Y_(myShip[i]), i + 1, myShip[i].speed);
+                if (enemy.ship[i].InGame) DrawCircle(BrushGold, X_(enemy.ship[i]), Y_(enemy.ship[i]), i + 1, enemy.ship[i].speed);
             }
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
-       
+
         double PolarToX(double pi)//перевод полярной координаты в координату X
         {
             double p = pi * kof;
@@ -377,13 +344,13 @@ namespace Warp_6
         }
         float X_(Ship Ship)//получение координаты х корабля
         {
-            return (float)position[Ship.position].x; ;
+            return (float)position[Ship.position].x;
         }
         float Y_(Ship Ship)//получение координаты у корабля
         {
-            return (float)position[Ship.position].y; ;
+            return (float)position[Ship.position].y;
         }
-        
+
         void WhoGoesFirst()
         {
             string message;
@@ -391,7 +358,7 @@ namespace Warp_6
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                 short NumOfShip = enemy.list[0];
-                SetsShip(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
+                SetShipOnSpiral(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
                 WhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
             }
@@ -399,10 +366,9 @@ namespace Warp_6
             {
                 message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
             }
-
+            pictureBox.Refresh();
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
             MessageBox.Show(message, "Кто начинает");
-            graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
         void InitializationAllShips()
         {
@@ -433,15 +399,15 @@ namespace Warp_6
                 enemy.ship[i].InGame = true;
             }
         }
-        void SetsShip(ref Ship ship, short numOfShip, ref short currentPoint, SolidBrush brush)
+        void SetShipOnSpiral(ref Ship ship, short numOfShip, ref short currentPoint, SolidBrush brush)
         {
             ship.position = currentPoint;
             position[currentPoint].busy = true;
             switch (ship.type)
             {
-                case 1: { DrawTriangle(brush, ship, numOfShip + 1); } break;
-                case 2: { DrawRectangle(brush, ship, numOfShip + 1); } break;
-                case 3: { DrawCircle(brush, ship, numOfShip + 1); } break;
+                case 1: { DrawTriangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
+                case 2: { DrawRectangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
+                case 3: { DrawCircle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
             }
             currentPoint--;
         }
@@ -500,7 +466,7 @@ namespace Warp_6
                 NumOfShip = i;
                 if (i != 9)
                 {
-                    SetsShip(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
+                    SetShipOnSpiral(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
                     ShipRadioButtonOff(NumOfShip);
 
                     WhiteRectangle(NumOfShip, false);
@@ -508,7 +474,7 @@ namespace Warp_6
                 if (enemy.list.Count > 0)
                 {
                     NumOfShip = enemy.list[0];
-                    SetsShip(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
+                    SetShipOnSpiral(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
                     WhiteRectangle(NumOfShip, true);
                     enemy.list.RemoveAt(0);
 
@@ -531,6 +497,35 @@ namespace Warp_6
 
             }
             AutoPosChB.Checked = false;
+        }
+        void ShipOutOfGame(TextBox ShipsCenterTextbox, ref Ship ship, ref short ShipsInCenter, short numOfShip, string message)
+        {
+            ShipsInCenter++;
+            string winOrLoss = "Проигрыш...";
+            if (message.Contains("Вы победили!")) { ShipRadioButtonOff(numOfShip); winOrLoss = "Победа!"; } 
+            ShipsCenterTextbox.Text = ShipsInCenter.ToString();
+            ship.InGame = false;
+            if (myShipsInCenter == 6)
+            {
+                DialogResult result = MessageBox.Show(message, winOrLoss, MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) Application.Restart();
+                else Application.Exit();
+            }
+        }
+        void MovingOfShip(TextBox ShipsCenterTextbox, ref Ship ship, ref short ShipsInCenter, short numOfShip, string message)
+        {
+            position[ship.position].busy = false;
+            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ShipsCenterTextbox, ref ship, ref ShipsInCenter, numOfShip, message);
+            else
+            {
+                ship.position -= ship.speed;
+                while (position[ship.position].busy && ship.InGame)
+                {
+                    if (position[ship.position].jump == -1) ShipOutOfGame(ShipsCenterTextbox, ref ship, ref ShipsInCenter, numOfShip, message);
+                    else ship.position = position[ship.position].jump;
+                }
+                position[ship.position].busy = true;
+            }
         }
 
         public Form1()
@@ -696,7 +691,7 @@ namespace Warp_6
                 }
             }
         }
-
+        
         private void OnPosition_Button_Click(object sender, EventArgs e)
         {
             OnPosition_Button.Enabled = false;
@@ -711,14 +706,14 @@ namespace Warp_6
                     if (NumOfShip != -1)
                     {
                         ShipRadioButtonOff(NumOfShip);
-                        SetsShip(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
+                        SetShipOnSpiral(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
                         WhiteRectangle(NumOfShip, false);
 
                         if (enemy.list.Count > 0)
                         {
                             Thread.Sleep(1000);
                             NumOfShip = enemy.list[0];
-                            SetsShip(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
+                            SetShipOnSpiral(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
                             WhiteRectangle(NumOfShip, true);
                             enemy.list.RemoveAt(0);
 
@@ -814,52 +809,13 @@ namespace Warp_6
         private void Step_Button_Click(object sender, EventArgs e)
         {
             Step_Button.Enabled = false;
-            int numOfShip = ShipSelection();
+            short numOfShip = ShipSelection();
             bool playerMadeStep = false;
             if (numOfShip != -1)
             {
                 if (Go_RadioButton.Checked)
                 {
-                    position[myShip[numOfShip].position].busy = false;
-                    if ((myShip[numOfShip].position - myShip[numOfShip].speed) < 0)
-                    {
-                        myShipsInCenter++;
-                        MyShipsCenterTextbox.Text = myShipsInCenter.ToString();
-                        myShip[numOfShip].InGame = false;
-                        ShipRadioButtonOff(numOfShip);
-                        if (myShipsInCenter == 6)
-                        {
-                            DialogResult result = MessageBox.Show("Вы победили! Вам удалось опередить противника и выиграть эту битву! Империя гордиться вами! Начать заного?", "Победа!", MessageBoxButtons.YesNo);
-                            if (result == DialogResult.Yes) Application.Restart();
-                            else Application.Exit();
-                        }
-                    }
-                    else
-                    {
-                        myShip[numOfShip].position -= myShip[numOfShip].speed;
-                        while (position[myShip[numOfShip].position].busy && myShip[numOfShip].InGame)
-                        {
-                            if (position[myShip[numOfShip].position].jump == -1)
-                            {
-                                myShipsInCenter++;
-                                MyShipsCenterTextbox.Text = myShipsInCenter.ToString();
-                                myShip[numOfShip].InGame = false;
-                                ShipRadioButtonOff(numOfShip);
-                                if (myShipsInCenter == 6)
-                                {
-                                    DialogResult result = MessageBox.Show("Вы победили! Вам удалось опередить противника и выиграть эту битву! Империя гордиться вами! Начать заного?", "Победа!", MessageBoxButtons.YesNo);
-                                    if (result == DialogResult.Yes) Application.Restart();
-                                    else Application.Exit();
-                                }
-                            }
-                            else
-                            {
-                                myShip[numOfShip].position = position[myShip[numOfShip].position].jump;
-                            }
-                        }
-
-                        position[myShip[numOfShip].position].busy = true;
-                    }
+                    MovingOfShip(MyShipsCenterTextbox, ref myShip[numOfShip], ref myShipsInCenter, numOfShip, messageYouWin);
                     playerMadeStep = true;
                 }
                 else
@@ -875,20 +831,15 @@ namespace Warp_6
                         MoreSpeed_Button.Enabled = false;
                         playerMadeStep = true;
                     }
-                    else
-                    {
-                        MessageBox.Show("Скорость не была изменена. Ход не закончен.", "Внимание!");
-                    }
+                    else MessageBox.Show("Скорость не была изменена. Ход не закончен.", "Внимание!");
                 }
-
             }
-            else
-            {
-                MessageBox.Show("Корабль не был выбран. Ход не закончен.", "Внимание!");
-            }
+            else MessageBox.Show("Корабль не был выбран. Ход не закончен.", "Внимание!");
+            
 
             if (playerMadeStep)
             {
+
                 DrawEverything();
             }
 
@@ -912,6 +863,12 @@ namespace Warp_6
                     SaveFile.WriteLine(enemy.ship[i].position);
                     SaveFile.WriteLine(enemy.ship[i].InGame);
                 }
+                SaveFile.WriteLine(myShipsInCenter);
+                SaveFile.WriteLine(enemyShipsInCenter);
+                SaveFile.WriteLine(enemy.list.Count);
+                for (short i = 0; i < enemy.list.Count; i++) SaveFile.WriteLine(enemy.list[i]);
+                SaveFile.WriteLine(currentPoint);
+                SaveFile.Close();
 
                 InvalidСharacters_Label.Visible = false;
                 СreateSave_Button.Visible = false;
@@ -924,11 +881,10 @@ namespace Warp_6
                 OnPosition_Button.Enabled = true;
                 GroupAction.Enabled = true;
                 GroupAction.Enabled = true;
-                SaveFile.Close();
-                DrawEverything();
+                DownloadGame_ToolStripMenuItem.Enabled = true;
+                NewGame_ToolStripMenuItem.Enabled = true;
             }
-            else { InvalidСharacters_Label.Visible = true; }
-
+            else InvalidСharacters_Label.Visible = true;
         }
         private void NewGame_Buttom_Click(object sender, EventArgs e)
         {
@@ -982,140 +938,200 @@ namespace Warp_6
         }
         private void LoadingTheSelectedSave_Buttom_Click(object sender, EventArgs e)
         {
-            NewGame_Buttom.Visible = false;
-            NewGame_Buttom.Visible = false;
-            DownloadGame_Buttom.Visible = false;
-            LoadingTheSelectedSave_Buttom.Visible = false;
-            SaveList.Visible = false;
-
-            GroupShip.Visible = true;
-            NewGame_ToolStripMenuItem.Visible = true;
-            DownloadGame_ToolStripMenuItem.Visible = true;
-            SaveGame_ToolStripMenuItem.Visible = true;
-            GameExit_Buttom.Width = 177;
-            GameExit_Buttom.Height = 33;
-            GameExit_Buttom.Location = new Point(1713, 955);
-            GameExit_Buttom.Font = new Font("Segoe UI", 12);
-
-            StreamReader SaveFile = new StreamReader(@"D:\Zlowolf\Coursework\Save\" + SaveList.SelectedItem + ".txt");
-            float xLeft = 130;
-            float xRight = 1300;
-            float y = 160;
-            float shift = 80;
-            bool onPosition = false;
-
-            for (short i = 0; i < 9; i++)
+            bool wantToLoad = true;
+            
+            if (File.Exists(@"D:\Zlowolf\Coursework\Save\" + SaveList.SelectedItem + ".txt"))
             {
-                myShip[i].speed = short.Parse(SaveFile.ReadLine());
-                myShip[i].position = short.Parse(SaveFile.ReadLine());
-                myShip[i].InGame = bool.Parse(SaveFile.ReadLine());
-
-                enemy.ship[i].speed = short.Parse(SaveFile.ReadLine());
-                enemy.ship[i].position = short.Parse(SaveFile.ReadLine());
-                enemy.ship[i].InGame = bool.Parse(SaveFile.ReadLine());
-            }
-
-            DrawMap();
-
-            for (short i = 0; i < 4; i++)
-            {
-                if (myShip[i].position == -1 && myShip[i].InGame) { onPosition = true; DrawTriangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed); }
-                else if (myShip[i].InGame) DrawTriangle(BrushLimeGreen, myShip[i], i + 1);
-
-                if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { DrawTriangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed); }
-                else if (enemy.ship[i].InGame) DrawTriangle(BrushGold, enemy.ship[i], i + 1);
-
-                y += shift;
-            }
-
-            for (short i = 4; i < 7; i++)
-            {
-                if (myShip[i].position == -1 && myShip[i].InGame) { onPosition = true; DrawRectangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed); }
-                else if (myShip[i].InGame) DrawRectangle(BrushLimeGreen, myShip[i], i + 1);
-
-                if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { DrawRectangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed); }
-                else if (enemy.ship[i].InGame) DrawRectangle(BrushGold, enemy.ship[i], i + 1);
-
-                y += shift;
-            }
-
-            for (short i = 7; i < 9; i++)
-            {
-                if (myShip[i].position == -1 && myShip[i].InGame) { onPosition = true; DrawCircle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed); }
-                else if (myShip[i].InGame) DrawCircle(BrushLimeGreen, myShip[i], i + 1);
-
-                if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { DrawCircle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed); }
-                else if (enemy.ship[i].InGame) DrawCircle(BrushGold, enemy.ship[i], i + 1);
-
-                y += shift;
-            }
-
-            if (onPosition)
-            {
-                OnPosition_Button.Visible = true;
-            }
-            else
-            {
-                for (short i = 125; i < 107; i++)
-                {
-                    if (!position[i].busy) { onPosition = false; break; }
-                }
-
-                if (!onPosition)
-                {
-                    OnPosition_Button.Visible = true;
-                    OnPosition_Button.Text = "Начать игру";
+                if (!NewGame_Buttom.Visible)
+                {   
+                    DialogResult result = MessageBox.Show("Хотите загрузить игру?\n Весь не сохранённый прогресс будет потерян.", "Загрузка", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.No)
+                    {
+                        wantToLoad = false;
+                    }
+                    else
+                    {
+                        SaveGame_ToolStripMenuItem.Enabled = true;
+                        NewGame_ToolStripMenuItem.Enabled = true;
+                        DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
+                        GroupShip.Enabled = true;
+                    }
                 }
                 else
                 {
-                    OnPosition_Button.Visible = false;
-                    Go_RadioButton.Checked = true;
-                    GroupAction.Visible = true;
-                    ShowSpeed.Visible = true;
-                    MoreSpeed_Button.Visible = true;
-                    LessSpeed_Button.Visible = true;
-                    ShipInCenterLabel.Visible = true;
-                    MyShipsCenterLabel.Visible = true;
-                    EnemyShipsCenterLebel.Visible = true;
-                    MyShipsCenterTextbox.Visible = true;
-                    EnemyShipsCenterTextbox.Visible = true;
-                    Step_Button.Visible = true;
+                    NewGame_Buttom.Visible = false;
+                    DownloadGame_Buttom.Visible = false;
+                    GameExit_Buttom.Enabled = true;
+                    GameExit_Buttom.Width = 177;
+                    GameExit_Buttom.Height = 33;
+                    GameExit_Buttom.Location = new Point(1713, 955);
+                    GameExit_Buttom.Font = new Font("Segoe UI", 12);
+                    GroupShip.Visible = true;
+                    NewGame_ToolStripMenuItem.Visible = true;
+                    DownloadGame_ToolStripMenuItem.Visible = true;
+                    SaveGame_ToolStripMenuItem.Visible = true;
+                }
+
+                if (wantToLoad)
+                {                    
+                    LoadingTheSelectedSave_Buttom.Visible = false;
+                    SaveList.Visible = false;
+                    StreamReader SaveFile = new StreamReader(@"D:\Zlowolf\Coursework\Save\" + SaveList.SelectedItem + ".txt");
+                    const float xLeft = 130;
+                    const float xRight = 1300;
+                    float yOnSide = 160;
+                    float x = 0;
+                    float y = 0;
+                    float shift = 80;
+                    bool onPosition = false;
+
+                    for (short i = 0; i < 126; i++) position[i].busy = false;
 
                     for (short i = 0; i < 9; i++)
                     {
-                        if (myShip[i].InGame)
+                        myShip[i].speed = short.Parse(SaveFile.ReadLine());
+                        myShip[i].position = short.Parse(SaveFile.ReadLine());
+                        myShip[i].InGame = bool.Parse(SaveFile.ReadLine());
+                        if (myShip[i].position > -1) position[myShip[i].position].busy = true;
+
+                        enemy.ship[i].speed = short.Parse(SaveFile.ReadLine());
+                        enemy.ship[i].position = short.Parse(SaveFile.ReadLine());
+                        enemy.ship[i].InGame = bool.Parse(SaveFile.ReadLine());
+                        if (enemy.ship[i].position > -1) position[enemy.ship[i].position].busy = true;
+                    }
+
+                    myShipsInCenter = short.Parse(SaveFile.ReadLine());
+                    enemyShipsInCenter = short.Parse(SaveFile.ReadLine());
+                    short listCount = short.Parse(SaveFile.ReadLine());
+                    enemy.list.Clear();
+                    while (listCount > 0)
+                    {
+                        enemy.list.Add(short.Parse(SaveFile.ReadLine()));
+                        listCount--;
+                    }
+                    currentPoint = short.Parse(SaveFile.ReadLine());
+                    SaveFile.Close();
+                    DrawMap();
+
+                    for (short i = 0; i < 4; i++)
+                    {
+                        if (myShip[i].position == -1 && myShip[i].InGame) { x = xLeft; y = yOnSide; onPosition = true; }
+                        else if (myShip[i].InGame) { x = X_(myShip[i]); y = Y_(myShip[i]); }
+                        DrawTriangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+
+                        if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { x = xRight; y = yOnSide; }
+                        else if (enemy.ship[i].InGame) { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
+                        DrawTriangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+
+                        yOnSide += shift;
+                    }
+
+                    for (short i = 4; i < 7; i++)
+                    {
+                        if (myShip[i].position == -1 && myShip[i].InGame) { x = xLeft; y = yOnSide; onPosition = true; }
+                        else if (myShip[i].InGame) { x = X_(myShip[i]); y = Y_(myShip[i]); }
+                        DrawRectangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+
+                        if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { x = xRight; y = yOnSide; }
+                        else if (enemy.ship[i].InGame) { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
+                        DrawRectangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+
+                        yOnSide += shift;
+                    }
+
+                    for (short i = 7; i < 9; i++)
+                    {
+                        if (myShip[i].position == -1 && myShip[i].InGame) { x = xLeft; y = yOnSide; onPosition = true; }
+                        else if (myShip[i].InGame) { x = X_(myShip[i]); y = Y_(myShip[i]); }
+                        DrawCircle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+
+                        if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { x = xRight; y = yOnSide; }
+                        else if (enemy.ship[i].InGame) { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
+                        DrawCircle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+
+                        yOnSide += shift;
+                    }
+
+                    if (onPosition)
+                    {
+                        OnPosition_Button.Visible = true;
+                        OnPosition_Button.Enabled = true;
+                        OnPosition_Button.Text = "На позицию";
+
+                        for (short i = 0; i < 9; i++)
                         {
-                            shipRadioButtons[i].Enabled = true;
-                            shipRadioButtons[i].BackColor = Color.Transparent;
-                        }
-                        else
-                        {
-                            shipRadioButtons[i].Enabled = false;
-                            shipRadioButtons[i].BackColor = Color.WhiteSmoke;
+                            if (myShip[i].position == -1)
+                            {
+                                shipRadioButtons[i].Enabled = true;
+                                shipRadioButtons[i].BackColor = Color.Transparent;
+                            }
+                            else
+                            {
+                                shipRadioButtons[i].Enabled = false;
+                                shipRadioButtons[i].BackColor = Color.WhiteSmoke;
+                            }
                         }
                     }
-                    SpeedLable.Visible = true;
-                    ShowSpeed.Text = "";
+                    else
+                    {
+                        for (short i = 125; i < 107; i++) if (!position[i].busy) { onPosition = false; break; }
+
+                        if (!onPosition)
+                        {
+                            OnPosition_Button.Visible = true;
+                            OnPosition_Button.Enabled = true;
+                            OnPosition_Button.Text = "Начать игру";
+                        }
+                        else
+                        {   
+                            OnPosition_Button.Visible = false;
+                            Go_RadioButton.Checked = true;
+                            GroupAction.Visible = true;
+                            ShowSpeed.Visible = true;
+                            MoreSpeed_Button.Visible = true;
+                            LessSpeed_Button.Visible = true;
+                            ShipInCenterLabel.Visible = true;
+                            MyShipsCenterLabel.Visible = true;
+                            EnemyShipsCenterLebel.Visible = true;
+                            MyShipsCenterTextbox.Visible = true;
+                            EnemyShipsCenterTextbox.Visible = true;
+                            Step_Button.Visible = true;
+                            LoadingTheSelectedSave_Buttom.Visible = false;
+                            SaveList.Visible = false;
+
+                            for (short i = 0; i < 9; i++)
+                            {
+                                if (myShip[i].InGame)
+                                {
+                                    shipRadioButtons[i].Enabled = true;
+                                    shipRadioButtons[i].BackColor = Color.Transparent;
+                                }
+                                else
+                                {
+                                    shipRadioButtons[i].Enabled = false;
+                                    shipRadioButtons[i].BackColor = Color.WhiteSmoke;
+                                }
+                            }
+
+                            SpeedLable.Visible = true;
+                            ShowSpeed.Text = "";
+                        }
+                    }
+                    this.Refresh();
+                    graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
                 }
             }
-            string message = "Сохранение: " + SaveList.SelectedItem.ToString();
-            graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
-            MessageBox.Show(message, "Сохранение загруженно");
-            graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
         private void GameExit_Buttom_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Вы точно хотите выйти из игры?", "Выход ли это?", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Хотите выйти из игры?\n Весь не сохранённый прогресс будет потерян.", "Выход", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                result = MessageBox.Show("Сохранить прогресс игры?", "Сохранить?", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    Application.Restart();
-                }
-                else Application.Exit();
+                Application.Exit();
             }
+            else Application.Restart();
         }
+
         private void Rules_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(@"D:\Zlowolf\Coursework\Rules.txt"))
@@ -1128,42 +1144,46 @@ namespace Warp_6
         }
         private void NewGame_ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            NewGame_Buttom.Visible = false;
-            OnPosition_Button.Visible = true;
-            OnPosition_Button.Text = "На позицию";
-            Go_RadioButton.Checked = false;
-            GroupAction.Visible = false;
-            ShowSpeed.Visible = false;
-            MoreSpeed_Button.Visible = false;
-            LessSpeed_Button.Visible = false;
-            ShipInCenterLabel.Visible = false;
-            MyShipsCenterLabel.Visible = false;
-            EnemyShipsCenterLebel.Visible = false;
-            MyShipsCenterTextbox.Visible = false;
-            EnemyShipsCenterTextbox.Visible = false;
-            Step_Button.Visible = false;
-            AutoPosChB.Visible = true;
-            AutoPosChB.Checked = false;
-            SpeedLable.Visible = false;
-            GroupShip.Visible = true;
-            OnPosition_Button.Visible = true;
-            myShipsInCenter = 0;
-            enemyShipsInCenter = 0;
-            enemyShipsInCenter = 0;
-            myShipsInCenter = 0;
-            currentPoint = 125;
-
-            for (short i = 0; i < 9; i++)
+            DialogResult result = MessageBox.Show("Хотите начать новую игру?\n Весь не сохранённый прогресс будет потерян.", "Новая игра", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
             {
-                shipRadioButtons[i].Enabled = true;
-                shipRadioButtons[i].BackColor = Color.Transparent;
-            }
+                NewGame_Buttom.Visible = false;
+                OnPosition_Button.Visible = true;
+                OnPosition_Button.Text = "На позицию";
+                Go_RadioButton.Checked = false;
+                GroupAction.Visible = false;
+                ShowSpeed.Visible = false;
+                MoreSpeed_Button.Visible = false;
+                LessSpeed_Button.Visible = false;
+                ShipInCenterLabel.Visible = false;
+                MyShipsCenterLabel.Visible = false;
+                EnemyShipsCenterLebel.Visible = false;
+                MyShipsCenterTextbox.Visible = false;
+                EnemyShipsCenterTextbox.Visible = false;
+                Step_Button.Visible = false;
+                AutoPosChB.Visible = true;
+                AutoPosChB.Checked = false;
+                SpeedLable.Visible = false;
+                //GroupShip.Visible = true;
+                OnPosition_Button.Visible = true;
+                myShipsInCenter = 0;
+                enemyShipsInCenter = 0;
+                enemyShipsInCenter = 0;
+                myShipsInCenter = 0;
+                currentPoint = 125;
 
-            InitializationAllShips();
-            enemy.EnemyShipSorting();
-            DrawMap();
-            DrawingShipsOnSides();
-            WhoGoesFirst();
+                for (short i = 0; i < 9; i++)
+                {
+                    shipRadioButtons[i].Enabled = true;
+                    shipRadioButtons[i].BackColor = Color.Transparent;
+                }
+
+                InitializationAllShips();
+                enemy.EnemyShipSorting();
+                DrawMap();
+                DrawingShipsOnSides();
+                WhoGoesFirst();
+            }
         }
         private void SaveGame_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1184,6 +1204,8 @@ namespace Warp_6
                 GroupAction.Enabled = false;
                 Step_Button.Enabled = false;
                 OnPosition_Button.Enabled = false;
+                DownloadGame_ToolStripMenuItem.Enabled = false;
+                NewGame_ToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -1198,11 +1220,58 @@ namespace Warp_6
                 GroupAction.Enabled = true;
                 Step_Button.Enabled = true;
                 OnPosition_Button.Enabled = true;
+                DownloadGame_ToolStripMenuItem.Enabled = true;
+                NewGame_ToolStripMenuItem.Enabled = true;
             }
         }
         private void DownloadGame_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (DownloadGame_ToolStripMenuItem.Text == "Загрузить игру")
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(@"D:\Zlowolf\Coursework\Save");
+                FileInfo[] files = directoryInfo.GetFiles("*.txt");
+                SaveList.Items.Clear();
+                foreach (FileInfo fi in files)
+                {
+                    SaveList.Items.Add(fi.Name.ToString().Replace(".txt", ""));
+                }
 
+                SaveList.Location = new Point(758, 289);
+                LoadingTheSelectedSave_Buttom.Location = new Point(867, 695);
+                SaveList.Visible = true;
+                LoadingTheSelectedSave_Buttom.Visible = true;
+                DownloadGame_ToolStripMenuItem.Text = "Отменить загрузку";
+                GroupShip.Enabled = false;
+                Go_RadioButton.Checked = true;
+                Go_RadioButton.Enabled = false;
+                GroupAction.Enabled = false;
+                GroupAction.Enabled = false;
+                Step_Button.Enabled = false;
+                OnPosition_Button.Enabled = false;
+                SaveGame_ToolStripMenuItem.Enabled = false;
+                NewGame_ToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                SaveList.Visible = false;
+                LoadingTheSelectedSave_Buttom.Visible = false;
+                СreateSave_Button.Visible = false;
+                SaveName_Label.Visible = false;
+                SaveName_Textbox.Visible = false;
+                DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
+
+                GroupShip.Enabled = true;
+                Go_RadioButton.Enabled = true;
+                GroupAction.Enabled = true;
+                GroupAction.Enabled = true;
+                Step_Button.Enabled = true;
+                OnPosition_Button.Enabled = true;
+                SaveGame_ToolStripMenuItem.Enabled = true;
+                NewGame_ToolStripMenuItem.Enabled = true;
+
+                pictureBox.Refresh();
+                graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+            }
         }
     }
 }
