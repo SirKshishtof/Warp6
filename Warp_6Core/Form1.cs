@@ -137,8 +137,11 @@ namespace Warp_6
         short enemyShipsInCenter = 0;
         short myShipsInCenter = 0;
         short currentPoint = 125;
-        const short verticalShear = 20;//Сдвиг всей картинки относительно оси Y
+        string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
+        string rulesPath = Directory.GetCurrentDirectory() + "\\Rules.txt";
+
         const double turn = 3.11;//Коффициент задающий поворот спирали и точек
+        const short verticalShear = 20;//Сдвиг всей картинки относительно оси 
         const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
         const short fontSmall = 12;//Шрифт меленькой цифры на фигуре
         const short fontBig = 25;//Шрифт большой цифры на фигуре
@@ -546,10 +549,8 @@ namespace Warp_6
             double start_angle;
             double step;
 
-            for (short i = 0; i < shipRadioButtons.Length; i++)
-            {
-                shipRadioButtons[i] = new System.Windows.Forms.RadioButton();
-            }
+            for (short i = 0; i < shipRadioButtons.Length; i++) shipRadioButtons[i] = new System.Windows.Forms.RadioButton();
+            
             shipRadioButtons[0] = Ship_0;
             shipRadioButtons[1] = Ship_1;
             shipRadioButtons[2] = Ship_2;
@@ -647,8 +648,8 @@ namespace Warp_6
                     count++;
                 }
             }
-
             enemy.EnemyShipSorting();
+            Directory.CreateDirectory(savePath);
         }
 
         private void Ship_0_CheckedChanged(object sender, EventArgs e) => PrintSpeed(0);
@@ -851,7 +852,7 @@ namespace Warp_6
             MatchCollection matches = reg.Matches(SaveName_Textbox.Text);
             if (matches.Count == 0)
             {
-                StreamWriter SaveFile = new StreamWriter(@"D:\Zlowolf\Coursework\Save\" + SaveName_Textbox.Text + ".txt");
+                StreamWriter SaveFile = new StreamWriter(savePath + SaveName_Textbox.Text + ".txt");
 
                 for (int i = 0; i < 9; i++)
                 {
@@ -913,7 +914,7 @@ namespace Warp_6
         {
             if (DownloadGame_Buttom.Text == "Загрузить игру")
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(@"D:\Zlowolf\Coursework\Save");
+                DirectoryInfo directoryInfo = new DirectoryInfo(savePath);
                 FileInfo[] files = directoryInfo.GetFiles("*.txt");
 
                 foreach (FileInfo fi in files)
@@ -940,7 +941,7 @@ namespace Warp_6
         {
             bool wantToLoad = true;
             
-            if (File.Exists(@"D:\Zlowolf\Coursework\Save\" + SaveList.SelectedItem + ".txt"))
+            if (File.Exists(savePath + SaveList.SelectedItem + ".txt"))
             {
                 if (!NewGame_Buttom.Visible)
                 {   
@@ -951,8 +952,6 @@ namespace Warp_6
                     }
                     else
                     {
-                        SaveGame_ToolStripMenuItem.Enabled = true;
-                        NewGame_ToolStripMenuItem.Enabled = true;
                         DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
                         GroupShip.Enabled = true;
                     }
@@ -976,7 +975,17 @@ namespace Warp_6
                 {                    
                     LoadingTheSelectedSave_Buttom.Visible = false;
                     SaveList.Visible = false;
-                    StreamReader SaveFile = new StreamReader(@"D:\Zlowolf\Coursework\Save\" + SaveList.SelectedItem + ".txt");
+                    GroupShip.Enabled = true;
+                    Go_RadioButton.Enabled = true;
+                    GroupAction.Enabled = true;
+                    GroupAction.Enabled = true;
+                    Step_Button.Enabled = true;
+                    OnPosition_Button.Enabled = true;
+                    DownloadGame_ToolStripMenuItem.Enabled = true;
+                    SaveGame_ToolStripMenuItem.Enabled = true;
+                    NewGame_ToolStripMenuItem.Enabled = true;
+
+                    StreamReader SaveFile = new StreamReader(savePath + SaveList.SelectedItem + ".txt");
                     const float xLeft = 130;
                     const float xRight = 1300;
                     float yOnSide = 160;
@@ -1002,6 +1011,8 @@ namespace Warp_6
 
                     myShipsInCenter = short.Parse(SaveFile.ReadLine());
                     enemyShipsInCenter = short.Parse(SaveFile.ReadLine());
+                    MyShipsCenterTextbox.Text = myShipsInCenter.ToString();
+                    EnemyShipsCenterTextbox.Text = enemyShipsInCenter.ToString();
                     short listCount = short.Parse(SaveFile.ReadLine());
                     enemy.list.Clear();
                     while (listCount > 0)
@@ -1013,42 +1024,62 @@ namespace Warp_6
                     SaveFile.Close();
                     DrawMap();
 
+
+
                     for (short i = 0; i < 4; i++)
                     {
-                        if (myShip[i].position == -1 && myShip[i].InGame) { x = xLeft; y = yOnSide; onPosition = true; }
-                        else if (myShip[i].InGame) { x = X_(myShip[i]); y = Y_(myShip[i]); }
-                        DrawTriangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                        if (myShip[i].InGame) 
+                        {
+                            if (myShip[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
+                            else { x = X_(myShip[i]); y = Y_(myShip[i]); }
+                            DrawTriangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                        }
 
-                        if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { x = xRight; y = yOnSide; }
-                        else if (enemy.ship[i].InGame) { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
-                        DrawTriangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+                        if (enemy.ship[i].InGame)
+                        {
+                            if (enemy.ship[i].position == -1) { x = xRight; y = yOnSide; }
+                            else { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
+                            DrawTriangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+                        }
 
                         yOnSide += shift;
                     }
 
                     for (short i = 4; i < 7; i++)
                     {
-                        if (myShip[i].position == -1 && myShip[i].InGame) { x = xLeft; y = yOnSide; onPosition = true; }
-                        else if (myShip[i].InGame) { x = X_(myShip[i]); y = Y_(myShip[i]); }
-                        DrawRectangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                        if (myShip[i].InGame)
+                        {
+                            if (myShip[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
+                            else { x = X_(myShip[i]); y = Y_(myShip[i]); }
+                            DrawRectangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                        }
 
-                        if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { x = xRight; y = yOnSide; }
-                        else if (enemy.ship[i].InGame) { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
-                        DrawRectangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+                        if (enemy.ship[i].InGame)
+                        {
+                            if (enemy.ship[i].position == -1) { x = xRight; y = yOnSide; }
+                            else { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
+                            DrawRectangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+                        }
 
                         yOnSide += shift;
                     }
 
                     for (short i = 7; i < 9; i++)
                     {
-                        if (myShip[i].position == -1 && myShip[i].InGame) { x = xLeft; y = yOnSide; onPosition = true; }
-                        else if (myShip[i].InGame) { x = X_(myShip[i]); y = Y_(myShip[i]); }
-                        DrawCircle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                        if (myShip[i].InGame)
+                        {
+                            if (myShip[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
+                            else { x = X_(myShip[i]); y = Y_(myShip[i]); }
+                            DrawCircle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                        }
 
-                        if (enemy.ship[i].position == -1 && enemy.ship[i].InGame) { x = xRight; y = yOnSide; }
-                        else if (enemy.ship[i].InGame) { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
-                        DrawCircle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
-
+                        if (enemy.ship[i].InGame)
+                        {
+                            if (enemy.ship[i].position == -1) { x = xRight; y = yOnSide; }
+                            else { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
+                            DrawCircle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+                        }
+                       
                         yOnSide += shift;
                     }
 
@@ -1087,15 +1118,15 @@ namespace Warp_6
                             OnPosition_Button.Visible = false;
                             Go_RadioButton.Checked = true;
                             GroupAction.Visible = true;
-                            ShowSpeed.Visible = true;
                             MoreSpeed_Button.Visible = true;
                             LessSpeed_Button.Visible = true;
+                            Step_Button.Visible = true;
+                            ShowSpeed.Visible = true;
                             ShipInCenterLabel.Visible = true;
                             MyShipsCenterLabel.Visible = true;
-                            EnemyShipsCenterLebel.Visible = true;
                             MyShipsCenterTextbox.Visible = true;
+                            EnemyShipsCenterLebel.Visible = true;
                             EnemyShipsCenterTextbox.Visible = true;
-                            Step_Button.Visible = true;
                             LoadingTheSelectedSave_Buttom.Visible = false;
                             SaveList.Visible = false;
 
@@ -1134,9 +1165,9 @@ namespace Warp_6
 
         private void Rules_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(@"D:\Zlowolf\Coursework\Rules.txt"))
+            if (File.Exists(rulesPath))
             {
-                StreamReader rulesFile = new StreamReader(@"D:\Zlowolf\Coursework\Rules.txt");
+                StreamReader rulesFile = new StreamReader(rulesPath);
                 string mes = rulesFile.ReadToEnd();
                 rulesFile.Close();
                 MessageBox.Show(mes, "Правила");
@@ -1164,7 +1195,6 @@ namespace Warp_6
                 AutoPosChB.Visible = true;
                 AutoPosChB.Checked = false;
                 SpeedLable.Visible = false;
-                //GroupShip.Visible = true;
                 OnPosition_Button.Visible = true;
                 myShipsInCenter = 0;
                 enemyShipsInCenter = 0;
@@ -1228,7 +1258,7 @@ namespace Warp_6
         {
             if (DownloadGame_ToolStripMenuItem.Text == "Загрузить игру")
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(@"D:\Zlowolf\Coursework\Save");
+                DirectoryInfo directoryInfo = new DirectoryInfo(savePath);
                 FileInfo[] files = directoryInfo.GetFiles("*.txt");
                 SaveList.Items.Clear();
                 foreach (FileInfo fi in files)
@@ -1255,9 +1285,6 @@ namespace Warp_6
             {
                 SaveList.Visible = false;
                 LoadingTheSelectedSave_Buttom.Visible = false;
-                СreateSave_Button.Visible = false;
-                SaveName_Label.Visible = false;
-                SaveName_Textbox.Visible = false;
                 DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
 
                 GroupShip.Enabled = true;
