@@ -6,6 +6,7 @@ using System.Threading;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using Ships;
 
 namespace Warp_6
 {
@@ -24,105 +25,17 @@ namespace Warp_6
                 busy = false;
             }
 
-
             public double x;
             public double y;
             public short jump;
             public bool busy;
         }
-        struct Ship
-        {
-            public Ship(short type)
-            {
-                InGame = true;
-                this.type = type;
-                position = -1;
-            }
-            public short position;
-            public short type;
-            public short speed;
-            public bool InGame;
-        }
-        class Enemy
-        {
-            public Ship[] ship = new Ship[9];
-            public List<short> list = new List<short>();
-            public void EnemyShipSorting()
-            {
-                if (list.Count != 0) { list.Clear(); }
-                short count = -1;
-                int max = 0;
-                int[] index = new int[9];
-
-                for (short i = 0; i < 4; i++)
-                {
-                    if (ship[i].speed > max)
-                    {
-                        max = ship[i].speed;
-                        count = i;
-                    }
-                }
-                for (int i = 0; i < 4; i++)
-                {
-                    if (i != count)
-                    {
-                        ship[i].InGame = false;
-                    }
-                }
-                for (int i = 0; i < 9; i++)
-                {
-                    if (ship[i].InGame) { index[i] = ship[i].speed; }
-                    else { index[i] = 0; }
-                }
-
-                for (int i = 0; i < 9; i++)
-                {
-                    max = 0;
-                    for (short j = 0; j < 9; j++)
-                    {
-                        if (index[j] > max)
-                        {
-                            max = index[j];
-                            count = j;
-                        }
-                    }
-                    if (max != 0) { index[count] = 0; list.Add(count); };
-                }
-
-                max = 0;
-                for (int i = 0; i < 3; i++)
-                {
-                    for (short j = 0; j < 4; j++)
-                    {
-                        if (ship[j].speed >= max && !ship[j].InGame)
-                        {
-                            max = ship[j].speed;
-                            count = j;
-                        }
-                    }
-                    ship[count].InGame = true;
-                    list.Add(count);
-                    max = 0;
-                }
-                for (int i = 0; i < 9; i++)
-                {
-                    ship[i].InGame = true;
-                }
-            }
-            private int[] ArrZero(int[] Arr)
-            {
-                int size = Arr.Length;
-                for (int i = 0; i < size; i++)
-                {
-                    Arr[i] = 0;
-                }
-                return Arr;
-            }
-        }
+        
 
         Graphics graphics;
         Graphics graph_bitmap;
         Bitmap bitmap;
+
         SolidBrush BrushBlack = new SolidBrush(Color.Black);
         SolidBrush BrushGold = new SolidBrush(Color.Gold);
         SolidBrush BrushLimeGreen = new SolidBrush(Color.LimeGreen);
@@ -269,7 +182,7 @@ namespace Warp_6
                 graph_bitmap.FillPolygon(BrushBlack, points);
             }
         }
-        void WhiteRectangle(int numOfShip, bool enemy)
+        void DrawWhiteRectangle(int numOfShip, bool enemy)
         {
             float radius = 70;
             float x;
@@ -310,7 +223,7 @@ namespace Warp_6
                 y += Shift;
             }
         }
-        void DrawEverything()
+        void DrawMapAndShips()
         {
             DrawMap();
             for (int i = 0; i < 4; i++)
@@ -362,7 +275,7 @@ namespace Warp_6
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                 short NumOfShip = enemy.list[0];
                 SetShipOnSpiral(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
-                WhiteRectangle(NumOfShip, true);
+                DrawWhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
             }
             else
@@ -472,13 +385,13 @@ namespace Warp_6
                     SetShipOnSpiral(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
                     ShipRadioButtonOff(NumOfShip);
 
-                    WhiteRectangle(NumOfShip, false);
+                    DrawWhiteRectangle(NumOfShip, false);
                 }
                 if (enemy.list.Count > 0)
                 {
                     NumOfShip = enemy.list[0];
                     SetShipOnSpiral(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
-                    WhiteRectangle(NumOfShip, true);
+                    DrawWhiteRectangle(NumOfShip, true);
                     enemy.list.RemoveAt(0);
 
                     bool shipNotEnabled = true;
@@ -708,14 +621,14 @@ namespace Warp_6
                     {
                         ShipRadioButtonOff(NumOfShip);
                         SetShipOnSpiral(ref myShip[NumOfShip], NumOfShip, ref currentPoint, BrushLimeGreen);
-                        WhiteRectangle(NumOfShip, false);
+                        DrawWhiteRectangle(NumOfShip, false);
 
                         if (enemy.list.Count > 0)
                         {
                             Thread.Sleep(1000);
                             NumOfShip = enemy.list[0];
                             SetShipOnSpiral(ref enemy.ship[NumOfShip], NumOfShip, ref currentPoint, BrushGold);
-                            WhiteRectangle(NumOfShip, true);
+                            DrawWhiteRectangle(NumOfShip, true);
                             enemy.list.RemoveAt(0);
 
                             bool shipNotEnabled = true;
@@ -841,7 +754,7 @@ namespace Warp_6
             if (playerMadeStep)
             {
 
-                DrawEverything();
+                DrawMapAndShips();
             }
 
             Step_Button.Enabled = true;
