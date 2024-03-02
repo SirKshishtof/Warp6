@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Zlowolf\\Coursework\\W6\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\ships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\ships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Ships.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ships.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Ships.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ships.cs",
+              "RelativeToolTip": "Warp_6Core\\Ships.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T12:35:39.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Drawing.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Drawing.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
+              "RelativeToolTip": "Warp_6Core\\Drawing.cs",
+              "ViewState": "AQIAAKMAAAAAAAAAAAAuwMgAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T13:07:52.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
+              "RelativeToolTip": "Warp_6Core\\Form1.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAiwB8AAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2023-11-13T06:02:12.326Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
