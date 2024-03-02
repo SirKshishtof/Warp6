@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading;
@@ -7,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Ships;
+using Drawing;
 
 namespace Warp_6
 {
@@ -30,12 +30,12 @@ namespace Warp_6
             public short jump;
             public bool busy;
         }
-        
 
-        Graphics graphics;
-        Graphics graph_bitmap;
-        Bitmap bitmap;
 
+        //Graphics graphics;
+        //Graphics graph_bitmap;
+        //Bitmap bitmap;
+        Display display;
         SolidBrush BrushBlack = new SolidBrush(Color.Black);
         SolidBrush BrushGold = new SolidBrush(Color.Gold);
         SolidBrush BrushLimeGreen = new SolidBrush(Color.LimeGreen);
@@ -45,7 +45,7 @@ namespace Warp_6
         Ship[] myShip = new Ship[9];
         Enemy enemy = new Enemy();
         Random rnd = new Random();
-        System.Windows.Forms.RadioButton[] shipRadioButtons = new System.Windows.Forms.RadioButton[9];
+        RadioButton[] shipRadioButtons = new RadioButton[9];
 
         short enemyShipsInCenter = 0;
         short myShipsInCenter = 0;
@@ -63,29 +63,29 @@ namespace Warp_6
         //graph_bitmap.DrawRectangle(BlackPen, x - (radius / 2), y - (radius / 2), radius, radius);
         void DrawDashLine(int a, int b)
         {
-            graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y);
+            display.graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y);
         }
         void DrawCircle(double x, double y, float radius)
         {
-            graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
+            display.graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
         }
-        void DrawTriangle(SolidBrush brush, float x, float y, int numShip, int speedOfShip)
-        {
-            string TextNumShip = Convert.ToString(numShip);
-            string TextPowerOfShip = Convert.ToString(speedOfShip);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
-            float radius = 40;
-            float Shift = (float)Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(radius / 2, 2));
-            PointF TopPoint = new PointF(x, y - radius);
-            PointF BottomLeftPoint = new PointF(x - Shift, y + (radius / 2));
-            PointF BottomRightPoint = new PointF(x + Shift, y + (radius / 2));
-            PointF[] angelPoints = { TopPoint, BottomLeftPoint, BottomRightPoint };
-            graph_bitmap.FillPolygon(brush, angelPoints);
-            graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
-            graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
-            //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-        }
+        //void DrawTriangle(SolidBrush brush, float x, float y, int numShip, int speedOfShip)
+        //{
+        //    string TextNumShip = Convert.ToString(numShip);
+        //    string TextPowerOfShip = Convert.ToString(speedOfShip);
+        //    Font FontNumShip = new Font("Arial", fontSmall);
+        //    Font FontPowerOfShip = new Font("Arial", fontBig);
+        //    float radius = 40;
+        //    float Shift = (float)Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(radius / 2, 2));
+        //    PointF TopPoint = new PointF(x, y - radius);
+        //    PointF BottomLeftPoint = new PointF(x - Shift, y + (radius / 2));
+        //    PointF BottomRightPoint = new PointF(x + Shift, y + (radius / 2));
+        //    PointF[] angelPoints = { TopPoint, BottomLeftPoint, BottomRightPoint };
+        //    display.graph_bitmap.FillPolygon(brush, angelPoints);
+        //    display.graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
+        //    display.graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
+        //    //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+        //}
         void DrawRectangle(SolidBrush brush, float x, float y, int numShip, int speedOfShip)
         {
             string TextNumShip = Convert.ToString(numShip);
@@ -93,9 +93,9 @@ namespace Warp_6
             Font FontNumShip = new Font("Arial", fontSmall);
             Font FontPowerOfShip = new Font("Arial", fontBig);
             float radius = 50;
-            graph_bitmap.FillRectangle(brush, x - (radius / 2), y - (radius / 2), radius, radius);
-            graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
-            graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
+            display.graph_bitmap.FillRectangle(brush, x - (radius / 2), y - (radius / 2), radius, radius);
+            display.graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
+            display.graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
             //graphics.DrawImage(bitmap, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
         }
         void DrawCircle(SolidBrush brush, float x, float y, int numShip, int speedOfShip)
@@ -105,22 +105,11 @@ namespace Warp_6
             Font FontNumShip = new Font("Arial", fontSmall);
             Font FontPowerOfShip = new Font("Arial", fontBig);
             float radius = 55;
-            graph_bitmap.FillEllipse(brush, x - (radius / 2), y - (radius / 2), radius, radius);
-            graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
-            graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
+            display.graph_bitmap.FillEllipse(brush, x - (radius / 2), y - (radius / 2), radius, radius);
+            display.graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
+            display.graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
         }
-        void DrawShipFrame()
-        {
-            BlackPen.DashStyle = DashStyle.Solid;
-            //graph_bitmap.DrawRectangle(BlackPen, x - (radius / 2), y - (radius / 2), radius, radius);
-            short numOfShip = ShipSelection();
-            //switch (myShip[numOfShip].type)
-            //{
-            //    case 1: { DrawTriangle(brush, ship, numOfShip + 1); } break;
-            //    case 2: { DrawRectangle(brush, ship, numOfShip + 1); } break;
-            //    case 3: { DrawCircle(brush, ship, numOfShip + 1); } break;
-            //}
-        }
+        
         void DrawMap()
         {
             double x = 0;
@@ -128,7 +117,7 @@ namespace Warp_6
 
             double pi = 0;
             float radius = 40;
-            graph_bitmap.Clear(Color.White);
+            display.graph_bitmap.Clear(Color.White);
 
             BlackPen.DashStyle = DashStyle.Dash;
 
@@ -179,7 +168,7 @@ namespace Warp_6
 
                 xOfPoint = (points[1].X + points[2].X) / 2;
                 yOfPoint = (points[1].Y + points[2].Y) / 2;
-                graph_bitmap.FillPolygon(BrushBlack, points);
+                display.graph_bitmap.FillPolygon(BrushBlack, points);
             }
         }
         void DrawWhiteRectangle(int numOfShip, bool enemy)
@@ -191,8 +180,8 @@ namespace Warp_6
             if (enemy) { x = 1300; }
             else { x = 130; }
 
-            graph_bitmap.FillRectangle(new SolidBrush(Color.White), x - (radius / 2), y - (radius / 2), radius, radius);
-            graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+            display.graph_bitmap.FillRectangle(new SolidBrush(Color.White), x - (radius / 2), y - (radius / 2), radius, radius);
+            display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
 
         }
         void DrawingShipsOnSides()
@@ -204,8 +193,8 @@ namespace Warp_6
 
             for (int i = 0; i < 4; i++)
             {
-                DrawTriangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
-                DrawTriangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
+                display.DrawTriangle(BrushLimeGreen, xLeft, y, i + 1, myShip[i].speed);
+                display.DrawTriangle(BrushGold, xRight, y, i + 1, enemy.ship[i].speed);
                 y += Shift;
             }
 
@@ -228,8 +217,8 @@ namespace Warp_6
             DrawMap();
             for (int i = 0; i < 4; i++)
             {
-                if (myShip[i].InGame) DrawTriangle(BrushLimeGreen, X_(myShip[i]), Y_(myShip[i]), i + 1, myShip[i].speed);
-                if (enemy.ship[i].InGame) DrawTriangle(BrushGold, X_(enemy.ship[i]), Y_(enemy.ship[i]), i + 1, enemy.ship[i].speed);
+                if (myShip[i].InGame) display.DrawTriangle(BrushLimeGreen, X_(myShip[i]), Y_(myShip[i]), i + 1, myShip[i].speed);
+                if (enemy.ship[i].InGame) display.DrawTriangle(BrushGold, X_(enemy.ship[i]), Y_(enemy.ship[i]), i + 1, enemy.ship[i].speed);
             }
 
             for (int i = 4; i < 7; i++)
@@ -243,7 +232,7 @@ namespace Warp_6
                 if (myShip[i].InGame) DrawCircle(BrushLimeGreen, X_(myShip[i]), Y_(myShip[i]), i + 1, myShip[i].speed);
                 if (enemy.ship[i].InGame) DrawCircle(BrushGold, X_(enemy.ship[i]), Y_(enemy.ship[i]), i + 1, enemy.ship[i].speed);
             }
-            graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+            display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
 
         double PolarToX(double pi)//перевод полярной координаты в координату X
@@ -283,7 +272,7 @@ namespace Warp_6
                 message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
             }
             pictureBox.Refresh();
-            graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+            display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
             MessageBox.Show(message, "Кто начинает");
         }
         void InitializationAllShips()
@@ -321,7 +310,7 @@ namespace Warp_6
             position[currentPoint].busy = true;
             switch (ship.type)
             {
-                case 1: { DrawTriangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
+                case 1: { display.DrawTriangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
                 case 2: { DrawRectangle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
                 case 3: { DrawCircle(brush, X_(ship), Y_(ship), numOfShip + 1, ship.speed); } break;
             }
@@ -450,9 +439,10 @@ namespace Warp_6
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            graph_bitmap = Graphics.FromImage(bitmap);
-            graphics = pictureBox.CreateGraphics();
+            //bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
+            //graph_bitmap = Graphics.FromImage(bitmap);
+            //graphics = pictureBox.CreateGraphics();
+            display = new Display(pictureBox);
             short[] index = new short[6] { 0, 1, 2, 3, 4, 5 };
             short count;
             short dest = 6;
@@ -945,14 +935,14 @@ namespace Warp_6
                         {
                             if (myShip[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
                             else { x = X_(myShip[i]); y = Y_(myShip[i]); }
-                            DrawTriangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
+                            display.DrawTriangle(BrushLimeGreen, x, y, i + 1, myShip[i].speed);
                         }
 
                         if (enemy.ship[i].InGame)
                         {
                             if (enemy.ship[i].position == -1) { x = xRight; y = yOnSide; }
                             else { x = X_(enemy.ship[i]); y = Y_(enemy.ship[i]); }
-                            DrawTriangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
+                            display.DrawTriangle(BrushGold, x, y, i + 1, enemy.ship[i].speed);
                         }
 
                         yOnSide += shift;
@@ -1062,7 +1052,7 @@ namespace Warp_6
                         }
                     }
                     this.Refresh();
-                    graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+                    display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
                 }
             }
         }
@@ -1210,7 +1200,7 @@ namespace Warp_6
                 NewGame_ToolStripMenuItem.Enabled = true;
 
                 pictureBox.Refresh();
-                graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+                display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
             }
         }
     }
