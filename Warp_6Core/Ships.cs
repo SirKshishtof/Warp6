@@ -22,7 +22,7 @@ namespace Ships
 
     public class Enemy
     {
-        public Ship[] ship = new Ship[9];
+        public Ship[] ships = new Ship[9];
         public List<short> list = new List<short>();
         public void EnemyShipSorting()
         {
@@ -33,9 +33,9 @@ namespace Ships
 
             for (short i = 0; i < 4; i++)
             {
-                if (ship[i].speed > max)
+                if (ships[i].speed > max)
                 {
-                    max = ship[i].speed;
+                    max = ships[i].speed;
                     count = i;
                 }
             }
@@ -43,12 +43,12 @@ namespace Ships
             {
                 if (i != count)
                 {
-                    ship[i].InGame = false;
+                    ships[i].InGame = false;
                 }
             }
             for (int i = 0; i < 9; i++)
             {
-                if (ship[i].InGame) { index[i] = ship[i].speed; }
+                if (ships[i].InGame) { index[i] = ships[i].speed; }
                 else { index[i] = 0; }
             }
 
@@ -71,19 +71,19 @@ namespace Ships
             {
                 for (short j = 0; j < 4; j++)
                 {
-                    if (ship[j].speed >= max && !ship[j].InGame)
+                    if (ships[j].speed >= max && !ships[j].InGame)
                     {
-                        max = ship[j].speed;
+                        max = ships[j].speed;
                         count = j;
                     }
                 }
-                ship[count].InGame = true;
+                ships[count].InGame = true;
                 list.Add(count);
                 max = 0;
             }
             for (int i = 0; i < 9; i++)
             {
-                ship[i].InGame = true;
+                ships[i].InGame = true;
             }
         }
         private int[] ArrZero(int[] Arr)

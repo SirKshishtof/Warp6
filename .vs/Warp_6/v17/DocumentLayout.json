@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Zlowolf\\Coursework\\W6\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\ships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,21 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Drawing.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Drawing.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
-              "RelativeToolTip": "Warp_6Core\\Drawing.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAuwB8AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-02T06:34:18.89Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -45,21 +32,34 @@
               "RelativeDocumentMoniker": "Warp_6Core\\Ships.cs",
               "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ships.cs",
               "RelativeToolTip": "Warp_6Core\\Ships.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-02T06:00:13.721Z"
+              "WhenOpened": "2024-03-03T08:24:59.293Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Drawing.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Drawing.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
+              "RelativeToolTip": "Warp_6Core\\Drawing.cs",
+              "ViewState": "AQIAAHoAAAAAAAAAAAAmwJYAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T06:34:18.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
               "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
               "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
               "RelativeToolTip": "Warp_6Core\\Form1.cs",
-              "ViewState": "AQIAAJ4DAAAwMzMzMzMwwKEDAAAAAAAA",
+              "ViewState": "AQIAAGEAAAAAAAAAAAA3wPsCAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2023-11-13T06:02:12.326Z"
+              "WhenOpened": "2023-11-13T06:02:12.326Z",
+              "EditorCaption": ""
             }
           ]
         }
