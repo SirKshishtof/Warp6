@@ -8,12 +8,13 @@ namespace Ships
 {
     public struct Ship
     {
-        public Ship(short type)
+        public Ship(short type, short index)
         {
-            InGame = true;
             this.type = type;
+            this.index = index;
             position = -1;
         }
+        public short index;
         public short position;
         public short type;
         public short speed;
@@ -94,6 +95,12 @@ namespace Ships
                 Arr[i] = 0;
             }
             return Arr;
+        }
+
+        public int RandomStep()
+        {
+            Random rnd = new Random();
+            return rnd.Next()%9;
         }
     }
 }

@@ -144,11 +144,11 @@ namespace Drawing
             float y = (float)(p * Math.Sin(pi + turn) + pictureBox.Size.Height / 2 - 25);
             return y;
         }
-        public float X_CoordFromShip(Ship Ship)//получение координаты х корабля
+        public float X_GetCoord(Ship Ship)//получение координаты х корабля
         {
             return (float)position[Ship.position].x;
         }
-        public float Y_CoordFromShip(Ship Ship)//получение координаты у корабля
+        public float Y_GetCoord(Ship Ship)//получение координаты у корабля
         {
             return (float)position[Ship.position].y;
         }
@@ -162,10 +162,10 @@ namespace Drawing
             graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
         }
 
-        public void DrawTriangle(bool myShip, float x, float y, int numShip, int speedOfShip)
+        public void DrawTriangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
-            if (myShip) { brush = new SolidBrush(Color.LimeGreen); }
+            if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
             else { brush = new SolidBrush(Color.Gold); }
 
             string TextNumShip = Convert.ToString(numShip);
@@ -182,10 +182,10 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
         }
-        public void DrawRectangle(bool myShip, float x, float y, int numShip, int speedOfShip)
+        public void DrawRectangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
-            if (myShip) { brush = new SolidBrush(Color.LimeGreen); }
+            if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
             else { brush = new SolidBrush(Color.Gold); }
 
             string TextNumShip = Convert.ToString(numShip);
@@ -197,10 +197,10 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
         }
-        public void DrawCircle(bool myShip, float x, float y, int numShip, int speedOfShip)
+        public void DrawCircle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
-            if (myShip) { brush = new SolidBrush(Color.LimeGreen); }
+            if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
             else { brush = new SolidBrush(Color.Gold); }
 
             string TextNumShip = Convert.ToString(numShip);
@@ -319,20 +319,20 @@ namespace Drawing
             DrawMap();
             for (int i = 0; i < 4; i++)
             {
-                if (myShips[i].InGame) DrawTriangle(true, X_CoordFromShip(myShips[i]), Y_CoordFromShip(myShips[i]), i + 1, myShips[i].speed);
-                if (enemyShips[i].InGame) DrawTriangle(false, X_CoordFromShip(enemyShips[i]), Y_CoordFromShip(enemyShips[i]), i + 1, enemyShips[i].speed);
+                if (myShips[i].InGame) DrawTriangle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
+                if (enemyShips[i].InGame) DrawTriangle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
             }
 
             for (int i = 4; i < 7; i++)
             {
-                if (myShips[i].InGame) DrawRectangle(true, X_CoordFromShip(myShips[i]), Y_CoordFromShip(myShips[i]), i + 1, myShips[i].speed);
-                if (enemyShips[i].InGame) DrawRectangle(false, X_CoordFromShip(enemyShips[i]), Y_CoordFromShip(enemyShips[i]), i + 1, enemyShips[i].speed);
+                if (myShips[i].InGame) DrawRectangle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
+                if (enemyShips[i].InGame) DrawRectangle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
             }
 
             for (int i = 7; i < 9; i++)
             {
-                if (myShips[i].InGame) DrawCircle(true, X_CoordFromShip(myShips[i]), Y_CoordFromShip(myShips[i]), i + 1, myShips[i].speed);
-                if (enemyShips[i].InGame) DrawCircle(false, X_CoordFromShip(enemyShips[i]), Y_CoordFromShip(enemyShips[i]), i + 1, enemyShips[i].speed);
+                if (myShips[i].InGame) DrawCircle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
+                if (enemyShips[i].InGame) DrawCircle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
             }
             //DrawImage();
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
