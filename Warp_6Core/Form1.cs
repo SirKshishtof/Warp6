@@ -410,7 +410,7 @@ namespace Warp_6
         }
         private void NewGame_Buttom_Click(object sender, EventArgs e)
         {
-            OnOffMainMenu();
+            MainMenu_OnOff();
 
             myShipsInCenter = 0;
             enemyShipsInCenter = 0;
@@ -453,28 +453,21 @@ namespace Warp_6
                 if (!NewGame_Buttom.Visible)
                 {   
                     DialogResult result = MessageBox.Show("Хотите загрузить игру?\n Весь не сохранённый прогресс будет потерян.", "Загрузка", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.No)
-                    {
-                        wantToLoad = false;
-                    }
-                    else
-                    {
-                        DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
-                        GroupShip.Enabled = true;
-                    }
+                    if (result == DialogResult.No) wantToLoad = false;
                 }
                 else
                 {
-                    OnOffMainMenu();
+                    MainMenu_OnOff();
                 }
 
                 if (wantToLoad)
-                {                    
+                {
+                    DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
+
                     LoadingTheSelectedSave_Buttom.Visible = false;
                     SaveList.Visible = false;
                     GroupShip.Enabled = true;
                     Go_RadioButton.Enabled = true;
-                    GroupAction.Enabled = true;
                     GroupAction.Enabled = true;
                     Step_Button.Enabled = true;
                     OnPosition_Button.Enabled = true;

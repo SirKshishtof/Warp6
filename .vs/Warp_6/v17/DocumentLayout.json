@@ -3,15 +3,11 @@
   "WorkspaceRootPath": "D:\\Zlowolf\\Coursework\\W6\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -22,32 +18,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 240,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
               "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "RelativeToolTip": "Warp_6Core\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs [Design]",
+              "RelativeToolTip": "Warp_6Core\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-07T08:05:23.465Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Drawing.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Drawing.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
-              "RelativeToolTip": "Warp_6Core\\Drawing.cs",
-              "ViewState": "AQIAAJIAAAAAAAAAAAAowF0BAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T07:34:52.231Z",
-              "EditorCaption": ""
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -57,7 +40,7 @@
               "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
               "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
               "RelativeToolTip": "Warp_6Core\\Form1.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAmwKkBAABKAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2023-11-13T06:02:12.326Z",
               "EditorCaption": ""
