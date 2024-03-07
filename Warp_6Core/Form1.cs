@@ -68,6 +68,27 @@ namespace Warp_6
                 }
             }
         }
+        void MainMenu_OnOff()
+        {
+            NewGame_Buttom.Visible = false;
+            GroupShip.Visible = true;
+            DownloadGame_Buttom.Visible = false;
+            NewGame_ToolStripMenuItem.Visible = true;
+            DownloadGame_ToolStripMenuItem.Visible = true;
+            SaveGame_ToolStripMenuItem.Visible = true;
+            GameExit_Buttom.Width = 177;
+            GameExit_Buttom.Height = 33;
+            GameExit_Buttom.Location = new Point(1713, 955);
+            GameExit_Buttom.Font = new Font("Segoe UI", 12);
+            GameExit_Buttom.Enabled = true;
+        }
+        void DownloadMenu_OnOff(bool on)
+        {
+            SaveList.Visible = on;
+            LoadingTheSelectedSave_Buttom.Visible = on;
+            NewGame_Buttom.Enabled = !on;
+            GameExit_Buttom.Enabled = !on;
+        }
         void AutoPos()
         {
             short NumOfShip;
@@ -76,7 +97,7 @@ namespace Warp_6
                 NumOfShip = i;
                 if (i != 9)
                 {
-                    gameplay.SetShipOnSpiral(display, ref myShips[NumOfShip], ref gameplay.currentPoint, true);
+                    gameplay.SetShipOnSpiral(display, ref myShips[NumOfShip], true);
                     ShipRadioButtonOff(NumOfShip);
 
                     display.DrawWhiteRectangle(NumOfShip, false);
@@ -84,7 +105,7 @@ namespace Warp_6
                 if (enemy.list.Count > 0)
                 {
                     NumOfShip = enemy.list[0];
-                    gameplay.SetShipOnSpiral(display,ref enemy.ships[NumOfShip], ref gameplay.currentPoint, false);
+                    gameplay.SetShipOnSpiral(display,ref enemy.ships[NumOfShip], false);
                     display.DrawWhiteRectangle(NumOfShip, true);
                     enemy.list.RemoveAt(0);
 
@@ -207,14 +228,14 @@ namespace Warp_6
                     if (NumOfShip != -1)
                     {
                         ShipRadioButtonOff(NumOfShip);
-                        gameplay.SetShipOnSpiral(display, ref myShips[NumOfShip],  ref gameplay.currentPoint, true);
+                        gameplay.SetShipOnSpiral(display, ref myShips[NumOfShip], true);
                         display.DrawWhiteRectangle(NumOfShip, false);
 
                         if (enemy.list.Count > 0)
                         {
                             Thread.Sleep(1000);
                             NumOfShip = enemy.list[0];
-                            gameplay.SetShipOnSpiral(display, ref enemy.ships[NumOfShip],   ref gameplay.currentPoint, false);
+                            gameplay.SetShipOnSpiral(display, ref enemy.ships[NumOfShip], false);
                             display.DrawWhiteRectangle(NumOfShip, true);
                             enemy.list.RemoveAt(0);
 
@@ -389,26 +410,18 @@ namespace Warp_6
         }
         private void NewGame_Buttom_Click(object sender, EventArgs e)
         {
-            NewGame_Buttom.Visible = false;
-            OnPosition_Button.Visible = true;
-            GroupShip.Visible = true;
-            NewGame_Buttom.Visible = false;
-            DownloadGame_Buttom.Visible = false;
-            NewGame_ToolStripMenuItem.Visible = true;
-            DownloadGame_ToolStripMenuItem.Visible = true;
-            SaveGame_ToolStripMenuItem.Visible = true;
-            GameExit_Buttom.Width = 177;
-            GameExit_Buttom.Height = 33;
-            GameExit_Buttom.Location = new Point(1713, 955);
-            GameExit_Buttom.Font = new Font("Segoe UI", 12);
+            OnOffMainMenu();
+
             myShipsInCenter = 0;
             enemyShipsInCenter = 0;
+
+            OnPosition_Button.Visible = true;
 
             gameplay.InitializationAllShips(enemy,myShips);
             enemy.EnemyShipSorting();
             display.DrawMap();
             display.DrawingShipsOnSides(myShips, enemy.ships);
-            gameplay.WhoGoesFirst(display, gameplay, enemy);
+            gameplay.WhoGoesFirst(display, enemy);
         }
         private void DownloadGame_Buttom_Click(object sender, EventArgs e)
         {
@@ -422,18 +435,12 @@ namespace Warp_6
                     SaveList.Items.Add(fi.Name.ToString().Replace(".txt", ""));
                 }
 
-                SaveList.Visible = true;
-                LoadingTheSelectedSave_Buttom.Visible = true;
-                NewGame_Buttom.Enabled = false;
-                GameExit_Buttom.Enabled = false;
+                DownloadMenu_OnOff(true);
                 DownloadGame_Buttom.Text = "Назад";
             }
             else
             {
-                SaveList.Visible = false;
-                LoadingTheSelectedSave_Buttom.Visible = false;
-                NewGame_Buttom.Enabled = true;
-                GameExit_Buttom.Enabled = true;
+                DownloadMenu_OnOff(false);
                 DownloadGame_Buttom.Text = "Загрузить игру";
             }
         }
@@ -458,17 +465,7 @@ namespace Warp_6
                 }
                 else
                 {
-                    NewGame_Buttom.Visible = false;
-                    DownloadGame_Buttom.Visible = false;
-                    GameExit_Buttom.Enabled = true;
-                    GameExit_Buttom.Width = 177;
-                    GameExit_Buttom.Height = 33;
-                    GameExit_Buttom.Location = new Point(1713, 955);
-                    GameExit_Buttom.Font = new Font("Segoe UI", 12);
-                    GroupShip.Visible = true;
-                    NewGame_ToolStripMenuItem.Visible = true;
-                    DownloadGame_ToolStripMenuItem.Visible = true;
-                    SaveGame_ToolStripMenuItem.Visible = true;
+                    OnOffMainMenu();
                 }
 
                 if (wantToLoad)
@@ -712,7 +709,7 @@ namespace Warp_6
                 enemy.EnemyShipSorting();
                 display.DrawMap();
                 display.DrawingShipsOnSides(myShips, enemy.ships);
-                gameplay.WhoGoesFirst(display, gameplay, enemy);
+                gameplay.WhoGoesFirst(display, enemy);
             }
         }
         private void SaveGame_ToolStripMenuItem_Click(object sender, EventArgs e)

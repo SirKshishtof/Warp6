@@ -8,8 +8,7 @@ namespace Game
     public delegate void Delegation (int index);
 
     public class Gameplay
-    {
-
+    { 
         public short currentPoint = 125;
 
         public void MovingOfShip(TextBox ShipsCenterTextbox, ref Display display, ref Ship ship, string message, ref Delegation del)
@@ -54,7 +53,7 @@ namespace Game
             return false;
         }
 
-        public void SetShipOnSpiral(Display display, ref Ship ship, ref short currentPoint, bool isThatMyShip)
+        public void SetShipOnSpiral(Display display, ref Ship ship, bool isThatMyShip)
         {
             ship.position = currentPoint;
             display.position[currentPoint].busy = true;
@@ -69,7 +68,7 @@ namespace Game
             currentPoint--;
         }
 
-        public void WhoGoesFirst(Display display, Gameplay gameplay,Enemy enemy)
+        public void WhoGoesFirst(Display display, Enemy enemy)
         {
             Random rnd = new Random();
             string message;
@@ -77,7 +76,7 @@ namespace Game
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                 short NumOfShip = enemy.list[0];
-                gameplay.SetShipOnSpiral(display, ref enemy.ships[NumOfShip], ref gameplay.currentPoint, false);
+                SetShipOnSpiral(display, ref enemy.ships[NumOfShip], false);
                 display.DrawWhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
             }
