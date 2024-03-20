@@ -1,4 +1,5 @@
-﻿using Ships;
+﻿using Game;
+using Players;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Drawing
-{
+{ 
     struct Addres_Dash
     {
         public int _external;
@@ -114,12 +115,13 @@ namespace Drawing
                     count++;
                 }
             }
+
         }
         
-        public Graphics graphics;
-        public Graphics graph_bitmap;
-        public Bitmap bitmap;
-         PictureBox pictureBox;
+        Graphics graphics;
+        Graphics graph_bitmap;
+        Bitmap bitmap;
+        PictureBox pictureBox;
         Pen BlackPen = new Pen(Color.Black, 3);
         SolidBrush BrushBlack = new SolidBrush(Color.Black);
 
@@ -334,7 +336,6 @@ namespace Drawing
                 if (myShips[i].InGame) DrawCircle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
                 if (enemyShips[i].InGame) DrawCircle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
             }
-            //DrawImage();
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
         public void DrawImage()
@@ -344,6 +345,35 @@ namespace Drawing
         public void PictureBoxRefresh()
         {
             pictureBox.Refresh();
+        }
+        public void DrawShipAfterLoading(bool myShips, Ship ship, ref bool onPosition)
+        {
+            float x;
+            float y;
+            float yOnSide = 160;
+            float shift = 80;
+            if (ship.InGame)
+            {
+                if (ship.position == -1)
+                {
+                    if (myShips) x = 130;
+                    else x = 1300;
+                    y = yOnSide + shift * ship.index;
+                    onPosition = true;
+                }
+                else
+                {
+                    x = X_GetCoord(ship);
+                    y = Y_GetCoord(ship);
+                }
+
+                switch (ship.type)
+                {
+                    case 1: DrawTriangle(myShips, x, y, ship.index + 1, ship.speed); break;
+                    case 2: DrawRectangle(myShips, x, y, ship.index + 1, ship.speed); break;
+                    case 3: DrawCircle(myShips, x, y, ship.index + 1, ship.speed); break;
+                }
+            }
         }
     }
 }

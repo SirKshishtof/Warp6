@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Drawing;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ships
+namespace Players
 {
     public struct Ship
     {

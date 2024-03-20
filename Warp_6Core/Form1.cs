@@ -5,7 +5,7 @@ using System.Threading;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using Ships;
+using Players;
 using Drawing;
 using Game;
 
@@ -21,11 +21,9 @@ namespace Warp_6
         Enemy enemy = new Enemy();
         RadioButton[] shipRadioButtons = new RadioButton[9];
 
-        short enemyShipsInCenter = 0;
-        short myShipsInCenter = 0;
         string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
         string rulesPath = Directory.GetCurrentDirectory() + "\\Rules.txt";
-
+        
         const string messageYouWin= "Вы победили! Вам удалось опередить противника и выиграть эту битву! Империя гордиться вами! Начать заного?";
         const string messageBotWin = "Вы проиграли... Противник опередил вас и вы проиграли эту битву. Вы подвели империю. Начать заного?";
         
@@ -45,7 +43,7 @@ namespace Warp_6
         }
         void PrintSpeed(short numOfShip)
         {
-            ShowSpeed.Text = myShips[numOfShip].speed.ToString();
+            ShowSpeed_Textbox.Text = myShips[numOfShip].speed.ToString();
             if (ChangeSpeed_RadioButton.Checked)
             {
                 if (myShips[numOfShip].speed == 1)
@@ -68,27 +66,96 @@ namespace Warp_6
                 }
             }
         }
-        void MainMenu_OnOff()
+        void MainMenu_Off()
         {
             NewGame_Buttom.Visible = false;
-            GroupShip.Visible = true;
             DownloadGame_Buttom.Visible = false;
+            GroupShip.Visible = true;
             NewGame_ToolStripMenuItem.Visible = true;
             DownloadGame_ToolStripMenuItem.Visible = true;
             SaveGame_ToolStripMenuItem.Visible = true;
+            GameExit_Buttom.Enabled = true;
             GameExit_Buttom.Width = 177;
             GameExit_Buttom.Height = 33;
             GameExit_Buttom.Location = new Point(1713, 955);
             GameExit_Buttom.Font = new Font("Segoe UI", 12);
-            GameExit_Buttom.Enabled = true;
+            
         }
         void DownloadMenu_OnOff(bool on)
         {
-            SaveList.Visible = on;
+            Save_List.Visible = on;
             LoadingTheSelectedSave_Buttom.Visible = on;
             NewGame_Buttom.Enabled = !on;
             GameExit_Buttom.Enabled = !on;
         }
+        void SaveGame_OnOff(bool on)
+        {
+            СreateSave_Button.Visible = on;
+            SaveName_Label.Visible = on;
+            SaveName_Textbox.Visible = on;
+            DownloadGame_ToolStripMenuItem.Enabled = !on;
+            NewGame_ToolStripMenuItem.Enabled = !on;
+            if (on) SaveGame_ToolStripMenuItem.Text = "Отменить сохранение";
+            else SaveGame_ToolStripMenuItem.Text = "Сохранить игру";
+
+        }
+        void DownloadGame_OnOff(bool on)
+        {
+            Save_List.Visible = on;
+            LoadingTheSelectedSave_Buttom.Visible = on;
+            SaveGame_ToolStripMenuItem.Enabled = !on;
+            NewGame_ToolStripMenuItem.Enabled = !on;
+            if (on) DownloadGame_ToolStripMenuItem.Text = "Отменить загрузку";
+            else DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
+        }
+        void ActionItems_OnOff(bool on)
+        {
+            GroupShip.Enabled = on;
+            Go_RadioButton.Enabled = on;
+            GroupAction.Enabled = on;
+            Step_Button.Enabled = on;
+            OnPosition_Button.Enabled = on;
+            NewGame_ToolStripMenuItem.Enabled = on;
+        }
+        void PositionButtonVisible(bool on, bool startGame)
+        {
+            OnPosition_Button.Visible = on;
+            Step_Button.Visible = !on;
+            if (startGame) OnPosition_Button.Text = "Начать игру";
+            else OnPosition_Button.Text = "На позицию";
+        }
+        void ActionItemsVisible(bool on)
+        {
+            GroupAction.Visible = on;
+            ShowSpeed_Textbox.Visible = on;
+            Speed_Lable.Visible = on;
+            MoreSpeed_Button.Visible = on;
+            LessSpeed_Button.Visible = on;
+            ShipInCenter_Label.Visible = on;
+            MyShipsCenter_Label.Visible = on;
+            EnemyShipsCenter_Lebel.Visible = on;
+            MyShipsCenter_Textbox.Visible = on;
+            EnemyShipsCenter_Textbox.Visible = on;
+            Step_Button.Visible = on;
+        }
+        void ActionItemsEnabled(bool on)
+        {
+            Go_RadioButton.Enabled = on;
+            Step_Button.Enabled = on;
+            GroupShip.Enabled = on;
+            OnPosition_Button.Enabled = on;
+            GroupAction.Enabled = on;
+            GroupAction.Enabled = on;
+            DownloadGame_ToolStripMenuItem.Enabled = on;
+            NewGame_ToolStripMenuItem.Enabled = on;
+        }
+        void ShipRadioButtons_OnOff(short index, bool on)
+        {
+            shipRadioButtons[index].Enabled = on;
+            if (on) shipRadioButtons[index].BackColor = Color.Transparent;
+            else shipRadioButtons[index].BackColor = Color.WhiteSmoke;
+        }
+        
         void AutoPos()
         {
             short NumOfShip;
@@ -258,25 +325,14 @@ namespace Warp_6
                 }
                 else
                 {
-                    OnPosition_Button.Visible = false;
-                    Go_RadioButton.Checked = true;
-                    GroupAction.Visible = true;
-                    ShowSpeed.Visible = true;
-                    MoreSpeed_Button.Visible = true;
-                    LessSpeed_Button.Visible = true;
-                    ShipInCenterLabel.Visible = true;
-                    MyShipsCenterLabel.Visible = true;
-                    EnemyShipsCenterLebel.Visible = true;
-                    MyShipsCenterTextbox.Visible = true;
-                    EnemyShipsCenterTextbox.Visible = true;
-                    Step_Button.Visible = true;
+                    PositionButtonVisible(false, false);
+                    ActionItemsVisible(true);
+
                     for (short i = 0; i < 9; i++)
                     {
-                        shipRadioButtons[i].Enabled = true;
-                        shipRadioButtons[i].BackColor = Color.Transparent;
+                        ShipRadioButtons_OnOff(i, true);
                     }
-                    SpeedLable.Visible = true;
-                    ShowSpeed.Text = "";
+                    ShowSpeed_Textbox.Text = "";
                 }
             }
 
@@ -301,7 +357,7 @@ namespace Warp_6
                     GroupShip.Enabled = true;
                 }
                 MoreSpeed_Button.Enabled = true;
-                ShowSpeed.Text = myShips[numOfShip].speed.ToString();
+                ShowSpeed_Textbox.Text = myShips[numOfShip].speed.ToString();
                 if (myShips[numOfShip].speed == 1) LessSpeed_Button.Enabled = false;
             }
         }
@@ -324,7 +380,7 @@ namespace Warp_6
                     GroupShip.Enabled = true;
                 }
                 LessSpeed_Button.Enabled = true;
-                ShowSpeed.Text = myShips[numOfShip].speed.ToString();
+                ShowSpeed_Textbox.Text = myShips[numOfShip].speed.ToString();
                 if (gameplay.MaxSppeed(myShips[numOfShip])) MoreSpeed_Button.Enabled = false;
             }
         }
@@ -337,7 +393,7 @@ namespace Warp_6
             {
                 if (Go_RadioButton.Checked)
                 {
-                    gameplay.MovingOfShip(MyShipsCenterTextbox, ref display, ref myShips[numOfShip], messageYouWin, ref shipRadioButtonOff);
+                    gameplay.MovingOfShip(MyShipsCenter_Textbox, ref display, ref myShips[numOfShip], messageYouWin, ref shipRadioButtonOff);
                     playerMadeStep = true;
                 }
                 else
@@ -385,11 +441,12 @@ namespace Warp_6
                     SaveFile.WriteLine(enemy.ships[i].position);
                     SaveFile.WriteLine(enemy.ships[i].InGame);
                 }
-                SaveFile.WriteLine(myShipsInCenter);
-                SaveFile.WriteLine(enemyShipsInCenter);
+                SaveFile.WriteLine(MyShipsCenter_Textbox.Text);
+                SaveFile.WriteLine(EnemyShipsCenter_Textbox.Text);
                 SaveFile.WriteLine(enemy.list.Count);
                 for (short i = 0; i < enemy.list.Count; i++) SaveFile.WriteLine(enemy.list[i]);
                 SaveFile.WriteLine(gameplay.currentPoint);
+                if (Step_Button.Visible) { SaveFile.WriteLine(true); }
                 SaveFile.Close();
 
                 InvalidСharacters_Label.Visible = false;
@@ -397,23 +454,16 @@ namespace Warp_6
                 SaveName_Label.Visible = false;
                 SaveName_Textbox.Visible = false;
                 SaveGame_ToolStripMenuItem.Text = "Сохранить игру";
-                Go_RadioButton.Enabled = true;
-                Step_Button.Enabled = true;
-                GroupShip.Enabled = true;
-                OnPosition_Button.Enabled = true;
-                GroupAction.Enabled = true;
-                GroupAction.Enabled = true;
-                DownloadGame_ToolStripMenuItem.Enabled = true;
-                NewGame_ToolStripMenuItem.Enabled = true;
+                ActionItemsEnabled(true);
             }
             else InvalidСharacters_Label.Visible = true;
         }
         private void NewGame_Buttom_Click(object sender, EventArgs e)
         {
-            MainMenu_OnOff();
+            MainMenu_Off();
 
-            myShipsInCenter = 0;
-            enemyShipsInCenter = 0;
+            MyShipsCenter_Textbox.Text = 0.ToString();
+            EnemyShipsCenter_Textbox.Text = 0.ToString();
 
             OnPosition_Button.Visible = true;
 
@@ -432,7 +482,7 @@ namespace Warp_6
 
                 foreach (FileInfo fi in files)
                 {
-                    SaveList.Items.Add(fi.Name.ToString().Replace(".txt", ""));
+                    Save_List.Items.Add(fi.Name.ToString().Replace(".txt", ""));
                 }
 
                 DownloadMenu_OnOff(true);
@@ -448,7 +498,7 @@ namespace Warp_6
         {
             bool wantToLoad = true;
             
-            if (File.Exists(savePath + SaveList.SelectedItem + ".txt"))
+            if (File.Exists(savePath + Save_List.SelectedItem + ".txt"))
             {
                 if (!NewGame_Buttom.Visible)
                 {   
@@ -457,7 +507,7 @@ namespace Warp_6
                 }
                 else
                 {
-                    MainMenu_OnOff();
+                    MainMenu_Off();
                 }
 
                 if (wantToLoad)
@@ -465,181 +515,53 @@ namespace Warp_6
                     DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
 
                     LoadingTheSelectedSave_Buttom.Visible = false;
-                    SaveList.Visible = false;
-                    GroupShip.Enabled = true;
-                    Go_RadioButton.Enabled = true;
-                    GroupAction.Enabled = true;
-                    Step_Button.Enabled = true;
-                    OnPosition_Button.Enabled = true;
-                    DownloadGame_ToolStripMenuItem.Enabled = true;
-                    SaveGame_ToolStripMenuItem.Enabled = true;
-                    NewGame_ToolStripMenuItem.Enabled = true;
-
-                    StreamReader SaveFile = new StreamReader(savePath + SaveList.SelectedItem + ".txt");
-                    const float xLeft = 130;
-                    const float xRight = 1300;
-                    float yOnSide = 160;
-                    float x = 0;
-                    float y = 0;
-                    float shift = 80;
+                    Save_List.Visible = false;
+                    ActionItemsEnabled(true);
                     bool onPosition = false;
+                    string save = savePath + Save_List.SelectedItem + ".txt";
 
-                    for (short i = 0; i < 126; i++) display.position[i].busy = false;
+                    gameplay.InitializationAllShips(save, display, myShips, enemy, MyShipsCenter_Textbox, EnemyShipsCenter_Textbox);
+                    display.DrawMap();
 
                     for (short i = 0; i < 9; i++)
                     {
-                        myShips[i].speed = short.Parse(SaveFile.ReadLine());
-                        myShips[i].position = short.Parse(SaveFile.ReadLine());
-                        myShips[i].InGame = bool.Parse(SaveFile.ReadLine());
-                        if (myShips[i].position > -1) display.position[myShips[i].position].busy = true;
-
-                        enemy.ships[i].speed = short.Parse(SaveFile.ReadLine());
-                        enemy.ships[i].position = short.Parse(SaveFile.ReadLine());
-                        enemy.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
-                        if (enemy.ships[i].position > -1) display.position[enemy.ships[i].position].busy = true;
-                    }
-
-                    myShipsInCenter = short.Parse(SaveFile.ReadLine());
-                    enemyShipsInCenter = short.Parse(SaveFile.ReadLine());
-                    MyShipsCenterTextbox.Text = myShipsInCenter.ToString();
-                    EnemyShipsCenterTextbox.Text = enemyShipsInCenter.ToString();
-                    short listCount = short.Parse(SaveFile.ReadLine());
-                    enemy.list.Clear();
-                    while (listCount > 0)
-                    {
-                        enemy.list.Add(short.Parse(SaveFile.ReadLine()));
-                        listCount--;
-                    }
-                    gameplay.currentPoint = short.Parse(SaveFile.ReadLine());
-                    SaveFile.Close();
-                    display.DrawMap();
-
-
-
-                    for (short i = 0; i < 4; i++)
-                    {
-                        if (myShips[i].InGame) 
-                        {
-                            if (myShips[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
-                            else { x = display.X_GetCoord(myShips[i]); y = display.Y_GetCoord(myShips[i]); }
-                            display.DrawTriangle(true, x, y, i + 1, myShips[i].speed);
-                        }
-
-                        if (enemy.ships[i].InGame)
-                        {
-                            if (enemy.ships[i].position == -1) { x = xRight; y = yOnSide; }
-                            else { x = display.X_GetCoord(enemy.ships[i]); y = display.Y_GetCoord(enemy.ships[i]); }
-                            display.DrawTriangle(false, x, y, i + 1, enemy.ships[i].speed);
-                        }
-
-                        yOnSide += shift;
-                    }
-
-                    for (short i = 4; i < 7; i++)
-                    {
-                        if (myShips[i].InGame)
-                        {
-                            if (myShips[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
-                            else { x = display.X_GetCoord(myShips[i]); y = display.Y_GetCoord(myShips[i]); }
-                            display.DrawRectangle(true, x, y, i + 1, myShips[i].speed);
-                        }
-
-                        if (enemy.ships[i].InGame)
-                        {
-                            if (enemy.ships[i].position == -1) { x = xRight; y = yOnSide; }
-                            else { x = display.X_GetCoord(enemy.ships[i]); y = display.Y_GetCoord(enemy.ships[i]); }
-                            display.DrawRectangle(false, x, y, i + 1, enemy.ships[i].speed);
-                        }
-
-                        yOnSide += shift;
-                    }
-
-                    for (short i = 7; i < 9; i++)
-                    {
-                        if (myShips[i].InGame)
-                        {
-                            if (myShips[i].position == -1) { x = xLeft; y = yOnSide; onPosition = true; }
-                            else { x = display.X_GetCoord(myShips[i]); y = display.Y_GetCoord(myShips[i]); }
-                            display.DrawCircle(true, x, y, i + 1, myShips[i].speed);
-                        }
-
-                        if (enemy.ships[i].InGame)
-                        {
-                            if (enemy.ships[i].position == -1) { x = xRight; y = yOnSide; }
-                            else { x = display.X_GetCoord(enemy.ships[i]); y = display.Y_GetCoord(enemy.ships[i]); }
-                            display.DrawCircle(false, x, y, i + 1, enemy.ships[i].speed);
-                        }
-                       
-                        yOnSide += shift;
+                        display.DrawShipAfterLoading(true, myShips[i], ref onPosition);
+                        display.DrawShipAfterLoading(false, enemy.ships[i], ref onPosition);
                     }
 
                     if (onPosition)
                     {
-                        OnPosition_Button.Visible = true;
-                        OnPosition_Button.Enabled = true;
-                        OnPosition_Button.Text = "На позицию";
+                        PositionButtonVisible(true, false);
 
+                        bool on;
                         for (short i = 0; i < 9; i++)
                         {
-                            if (myShips[i].position == -1)
-                            {
-                                shipRadioButtons[i].Enabled = true;
-                                shipRadioButtons[i].BackColor = Color.Transparent;
-                            }
-                            else
-                            {
-                                shipRadioButtons[i].Enabled = false;
-                                shipRadioButtons[i].BackColor = Color.WhiteSmoke;
-                            }
+                            if (myShips[i].position == -1) on = true;
+                            else on = false;
+                            ShipRadioButtons_OnOff(i, on);
                         }
                     }
                     else
                     {
-                        for (short i = 125; i < 107; i++) if (!display.position[i].busy) { onPosition = false; break; }
+                        for (short i = 125; i > 107; i--) if (!display.position[i].busy) { onPosition = true; break; }
 
-                        if (!onPosition)
+                        if (onPosition)
                         {
-                            OnPosition_Button.Visible = true;
-                            OnPosition_Button.Enabled = true;
-                            OnPosition_Button.Text = "Начать игру";
+                            PositionButtonVisible(true, true); 
                         }
                         else
-                        {   
-                            OnPosition_Button.Visible = false;
-                            Go_RadioButton.Checked = true;
-                            GroupAction.Visible = true;
-                            MoreSpeed_Button.Visible = true;
-                            LessSpeed_Button.Visible = true;
-                            Step_Button.Visible = true;
-                            ShowSpeed.Visible = true;
-                            ShipInCenterLabel.Visible = true;
-                            MyShipsCenterLabel.Visible = true;
-                            MyShipsCenterTextbox.Visible = true;
-                            EnemyShipsCenterLebel.Visible = true;
-                            EnemyShipsCenterTextbox.Visible = true;
-                            LoadingTheSelectedSave_Buttom.Visible = false;
-                            SaveList.Visible = false;
-
+                        {
+                            PositionButtonVisible(false, false);
+                            ActionItemsVisible(true);
                             for (short i = 0; i < 9; i++)
                             {
-                                if (myShips[i].InGame)
-                                {
-                                    shipRadioButtons[i].Enabled = true;
-                                    shipRadioButtons[i].BackColor = Color.Transparent;
-                                }
-                                else
-                                {
-                                    shipRadioButtons[i].Enabled = false;
-                                    shipRadioButtons[i].BackColor = Color.WhiteSmoke;
-                                }
+                                ShipRadioButtons_OnOff(i, myShips[i].InGame);
                             }
-
-                            SpeedLable.Visible = true;
-                            ShowSpeed.Text = "";
+                            ShowSpeed_Textbox.Text = "";
                         }
                     }
-                    this.Refresh();
-                    display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+                    Refresh();
+                    display.DrawImage();
                 }
             }
         }
@@ -663,34 +585,24 @@ namespace Warp_6
                 MessageBox.Show(mes, "Правила");
             }
         }
+        
         private void NewGame_ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Хотите начать новую игру?\n Весь не сохранённый прогресс будет потерян.", "Новая игра", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                NewGame_Buttom.Visible = false;
-                OnPosition_Button.Visible = true;
-                OnPosition_Button.Text = "На позицию";
-                Go_RadioButton.Checked = false;
-                GroupAction.Visible = false;
-                ShowSpeed.Visible = false;
-                MoreSpeed_Button.Visible = false;
-                LessSpeed_Button.Visible = false;
-                ShipInCenterLabel.Visible = false;
-                MyShipsCenterLabel.Visible = false;
-                EnemyShipsCenterLebel.Visible = false;
-                MyShipsCenterTextbox.Visible = false;
-                EnemyShipsCenterTextbox.Visible = false;
-                Step_Button.Visible = false;
+                PositionButtonVisible(true, false);
+                ActionItemsVisible(false);
+
+                MyShipsCenter_Textbox.Text = 0.ToString();
+                EnemyShipsCenter_Textbox.Text = 0.ToString();
+
+                gameplay.currentPoint = 125;
+
                 AutoPosChB.Visible = true;
                 AutoPosChB.Checked = false;
-                SpeedLable.Visible = false;
-                OnPosition_Button.Visible = true;
-                myShipsInCenter = 0;
-                enemyShipsInCenter = 0;
-                enemyShipsInCenter = 0;
-                myShipsInCenter = 0;
-                gameplay.currentPoint = 125;
+
+                MainMenu_Off();
 
                 for (short i = 0; i < 9; i++)
                 {
@@ -709,39 +621,17 @@ namespace Warp_6
         {
             if (SaveGame_ToolStripMenuItem.Text == "Сохранить игру")
             {
-                СreateSave_Button.Visible = true;
-                SaveName_Label.Visible = true;
-                SaveName_Textbox.Visible = true;
-                SaveGame_ToolStripMenuItem.Text = "Отменить сохранение";
                 string str = DateTime.Now.ToString().Replace(":", ".").Replace(" ", "  ");
 
                 SaveName_Textbox.Text = str;
 
-                GroupShip.Enabled = false;
-                Go_RadioButton.Checked = true;
-                Go_RadioButton.Enabled = false;
-                GroupAction.Enabled = false;
-                GroupAction.Enabled = false;
-                Step_Button.Enabled = false;
-                OnPosition_Button.Enabled = false;
-                DownloadGame_ToolStripMenuItem.Enabled = false;
-                NewGame_ToolStripMenuItem.Enabled = false;
+                SaveGame_OnOff(true);
+                ActionItems_OnOff(false);
             }
             else
             {
-                СreateSave_Button.Visible = false;
-                SaveName_Label.Visible = false;
-                SaveName_Textbox.Visible = false;
-                SaveGame_ToolStripMenuItem.Text = "Сохранить игру";
-
-                GroupShip.Enabled = true;
-                Go_RadioButton.Enabled = true;
-                GroupAction.Enabled = true;
-                GroupAction.Enabled = true;
-                Step_Button.Enabled = true;
-                OnPosition_Button.Enabled = true;
-                DownloadGame_ToolStripMenuItem.Enabled = true;
-                NewGame_ToolStripMenuItem.Enabled = true;
+                SaveGame_OnOff(false);
+                ActionItems_OnOff(true);
             }
         }
         private void DownloadGame_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -750,45 +640,23 @@ namespace Warp_6
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(savePath);
                 FileInfo[] files = directoryInfo.GetFiles("*.txt");
-                SaveList.Items.Clear();
+                Save_List.Items.Clear();
                 foreach (FileInfo fi in files)
                 {
-                    SaveList.Items.Add(fi.Name.ToString().Replace(".txt", ""));
+                    Save_List.Items.Add(fi.Name.ToString().Replace(".txt", ""));
                 }
-
-                SaveList.Location = new Point(758, 289);
+                Save_List.Location = new Point(758, 289);
                 LoadingTheSelectedSave_Buttom.Location = new Point(867, 695);
-                SaveList.Visible = true;
-                LoadingTheSelectedSave_Buttom.Visible = true;
-                DownloadGame_ToolStripMenuItem.Text = "Отменить загрузку";
-                GroupShip.Enabled = false;
-                Go_RadioButton.Checked = true;
-                Go_RadioButton.Enabled = false;
-                GroupAction.Enabled = false;
-                GroupAction.Enabled = false;
-                Step_Button.Enabled = false;
-                OnPosition_Button.Enabled = false;
-                SaveGame_ToolStripMenuItem.Enabled = false;
-                NewGame_ToolStripMenuItem.Enabled = false;
+                DownloadGame_OnOff(true);
+                ActionItems_OnOff(false);
             }
             else
             {
-                SaveList.Visible = false;
-                LoadingTheSelectedSave_Buttom.Visible = false;
-                DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
-
-                GroupShip.Enabled = true;
-                Go_RadioButton.Enabled = true;
-                GroupAction.Enabled = true;
-                GroupAction.Enabled = true;
-                Step_Button.Enabled = true;
-                OnPosition_Button.Enabled = true;
-                SaveGame_ToolStripMenuItem.Enabled = true;
-                NewGame_ToolStripMenuItem.Enabled = true;
-
+                DownloadGame_OnOff(false);
+                ActionItems_OnOff(true);
                 pictureBox.Refresh();
-                display.graphics.DrawImage(display.bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
+                display.DrawImage();
             }
         }
     }
-}
+}//792 //776//737//688

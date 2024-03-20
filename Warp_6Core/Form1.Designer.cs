@@ -35,7 +35,7 @@
             ChangeSpeed_RadioButton = new System.Windows.Forms.RadioButton();
             MoreSpeed_Button = new System.Windows.Forms.Button();
             LessSpeed_Button = new System.Windows.Forms.Button();
-            ShowSpeed = new System.Windows.Forms.TextBox();
+            ShowSpeed_Textbox = new System.Windows.Forms.TextBox();
             Ship_0 = new System.Windows.Forms.RadioButton();
             Ship_1 = new System.Windows.Forms.RadioButton();
             Ship_2 = new System.Windows.Forms.RadioButton();
@@ -47,13 +47,13 @@
             Ship_6 = new System.Windows.Forms.RadioButton();
             GroupAction = new System.Windows.Forms.GroupBox();
             GroupShip = new System.Windows.Forms.GroupBox();
-            ShipInCenterLabel = new System.Windows.Forms.Label();
-            MyShipsCenterLabel = new System.Windows.Forms.Label();
-            EnemyShipsCenterLebel = new System.Windows.Forms.Label();
-            MyShipsCenterTextbox = new System.Windows.Forms.TextBox();
-            EnemyShipsCenterTextbox = new System.Windows.Forms.TextBox();
+            ShipInCenter_Label = new System.Windows.Forms.Label();
+            MyShipsCenter_Label = new System.Windows.Forms.Label();
+            EnemyShipsCenter_Lebel = new System.Windows.Forms.Label();
+            MyShipsCenter_Textbox = new System.Windows.Forms.TextBox();
+            EnemyShipsCenter_Textbox = new System.Windows.Forms.TextBox();
             Step_Button = new System.Windows.Forms.Button();
-            SpeedLable = new System.Windows.Forms.Label();
+            Speed_Lable = new System.Windows.Forms.Label();
             AutoPosChB = new System.Windows.Forms.CheckBox();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             Rules_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +69,7 @@
             InvalidСharacters_Label = new System.Windows.Forms.Label();
             LoadingTheSelectedSave_Buttom = new System.Windows.Forms.Button();
             pictureBox = new System.Windows.Forms.PictureBox();
-            SaveList = new System.Windows.Forms.ListBox();
+            Save_List = new System.Windows.Forms.ListBox();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -93,6 +93,7 @@
             // Go_RadioButton
             // 
             Go_RadioButton.AutoSize = true;
+            Go_RadioButton.Checked = true;
             Go_RadioButton.Location = new System.Drawing.Point(20, 65);
             Go_RadioButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Go_RadioButton.Name = "Go_RadioButton";
@@ -111,7 +112,6 @@
             ChangeSpeed_RadioButton.Name = "ChangeSpeed_RadioButton";
             ChangeSpeed_RadioButton.Size = new System.Drawing.Size(204, 82);
             ChangeSpeed_RadioButton.TabIndex = 3;
-            ChangeSpeed_RadioButton.TabStop = true;
             ChangeSpeed_RadioButton.Text = "Изменить \r\nскорость";
             ChangeSpeed_RadioButton.UseVisualStyleBackColor = true;
             ChangeSpeed_RadioButton.CheckedChanged += ChangeSpeed_RadioButton_CheckedChanged;
@@ -146,18 +146,18 @@
             LessSpeed_Button.Visible = false;
             LessSpeed_Button.Click += LessSpeed_Button_Click;
             // 
-            // ShowSpeed
+            // ShowSpeed_Textbox
             // 
-            ShowSpeed.BackColor = System.Drawing.Color.White;
-            ShowSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ShowSpeed.Location = new System.Drawing.Point(383, 497);
-            ShowSpeed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            ShowSpeed.Name = "ShowSpeed";
-            ShowSpeed.ReadOnly = true;
-            ShowSpeed.Size = new System.Drawing.Size(100, 45);
-            ShowSpeed.TabIndex = 6;
-            ShowSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            ShowSpeed.Visible = false;
+            ShowSpeed_Textbox.BackColor = System.Drawing.Color.White;
+            ShowSpeed_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShowSpeed_Textbox.Location = new System.Drawing.Point(383, 497);
+            ShowSpeed_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            ShowSpeed_Textbox.Name = "ShowSpeed_Textbox";
+            ShowSpeed_Textbox.ReadOnly = true;
+            ShowSpeed_Textbox.Size = new System.Drawing.Size(100, 45);
+            ShowSpeed_Textbox.TabIndex = 6;
+            ShowSpeed_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            ShowSpeed_Textbox.Visible = false;
             // 
             // Ship_0
             // 
@@ -314,68 +314,68 @@
             GroupShip.Text = "Корабли";
             GroupShip.Visible = false;
             // 
-            // ShipInCenterLabel
+            // ShipInCenter_Label
             // 
-            ShipInCenterLabel.AutoSize = true;
-            ShipInCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ShipInCenterLabel.Location = new System.Drawing.Point(129, 781);
-            ShipInCenterLabel.Name = "ShipInCenterLabel";
-            ShipInCenterLabel.Size = new System.Drawing.Size(302, 39);
-            ShipInCenterLabel.TabIndex = 19;
-            ShipInCenterLabel.Text = "Корабли в центре";
-            ShipInCenterLabel.Visible = false;
+            ShipInCenter_Label.AutoSize = true;
+            ShipInCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShipInCenter_Label.Location = new System.Drawing.Point(129, 781);
+            ShipInCenter_Label.Name = "ShipInCenter_Label";
+            ShipInCenter_Label.Size = new System.Drawing.Size(302, 39);
+            ShipInCenter_Label.TabIndex = 19;
+            ShipInCenter_Label.Text = "Корабли в центре";
+            ShipInCenter_Label.Visible = false;
             // 
-            // MyShipsCenterLabel
+            // MyShipsCenter_Label
             // 
-            MyShipsCenterLabel.AutoSize = true;
-            MyShipsCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MyShipsCenterLabel.Location = new System.Drawing.Point(173, 846);
-            MyShipsCenterLabel.Name = "MyShipsCenterLabel";
-            MyShipsCenterLabel.Size = new System.Drawing.Size(105, 39);
-            MyShipsCenterLabel.TabIndex = 20;
-            MyShipsCenterLabel.Text = "Ваши";
-            MyShipsCenterLabel.Visible = false;
+            MyShipsCenter_Label.AutoSize = true;
+            MyShipsCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MyShipsCenter_Label.Location = new System.Drawing.Point(173, 846);
+            MyShipsCenter_Label.Name = "MyShipsCenter_Label";
+            MyShipsCenter_Label.Size = new System.Drawing.Size(105, 39);
+            MyShipsCenter_Label.TabIndex = 20;
+            MyShipsCenter_Label.Text = "Ваши";
+            MyShipsCenter_Label.Visible = false;
             // 
-            // EnemyShipsCenterLebel
+            // EnemyShipsCenter_Lebel
             // 
-            EnemyShipsCenterLebel.AutoSize = true;
-            EnemyShipsCenterLebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            EnemyShipsCenterLebel.Location = new System.Drawing.Point(71, 909);
-            EnemyShipsCenterLebel.Name = "EnemyShipsCenterLebel";
-            EnemyShipsCenterLebel.Size = new System.Drawing.Size(207, 39);
-            EnemyShipsCenterLebel.TabIndex = 21;
-            EnemyShipsCenterLebel.Text = "Противника";
-            EnemyShipsCenterLebel.Visible = false;
+            EnemyShipsCenter_Lebel.AutoSize = true;
+            EnemyShipsCenter_Lebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            EnemyShipsCenter_Lebel.Location = new System.Drawing.Point(71, 909);
+            EnemyShipsCenter_Lebel.Name = "EnemyShipsCenter_Lebel";
+            EnemyShipsCenter_Lebel.Size = new System.Drawing.Size(207, 39);
+            EnemyShipsCenter_Lebel.TabIndex = 21;
+            EnemyShipsCenter_Lebel.Text = "Противника";
+            EnemyShipsCenter_Lebel.Visible = false;
             // 
-            // MyShipsCenterTextbox
+            // MyShipsCenter_Textbox
             // 
-            MyShipsCenterTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            MyShipsCenterTextbox.BackColor = System.Drawing.Color.White;
-            MyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MyShipsCenterTextbox.Location = new System.Drawing.Point(294, 842);
-            MyShipsCenterTextbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            MyShipsCenterTextbox.Name = "MyShipsCenterTextbox";
-            MyShipsCenterTextbox.ReadOnly = true;
-            MyShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
-            MyShipsCenterTextbox.TabIndex = 22;
-            MyShipsCenterTextbox.Text = "0";
-            MyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            MyShipsCenterTextbox.Visible = false;
+            MyShipsCenter_Textbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            MyShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
+            MyShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MyShipsCenter_Textbox.Location = new System.Drawing.Point(294, 842);
+            MyShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            MyShipsCenter_Textbox.Name = "MyShipsCenter_Textbox";
+            MyShipsCenter_Textbox.ReadOnly = true;
+            MyShipsCenter_Textbox.Size = new System.Drawing.Size(85, 45);
+            MyShipsCenter_Textbox.TabIndex = 22;
+            MyShipsCenter_Textbox.Text = "0";
+            MyShipsCenter_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            MyShipsCenter_Textbox.Visible = false;
             // 
-            // EnemyShipsCenterTextbox
+            // EnemyShipsCenter_Textbox
             // 
-            EnemyShipsCenterTextbox.AcceptsReturn = true;
-            EnemyShipsCenterTextbox.BackColor = System.Drawing.Color.White;
-            EnemyShipsCenterTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            EnemyShipsCenterTextbox.Location = new System.Drawing.Point(294, 909);
-            EnemyShipsCenterTextbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            EnemyShipsCenterTextbox.Name = "EnemyShipsCenterTextbox";
-            EnemyShipsCenterTextbox.ReadOnly = true;
-            EnemyShipsCenterTextbox.Size = new System.Drawing.Size(85, 45);
-            EnemyShipsCenterTextbox.TabIndex = 23;
-            EnemyShipsCenterTextbox.Text = "0";
-            EnemyShipsCenterTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            EnemyShipsCenterTextbox.Visible = false;
+            EnemyShipsCenter_Textbox.AcceptsReturn = true;
+            EnemyShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
+            EnemyShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            EnemyShipsCenter_Textbox.Location = new System.Drawing.Point(294, 909);
+            EnemyShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            EnemyShipsCenter_Textbox.Name = "EnemyShipsCenter_Textbox";
+            EnemyShipsCenter_Textbox.ReadOnly = true;
+            EnemyShipsCenter_Textbox.Size = new System.Drawing.Size(85, 45);
+            EnemyShipsCenter_Textbox.TabIndex = 23;
+            EnemyShipsCenter_Textbox.Text = "0";
+            EnemyShipsCenter_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            EnemyShipsCenter_Textbox.Visible = false;
             // 
             // Step_Button
             // 
@@ -391,16 +391,16 @@
             Step_Button.Visible = false;
             Step_Button.Click += Step_Button_Click;
             // 
-            // SpeedLable
+            // Speed_Lable
             // 
-            SpeedLable.AutoSize = true;
-            SpeedLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            SpeedLable.Location = new System.Drawing.Point(367, 461);
-            SpeedLable.Name = "SpeedLable";
-            SpeedLable.Size = new System.Drawing.Size(138, 32);
-            SpeedLable.TabIndex = 27;
-            SpeedLable.Text = "Скорость";
-            SpeedLable.Visible = false;
+            Speed_Lable.AutoSize = true;
+            Speed_Lable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Speed_Lable.Location = new System.Drawing.Point(367, 461);
+            Speed_Lable.Name = "Speed_Lable";
+            Speed_Lable.Size = new System.Drawing.Size(138, 32);
+            Speed_Lable.TabIndex = 27;
+            Speed_Lable.Text = "Скорость";
+            Speed_Lable.Visible = false;
             // 
             // AutoPosChB
             // 
@@ -553,15 +553,15 @@
             pictureBox.TabIndex = 42;
             pictureBox.TabStop = false;
             // 
-            // SaveList
+            // Save_List
             // 
-            SaveList.FormattingEnabled = true;
-            SaveList.ItemHeight = 20;
-            SaveList.Location = new System.Drawing.Point(1156, 171);
-            SaveList.Name = "SaveList";
-            SaveList.Size = new System.Drawing.Size(404, 404);
-            SaveList.TabIndex = 36;
-            SaveList.Visible = false;
+            Save_List.FormattingEnabled = true;
+            Save_List.ItemHeight = 20;
+            Save_List.Location = new System.Drawing.Point(1156, 171);
+            Save_List.Name = "Save_List";
+            Save_List.Size = new System.Drawing.Size(404, 404);
+            Save_List.TabIndex = 36;
+            Save_List.Visible = false;
             // 
             // Form1
             // 
@@ -575,21 +575,21 @@
             Controls.Add(SaveName_Textbox);
             Controls.Add(SaveName_Label);
             Controls.Add(OnPosition_Button);
-            Controls.Add(SaveList);
+            Controls.Add(Save_List);
             Controls.Add(DownloadGame_Buttom);
             Controls.Add(NewGame_Buttom);
             Controls.Add(GameExit_Buttom);
             Controls.Add(AutoPosChB);
-            Controls.Add(SpeedLable);
+            Controls.Add(Speed_Lable);
             Controls.Add(Step_Button);
-            Controls.Add(EnemyShipsCenterTextbox);
-            Controls.Add(MyShipsCenterTextbox);
-            Controls.Add(EnemyShipsCenterLebel);
-            Controls.Add(MyShipsCenterLabel);
-            Controls.Add(ShipInCenterLabel);
+            Controls.Add(EnemyShipsCenter_Textbox);
+            Controls.Add(MyShipsCenter_Textbox);
+            Controls.Add(EnemyShipsCenter_Lebel);
+            Controls.Add(MyShipsCenter_Label);
+            Controls.Add(ShipInCenter_Label);
             Controls.Add(GroupShip);
             Controls.Add(GroupAction);
-            Controls.Add(ShowSpeed);
+            Controls.Add(ShowSpeed_Textbox);
             Controls.Add(LessSpeed_Button);
             Controls.Add(MoreSpeed_Button);
             Controls.Add(pictureBox);
@@ -619,7 +619,7 @@
         private System.Windows.Forms.RadioButton ChangeSpeed_RadioButton;
         private System.Windows.Forms.Button MoreSpeed_Button;
         private System.Windows.Forms.Button LessSpeed_Button;
-        private System.Windows.Forms.TextBox ShowSpeed;
+        private System.Windows.Forms.TextBox ShowSpeed_Textbox;
         private System.Windows.Forms.RadioButton Ship_0;
         private System.Windows.Forms.RadioButton Ship_1;
         private System.Windows.Forms.RadioButton Ship_2;
@@ -631,13 +631,13 @@
         private System.Windows.Forms.RadioButton Ship_6;
         private System.Windows.Forms.GroupBox GroupAction;
         private System.Windows.Forms.GroupBox GroupShip;
-        private System.Windows.Forms.Label ShipInCenterLabel;
-        private System.Windows.Forms.Label MyShipsCenterLabel;
-        private System.Windows.Forms.Label EnemyShipsCenterLebel;
-        private System.Windows.Forms.TextBox MyShipsCenterTextbox;
-        private System.Windows.Forms.TextBox EnemyShipsCenterTextbox;
+        private System.Windows.Forms.Label ShipInCenter_Label;
+        private System.Windows.Forms.Label MyShipsCenter_Label;
+        private System.Windows.Forms.Label EnemyShipsCenter_Lebel;
+        private System.Windows.Forms.TextBox MyShipsCenter_Textbox;
+        private System.Windows.Forms.TextBox EnemyShipsCenter_Textbox;
         private System.Windows.Forms.Button Step_Button;
-        private System.Windows.Forms.Label SpeedLable;
+        private System.Windows.Forms.Label Speed_Lable;
         private System.Windows.Forms.CheckBox AutoPosChB;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem Rules_ToolStripMenuItem;
@@ -653,7 +653,7 @@
         private System.Windows.Forms.Label InvalidСharacters_Label;
         private System.Windows.Forms.Button LoadingTheSelectedSave_Buttom;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.ListBox SaveList;
+        private System.Windows.Forms.ListBox Save_List;
     }
 }
 

@@ -1,14 +1,15 @@
 ﻿using Drawing;
-using Ships;
+using Players;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Game
 {
-    public delegate void Delegation (int index);
+    public delegate void Delegation(int index);
 
     public class Gameplay
-    { 
+    {
         public short currentPoint = 125;
 
         public void MovingOfShip(TextBox ShipsCenterTextbox, ref Display display, ref Ship ship, string message, ref Delegation del)
@@ -34,7 +35,7 @@ namespace Game
             ship.InGame = false;
             ShipsCenterTextbox.Text = shipInCenter.ToString();
             string winOrLoss;
-            if (message.Contains("Вы победили!")){ del(ship.index); winOrLoss = "Победа!";}
+            if (message.Contains("Вы победили!")) { del(ship.index); winOrLoss = "Победа!"; }
             else { winOrLoss = "Проигрыш..."; }
             if (shipInCenter == 6)
             {
@@ -89,36 +90,63 @@ namespace Game
             MessageBox.Show(message, "Кто начинает");
         }
 
-        public void InitializationAllShips(Enemy enemy, Ship[] myShips)
+        short SettingOfShipSpeed(Ship ship)
         {
             Random rnd = new Random();
+            short x = 0;
 
-            for (short i = 0; i < 4; i++)
+            switch (ship.type)
             {
-                myShips[i].speed = (short)(rnd.Next() % 4 + 1);//Задание скорости корабля
-                myShips[i].InGame = true;
-
-                enemy.ships[i].speed = (short)(rnd.Next() % 4 + 1); ;//Задание скорости корабля
-                enemy.ships[i].InGame = true;
+                case 1: x = 4; break;
+                case 2: x = 6; break;
+                case 3: x = 8; break;
             }
 
-            for (short i = 4; i < 7; i++)
+            return (short)(rnd.Next() % x + 1);
+        }
+        public void InitializationAllShips(Enemy enemy, Ship[] myShips)
+        {
+
+            for (short i = 0; i < 9; i++)
             {
-                myShips[i].speed = (short)(rnd.Next() % 6 + 1);//Задание скорости корабля
+                myShips[i].speed = SettingOfShipSpeed(myShips[i]);//Задание скорости корабля
                 myShips[i].InGame = true;
 
-                enemy.ships[i].speed = (short)(rnd.Next() % 6 + 1); ;//Задание скорости корабля
-                enemy.ships[i].InGame = true;
-            }
-
-            for (short i = 7; i < 9; i++)
-            {
-                myShips[i].speed = (short)(rnd.Next() % 8 + 1);//Задание скорости корабля
-                myShips[i].InGame = true;
-
-                enemy.ships[i].speed = (short)(rnd.Next() % 8 + 1); ;//Задание скорости корабля
+                enemy.ships[i].speed = SettingOfShipSpeed(enemy.ships[i]);//Задание скорости корабля
                 enemy.ships[i].InGame = true;
             }
         }
+        public void InitializationAllShips(string savePath, Display display, Ship[] myShips, Enemy enemy, TextBox MyShipsCenterTextbox, TextBox EnemyShipsCenterTextbox)
+        {
+            StreamReader SaveFile = new StreamReader(savePath);
+
+            for (short i = 0; i < 126; i++) display.position[i].busy = false;
+
+            for (short i = 0; i < 9; i++)
+            {
+                myShips[i].speed = short.Parse(SaveFile.ReadLine());
+                myShips[i].position = short.Parse(SaveFile.ReadLine());
+                myShips[i].InGame = bool.Parse(SaveFile.ReadLine());
+                if (myShips[i].position > -1) display.position[myShips[i].position].busy = true;
+
+                enemy.ships[i].speed = short.Parse(SaveFile.ReadLine());
+                enemy.ships[i].position = short.Parse(SaveFile.ReadLine());
+                enemy.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                if (enemy.ships[i].position > -1) display.position[enemy.ships[i].position].busy = true;
+            }
+
+            MyShipsCenterTextbox.Text = SaveFile.ReadLine();
+            EnemyShipsCenterTextbox.Text = SaveFile.ReadLine();
+            short listCount = short.Parse(SaveFile.ReadLine());
+            enemy.list.Clear();
+            while (listCount > 0)
+            {
+                enemy.list.Add(short.Parse(SaveFile.ReadLine()));
+                listCount--;
+            }
+            currentPoint = short.Parse(SaveFile.ReadLine());
+            SaveFile.Close();
+        }
+
     }
 }
