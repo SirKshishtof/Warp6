@@ -16,11 +16,10 @@ namespace Warp_6
         Display display;
         Gameplay gameplay;
         Delegation shipRadioButtonOff;
-
-        Ship[] myShips = new Ship[9];
         Enemy enemy = new Enemy();
         RadioButton[] shipRadioButtons = new RadioButton[9];
-
+        Player playerOne;
+        //Player playerTwo;
         string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
         string rulesPath = Directory.GetCurrentDirectory() + "\\Rules.txt";
         
@@ -43,17 +42,17 @@ namespace Warp_6
         }
         void PrintSpeed(short numOfShip)
         {
-            ShowSpeed_Textbox.Text = myShips[numOfShip].speed.ToString();
+            ShowSpeed_Textbox.Text = playerOne.ships[numOfShip].speed.ToString();
             if (ChangeSpeed_RadioButton.Checked)
             {
-                if (myShips[numOfShip].speed == 1)
+                if (playerOne.ships[numOfShip].speed == 1)
                 {
                     LessSpeed_Button.Enabled = false;
                     MoreSpeed_Button.Enabled = true;
                 }
                 else
                 {
-                    if (gameplay.MaxSppeed(myShips[numOfShip]))
+                    if (gameplay.MaxSppeed(playerOne.ships[numOfShip]))
                     {
                         LessSpeed_Button.Enabled = true;
                         MoreSpeed_Button.Enabled = false;
@@ -148,6 +147,7 @@ namespace Warp_6
             GroupAction.Enabled = on;
             DownloadGame_ToolStripMenuItem.Enabled = on;
             NewGame_ToolStripMenuItem.Enabled = on;
+            SaveGame_ToolStripMenuItem.Enabled = on;
         }
         void ShipRadioButtons_OnOff(short index, bool on)
         {
@@ -164,7 +164,7 @@ namespace Warp_6
                 NumOfShip = i;
                 if (i != 9)
                 {
-                    gameplay.SetShipOnSpiral(display, ref myShips[NumOfShip], true);
+                    gameplay.SetShipOnSpiral(display, ref playerOne.ships[NumOfShip], playerOne.brash);
                     ShipRadioButtonOff(NumOfShip);
 
                     display.DrawWhiteRectangle(NumOfShip, false);
@@ -172,7 +172,7 @@ namespace Warp_6
                 if (enemy.list.Count > 0)
                 {
                     NumOfShip = enemy.list[0];
-                    gameplay.SetShipOnSpiral(display,ref enemy.ships[NumOfShip], false);
+                    gameplay.SetShipOnSpiral(display,ref enemy.player.ships[NumOfShip], enemy.player.brash);
                     display.DrawWhiteRectangle(NumOfShip, true);
                     enemy.list.RemoveAt(0);
 
@@ -206,7 +206,7 @@ namespace Warp_6
             gameplay = new Gameplay();
             shipRadioButtonOff = ShipRadioButtonOff;
 
-            for (short i = 0; i < shipRadioButtons.Length; i++) shipRadioButtons[i] = new System.Windows.Forms.RadioButton();
+            for (short i = 0; i < shipRadioButtons.Length; i++) shipRadioButtons[i] = new RadioButton();
 
             shipRadioButtons[0] = Ship_0;
             shipRadioButtons[1] = Ship_1;
@@ -218,24 +218,9 @@ namespace Warp_6
             shipRadioButtons[7] = Ship_7;
             shipRadioButtons[8] = Ship_8;
 
-            for (short i = 0; i < 4; i++)
-            {
-                myShips[i] = new Ship(1,i);
-                enemy.ships[i] = new Ship(1, i);
-            }
-
-            for (short i = 4; i < 7; i++)
-            {
-                myShips[i] = new Ship(2, i);
-                enemy.ships[i] = new Ship(2, i);
-            }
-
-            for (short i = 7; i < 9; i++)
-            {
-                myShips[i] = new Ship(3, i);
-                enemy.ships[i] = new Ship(3, i);
-            }
-
+            playerOne = new Player(true);
+            enemy.player = new Player(false);
+            
             enemy.EnemyShipSorting();
             Directory.CreateDirectory(savePath);
         }
@@ -259,7 +244,7 @@ namespace Warp_6
             int numOfShip = ShipSelection();
             if (numOfShip != -1)
             {
-                if (myShips[numOfShip].speed == 1)
+                if (playerOne.ships[numOfShip].speed == 1)
                 {
 
                     LessSpeed_Button.Enabled = false;
@@ -267,7 +252,7 @@ namespace Warp_6
                 }
                 else
                 {
-                    if (gameplay.MaxSppeed(myShips[numOfShip]))
+                    if (gameplay.MaxSppeed(playerOne.ships[numOfShip]))
                     {
                         LessSpeed_Button.Enabled = true;
                         MoreSpeed_Button.Enabled = false;
@@ -295,14 +280,14 @@ namespace Warp_6
                     if (NumOfShip != -1)
                     {
                         ShipRadioButtonOff(NumOfShip);
-                        gameplay.SetShipOnSpiral(display, ref myShips[NumOfShip], true);
+                        gameplay.SetShipOnSpiral(display, ref playerOne.ships[NumOfShip], playerOne.brash);
                         display.DrawWhiteRectangle(NumOfShip, false);
 
                         if (enemy.list.Count > 0)
                         {
                             Thread.Sleep(1000);
                             NumOfShip = enemy.list[0];
-                            gameplay.SetShipOnSpiral(display, ref enemy.ships[NumOfShip], false);
+                            gameplay.SetShipOnSpiral(display, ref enemy.player.ships[NumOfShip], enemy.player.brash);
                             display.DrawWhiteRectangle(NumOfShip, true);
                             enemy.list.RemoveAt(0);
 
@@ -344,7 +329,7 @@ namespace Warp_6
 
             if (numOfShip != -1)
             {
-                myShips[numOfShip].speed--;
+                playerOne.ships[numOfShip].speed--;
                 if (Go_RadioButton.Enabled)
                 {
                     LessSpeed_Button.Enabled = false;
@@ -357,8 +342,8 @@ namespace Warp_6
                     GroupShip.Enabled = true;
                 }
                 MoreSpeed_Button.Enabled = true;
-                ShowSpeed_Textbox.Text = myShips[numOfShip].speed.ToString();
-                if (myShips[numOfShip].speed == 1) LessSpeed_Button.Enabled = false;
+                ShowSpeed_Textbox.Text = playerOne.ships[numOfShip].speed.ToString();
+                if (playerOne.ships[numOfShip].speed == 1) LessSpeed_Button.Enabled = false;
             }
         }
         private void MoreSpeed_Button_Click(object sender, EventArgs e)
@@ -367,7 +352,7 @@ namespace Warp_6
 
             if (numOfShip != -1)
             {
-                myShips[numOfShip].speed++;
+                playerOne.ships[numOfShip].speed++;
                 if (Go_RadioButton.Enabled)
                 {
                     MoreSpeed_Button.Enabled = false;
@@ -380,11 +365,11 @@ namespace Warp_6
                     GroupShip.Enabled = true;
                 }
                 LessSpeed_Button.Enabled = true;
-                ShowSpeed_Textbox.Text = myShips[numOfShip].speed.ToString();
-                if (gameplay.MaxSppeed(myShips[numOfShip])) MoreSpeed_Button.Enabled = false;
+                ShowSpeed_Textbox.Text = playerOne.ships[numOfShip].speed.ToString();
+                if (gameplay.MaxSppeed(playerOne.ships[numOfShip])) MoreSpeed_Button.Enabled = false;
             }
         }
-        private void Step_Button_Click(object sender, EventArgs e)
+        private void Step_Button_Click(object sender, EventArgs e)  
         {
             Step_Button.Enabled = false;
             short numOfShip = ShipSelection();
@@ -393,8 +378,9 @@ namespace Warp_6
             {
                 if (Go_RadioButton.Checked)
                 {
-                    gameplay.MovingOfShip(MyShipsCenter_Textbox, ref display, ref myShips[numOfShip], messageYouWin, ref shipRadioButtonOff);
+                    gameplay.MovingOfShip(display, ref playerOne.ships[numOfShip], ref playerOne.shipInCerter , messageYouWin, shipRadioButtonOff);
                     playerMadeStep = true;
+                    MyShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
                 }
                 else
                 {
@@ -405,9 +391,8 @@ namespace Warp_6
                         MoreSpeed_Button.Enabled = true;
                         LessSpeed_Button.Enabled = true;
                         GroupShip.Enabled = true;
-                        LessSpeed_Button.Enabled = false;
-                        MoreSpeed_Button.Enabled = false;
                         playerMadeStep = true;
+
                     }
                     else MessageBox.Show("Скорость не была изменена. Ход не закончен.", "Внимание!");
                 }
@@ -418,7 +403,7 @@ namespace Warp_6
             if (playerMadeStep)
             {
                 enemy.RandomStep();
-                display.DrawMapAndShips(myShips, enemy.ships);
+                display.DrawMapAndShips(playerOne.ships, enemy.player.ships);
             }
 
             Step_Button.Enabled = true;
@@ -429,32 +414,17 @@ namespace Warp_6
             MatchCollection matches = reg.Matches(SaveName_Textbox.Text);
             if (matches.Count == 0)
             {
-                StreamWriter SaveFile = new StreamWriter(savePath + SaveName_Textbox.Text + ".txt");
-
-                for (int i = 0; i < 9; i++)
-                {
-                    SaveFile.WriteLine(myShips[i].speed);
-                    SaveFile.WriteLine(myShips[i].position);
-                    SaveFile.WriteLine(myShips[i].InGame);
-
-                    SaveFile.WriteLine(enemy.ships[i].speed);
-                    SaveFile.WriteLine(enemy.ships[i].position);
-                    SaveFile.WriteLine(enemy.ships[i].InGame);
-                }
-                SaveFile.WriteLine(MyShipsCenter_Textbox.Text);
-                SaveFile.WriteLine(EnemyShipsCenter_Textbox.Text);
-                SaveFile.WriteLine(enemy.list.Count);
-                for (short i = 0; i < enemy.list.Count; i++) SaveFile.WriteLine(enemy.list[i]);
-                SaveFile.WriteLine(gameplay.currentPoint);
-                if (Step_Button.Visible) { SaveFile.WriteLine(true); }
-                SaveFile.Close();
-
+                string str = savePath + SaveName_Textbox.Text + ".txt";
+                gameplay.SaveInformationAboutShips(str, playerOne, enemy, Step_Button.Visible);
+                
                 InvalidСharacters_Label.Visible = false;
                 СreateSave_Button.Visible = false;
                 SaveName_Label.Visible = false;
                 SaveName_Textbox.Visible = false;
                 SaveGame_ToolStripMenuItem.Text = "Сохранить игру";
                 ActionItemsEnabled(true);
+                Refresh();
+                display.DrawImage();
             }
             else InvalidСharacters_Label.Visible = true;
         }
@@ -467,10 +437,10 @@ namespace Warp_6
 
             OnPosition_Button.Visible = true;
 
-            gameplay.InitializationAllShips(enemy,myShips);
+            gameplay.InitializationAllShips(playerOne.ships, enemy.player.ships);
             enemy.EnemyShipSorting();
             display.DrawMap();
-            display.DrawingShipsOnSides(myShips, enemy.ships);
+            display.DrawingShipsOnSides(playerOne.ships, enemy.player.ships);
             gameplay.WhoGoesFirst(display, enemy);
         }
         private void DownloadGame_Buttom_Click(object sender, EventArgs e)
@@ -513,50 +483,47 @@ namespace Warp_6
                 if (wantToLoad)
                 {
                     DownloadGame_ToolStripMenuItem.Text = "Загрузить игру";
-
                     LoadingTheSelectedSave_Buttom.Visible = false;
                     Save_List.Visible = false;
                     ActionItemsEnabled(true);
+
                     bool onPosition = false;
+                    bool step = false;
                     string save = savePath + Save_List.SelectedItem + ".txt";
 
-                    gameplay.InitializationAllShips(save, display, myShips, enemy, MyShipsCenter_Textbox, EnemyShipsCenter_Textbox);
+                    gameplay.DownloadingDataInShips(save, display, playerOne, enemy, ref step);
                     display.DrawMap();
 
                     for (short i = 0; i < 9; i++)
                     {
-                        display.DrawShipAfterLoading(true, myShips[i], ref onPosition);
-                        display.DrawShipAfterLoading(false, enemy.ships[i], ref onPosition);
+                        display.DrawShipAfterLoading(true, playerOne.ships[i], ref onPosition);
+                        display.DrawShipAfterLoading(false, enemy.player.ships[i], ref onPosition);
                     }
 
                     if (onPosition)
                     {
                         PositionButtonVisible(true, false);
-
                         bool on;
                         for (short i = 0; i < 9; i++)
                         {
-                            if (myShips[i].position == -1) on = true;
+                            if (playerOne.ships[i].position == -1) on = true;
                             else on = false;
                             ShipRadioButtons_OnOff(i, on);
                         }
                     }
                     else
                     {
-                        for (short i = 125; i > 107; i--) if (!display.position[i].busy) { onPosition = true; break; }
-
-                        if (onPosition)
-                        {
-                            PositionButtonVisible(true, true); 
+                        if (!step)
+                        { 
+                            PositionButtonVisible(true, true);
+                            ActionItemsVisible(false);
                         }
                         else
                         {
                             PositionButtonVisible(false, false);
                             ActionItemsVisible(true);
-                            for (short i = 0; i < 9; i++)
-                            {
-                                ShipRadioButtons_OnOff(i, myShips[i].InGame);
-                            }
+
+                            for (short i = 0; i < 9; i++) ShipRadioButtons_OnOff(i, playerOne.ships[i].InGame);
                             ShowSpeed_Textbox.Text = "";
                         }
                     }
@@ -593,7 +560,6 @@ namespace Warp_6
             {
                 PositionButtonVisible(true, false);
                 ActionItemsVisible(false);
-
                 MyShipsCenter_Textbox.Text = 0.ToString();
                 EnemyShipsCenter_Textbox.Text = 0.ToString();
 
@@ -610,10 +576,10 @@ namespace Warp_6
                     shipRadioButtons[i].BackColor = Color.Transparent;
                 }
                 
-                gameplay.InitializationAllShips(enemy, myShips);
+                gameplay.InitializationAllShips(playerOne.ships, enemy.player.ships);
                 enemy.EnemyShipSorting();
                 display.DrawMap();
-                display.DrawingShipsOnSides(myShips, enemy.ships);
+                display.DrawingShipsOnSides(playerOne.ships, enemy.player.ships);
                 gameplay.WhoGoesFirst(display, enemy);
             }
         }

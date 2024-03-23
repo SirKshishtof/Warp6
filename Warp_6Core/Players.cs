@@ -22,10 +22,25 @@ namespace Players
         public short speed;
         public bool InGame;
     }
+    public struct Player
+    {
+        public Player(bool brush)
+        {
+            this.brash = brush;
+            shipInCerter = 0;
+            for (short i = 0; i < 4; i++) ships[i] = new Ship(1, i);
 
+            for (short i = 4; i < 7; i++) ships[i] = new Ship(2, i);
+
+            for (short i = 7; i < 9; i++) ships[i] = new Ship(3, i);
+        }
+        public Ship[] ships = new Ship[9];
+        public short shipInCerter;
+        public bool brash;
+    }
     public class Enemy
     {
-        public Ship[] ships = new Ship[9];
+        public Player player;
         public List<short> list = new List<short>();
         public void EnemyShipSorting()
         {
@@ -36,9 +51,9 @@ namespace Players
 
             for (short i = 0; i < 4; i++)
             {
-                if (ships[i].speed > max)
+                if (player.ships[i].speed > max)
                 {
-                    max = ships[i].speed;
+                    max = player.ships[i].speed;
                     count = i;
                 }
             }
@@ -46,12 +61,12 @@ namespace Players
             {
                 if (i != count)
                 {
-                    ships[i].InGame = false;
+                    player.ships[i].InGame = false;
                 }
             }
             for (int i = 0; i < 9; i++)
             {
-                if (ships[i].InGame) { index[i] = ships[i].speed; }
+                if (player.ships[i].InGame) { index[i] = player.ships[i].speed; }
                 else { index[i] = 0; }
             }
 
@@ -74,19 +89,19 @@ namespace Players
             {
                 for (short j = 0; j < 4; j++)
                 {
-                    if (ships[j].speed >= max && !ships[j].InGame)
+                    if (player.ships[j].speed >= max && !player.ships[j].InGame)
                     {
-                        max = ships[j].speed;
+                        max = player.ships[j].speed;
                         count = j;
                     }
                 }
-                ships[count].InGame = true;
+                player.ships[count].InGame = true;
                 list.Add(count);
                 max = 0;
             }
             for (int i = 0; i < 9; i++)
             {
-                ships[i].InGame = true;
+                player.ships[i].InGame = true;
             }
         }
         private int[] ArrZero(int[] Arr)

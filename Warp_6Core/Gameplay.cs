@@ -12,28 +12,26 @@ namespace Game
     {
         public short currentPoint = 125;
 
-        public void MovingOfShip(TextBox ShipsCenterTextbox, ref Display display, ref Ship ship, string message, ref Delegation del)
+        public void MovingOfShip(Display display, ref Ship ship, ref short shipInCenter, string message,  Delegation del)
         {
             display.position[ship.position].busy = false;
-            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ShipsCenterTextbox, ref ship, message, ref del);
+            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship,ref shipInCenter, message,  del);
             else
             {
                 ship.position -= ship.speed;
                 while (display.position[ship.position].busy && ship.InGame)
                 {
-                    if (display.position[ship.position].jump == -1) ShipOutOfGame(ShipsCenterTextbox, ref ship, message, ref del);
+                    if (display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message,  del);
                     else ship.position = display.position[ship.position].jump;
                 }
                 display.position[ship.position].busy = true;
             }
         }
 
-        void ShipOutOfGame(TextBox ShipsCenterTextbox, ref Ship ship, string message, ref Delegation del)
+        void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message, Delegation del)
         {
-            short shipInCenter = short.Parse(ShipsCenterTextbox.Text);
             shipInCenter++;
             ship.InGame = false;
-            ShipsCenterTextbox.Text = shipInCenter.ToString();
             string winOrLoss;
             if (message.Contains("Вы победили!")) { del(ship.index); winOrLoss = "Победа!"; }
             else { winOrLoss = "Проигрыш..."; }
@@ -77,7 +75,7 @@ namespace Game
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                 short NumOfShip = enemy.list[0];
-                SetShipOnSpiral(display, ref enemy.ships[NumOfShip], false);
+                SetShipOnSpiral(display, ref enemy.player.ships[NumOfShip], false);
                 display.DrawWhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
             }
@@ -104,19 +102,42 @@ namespace Game
 
             return (short)(rnd.Next() % x + 1);
         }
-        public void InitializationAllShips(Enemy enemy, Ship[] myShips)
+        public void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
         {
-
             for (short i = 0; i < 9; i++)
             {
-                myShips[i].speed = SettingOfShipSpeed(myShips[i]);//Задание скорости корабля
-                myShips[i].InGame = true;
+                playerOne[i].speed = SettingOfShipSpeed(playerOne[i]);//Задание скорости корабля
+                playerOne[i].InGame = true;
 
-                enemy.ships[i].speed = SettingOfShipSpeed(enemy.ships[i]);//Задание скорости корабля
-                enemy.ships[i].InGame = true;
+                playerTwo[i].speed = SettingOfShipSpeed(playerTwo[i]);//Задание скорости корабля
+                playerTwo[i].InGame = true;
+
             }
         }
-        public void InitializationAllShips(string savePath, Display display, Ship[] myShips, Enemy enemy, TextBox MyShipsCenterTextbox, TextBox EnemyShipsCenterTextbox)
+        public void SaveInformationAboutShips(string savePath,Player playerOne, Enemy enemy, bool stepbuttonVisible)
+        {
+            StreamWriter SaveFile = new StreamWriter(savePath);
+
+            for (int i = 0; i < 9; i++)
+            {
+                SaveFile.WriteLine(playerOne.ships[i].speed);
+                SaveFile.WriteLine(playerOne.ships[i].position);
+                SaveFile.WriteLine(playerOne.ships[i].InGame);
+
+                SaveFile.WriteLine(enemy.player.ships[i].speed);
+                SaveFile.WriteLine(enemy.player.ships[i].position);
+                SaveFile.WriteLine(enemy.player.ships[i].InGame);
+            }
+            SaveFile.WriteLine(playerOne.shipInCerter);
+            SaveFile.WriteLine(enemy.player.shipInCerter);
+            SaveFile.WriteLine(enemy.list.Count);
+            for (short i = 0; i < enemy.list.Count; i++) SaveFile.WriteLine(enemy.list[i]);
+            SaveFile.WriteLine(currentPoint);
+            if (stepbuttonVisible) SaveFile.WriteLine(true);
+            else SaveFile.WriteLine(false);
+            SaveFile.Close();
+        }
+        public void DownloadingDataInShips(string savePath, Display display, Player PlayerOne, Enemy enemy, ref bool startGame)
         {
             StreamReader SaveFile = new StreamReader(savePath);
 
@@ -124,19 +145,19 @@ namespace Game
 
             for (short i = 0; i < 9; i++)
             {
-                myShips[i].speed = short.Parse(SaveFile.ReadLine());
-                myShips[i].position = short.Parse(SaveFile.ReadLine());
-                myShips[i].InGame = bool.Parse(SaveFile.ReadLine());
-                if (myShips[i].position > -1) display.position[myShips[i].position].busy = true;
+                PlayerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
+                PlayerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
+                PlayerOne.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                if (PlayerOne.ships[i].position > -1) display.position[PlayerOne.ships[i].position].busy = true;
 
-                enemy.ships[i].speed = short.Parse(SaveFile.ReadLine());
-                enemy.ships[i].position = short.Parse(SaveFile.ReadLine());
-                enemy.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
-                if (enemy.ships[i].position > -1) display.position[enemy.ships[i].position].busy = true;
+                enemy.player.ships[i].speed = short.Parse(SaveFile.ReadLine());
+                enemy.player.ships[i].position = short.Parse(SaveFile.ReadLine());
+                enemy.player.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                if (enemy.player.ships[i].position > -1) display.position[enemy.player.ships[i].position].busy = true;
             }
 
-            MyShipsCenterTextbox.Text = SaveFile.ReadLine();
-            EnemyShipsCenterTextbox.Text = SaveFile.ReadLine();
+            PlayerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
+            enemy.player.shipInCerter = short.Parse(SaveFile.ReadLine());
             short listCount = short.Parse(SaveFile.ReadLine());
             enemy.list.Clear();
             while (listCount > 0)
@@ -145,6 +166,33 @@ namespace Game
                 listCount--;
             }
             currentPoint = short.Parse(SaveFile.ReadLine());
+            startGame = bool.Parse(SaveFile.ReadLine());
+            SaveFile.Close();
+        }
+
+        public void DownloadingDataInShips(string savePath, Display display, Player playerOne, Player playerTwo, ref bool startGame)
+        {
+            StreamReader SaveFile = new StreamReader(savePath);
+
+            for (short i = 0; i < 126; i++) display.position[i].busy = false;
+
+            for (short i = 0; i < 9; i++)
+            {
+                playerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
+                playerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
+                playerOne.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                if (playerOne.ships[i].position > -1) display.position[playerOne.ships[i].position].busy = true;
+
+                playerTwo.ships[i].speed = short.Parse(SaveFile.ReadLine());
+                playerTwo.ships[i].position = short.Parse(SaveFile.ReadLine());
+                playerTwo.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                if (playerTwo.ships[i].position > -1) display.position[playerTwo.ships[i].position].busy = true;
+            }
+
+            playerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
+            playerTwo.shipInCerter = short.Parse(SaveFile.ReadLine());
+            currentPoint = short.Parse(SaveFile.ReadLine());
+            startGame = bool.Parse(SaveFile.ReadLine());
             SaveFile.Close();
         }
 

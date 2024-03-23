@@ -124,8 +124,8 @@ namespace Drawing
         PictureBox pictureBox;
         Pen BlackPen = new Pen(Color.Black, 3);
         SolidBrush BrushBlack = new SolidBrush(Color.Black);
-
         Addres_Dash[] addres_dash = new Addres_Dash[30];
+
         public Position[] position = new Position[126];
 
         const double turn = 3.11;//Коффициент задающий поворот спирали и точек
@@ -316,25 +316,25 @@ namespace Drawing
                 y += Shift;
             }
         }
-        public void DrawMapAndShips(Ship[] myShips, Ship[] enemyShips)
+        public void DrawMapAndShips(Ship[] playerOne, Ship[] PlayerTwo)
         {
             DrawMap();
             for (int i = 0; i < 4; i++)
             {
-                if (myShips[i].InGame) DrawTriangle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
-                if (enemyShips[i].InGame) DrawTriangle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
+                if (playerOne[i].InGame) DrawTriangle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
+                if (PlayerTwo[i].InGame) DrawTriangle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
             }
 
             for (int i = 4; i < 7; i++)
             {
-                if (myShips[i].InGame) DrawRectangle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
-                if (enemyShips[i].InGame) DrawRectangle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
+                if (playerOne[i].InGame) DrawRectangle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
+                if (PlayerTwo[i].InGame) DrawRectangle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
             }
 
             for (int i = 7; i < 9; i++)
             {
-                if (myShips[i].InGame) DrawCircle(true, X_GetCoord(myShips[i]), Y_GetCoord(myShips[i]), i + 1, myShips[i].speed);
-                if (enemyShips[i].InGame) DrawCircle(false, X_GetCoord(enemyShips[i]), Y_GetCoord(enemyShips[i]), i + 1, enemyShips[i].speed);
+                if (playerOne[i].InGame) DrawCircle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
+                if (PlayerTwo[i].InGame) DrawCircle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
             }
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
