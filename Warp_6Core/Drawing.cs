@@ -321,20 +321,20 @@ namespace Drawing
             DrawMap();
             for (int i = 0; i < 4; i++)
             {
-                if (playerOne[i].InGame) DrawTriangle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
-                if (PlayerTwo[i].InGame) DrawTriangle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
+                if (playerOne[i].inGame) DrawTriangle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
+                if (PlayerTwo[i].inGame) DrawTriangle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
             }
 
             for (int i = 4; i < 7; i++)
             {
-                if (playerOne[i].InGame) DrawRectangle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
-                if (PlayerTwo[i].InGame) DrawRectangle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
+                if (playerOne[i].inGame) DrawRectangle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
+                if (PlayerTwo[i].inGame) DrawRectangle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
             }
 
             for (int i = 7; i < 9; i++)
             {
-                if (playerOne[i].InGame) DrawCircle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
-                if (PlayerTwo[i].InGame) DrawCircle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
+                if (playerOne[i].inGame) DrawCircle(true, X_GetCoord(playerOne[i]), Y_GetCoord(playerOne[i]), i + 1, playerOne[i].speed);
+                if (PlayerTwo[i].inGame) DrawCircle(false, X_GetCoord(PlayerTwo[i]), Y_GetCoord(PlayerTwo[i]), i + 1, PlayerTwo[i].speed);
             }
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
@@ -352,7 +352,7 @@ namespace Drawing
             float y;
             float yOnSide = 160;
             float shift = 80;
-            if (ship.InGame)
+            if (ship.inGame)
             {
                 if (ship.position == -1)
                 {

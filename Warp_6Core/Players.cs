@@ -20,13 +20,23 @@ namespace Players
         public short position;
         public short type;
         public short speed;
-        public bool InGame;
+        public bool inGame;
     }
+
+    //class ShipComparer : IComparer<Ship>
+    //{
+    //    public int Compare(Ship? s1, Ship? s2)
+    //    {
+    //        if (s1 is null || s2 is null)
+    //            throw new ArgumentException("Некорректное значение параметра");
+    //        return s1.speed - s2.Name.Length;
+    //    }
+    //}
     public struct Player
     {
         public Player(bool brush)
         {
-            this.brash = brush;
+            this.brush = brush;
             shipInCerter = 0;
             for (short i = 0; i < 4; i++) ships[i] = new Ship(1, i);
 
@@ -36,7 +46,7 @@ namespace Players
         }
         public Ship[] ships = new Ship[9];
         public short shipInCerter;
-        public bool brash;
+        public bool brush;
     }
     public class Enemy
     {
@@ -61,12 +71,12 @@ namespace Players
             {
                 if (i != count)
                 {
-                    player.ships[i].InGame = false;
+                    player.ships[i].inGame = false;
                 }
             }
             for (int i = 0; i < 9; i++)
             {
-                if (player.ships[i].InGame) { index[i] = player.ships[i].speed; }
+                if (player.ships[i].inGame) { index[i] = player.ships[i].speed; }
                 else { index[i] = 0; }
             }
 
@@ -89,19 +99,19 @@ namespace Players
             {
                 for (short j = 0; j < 4; j++)
                 {
-                    if (player.ships[j].speed >= max && !player.ships[j].InGame)
+                    if (player.ships[j].speed >= max && !player.ships[j].inGame)
                     {
                         max = player.ships[j].speed;
                         count = j;
                     }
                 }
-                player.ships[count].InGame = true;
+                player.ships[count].inGame = true;
                 list.Add(count);
                 max = 0;
             }
             for (int i = 0; i < 9; i++)
             {
-                player.ships[i].InGame = true;
+                player.ships[i].inGame = true;
             }
         }
         private int[] ArrZero(int[] Arr)
@@ -114,10 +124,80 @@ namespace Players
             return Arr;
         }
 
-        public int RandomStep()
+        bool MaxSppeed(short index)
+        {
+            if (player.ships[index].type == 1 && player.ships[index].speed == 4 ||
+                player.ships[index].type == 2 && player.ships[index].speed == 6 ||
+                player.ships[index].type == 3 && player.ships[index].speed == 8) return true;
+
+            return false;
+        }
+
+        // 1 Вывод корабля в центр через n прыжков
+        // 2 Вывод корабля в центр через 1 прыжок
+        // 3 Вывод корабля в центр на прямую
+        // 4 Ход с n прыжками
+        // 5 Ход с 1 прыжком
+        // 6 Увеличить скорость
+        // 7 Уменьшить скорость
+        // 8 Обычный ход
+
+        List<Ship> foo(Ship[] ships)
+        {
+            List<Ship> listBuf = new List<Ship>();
+            List<Ship> list = new List<Ship>();
+            listBuf.AddRange(ships);
+            //list.Sort(list);//???????
+            short count;
+            short minSpeed = 10;
+            short index=0;
+            while (listBuf.Count > 0)
+            {
+                count = (short)(listBuf.Count);
+                for (short i = 0; i < count; i++)
+                {
+                    if (listBuf[i].speed < minSpeed)
+                    {
+                        minSpeed = listBuf[i].speed;
+                        index = i;
+                    }
+                }
+                list.Add(listBuf[index]);
+            }
+
+            return list;
+        }
+        short PuttingShipInCenterThroughSomeJumps()
+        {
+            return 0;
+        }
+
+        public short RandomStep()
         {
             Random rnd = new Random();
-            return rnd.Next()%9;
+            List<short> shipsInGame = new List<short>();
+
+            for (short i = 0; i < 9; i++) if (player.ships[i].inGame) shipsInGame.Add(i);
+
+            short index = shipsInGame[rnd.Next() % shipsInGame.Count()];
+            short action = (short)(rnd.Next() % 10);
+
+            for (short j = 0; j < 20; j++)
+            {
+                if (action > 1) return (short)(index * 100);
+                else
+                {
+                    short inc_dec = (short)(rnd.Next() % 2);
+
+                    if (inc_dec == 0) if (player.ships[index].speed > 1) return (short)((index * 100) + (10));
+                        else if (!MaxSppeed(index)) return (short)((index * 100) + (11));
+                }
+                index = shipsInGame[rnd.Next() % shipsInGame.Count()];
+                action = (short)(rnd.Next() % 2);
+            }
+            return -1;
         }
     }
 }
+
+

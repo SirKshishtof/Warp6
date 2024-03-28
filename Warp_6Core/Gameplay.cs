@@ -6,35 +6,33 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    public delegate void Delegation(int index);
-
     public class Gameplay
     {
         public short currentPoint = 125;
 
-        public void MovingOfShip(Display display, ref Ship ship, ref short shipInCenter, string message,  Delegation del)
+        public void MovingOfShip(Display display, ref Ship ship, ref short shipInCenter, string message) 
         {
             display.position[ship.position].busy = false;
-            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship,ref shipInCenter, message,  del);
+            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship,ref shipInCenter, message);
             else
             {
                 ship.position -= ship.speed;
-                while (display.position[ship.position].busy && ship.InGame)
+                while (display.position[ship.position].busy && ship.inGame)
                 {
-                    if (display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message,  del);
+                    if (display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message);
                     else ship.position = display.position[ship.position].jump;
                 }
                 display.position[ship.position].busy = true;
             }
         }
 
-        void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message, Delegation del)
+        void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message)
         {
             shipInCenter++;
-            ship.InGame = false;
+            ship.inGame = false;
             string winOrLoss;
-            if (message.Contains("Вы победили!")) { del(ship.index); winOrLoss = "Победа!"; }
-            else { winOrLoss = "Проигрыш..."; }
+            if (message.Contains("Вы победили!")) winOrLoss = "Победа!"; 
+            else winOrLoss = "Проигрыш..."; 
             if (shipInCenter == 6)
             {
                 DialogResult result = MessageBox.Show(message, winOrLoss, MessageBoxButtons.YesNo);
@@ -67,7 +65,7 @@ namespace Game
             currentPoint--;
         }
 
-        public void WhoGoesFirst(Display display, Enemy enemy)
+        public void WhoGoesFirst(Display display, Enemy enemy,ref bool greenGoesFirst)
         {
             Random rnd = new Random();
             string message;
@@ -78,11 +76,10 @@ namespace Game
                 SetShipOnSpiral(display, ref enemy.player.ships[NumOfShip], false);
                 display.DrawWhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
+                greenGoesFirst = false;
             }
-            else
-            {
-                message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
-            }
+            else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
+            
             display.PictureBoxRefresh();
             display.DrawImage();
             MessageBox.Show(message, "Кто начинает");
@@ -107,10 +104,10 @@ namespace Game
             for (short i = 0; i < 9; i++)
             {
                 playerOne[i].speed = SettingOfShipSpeed(playerOne[i]);//Задание скорости корабля
-                playerOne[i].InGame = true;
+                playerOne[i].inGame = true;
 
                 playerTwo[i].speed = SettingOfShipSpeed(playerTwo[i]);//Задание скорости корабля
-                playerTwo[i].InGame = true;
+                playerTwo[i].inGame = true;
 
             }
         }
@@ -122,11 +119,11 @@ namespace Game
             {
                 SaveFile.WriteLine(playerOne.ships[i].speed);
                 SaveFile.WriteLine(playerOne.ships[i].position);
-                SaveFile.WriteLine(playerOne.ships[i].InGame);
+                SaveFile.WriteLine(playerOne.ships[i].inGame);
 
                 SaveFile.WriteLine(enemy.player.ships[i].speed);
                 SaveFile.WriteLine(enemy.player.ships[i].position);
-                SaveFile.WriteLine(enemy.player.ships[i].InGame);
+                SaveFile.WriteLine(enemy.player.ships[i].inGame);
             }
             SaveFile.WriteLine(playerOne.shipInCerter);
             SaveFile.WriteLine(enemy.player.shipInCerter);
@@ -147,12 +144,12 @@ namespace Game
             {
                 PlayerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
-                PlayerOne.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                PlayerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
                 if (PlayerOne.ships[i].position > -1) display.position[PlayerOne.ships[i].position].busy = true;
 
                 enemy.player.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 enemy.player.ships[i].position = short.Parse(SaveFile.ReadLine());
-                enemy.player.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                enemy.player.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
                 if (enemy.player.ships[i].position > -1) display.position[enemy.player.ships[i].position].busy = true;
             }
 
@@ -180,12 +177,12 @@ namespace Game
             {
                 playerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 playerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
-                playerOne.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                playerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
                 if (playerOne.ships[i].position > -1) display.position[playerOne.ships[i].position].busy = true;
 
                 playerTwo.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 playerTwo.ships[i].position = short.Parse(SaveFile.ReadLine());
-                playerTwo.ships[i].InGame = bool.Parse(SaveFile.ReadLine());
+                playerTwo.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
                 if (playerTwo.ships[i].position > -1) display.position[playerTwo.ships[i].position].busy = true;
             }
 

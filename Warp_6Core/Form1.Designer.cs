@@ -70,6 +70,8 @@
             LoadingTheSelectedSave_Buttom = new System.Windows.Forms.Button();
             pictureBox = new System.Windows.Forms.PictureBox();
             Save_List = new System.Windows.Forms.ListBox();
+            Code = new System.Windows.Forms.TextBox();
+            PlayerTwoStep_Texbox = new System.Windows.Forms.TextBox();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -563,12 +565,31 @@
             Save_List.TabIndex = 36;
             Save_List.Visible = false;
             // 
+            // Code
+            // 
+            Code.Location = new System.Drawing.Point(23, 103);
+            Code.Name = "Code";
+            Code.Size = new System.Drawing.Size(65, 27);
+            Code.TabIndex = 43;
+            // 
+            // PlayerTwoStep_Texbox
+            // 
+            PlayerTwoStep_Texbox.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerTwoStep_Texbox.Location = new System.Drawing.Point(1652, 39);
+            PlayerTwoStep_Texbox.Name = "PlayerTwoStep_Texbox";
+            PlayerTwoStep_Texbox.ReadOnly = true;
+            PlayerTwoStep_Texbox.Size = new System.Drawing.Size(120, 38);
+            PlayerTwoStep_Texbox.TabIndex = 45;
+            PlayerTwoStep_Texbox.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(PlayerTwoStep_Texbox);
+            Controls.Add(Code);
             Controls.Add(LoadingTheSelectedSave_Buttom);
             Controls.Add(InvalidСharacters_Label);
             Controls.Add(СreateSave_Button);
@@ -654,6 +675,8 @@
         private System.Windows.Forms.Button LoadingTheSelectedSave_Buttom;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ListBox Save_List;
+        private System.Windows.Forms.TextBox Code;
+        private System.Windows.Forms.TextBox PlayerTwoStep_Texbox;
     }
 }
 
