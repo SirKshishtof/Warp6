@@ -16,7 +16,7 @@ namespace Drawing
         public int _external;
         public int _internal;
     }
-    public struct Position
+    struct Position
     {
         public Position()
         {
@@ -29,7 +29,7 @@ namespace Drawing
         public short jump;
         public bool busy;
     }
-    public class Display
+    class Display
     {
         public Display(PictureBox pictureBox)
         {

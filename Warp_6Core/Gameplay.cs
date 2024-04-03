@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    public class Gameplay
+    static class Gameplay
     {
-        public short currentPoint = 125;
+        public static short currentPoint = 125;
 
-        public void MovingOfShip(Display display, ref Ship ship, ref short shipInCenter, string message) 
+        public static void MovingOfShip(Display display, ref Ship ship, ref short shipInCenter, string message) 
         {
             display.position[ship.position].busy = false;
             if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship,ref shipInCenter, message);
@@ -26,7 +26,7 @@ namespace Game
             }
         }
 
-        void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message)
+        static void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message)
         {
             shipInCenter++;
             ship.inGame = false;
@@ -41,7 +41,7 @@ namespace Game
             }
         }
 
-        public bool MaxSppeed(Ship ship)
+        public static bool MaxSppeed(Ship ship)
         {
             if (ship.type == 1 && ship.speed == 4 ||
                 ship.type == 2 && ship.speed == 6 ||
@@ -50,7 +50,7 @@ namespace Game
             return false;
         }
 
-        public void SetShipOnSpiral(Display display, ref Ship ship, bool isThatMyShip)
+        public static void SetShipOnSpiral(Display display, ref Ship ship, bool isThatMyShip)
         {
             ship.position = currentPoint;
             display.position[currentPoint].busy = true;
@@ -65,7 +65,7 @@ namespace Game
             currentPoint--;
         }
 
-        public void WhoGoesFirst(Display display, Enemy enemy,ref bool greenGoesFirst)
+        public static void WhoGoesFirst(Display display, Enemy enemy,ref bool greenGoesFirst)
         {
             Random rnd = new Random();
             string message;
@@ -85,7 +85,7 @@ namespace Game
             MessageBox.Show(message, "Кто начинает");
         }
 
-        short SettingOfShipSpeed(Ship ship)
+        static short SettingOfShipSpeed(Ship ship)
         {
             Random rnd = new Random();
             short x = 0;
@@ -99,7 +99,7 @@ namespace Game
 
             return (short)(rnd.Next() % x + 1);
         }
-        public void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
+        public static void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
         {
             for (short i = 0; i < 9; i++)
             {
@@ -111,7 +111,7 @@ namespace Game
 
             }
         }
-        public void SaveInformationAboutShips(string savePath,Player playerOne, Enemy enemy, bool stepbuttonVisible)
+        public static void SaveInformationAboutShips(string savePath,Player playerOne, Enemy enemy, bool stepbuttonVisible)
         {
             StreamWriter SaveFile = new StreamWriter(savePath);
 
@@ -134,7 +134,7 @@ namespace Game
             else SaveFile.WriteLine(false);
             SaveFile.Close();
         }
-        public void DownloadingDataInShips(string savePath, Display display, Player PlayerOne, Enemy enemy, ref bool startGame)
+        public static void DownloadingDataInShips(string savePath, Display display, Player PlayerOne, Enemy enemy, ref bool startGame)
         {
             StreamReader SaveFile = new StreamReader(savePath);
 
@@ -167,7 +167,7 @@ namespace Game
             SaveFile.Close();
         }
 
-        public void DownloadingDataInShips(string savePath, Display display, Player playerOne, Player playerTwo, ref bool startGame)
+        public static void DownloadingDataInShips(string savePath, Display display, Player playerOne, Player playerTwo, ref bool startGame)
         {
             StreamReader SaveFile = new StreamReader(savePath);
 

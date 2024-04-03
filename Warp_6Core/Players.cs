@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Players
 {
-    public struct Ship
+    struct Ship
     {
         public Ship(short type, short index)
         {
@@ -32,7 +32,7 @@ namespace Players
     //        return s1.speed - s2.Name.Length;
     //    }
     //}
-    public struct Player
+    struct Player
     {
         public Player(bool brush)
         {
@@ -48,7 +48,7 @@ namespace Players
         public short shipInCerter;
         public bool brush;
     }
-    public class Enemy
+    class Enemy
     {
         public Player player;
         public List<short> list = new List<short>();
