@@ -10,19 +10,19 @@ namespace Game
     {
         public static short currentPoint = 125;
 
-        public static void MovingOfShip(Display display, ref Ship ship, ref short shipInCenter, string message) 
+        public static void MovingOfShip(ref Ship ship, ref short shipInCenter, string message) 
         {
-            display.position[ship.position].busy = false;
+            Display.position[ship.position].busy = false;
             if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship,ref shipInCenter, message);
             else
             {
                 ship.position -= ship.speed;
-                while (display.position[ship.position].busy && ship.inGame)
+                while (Display.position[ship.position].busy && ship.inGame)
                 {
-                    if (display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message);
-                    else ship.position = display.position[ship.position].jump;
+                    if (Display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message);
+                    else ship.position = Display.position[ship.position].jump;
                 }
-                display.position[ship.position].busy = true;
+                Display.position[ship.position].busy = true;
             }
         }
 
@@ -50,22 +50,22 @@ namespace Game
             return false;
         }
 
-        public static void SetShipOnSpiral(Display display, ref Ship ship, bool isThatMyShip)
+        public static void SetShipOnSpiral(ref Ship ship, bool isThatMyShip)
         {
             ship.position = currentPoint;
-            display.position[currentPoint].busy = true;
-            float x = display.X_GetCoord(ship);
-            float y = display.Y_GetCoord(ship);
+            Display.position[currentPoint].busy = true;
+            float x = Display.X_GetCoord(ship);
+            float y = Display.Y_GetCoord(ship);
             switch (ship.type)
             {
-                case 1: { display.DrawTriangle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
-                case 2: { display.DrawRectangle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
-                case 3: { display.DrawCircle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
+                case 1: { Display.DrawTriangle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
+                case 2: { Display.DrawRectangle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
+                case 3: { Display.DrawCircle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
             }
             currentPoint--;
         }
 
-        public static void WhoGoesFirst(Display display, Enemy enemy,ref bool greenGoesFirst)
+        public static void WhoGoesFirst( Enemy enemy,ref bool greenGoesFirst)
         {
             Random rnd = new Random();
             string message;
@@ -73,15 +73,15 @@ namespace Game
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                 short NumOfShip = enemy.list[0];
-                SetShipOnSpiral(display, ref enemy.player.ships[NumOfShip], false);
-                display.DrawWhiteRectangle(NumOfShip, true);
+                SetShipOnSpiral( ref enemy.player.ships[NumOfShip], false);
+                Display.DrawWhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
                 greenGoesFirst = false;
             }
             else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
             
-            display.PictureBoxRefresh();
-            display.DrawImage();
+            Display.PictureBoxRefresh();
+            Display.DrawImage();
             MessageBox.Show(message, "Кто начинает");
         }
 
@@ -134,23 +134,23 @@ namespace Game
             else SaveFile.WriteLine(false);
             SaveFile.Close();
         }
-        public static void DownloadingDataInShips(string savePath, Display display, Player PlayerOne, Enemy enemy, ref bool startGame)
+        public static void DownloadingDataInShips(string savePath, Player PlayerOne, Enemy enemy, ref bool startGame)
         {
             StreamReader SaveFile = new StreamReader(savePath);
 
-            for (short i = 0; i < 126; i++) display.position[i].busy = false;
+            for (short i = 0; i < 126; i++) Display.position[i].busy = false;
 
             for (short i = 0; i < 9; i++)
             {
                 PlayerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (PlayerOne.ships[i].position > -1) display.position[PlayerOne.ships[i].position].busy = true;
+                if (PlayerOne.ships[i].position > -1) Display.position[PlayerOne.ships[i].position].busy = true;
 
                 enemy.player.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 enemy.player.ships[i].position = short.Parse(SaveFile.ReadLine());
                 enemy.player.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (enemy.player.ships[i].position > -1) display.position[enemy.player.ships[i].position].busy = true;
+                if (enemy.player.ships[i].position > -1) Display.position[enemy.player.ships[i].position].busy = true;
             }
 
             PlayerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
@@ -167,23 +167,23 @@ namespace Game
             SaveFile.Close();
         }
 
-        public static void DownloadingDataInShips(string savePath, Display display, Player playerOne, Player playerTwo, ref bool startGame)
+        public static void DownloadingDataInShips(string savePath, Player playerOne, Player playerTwo, ref bool startGame)
         {
             StreamReader SaveFile = new StreamReader(savePath);
 
-            for (short i = 0; i < 126; i++) display.position[i].busy = false;
+            for (short i = 0; i < 126; i++) Display.position[i].busy = false;
 
             for (short i = 0; i < 9; i++)
             {
                 playerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 playerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
                 playerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (playerOne.ships[i].position > -1) display.position[playerOne.ships[i].position].busy = true;
+                if (playerOne.ships[i].position > -1) Display.position[playerOne.ships[i].position].busy = true;
 
                 playerTwo.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 playerTwo.ships[i].position = short.Parse(SaveFile.ReadLine());
                 playerTwo.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (playerTwo.ships[i].position > -1) display.position[playerTwo.ships[i].position].busy = true;
+                if (playerTwo.ships[i].position > -1) Display.position[playerTwo.ships[i].position].busy = true;
             }
 
             playerOne.shipInCerter = short.Parse(SaveFile.ReadLine());

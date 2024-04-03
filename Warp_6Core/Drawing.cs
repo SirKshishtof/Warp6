@@ -29,12 +29,27 @@ namespace Drawing
         public short jump;
         public bool busy;
     }
-    class Display
+    static class Display
     {
-        public Display(PictureBox pictureBox)
-        {
-            this.pictureBox = pictureBox;
+        static Graphics graphics;
+        static Graphics graph_bitmap;
+        static Bitmap bitmap;
+        public static PictureBox pictureBox;
+        static Pen BlackPen = new Pen(Color.Black, 3);
+        static SolidBrush BrushBlack = new SolidBrush(Color.Black);
+        static Addres_Dash[] addres_dash = new Addres_Dash[30];
 
+        static public Position[] position = new Position[126];
+
+        const double turn = 3.11;//Коффициент задающий поворот спирали и точек
+        const short verticalShear = 20;//Сдвиг всей картинки относительно оси Y 
+        const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
+        const short fontSmall = 12;//Шрифт меленькой цифры на фигуре
+        const short fontBig = 25;//Шрифт большой цифры на фигуре
+
+        public static void InitializationMap(PictureBox picBox)
+        {
+            pictureBox = picBox;
             bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
             graph_bitmap = Graphics.FromImage(bitmap);
             graphics = pictureBox.CreateGraphics();
@@ -115,56 +130,38 @@ namespace Drawing
                     count++;
                 }
             }
-
         }
-        
-        Graphics graphics;
-        Graphics graph_bitmap;
-        Bitmap bitmap;
-        PictureBox pictureBox;
-        Pen BlackPen = new Pen(Color.Black, 3);
-        SolidBrush BrushBlack = new SolidBrush(Color.Black);
-        Addres_Dash[] addres_dash = new Addres_Dash[30];
-
-        public Position[] position = new Position[126];
-
-        const double turn = 3.11;//Коффициент задающий поворот спирали и точек
-        const short verticalShear = 20;//Сдвиг всей картинки относительно оси Y 
-        const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
-        const short fontSmall = 12;//Шрифт меленькой цифры на фигуре
-        const short fontBig = 25;//Шрифт большой цифры на фигуре
-
-        float PolarToX(float pi)//перевод полярной координаты в координату X
+        static float PolarToX(float pi)//перевод полярной координаты в координату X
         {
             double p = pi * kof;
             float x = (float)(p * Math.Cos(pi + turn) + pictureBox.Size.Width / 2);
             return x;
         }
-        float PolarToY(float pi)//перевод полярной координаты в координату Y
+        static float PolarToY(float pi)//перевод полярной координаты в координату Y
         {
             double p = pi * kof;
             float y = (float)(p * Math.Sin(pi + turn) + pictureBox.Size.Height / 2 - 25);
             return y;
         }
-        public float X_GetCoord(Ship Ship)//получение координаты х корабля
+        public static float X_GetCoord(Ship Ship)//получение координаты х корабля
         {
             return (float)position[Ship.position].x;
         }
-        public float Y_GetCoord(Ship Ship)//получение координаты у корабля
+        public static float Y_GetCoord(Ship Ship)//получение координаты у корабля
         {
             return (float)position[Ship.position].y;
         }
 
-        void DrawDashLine(int a, int b)
+        static void DrawDashLine(int a, int b)
         {
             graph_bitmap.DrawLine(BlackPen, (float)position[a].x, (float)position[a].y, (float)position[b].x, (float)position[b].y);
         }
-        void DrawCircle(double x, double y, float radius)
+        static void DrawCircle(double x, double y, float radius)
         {
             graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
         }
 
-        public void DrawTriangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
+        public static void DrawTriangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
             if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
@@ -184,7 +181,7 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
         }
-        public void DrawRectangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
+        public static void DrawRectangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
             if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
@@ -199,7 +196,7 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
         }
-        public void DrawCircle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
+        public static void DrawCircle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
             if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
@@ -214,7 +211,7 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
         }
-        public void DrawMap()
+        public static void DrawMap()
         {
             float x = 0;
             float y = 0;
@@ -275,7 +272,7 @@ namespace Drawing
                 graph_bitmap.FillPolygon(BrushBlack, points);
             }
         }
-        public void DrawWhiteRectangle(int numOfShip, bool enemy)
+        public static void DrawWhiteRectangle(int numOfShip, bool enemy)
         {
             float radius = 70;
             float x;
@@ -288,7 +285,7 @@ namespace Drawing
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
 
         }
-        public void DrawingShipsOnSides(Ship[] myShips, Ship[] enemyShips)
+        public static void DrawingShipsOnSides(Ship[] myShips, Ship[] enemyShips)
         {
             float xLeft = 130;
             float xRight = 1300;
@@ -316,7 +313,7 @@ namespace Drawing
                 y += Shift;
             }
         }
-        public void DrawMapAndShips(Ship[] playerOne, Ship[] PlayerTwo)
+        public static void DrawMapAndShips(Ship[] playerOne, Ship[] PlayerTwo)
         {
             DrawMap();
             for (int i = 0; i < 4; i++)
@@ -338,15 +335,15 @@ namespace Drawing
             }
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
-        public void DrawImage()
+        public static void DrawImage()
         {
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
         }
-        public void PictureBoxRefresh()
+        public static void PictureBoxRefresh()
         {
             pictureBox.Refresh();
         }
-        public void DrawShipAfterLoading(bool myShips, Ship ship, ref bool onPosition)
+        public static void DrawShipAfterLoading(bool myShips, Ship ship, ref bool onPosition)
         {
             float x;
             float y;
