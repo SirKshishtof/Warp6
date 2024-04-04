@@ -41,11 +41,11 @@ namespace Drawing
 
         static public Position[] position = new Position[126];
 
-        const double turn = 3.11;//Коффициент задающий поворот спирали и точек
-        const short verticalShear = 20;//Сдвиг всей картинки относительно оси Y 
-        const double kof = 12;//Коффициент задающий ширину между витками спирали и точек
-        const short fontSmall = 12;//Шрифт меленькой цифры на фигуре
-        const short fontBig = 25;//Шрифт большой цифры на фигуре
+        const double TURN = 3.11;//Коффициент задающий поворот спирали и точек
+        const short VERTICALSHEAR = 20;//Сдвиг всей картинки относительно оси Y 
+        const double KOF = 12;//Коффициент задающий ширину между витками спирали и точек
+        const short FONTSMALL = 12;//Шрифт меленькой цифры на фигуре
+        const short FONTBIG = 25;//Шрифт большой цифры на фигуре
 
         public static void InitializationMap(PictureBox picBox)
         {
@@ -100,7 +100,7 @@ namespace Drawing
                 {
                     x = PolarToX(pi);
                     y = PolarToY(pi);
-                    position[count].y = y + verticalShear;
+                    position[count].y = y + VERTICALSHEAR;
                     position[count].x = x;
                     position[count].busy = false;
                     count++;
@@ -133,14 +133,14 @@ namespace Drawing
         }
         static float PolarToX(float pi)//перевод полярной координаты в координату X
         {
-            double p = pi * kof;
-            float x = (float)(p * Math.Cos(pi + turn) + pictureBox.Size.Width / 2);
+            double p = pi * KOF;
+            float x = (float)(p * Math.Cos(pi + TURN) + pictureBox.Size.Width / 2);
             return x;
         }
         static float PolarToY(float pi)//перевод полярной координаты в координату Y
         {
-            double p = pi * kof;
-            float y = (float)(p * Math.Sin(pi + turn) + pictureBox.Size.Height / 2 - 25);
+            double p = pi * KOF;
+            float y = (float)(p * Math.Sin(pi + TURN) + pictureBox.Size.Height / 2 - 25);
             return y;
         }
         public static float X_GetCoord(Ship Ship)//получение координаты х корабля
@@ -169,8 +169,8 @@ namespace Drawing
 
             string TextNumShip = Convert.ToString(numShip);
             string TextPowerOfShip = Convert.ToString(speedOfShip);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
+            Font FontNumShip = new Font("Arial", FONTSMALL);
+            Font FontPowerOfShip = new Font("Arial", FONTBIG);
             float radius = 40;
             float Shift = (float)Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(radius / 2, 2));
             PointF TopPoint = new PointF(x, y - radius);
@@ -189,8 +189,8 @@ namespace Drawing
 
             string TextNumShip = Convert.ToString(numShip);
             string TextPowerOfShip = Convert.ToString(speedOfShip);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
+            Font FontNumShip = new Font("Arial", FONTSMALL);
+            Font FontPowerOfShip = new Font("Arial", FONTBIG);
             float radius = 50;
             graph_bitmap.FillRectangle(brush, x - (radius / 2), y - (radius / 2), radius, radius);
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
@@ -204,8 +204,8 @@ namespace Drawing
 
             string TextNumShip = Convert.ToString(numShip);
             string TextPowerOfShip = Convert.ToString(speedOfShip);
-            Font FontNumShip = new Font("Arial", fontSmall);
-            Font FontPowerOfShip = new Font("Arial", fontBig);
+            Font FontNumShip = new Font("Arial", FONTSMALL);
+            Font FontPowerOfShip = new Font("Arial", FONTBIG);
             float radius = 55;
             graph_bitmap.FillEllipse(brush, x - (radius / 2), y - (radius / 2), radius, radius);
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
@@ -230,7 +230,7 @@ namespace Drawing
             {
                 x = PolarToX(pi);
                 y = PolarToY(pi);
-                DrawCircle(x, y + verticalShear, radius);
+                DrawCircle(x, y + VERTICALSHEAR, radius);
                 pi += 0.001f;
             }
             //Отрисовывание точек
