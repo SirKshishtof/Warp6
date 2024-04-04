@@ -32,7 +32,7 @@ namespace Players
     //        return s1.speed - s2.Name.Length;
     //    }
     //}
-    struct Player
+    internal class Player
     {
         public Player(bool brush)
         {
@@ -48,10 +48,11 @@ namespace Players
         public short shipInCerter;
         public bool brush;
     }
-    class Enemy
+    internal class Enemy
     {
-        public Player player;
         public List<short> list = new List<short>();
+
+        
         public void EnemyShipSorting()
         {
             if (list.Count != 0) { list.Clear(); }

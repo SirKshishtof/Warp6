@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    static class Gameplay
+    class Gameplay
     {
         public static short currentPoint = 125;
 
@@ -166,7 +166,6 @@ namespace Game
             startGame = bool.Parse(SaveFile.ReadLine());
             SaveFile.Close();
         }
-
         public static void DownloadingDataInShips(string savePath, Player playerOne, Player playerTwo, ref bool startGame)
         {
             StreamReader SaveFile = new StreamReader(savePath);
@@ -192,6 +191,5 @@ namespace Game
             startGame = bool.Parse(SaveFile.ReadLine());
             SaveFile.Close();
         }
-
     }
 }

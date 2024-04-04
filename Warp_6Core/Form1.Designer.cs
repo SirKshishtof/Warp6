@@ -48,10 +48,10 @@
             GroupAction = new System.Windows.Forms.GroupBox();
             GroupShip = new System.Windows.Forms.GroupBox();
             ShipInCenter_Label = new System.Windows.Forms.Label();
-            MyShipsCenter_Label = new System.Windows.Forms.Label();
-            EnemyShipsCenter_Lebel = new System.Windows.Forms.Label();
-            MyShipsCenter_Textbox = new System.Windows.Forms.TextBox();
-            EnemyShipsCenter_Textbox = new System.Windows.Forms.TextBox();
+            PlayerOneShipsCenter_Label = new System.Windows.Forms.Label();
+            PlayerTwoShipsCenter_Lebel = new System.Windows.Forms.Label();
+            PlayerOneShipsCenter_Textbox = new System.Windows.Forms.TextBox();
+            PlayerTwoShipsCenter_Textbox = new System.Windows.Forms.TextBox();
             Step_Button = new System.Windows.Forms.Button();
             Speed_Lable = new System.Windows.Forms.Label();
             AutoPosChB = new System.Windows.Forms.CheckBox();
@@ -327,57 +327,57 @@
             ShipInCenter_Label.Text = "Корабли в центре";
             ShipInCenter_Label.Visible = false;
             // 
-            // MyShipsCenter_Label
+            // PlayerOneShipsCenter_Label
             // 
-            MyShipsCenter_Label.AutoSize = true;
-            MyShipsCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MyShipsCenter_Label.Location = new System.Drawing.Point(173, 846);
-            MyShipsCenter_Label.Name = "MyShipsCenter_Label";
-            MyShipsCenter_Label.Size = new System.Drawing.Size(105, 39);
-            MyShipsCenter_Label.TabIndex = 20;
-            MyShipsCenter_Label.Text = "Ваши";
-            MyShipsCenter_Label.Visible = false;
+            PlayerOneShipsCenter_Label.AutoSize = true;
+            PlayerOneShipsCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerOneShipsCenter_Label.Location = new System.Drawing.Point(173, 846);
+            PlayerOneShipsCenter_Label.Name = "PlayerOneShipsCenter_Label";
+            PlayerOneShipsCenter_Label.Size = new System.Drawing.Size(105, 39);
+            PlayerOneShipsCenter_Label.TabIndex = 20;
+            PlayerOneShipsCenter_Label.Text = "Ваши";
+            PlayerOneShipsCenter_Label.Visible = false;
             // 
-            // EnemyShipsCenter_Lebel
+            // PlayerTwoShipsCenter_Lebel
             // 
-            EnemyShipsCenter_Lebel.AutoSize = true;
-            EnemyShipsCenter_Lebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            EnemyShipsCenter_Lebel.Location = new System.Drawing.Point(71, 909);
-            EnemyShipsCenter_Lebel.Name = "EnemyShipsCenter_Lebel";
-            EnemyShipsCenter_Lebel.Size = new System.Drawing.Size(207, 39);
-            EnemyShipsCenter_Lebel.TabIndex = 21;
-            EnemyShipsCenter_Lebel.Text = "Противника";
-            EnemyShipsCenter_Lebel.Visible = false;
+            PlayerTwoShipsCenter_Lebel.AutoSize = true;
+            PlayerTwoShipsCenter_Lebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerTwoShipsCenter_Lebel.Location = new System.Drawing.Point(71, 909);
+            PlayerTwoShipsCenter_Lebel.Name = "PlayerTwoShipsCenter_Lebel";
+            PlayerTwoShipsCenter_Lebel.Size = new System.Drawing.Size(207, 39);
+            PlayerTwoShipsCenter_Lebel.TabIndex = 21;
+            PlayerTwoShipsCenter_Lebel.Text = "Противника";
+            PlayerTwoShipsCenter_Lebel.Visible = false;
             // 
-            // MyShipsCenter_Textbox
+            // PlayerOneShipsCenter_Textbox
             // 
-            MyShipsCenter_Textbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
-            MyShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
-            MyShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MyShipsCenter_Textbox.Location = new System.Drawing.Point(294, 842);
-            MyShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            MyShipsCenter_Textbox.Name = "MyShipsCenter_Textbox";
-            MyShipsCenter_Textbox.ReadOnly = true;
-            MyShipsCenter_Textbox.Size = new System.Drawing.Size(85, 45);
-            MyShipsCenter_Textbox.TabIndex = 22;
-            MyShipsCenter_Textbox.Text = "0";
-            MyShipsCenter_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            MyShipsCenter_Textbox.Visible = false;
+            PlayerOneShipsCenter_Textbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
+            PlayerOneShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
+            PlayerOneShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerOneShipsCenter_Textbox.Location = new System.Drawing.Point(294, 842);
+            PlayerOneShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            PlayerOneShipsCenter_Textbox.Name = "PlayerOneShipsCenter_Textbox";
+            PlayerOneShipsCenter_Textbox.ReadOnly = true;
+            PlayerOneShipsCenter_Textbox.Size = new System.Drawing.Size(85, 45);
+            PlayerOneShipsCenter_Textbox.TabIndex = 22;
+            PlayerOneShipsCenter_Textbox.Text = "0";
+            PlayerOneShipsCenter_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            PlayerOneShipsCenter_Textbox.Visible = false;
             // 
-            // EnemyShipsCenter_Textbox
+            // PlayerTwoShipsCenter_Textbox
             // 
-            EnemyShipsCenter_Textbox.AcceptsReturn = true;
-            EnemyShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
-            EnemyShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            EnemyShipsCenter_Textbox.Location = new System.Drawing.Point(294, 909);
-            EnemyShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            EnemyShipsCenter_Textbox.Name = "EnemyShipsCenter_Textbox";
-            EnemyShipsCenter_Textbox.ReadOnly = true;
-            EnemyShipsCenter_Textbox.Size = new System.Drawing.Size(85, 45);
-            EnemyShipsCenter_Textbox.TabIndex = 23;
-            EnemyShipsCenter_Textbox.Text = "0";
-            EnemyShipsCenter_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            EnemyShipsCenter_Textbox.Visible = false;
+            PlayerTwoShipsCenter_Textbox.AcceptsReturn = true;
+            PlayerTwoShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
+            PlayerTwoShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerTwoShipsCenter_Textbox.Location = new System.Drawing.Point(294, 909);
+            PlayerTwoShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            PlayerTwoShipsCenter_Textbox.Name = "PlayerTwoShipsCenter_Textbox";
+            PlayerTwoShipsCenter_Textbox.ReadOnly = true;
+            PlayerTwoShipsCenter_Textbox.Size = new System.Drawing.Size(85, 45);
+            PlayerTwoShipsCenter_Textbox.TabIndex = 23;
+            PlayerTwoShipsCenter_Textbox.Text = "0";
+            PlayerTwoShipsCenter_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            PlayerTwoShipsCenter_Textbox.Visible = false;
             // 
             // Step_Button
             // 
@@ -603,10 +603,10 @@
             Controls.Add(AutoPosChB);
             Controls.Add(Speed_Lable);
             Controls.Add(Step_Button);
-            Controls.Add(EnemyShipsCenter_Textbox);
-            Controls.Add(MyShipsCenter_Textbox);
-            Controls.Add(EnemyShipsCenter_Lebel);
-            Controls.Add(MyShipsCenter_Label);
+            Controls.Add(PlayerTwoShipsCenter_Textbox);
+            Controls.Add(PlayerOneShipsCenter_Textbox);
+            Controls.Add(PlayerTwoShipsCenter_Lebel);
+            Controls.Add(PlayerOneShipsCenter_Label);
             Controls.Add(ShipInCenter_Label);
             Controls.Add(GroupShip);
             Controls.Add(GroupAction);
@@ -653,10 +653,10 @@
         private System.Windows.Forms.GroupBox GroupAction;
         private System.Windows.Forms.GroupBox GroupShip;
         private System.Windows.Forms.Label ShipInCenter_Label;
-        private System.Windows.Forms.Label MyShipsCenter_Label;
-        private System.Windows.Forms.Label EnemyShipsCenter_Lebel;
-        private System.Windows.Forms.TextBox MyShipsCenter_Textbox;
-        private System.Windows.Forms.TextBox EnemyShipsCenter_Textbox;
+        private System.Windows.Forms.Label PlayerOneShipsCenter_Label;
+        private System.Windows.Forms.Label PlayerTwoShipsCenter_Lebel;
+        private System.Windows.Forms.TextBox PlayerOneShipsCenter_Textbox;
+        private System.Windows.Forms.TextBox PlayerTwoShipsCenter_Textbox;
         private System.Windows.Forms.Button Step_Button;
         private System.Windows.Forms.Label Speed_Lable;
         private System.Windows.Forms.CheckBox AutoPosChB;

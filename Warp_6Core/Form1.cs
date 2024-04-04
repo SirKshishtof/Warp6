@@ -128,10 +128,10 @@ namespace Warp_6
             MoreSpeed_Button.Visible = on;
             LessSpeed_Button.Visible = on;
             ShipInCenter_Label.Visible = on;
-            MyShipsCenter_Label.Visible = on;
-            EnemyShipsCenter_Lebel.Visible = on;
-            MyShipsCenter_Textbox.Visible = on;
-            EnemyShipsCenter_Textbox.Visible = on;
+            PlayerOneShipsCenter_Label.Visible = on;
+            PlayerTwoShipsCenter_Lebel.Visible = on;
+            PlayerOneShipsCenter_Textbox.Visible = on;
+            PlayerTwoShipsCenter_Textbox.Visible = on;
             Step_Button.Visible = on;
             PlayerTwoStep_Texbox.Visible = on;
             PlayerTwoStep_Texbox.Text = "";
@@ -166,7 +166,7 @@ namespace Warp_6
                 case 0:
                     {
                         Gameplay.MovingOfShip( ref enemy.player.ships[numOfShip], ref enemy.player.shipInCerter, messageBotWin);
-                        EnemyShipsCenter_Textbox.Text = enemy.player.shipInCerter.ToString();
+                        PlayerTwoShipsCenter_Textbox.Text = enemy.player.shipInCerter.ToString();
                         PlayerTwoStep_Texbox.Text = "  " + (numOfShip + 1) + ":  Move";
                     }
                     break;
@@ -395,9 +395,9 @@ namespace Warp_6
                 {
                     Gameplay.MovingOfShip(ref playerOne.ships[numOfShip], ref playerOne.shipInCerter, messageYouWin);
                     playerMadeStep = true;
-                    if (short.Parse(MyShipsCenter_Textbox.Text)<playerOne.shipInCerter)
+                    if (short.Parse(PlayerOneShipsCenter_Textbox.Text)<playerOne.shipInCerter)
                     { 
-                        MyShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
+                        PlayerOneShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
                         ShipRadioButtonOff(numOfShip);
                     }
                 }
@@ -447,8 +447,8 @@ namespace Warp_6
         {
             MainMenu_Off();
 
-            MyShipsCenter_Textbox.Text = 0.ToString();
-            EnemyShipsCenter_Textbox.Text = 0.ToString();
+            PlayerOneShipsCenter_Textbox.Text = 0.ToString();
+            PlayerTwoShipsCenter_Textbox.Text = 0.ToString();
 
             OnPosition_Button.Visible = true;
 
@@ -515,8 +515,8 @@ namespace Warp_6
                         Display.DrawShipAfterLoading(false, enemy.player.ships[i], ref onPosition);
                     }
 
-                    MyShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
-                    EnemyShipsCenter_Textbox.Text = enemy.player.shipInCerter.ToString();
+                    PlayerOneShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
+                    PlayerTwoShipsCenter_Textbox.Text = enemy.player.shipInCerter.ToString();
                     if (onPosition)
                     {
                         PositionButtonVisible(true, false);
@@ -576,8 +576,8 @@ namespace Warp_6
             {
                 PositionButtonVisible(true, false);
                 ActionItemsVisible(false);
-                MyShipsCenter_Textbox.Text = 0.ToString();
-                EnemyShipsCenter_Textbox.Text = 0.ToString();
+                PlayerOneShipsCenter_Textbox.Text = 0.ToString();
+                PlayerTwoShipsCenter_Textbox.Text = 0.ToString();
 
                 Gameplay.currentPoint = 125;
 

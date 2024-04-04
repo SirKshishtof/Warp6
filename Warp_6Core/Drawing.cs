@@ -34,7 +34,7 @@ namespace Drawing
         static Graphics graphics;
         static Graphics graph_bitmap;
         static Bitmap bitmap;
-        public static PictureBox pictureBox;
+        static PictureBox pictureBox;
         static Pen BlackPen = new Pen(Color.Black, 3);
         static SolidBrush BrushBlack = new SolidBrush(Color.Black);
         static Addres_Dash[] addres_dash = new Addres_Dash[30];
