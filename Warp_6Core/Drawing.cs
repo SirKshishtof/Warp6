@@ -4,19 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Drawing
 { 
-    struct Addres_Dash
+    struct DashLine
     {
-        public int _external;
-        public int _internal;
+        public int externalDot;
+        public int internalDot;
     }
-    struct Position
+    class Position
     {
         public Position()
         {
@@ -37,61 +39,50 @@ namespace Drawing
         static PictureBox pictureBox;
         static Pen BlackPen = new Pen(Color.Black, 3);
         static SolidBrush BrushBlack = new SolidBrush(Color.Black);
-        static Addres_Dash[] addres_dash = new Addres_Dash[30];
+        static DashLine[] addres_dash = new DashLine[30];
 
         static public Position[] position = new Position[126];
 
-        const double TURN = 3.11;//Коффициент задающий поворот спирали и точек
+        const double TURN = 3.11;//Коффициент задающий поворот спирали и точек по единичной окружности
         const short VERTICALSHEAR = 20;//Сдвиг всей картинки относительно оси Y 
         const double KOF = 12;//Коффициент задающий ширину между витками спирали и точек
         const short FONTSMALL = 12;//Шрифт меленькой цифры на фигуре
         const short FONTBIG = 25;//Шрифт большой цифры на фигуре
 
-        public static void InitializationMap(PictureBox picBox)
+        static void CreatinJumpsAlongDottedLines()
         {
-            pictureBox = picBox;
-            bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            graph_bitmap = Graphics.FromImage(bitmap);
-            graphics = pictureBox.CreateGraphics();
+            short indexJumpTo = 0;//Показывает индексы точек, НА которые происходит прыжок
+            short indexPos = 6; //Показывает индексы точек, С которых происходит прыжок
 
-            short[] index = new short[6] { 0, 1, 2, 3, 4, 5 };
-            short count = 6;
-            short dest = 6;
-            float x;
-            float y;
-            float pi;
-            float start_angle;
-            float step;
-
-            //Сохранение прыжков
-            for (short i = 2; i <= 6; i++)
+            //Сохранение прыжков по пунктирным линиям
+            for (short i = 2; i < 7; i++)
             {
                 for (short j = 0; j < 6; j++)
                 {
                     for (short k = 0; k < 2; k++)
                     {
-                        position[count].jump = index[j];
-                        count++;
+                        position[indexPos].jump = indexJumpTo;
+                        indexPos++;
                     }
-                    index[j]++;
+                    indexJumpTo++;
                     for (short k = 2; k < i; k++)
                     {
-                        position[count].jump = index[j];
-                        index[j]++;
-                        count++;
+                        position[indexPos].jump = indexJumpTo;
+                        indexJumpTo++;
+                        indexPos++;
                     }
                 }
-                index[0] = index[5];
-                for (short j = 1; j < 6; j++)
-                {
-                    index[j] = (short)(index[j - 1] + i);
-                }
             }
-
-            //Сохранение координат точек
-            pi = 3.7f;
-            start_angle = 1.047f;
-            count = 0;
+        }
+        static void SavingLargePointCoordinates()
+        { 
+            //Сохранение координат больших точек
+            float pi = 3.7f;
+            float start_angle = 1.047f;
+            short indexPos = 0;
+            float x;
+            float y;
+            float step;
             for (int i = 1; i <= 6; i++)
             {
                 step = start_angle;
@@ -100,37 +91,54 @@ namespace Drawing
                 {
                     x = PolarToX(pi);
                     y = PolarToY(pi);
-                    position[count].y = y + VERTICALSHEAR;
-                    position[count].x = x;
-                    position[count].busy = false;
-                    count++;
+                    position[indexPos].y = y + VERTICALSHEAR;
+                    position[indexPos].x = x;
+                    position[indexPos].busy = false;
+                    indexPos++;
 
                     pi += step;
                 }
             }
+        }
+        static void SavingEndsCoordinatesOfDottedLines()
+        {
+            short dest = 6;
+            short indexPos = 5;
 
-            //Сохранение координат пунктирных линий
-            addres_dash[0]._external = 95;
-            addres_dash[0]._internal = 0;
+            addres_dash[0].externalDot = 95;
+            addres_dash[0].internalDot = 0;
 
             for (int i = 1; i < 5; i++)
             {
-                addres_dash[i]._external = addres_dash[i - 1]._external - 1;
-                addres_dash[i]._internal = addres_dash[i - 1]._internal + dest * i;
+                addres_dash[i].externalDot = addres_dash[i - 1].externalDot - 1;
+                addres_dash[i].internalDot = addres_dash[i - 1].internalDot + dest * i;
             }
 
-            count = 5;
+            indexPos = 5;
 
             for (short i = 0; i < 5; i++)
             {
                 for (short j = 1; j < 6; j++)
                 {
-                    addres_dash[count]._external = addres_dash[count - 5]._external + dest;
-                    addres_dash[count]._internal = addres_dash[count - 5]._internal + j;
-                    count++;
+                    addres_dash[indexPos].externalDot = addres_dash[indexPos - 5].externalDot + dest;
+                    addres_dash[indexPos].internalDot = addres_dash[indexPos - 5].internalDot + j;
+                    indexPos++;
                 }
             }
         }
+        public static void InitializationMap(PictureBox picBox)
+        {
+            pictureBox = picBox;
+            bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
+            graph_bitmap = Graphics.FromImage(bitmap);
+            graphics = pictureBox.CreateGraphics();
+
+            for (int i = 0; i < position.Length; i++) position[i] = new Position();
+            CreatinJumpsAlongDottedLines();
+            SavingLargePointCoordinates();
+            SavingEndsCoordinatesOfDottedLines();
+        }
+
         static float PolarToX(float pi)//перевод полярной координаты в координату X
         {
             double p = pi * KOF;
@@ -161,10 +169,21 @@ namespace Drawing
             graph_bitmap.FillEllipse(BrushBlack, (float)(x - (radius / 2)), (float)(y - (radius / 2)), radius, radius);
         }
 
-        public static void DrawTriangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
+        static float GetCoord(Ship ship)
+        {
+            if (ship.inGame)
+            {
+                if (ship.position == -1) { }
+                else { }
+            }
+                    float x = X_GetCoord(ship);
+            float y = Y_GetCoord(ship);
+            return 0;
+        }
+        public static void DrawTriangle(bool isThatHostsShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
-            if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
+            if (isThatHostsShip) { brush = new SolidBrush(Color.LimeGreen); }
             else { brush = new SolidBrush(Color.Gold); }
 
             string TextNumShip = Convert.ToString(numShip);
@@ -181,10 +200,10 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
         }
-        public static void DrawRectangle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
+        public static void DrawRectangle(bool isThatHostsShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
-            if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
+            if (isThatHostsShip) { brush = new SolidBrush(Color.LimeGreen); }
             else { brush = new SolidBrush(Color.Gold); }
 
             string TextNumShip = Convert.ToString(numShip);
@@ -196,10 +215,10 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
         }
-        public static void DrawCircle(bool isThatMyShip, float x, float y, int numShip, int speedOfShip)
+        public static void DrawCircle(bool isThatHostsShip, float x, float y, int numShip, int speedOfShip)
         {
             SolidBrush brush;
-            if (isThatMyShip) { brush = new SolidBrush(Color.LimeGreen); }
+            if (isThatHostsShip) { brush = new SolidBrush(Color.LimeGreen); }
             else { brush = new SolidBrush(Color.Gold); }
 
             string TextNumShip = Convert.ToString(numShip);
@@ -247,7 +266,7 @@ namespace Drawing
 
             for (int i = 0; i < 30; i++)
             {
-                DrawDashLine(addres_dash[i]._external, addres_dash[i]._internal);
+                DrawDashLine(addres_dash[i].externalDot, addres_dash[i].internalDot);
             }
 
             PointF[] points = new PointF[3];

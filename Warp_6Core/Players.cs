@@ -5,10 +5,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Players
 {
-    struct Ship
+    public class Ship : IComparable<Ship>
     {
         public Ship(short type, short index)
         {
@@ -21,17 +22,13 @@ namespace Players
         public short type;
         public short speed;
         public bool inGame;
-    }
 
-    //class ShipComparer : IComparer<Ship>
-    //{
-    //    public int Compare(Ship? s1, Ship? s2)
-    //    {
-    //        if (s1 is null || s2 is null)
-    //            throw new ArgumentException("Некорректное значение параметра");
-    //        return s1.speed - s2.Name.Length;
-    //    }
-    //}
+        public int CompareTo(Ship? s)
+        {
+            if (s is null) throw new ArgumentException("Некорректное значение параметра");
+            return speed.CompareTo(s.speed);
+        }
+    }
     class Player
     {
         public Player(bool brush)
@@ -48,10 +45,9 @@ namespace Players
         public short shipInCerter;
         public bool brush;
     }
-    class Enemy
+    class Enemy (bool brush) : Player (brush)
     {
         public List<short> list = new List<short>();
-        public Player player = new Player(false);
         
         public void EnemyShipSorting()
         {
@@ -62,9 +58,9 @@ namespace Players
 
             for (short i = 0; i < 4; i++)
             {
-                if (player.ships[i].speed > max)
+                if (ships[i].speed > max)
                 {
-                    max = player.ships[i].speed;
+                    max = ships[i].speed;
                     count = i;
                 }
             }
@@ -72,12 +68,12 @@ namespace Players
             {
                 if (i != count)
                 {
-                    player.ships[i].inGame = false;
+                    ships[i].inGame = false;
                 }
             }
             for (int i = 0; i < 9; i++)
             {
-                if (player.ships[i].inGame) { index[i] = player.ships[i].speed; }
+                if (ships[i].inGame) { index[i] = ships[i].speed; }
                 else { index[i] = 0; }
             }
 
@@ -100,19 +96,19 @@ namespace Players
             {
                 for (short j = 0; j < 4; j++)
                 {
-                    if (player.ships[j].speed >= max && !player.ships[j].inGame)
+                    if (ships[j].speed >= max && !ships[j].inGame)
                     {
-                        max = player.ships[j].speed;
+                        max = ships[j].speed;
                         count = j;
                     }
                 }
-                player.ships[count].inGame = true;
+                ships[count].inGame = true;
                 list.Add(count);
                 max = 0;
             }
             for (int i = 0; i < 9; i++)
             {
-                player.ships[i].inGame = true;
+                ships[i].inGame = true;
             }
         }
         private int[] ArrZero(int[] Arr)
@@ -127,14 +123,14 @@ namespace Players
 
         bool MaxSppeed(short index)
         {
-            if (player.ships[index].type == 1 && player.ships[index].speed == 4 ||
-                player.ships[index].type == 2 && player.ships[index].speed == 6 ||
-                player.ships[index].type == 3 && player.ships[index].speed == 8) return true;
+            if (ships[index].type == 1 && ships[index].speed == 4 ||
+                ships[index].type == 2 && ships[index].speed == 6 ||
+                ships[index].type == 3 && ships[index].speed == 8) return true;
 
             return false;
         }
 
-        // 1 Вывод корабля в центр через n прыжков
+        
         // 2 Вывод корабля в центр через 1 прыжок
         // 3 Вывод корабля в центр на прямую
         // 4 Ход с n прыжками
@@ -142,6 +138,7 @@ namespace Players
         // 6 Увеличить скорость
         // 7 Уменьшить скорость
         // 8 Обычный ход
+        // 9 Рандомный ход
 
         List<Ship> foo(Ship[] ships)
         {
@@ -168,6 +165,8 @@ namespace Players
 
             return list;
         }
+        
+        // 1 Вывод корабля в центр через n прыжков
         short PuttingShipInCenterThroughSomeJumps()
         {
             return 0;
@@ -178,7 +177,7 @@ namespace Players
             Random rnd = new Random();
             List<short> shipsInGame = new List<short>();
 
-            for (short i = 0; i < 9; i++) if (player.ships[i].inGame) shipsInGame.Add(i);
+            for (short i = 0; i < 9; i++) if (ships[i].inGame) shipsInGame.Add(i);
 
             short index = shipsInGame[rnd.Next() % shipsInGame.Count()];
             short action = (short)(rnd.Next() % 10);
@@ -190,7 +189,7 @@ namespace Players
                 {
                     short inc_dec = (short)(rnd.Next() % 2);
 
-                    if (inc_dec == 0) if (player.ships[index].speed > 1) return (short)((index * 100) + (10));
+                    if (inc_dec == 0) if (ships[index].speed > 1) return (short)((index * 100) + (10));
                         else if (!MaxSppeed(index)) return (short)((index * 100) + (11));
                 }
                 index = shipsInGame[rnd.Next() % shipsInGame.Count()];

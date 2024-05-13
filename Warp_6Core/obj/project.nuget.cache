@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/6q67qTeFUiyTxJA5c23y0rZUCwqOLgcF2YdeQRILfdL/Sm11wLGTCN/4N1LxnqtJgWQ5Q1LAfNn33KJ+nEoEg==",
+  "dgSpecHash": "HoTwvkHlY5GNavfvkIA0d/WG20nCFmaRx9SYlMZS5xRGeAjf2yRYZOpTaPjHIghm2YgfUDd6lE3/N620amcP6Q==",
   "success": true,
   "projectFilePath": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\wessy\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\wessy\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"
+    "C:\\Users\\wessy\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

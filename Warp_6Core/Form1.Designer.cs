@@ -81,7 +81,7 @@
             // OnPosition_Button
             // 
             OnPosition_Button.BackColor = System.Drawing.SystemColors.Control;
-            OnPosition_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            OnPosition_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             OnPosition_Button.Location = new System.Drawing.Point(129, 400);
             OnPosition_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             OnPosition_Button.Name = "OnPosition_Button";
@@ -122,7 +122,7 @@
             // 
             MoreSpeed_Button.BackColor = System.Drawing.SystemColors.Control;
             MoreSpeed_Button.Enabled = false;
-            MoreSpeed_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            MoreSpeed_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             MoreSpeed_Button.Location = new System.Drawing.Point(441, 559);
             MoreSpeed_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             MoreSpeed_Button.Name = "MoreSpeed_Button";
@@ -137,7 +137,7 @@
             // 
             LessSpeed_Button.BackColor = System.Drawing.SystemColors.Control;
             LessSpeed_Button.Enabled = false;
-            LessSpeed_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LessSpeed_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             LessSpeed_Button.Location = new System.Drawing.Point(383, 560);
             LessSpeed_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             LessSpeed_Button.Name = "LessSpeed_Button";
@@ -151,7 +151,7 @@
             // ShowSpeed_Textbox
             // 
             ShowSpeed_Textbox.BackColor = System.Drawing.Color.White;
-            ShowSpeed_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShowSpeed_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             ShowSpeed_Textbox.Location = new System.Drawing.Point(383, 497);
             ShowSpeed_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             ShowSpeed_Textbox.Name = "ShowSpeed_Textbox";
@@ -282,7 +282,7 @@
             // 
             GroupAction.Controls.Add(ChangeSpeed_RadioButton);
             GroupAction.Controls.Add(Go_RadioButton);
-            GroupAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GroupAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             GroupAction.Location = new System.Drawing.Point(28, 451);
             GroupAction.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             GroupAction.Name = "GroupAction";
@@ -305,7 +305,7 @@
             GroupShip.Controls.Add(Ship_2);
             GroupShip.Controls.Add(Ship_1);
             GroupShip.Controls.Add(Ship_0);
-            GroupShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GroupShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             GroupShip.Location = new System.Drawing.Point(115, 89);
             GroupShip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             GroupShip.Name = "GroupShip";
@@ -319,7 +319,7 @@
             // ShipInCenter_Label
             // 
             ShipInCenter_Label.AutoSize = true;
-            ShipInCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ShipInCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             ShipInCenter_Label.Location = new System.Drawing.Point(129, 781);
             ShipInCenter_Label.Name = "ShipInCenter_Label";
             ShipInCenter_Label.Size = new System.Drawing.Size(302, 39);
@@ -330,7 +330,7 @@
             // PlayerOneShipsCenter_Label
             // 
             PlayerOneShipsCenter_Label.AutoSize = true;
-            PlayerOneShipsCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerOneShipsCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             PlayerOneShipsCenter_Label.Location = new System.Drawing.Point(173, 846);
             PlayerOneShipsCenter_Label.Name = "PlayerOneShipsCenter_Label";
             PlayerOneShipsCenter_Label.Size = new System.Drawing.Size(105, 39);
@@ -341,7 +341,7 @@
             // PlayerTwoShipsCenter_Lebel
             // 
             PlayerTwoShipsCenter_Lebel.AutoSize = true;
-            PlayerTwoShipsCenter_Lebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerTwoShipsCenter_Lebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             PlayerTwoShipsCenter_Lebel.Location = new System.Drawing.Point(71, 909);
             PlayerTwoShipsCenter_Lebel.Name = "PlayerTwoShipsCenter_Lebel";
             PlayerTwoShipsCenter_Lebel.Size = new System.Drawing.Size(207, 39);
@@ -353,7 +353,7 @@
             // 
             PlayerOneShipsCenter_Textbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
             PlayerOneShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
-            PlayerOneShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerOneShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             PlayerOneShipsCenter_Textbox.Location = new System.Drawing.Point(294, 842);
             PlayerOneShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             PlayerOneShipsCenter_Textbox.Name = "PlayerOneShipsCenter_Textbox";
@@ -368,7 +368,7 @@
             // 
             PlayerTwoShipsCenter_Textbox.AcceptsReturn = true;
             PlayerTwoShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
-            PlayerTwoShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerTwoShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             PlayerTwoShipsCenter_Textbox.Location = new System.Drawing.Point(294, 909);
             PlayerTwoShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             PlayerTwoShipsCenter_Textbox.Name = "PlayerTwoShipsCenter_Textbox";
@@ -382,7 +382,7 @@
             // Step_Button
             // 
             Step_Button.BackColor = System.Drawing.SystemColors.Control;
-            Step_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Step_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             Step_Button.Location = new System.Drawing.Point(156, 692);
             Step_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Step_Button.Name = "Step_Button";
@@ -396,7 +396,7 @@
             // Speed_Lable
             // 
             Speed_Lable.AutoSize = true;
-            Speed_Lable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Speed_Lable.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
             Speed_Lable.Location = new System.Drawing.Point(367, 461);
             Speed_Lable.Name = "Speed_Lable";
             Speed_Lable.Size = new System.Drawing.Size(138, 32);
@@ -458,7 +458,7 @@
             // GameExit_Buttom
             // 
             GameExit_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            GameExit_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            GameExit_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F);
             GameExit_Buttom.Location = new System.Drawing.Point(780, 565);
             GameExit_Buttom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             GameExit_Buttom.Name = "GameExit_Buttom";
@@ -471,7 +471,7 @@
             // NewGame_Buttom
             // 
             NewGame_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            NewGame_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            NewGame_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F);
             NewGame_Buttom.Location = new System.Drawing.Point(780, 369);
             NewGame_Buttom.Name = "NewGame_Buttom";
             NewGame_Buttom.Size = new System.Drawing.Size(360, 66);
@@ -483,7 +483,7 @@
             // DownloadGame_Buttom
             // 
             DownloadGame_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            DownloadGame_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            DownloadGame_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F);
             DownloadGame_Buttom.Location = new System.Drawing.Point(780, 468);
             DownloadGame_Buttom.Name = "DownloadGame_Buttom";
             DownloadGame_Buttom.Size = new System.Drawing.Size(360, 66);
@@ -535,7 +535,7 @@
             // LoadingTheSelectedSave_Buttom
             // 
             LoadingTheSelectedSave_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            LoadingTheSelectedSave_Buttom.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LoadingTheSelectedSave_Buttom.Font = new System.Drawing.Font("Segoe UI", 15F);
             LoadingTheSelectedSave_Buttom.Location = new System.Drawing.Point(1278, 587);
             LoadingTheSelectedSave_Buttom.Name = "LoadingTheSelectedSave_Buttom";
             LoadingTheSelectedSave_Buttom.Size = new System.Drawing.Size(186, 44);
@@ -558,7 +558,6 @@
             // Save_List
             // 
             Save_List.FormattingEnabled = true;
-            Save_List.ItemHeight = 20;
             Save_List.Location = new System.Drawing.Point(1156, 171);
             Save_List.Name = "Save_List";
             Save_List.Size = new System.Drawing.Size(404, 404);
@@ -574,7 +573,7 @@
             // 
             // PlayerTwoStep_Texbox
             // 
-            PlayerTwoStep_Texbox.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayerTwoStep_Texbox.Font = new System.Drawing.Font("Segoe UI", 13.8F);
             PlayerTwoStep_Texbox.Location = new System.Drawing.Point(1652, 39);
             PlayerTwoStep_Texbox.Name = "PlayerTwoStep_Texbox";
             PlayerTwoStep_Texbox.ReadOnly = true;
