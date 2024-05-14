@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "D:\\Zlowolf\\Coursework\\W6\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\ienemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\ienemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\gameplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\gameplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\players.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\players.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\drawing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\ienemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\ienemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,96 +30,72 @@
       "DocumentGroups": [
         {
           "DockedWidth": 240,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Players.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Players.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Players.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Players.cs",
-              "RelativeToolTip": "Warp_6Core\\Players.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs*",
+              "RelativeToolTip": "Warp_6Core\\Form1.cs*",
+              "ViewState": "AQIAAOEBAAAAAAAAAAAAAPABAABWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T08:51:44.853Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Program.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Program.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Program.cs",
-              "RelativeToolTip": "Warp_6Core\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T12:44:06.257Z",
+              "WhenOpened": "2024-04-04T08:55:27.657Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "RelativeToolTip": "Warp_6Core\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T08:33:02.164Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Gameplay.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Gameplay.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
-              "RelativeToolTip": "Warp_6Core\\Gameplay.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-16T07:50:50.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IEnemy.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\IEnemy.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\IEnemy.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\IEnemy.cs",
-              "RelativeToolTip": "Warp_6Core\\IEnemy.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-16T07:50:06.493Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Drawing.cs",
               "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
               "RelativeDocumentMoniker": "Warp_6Core\\Drawing.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs",
-              "RelativeToolTip": "Warp_6Core\\Drawing.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAAcwIwAAAAAAAAA",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Drawing.cs*",
+              "RelativeToolTip": "Warp_6Core\\Drawing.cs*",
+              "ViewState": "AQIAAIcAAAAAAAAAAIAxwDIBAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-10T06:13:53.922Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Form1.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Form1.cs",
-              "RelativeToolTip": "Warp_6Core\\Form1.cs",
-              "ViewState": "AQIAAGQAAAAAAAAAAAA+wGECAABVAAAA",
+              "DocumentIndex": 1,
+              "Title": "Gameplay.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Gameplay.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs*",
+              "RelativeToolTip": "Warp_6Core\\Gameplay.cs*",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAkwKQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T08:55:27.657Z",
+              "WhenOpened": "2024-04-16T07:50:50.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Players.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Players.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Players.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Players.cs",
+              "RelativeToolTip": "Warp_6Core\\Players.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAuwC8AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T08:51:44.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IEnemy.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\IEnemy.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\IEnemy.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\IEnemy.cs",
+              "RelativeToolTip": "Warp_6Core\\IEnemy.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-16T07:50:06.493Z",
               "EditorCaption": ""
             }
           ]

@@ -420,7 +420,14 @@ namespace Warp_6
             if (matches.Count == 0)
             {
                 string SaveName = SaveName_Textbox.Text + ".txt";
-                Gameplay.SaveInformationAboutShips(SaveName, playerOne, enemy, Step_Button.Visible);
+                string gamesPhase = "0";
+                if (Step_Button.Visible) { gamesPhase = "3"; }
+                else 
+                {
+                    if (OnPosition_Button.Text == "Начать игру") { gamesPhase = "2"; }
+                    else { gamesPhase = "1"; }
+                }
+                Gameplay.SaveInformationAboutShips(playerOne, enemy, SaveName, gamesPhase);
                 
                 InvalidСharacters_Label.Visible = false;
                 СreateSave_Button.Visible = false;
@@ -428,8 +435,7 @@ namespace Warp_6
                 SaveName_Textbox.Visible = false;
                 SaveGame_ToolStripMenuItem.Text = "Сохранить игру";
                 ActionItemsEnabled(true);
-                Refresh();
-                Display.DrawImage();
+                Display.ImageRefresh();
             }
             else InvalidСharacters_Label.Visible = true;
         }
@@ -444,8 +450,7 @@ namespace Warp_6
 
             Gameplay.InitializationAllShips(playerOne.ships, enemy.ships);
             enemy.EnemyShipSorting();
-            Display.DrawMap();
-            Display.DrawingShipsOnSides(playerOne.ships, enemy.ships);
+            Display.DrawMapAndShips(playerOne.ships, enemy.ships);
             Gameplay.WhoGoesFirst( enemy, ref greenGoesFirst);
         }
         private void DownloadGame_Buttom_Click(object sender, EventArgs e)
@@ -493,20 +498,20 @@ namespace Warp_6
                     ActionItemsEnabled(true);
 
                     bool onPosition = false;
-                    bool step = false;
+                    string gamePhase = ""; 
                     string save = Gameplay.SavePath + Save_List.SelectedItem + ".txt";
 
-                    Gameplay.DownloadingDataInShips(save, playerOne, enemy, ref step);
-                    Display.DrawMap();
-
+                    Gameplay.DownloadingDataInShips(playerOne, enemy, save, ref gamePhase);
+                    Display.DrawMapAndShips(playerOne.ships, enemy.ships);
                     for (short i = 0; i < 9; i++)
                     {
-                        Display.DrawShipAfterLoading(true, playerOne.ships[i], ref onPosition);
-                        Display.DrawShipAfterLoading(false, enemy.ships[i], ref onPosition);
+                        if (playerOne.ships[i].inGame && playerOne.ships[i].position == -1) { onPosition = true; break; }
                     }
 
                     PlayerOneShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
                     PlayerTwoShipsCenter_Textbox.Text = enemy.shipInCerter.ToString();
+
+
                     if (onPosition)
                     {
                         PositionButtonVisible(true, false);
@@ -534,8 +539,7 @@ namespace Warp_6
                             ShowSpeed_Textbox.Text = "";
                         }
                     }
-                    Refresh();
-                    Display.DrawImage();
+                    Display.ImageRefresh();
                 }
             }
         }
@@ -585,8 +589,7 @@ namespace Warp_6
                 
                 Gameplay.InitializationAllShips(playerOne.ships, enemy.ships);
                 enemy.EnemyShipSorting();
-                Display.DrawMap();
-                Display.DrawingShipsOnSides(playerOne.ships, enemy.ships);
+                Display.DrawMapAndShips(playerOne.ships, enemy.ships);
                 Gameplay.WhoGoesFirst(enemy, ref greenGoesFirst);
             }
         }
@@ -627,8 +630,7 @@ namespace Warp_6
             {
                 DownloadGame_OnOff(false);
                 ActionItems_OnOff(true);
-                pictureBox.Refresh();
-                Display.DrawImage();
+                Display.ImageRefresh();
             }
         }
     }

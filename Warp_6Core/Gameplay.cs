@@ -8,11 +8,39 @@ namespace Game
 {
     class Gameplay
     {
-        static string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
+        private static string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
+        public static short currentPointOnMap = 125;//Переменная показывающая позицию на которую будет выставлен корабль в начале
+
+        private static void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message)
+        {
+            shipInCenter++;
+            ship.inGame = false;
+            string winOrLoss;
+            if (message.Contains("Вы победили!")) winOrLoss = "Победа!";
+            else winOrLoss = "Проигрыш...";
+            if (shipInCenter == 6)
+            {
+                DialogResult result = MessageBox.Show(message, winOrLoss, MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) Application.Restart();
+                else Application.Exit();
+            }
+        }
+        private static short SettingOfShipSpeed(Ship ship)
+        {
+            Random rnd = new Random();
+            short x = 0;
+
+            switch (ship.type)
+            {
+                case 1: x = 4; break;
+                case 2: x = 6; break;
+                case 3: x = 8; break;
+            }
+
+            return (short)(rnd.Next() % x + 1);
+        }
 
         public static string SavePath { get { return savePath; } }
-        
-        public static short currentPointOnMap = 125;//Переменная показывающая позицию на которую будет выставлен корабль в начале
         public static void MovingOfShip(ref Ship ship, ref short shipInCenter, string message) 
         {
             Display.position[ship.position].busy = false;
@@ -27,21 +55,7 @@ namespace Game
                 }
                 Display.position[ship.position].busy = true;
             }
-        }
-        static void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message)
-        {
-            shipInCenter++;
-            ship.inGame = false;
-            string winOrLoss;
-            if (message.Contains("Вы победили!")) winOrLoss = "Победа!"; 
-            else winOrLoss = "Проигрыш..."; 
-            if (shipInCenter == 6)
-            {
-                DialogResult result = MessageBox.Show(message, winOrLoss, MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes) Application.Restart();
-                else Application.Exit();
-            }
-        }
+        } 
         public static bool MaxSppeed(Ship ship)
         {
             if (ship.type == 1 && ship.speed == 4 ||
@@ -50,17 +64,15 @@ namespace Game
 
             return false;
         }
-        public static void SetShipOnSpiral(ref Ship ship, bool isThatMyShip)
+        public static void SetShipOnSpiral(ref Ship ship, bool isThatHostsShip)
         {
             ship.position = currentPointOnMap;
             Display.position[currentPointOnMap].busy = true;
-            float x = Display.X_GetCoord(ship);
-            float y = Display.Y_GetCoord(ship);
             switch (ship.type) 
             {
-                case 1: { Display.DrawTriangle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
-                case 2: { Display.DrawRectangle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
-                case 3: { Display.DrawCircle(isThatMyShip, x, y, ship.index + 1, ship.speed); } break;
+                case 1: { Display.DrawTriangleShip(ship, isThatHostsShip); } break;
+                case 2: { Display.DrawRectangleShip(ship, isThatHostsShip); } break;
+                case 3: { Display.DrawCircleShip(ship, isThatHostsShip); } break;
             }
             currentPointOnMap--;
         }
@@ -78,24 +90,9 @@ namespace Game
                 greenGoesFirst = false;
             }
             else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
-            
-            Display.PictureBoxRefresh();
-            Display.DrawImage();
+
+            Display.ImageRefresh();
             MessageBox.Show(message, "Кто начинает");
-        }
-        static short SettingOfShipSpeed(Ship ship)
-        {
-            Random rnd = new Random();
-            short x = 0;
-
-            switch (ship.type)
-            {
-                case 1: x = 4; break;
-                case 2: x = 6; break;
-                case 3: x = 8; break;
-            }
-
-            return (short)(rnd.Next() % x + 1);
         }
         public static void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
         {
@@ -103,15 +100,16 @@ namespace Game
             {
                 playerOne[i].speed = SettingOfShipSpeed(playerOne[i]);//Задание скорости корабля
                 playerOne[i].inGame = true;
+                playerOne[i].position = -1;
 
                 playerTwo[i].speed = SettingOfShipSpeed(playerTwo[i]);//Задание скорости корабля
                 playerTwo[i].inGame = true;
-
+                playerTwo[i].position = -1;
             }
         }
-        public static void SaveInformationAboutShips(string SaveName, Player playerOne, Enemy enemy, bool stepbuttonVisible)
+        public static void SaveInformationAboutShips(Player playerOne, Enemy enemy, string SaveName, string gamePhase)
         {
-            StreamWriter SaveFile = new StreamWriter(SaveName + savePath);
+            StreamWriter SaveFile = new StreamWriter(savePath + SaveName);
 
             for (int i = 0; i < 9; i++)
             {
@@ -128,11 +126,10 @@ namespace Game
             SaveFile.WriteLine(enemy.list.Count);
             for (short i = 0; i < enemy.list.Count; i++) SaveFile.WriteLine(enemy.list[i]);
             SaveFile.WriteLine(currentPointOnMap);
-            if (stepbuttonVisible) SaveFile.WriteLine(true);
-            else SaveFile.WriteLine(false);
+            SaveFile.WriteLine(gamePhase);
             SaveFile.Close();
         }
-        public static void DownloadingDataInShips(string savePath, Player PlayerOne, Enemy enemy, ref bool startGame)
+        public static void DownloadingDataInShips(Player PlayerOne, Enemy enemy, string savePath, ref string gamePhase)
         {
             StreamReader SaveFile = new StreamReader(savePath);
 
@@ -161,33 +158,33 @@ namespace Game
                 listCount--;
             }
             currentPointOnMap = short.Parse(SaveFile.ReadLine());
-            startGame = bool.Parse(SaveFile.ReadLine());
+            gamePhase = SaveFile.ReadLine();
             SaveFile.Close();
         }
-        public static void DownloadingDataInShips(string savePath, Player playerOne, Player playerTwo, ref bool startGame)
-        {
-            StreamReader SaveFile = new StreamReader(savePath);
+        //public static void DownloadingDataInShips(string savePath, Player playerOne, Player playerTwo, ref bool startGame)
+        //{
+        //    StreamReader SaveFile = new StreamReader(savePath);
 
-            for (short i = 0; i < 126; i++) Display.position[i].busy = false;
+        //    for (short i = 0; i < 126; i++) Display.position[i].busy = false;
 
-            for (short i = 0; i < 9; i++)
-            {
-                playerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
-                playerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
-                playerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (playerOne.ships[i].position > -1) Display.position[playerOne.ships[i].position].busy = true;
+        //    for (short i = 0; i < 9; i++)
+        //    {
+        //        playerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
+        //        playerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
+        //        playerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
+        //        if (playerOne.ships[i].position > -1) Display.position[playerOne.ships[i].position].busy = true;
 
-                playerTwo.ships[i].speed = short.Parse(SaveFile.ReadLine());
-                playerTwo.ships[i].position = short.Parse(SaveFile.ReadLine());
-                playerTwo.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (playerTwo.ships[i].position > -1) Display.position[playerTwo.ships[i].position].busy = true;
-            }
+        //        playerTwo.ships[i].speed = short.Parse(SaveFile.ReadLine());
+        //        playerTwo.ships[i].position = short.Parse(SaveFile.ReadLine());
+        //        playerTwo.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
+        //        if (playerTwo.ships[i].position > -1) Display.position[playerTwo.ships[i].position].busy = true;
+        //    }
 
-            playerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
-            playerTwo.shipInCerter = short.Parse(SaveFile.ReadLine());
-            currentPointOnMap = short.Parse(SaveFile.ReadLine());
-            startGame = bool.Parse(SaveFile.ReadLine());
-            SaveFile.Close();
-        }
+        //    playerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
+        //    playerTwo.shipInCerter = short.Parse(SaveFile.ReadLine());
+        //    currentPointOnMap = short.Parse(SaveFile.ReadLine());
+        //    startGame = bool.Parse(SaveFile.ReadLine());
+        //    SaveFile.Close();
+        //}
     }
 }
