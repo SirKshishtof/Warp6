@@ -252,20 +252,7 @@ namespace Drawing
                 graph_bitmap.FillPolygon(BrushBlack, points);
             }
         }
-        
-        public static void InitializationMap(PictureBox picBox)
-        {
-            pictureBox = picBox;
-            bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            graph_bitmap = Graphics.FromImage(bitmap);
-            graphics = pictureBox.CreateGraphics();
-
-            for (int i = 0; i < position.Length; i++) position[i] = new Position();
-            CreatinJumpsAlongDottedLines();
-            SavingLargePointCoordinates();
-            SavingEndsCoordinatesOfDottedLines();
-        }
-        public static void DrawTriangleShip(Ship ship, bool isThatHostsShip)
+        private static void DrawTriangleShip(Ship ship, bool isThatHostsShip)
         {
             Font FontNumShip = new Font("Arial", FONTSMALL);
             Font FontPowerOfShip = new Font("Arial", FONTBIG);
@@ -287,7 +274,7 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) - 4, y - (radius / 2) - 4);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 13, y - (radius / 2) + 18);
         }
-        public static void DrawRectangleShip(Ship ship, bool isThatHostsShip)
+        private static void DrawRectangleShip(Ship ship, bool isThatHostsShip)
         {
             Font FontNumShip = new Font("Arial", FONTSMALL);
             Font FontPowerOfShip = new Font("Arial", FONTBIG);
@@ -304,7 +291,7 @@ namespace Drawing
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 3, y - (radius / 2) + 2);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 8, y - (radius / 2) + 14);
         }
-        public static void DrawCircleShip(Ship ship, bool isThatHostsShip)
+        private static void DrawCircleShip(Ship ship, bool isThatHostsShip)
         {
             Font FontNumShip = new Font("Arial", FONTSMALL);
             Font FontPowerOfShip = new Font("Arial", FONTBIG);
@@ -320,6 +307,28 @@ namespace Drawing
             graph_bitmap.FillEllipse(brush, x - (radius / 2), y - (radius / 2), radius, radius);
             graph_bitmap.DrawString(TextPowerOfShip, FontPowerOfShip, BrushBlack, x - (radius / 3) + 6, y - (radius / 2) + 5);
             graph_bitmap.DrawString(TextNumShip, FontNumShip, BrushBlack, x - (radius / 3) - 3, y - (radius / 2) + 17);
+        }
+
+        public static void InitializationMap(PictureBox picBox)
+        {
+            pictureBox = picBox;
+            bitmap = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
+            graph_bitmap = Graphics.FromImage(bitmap);
+            graphics = pictureBox.CreateGraphics();
+
+            for (int i = 0; i < position.Length; i++) position[i] = new Position();
+            CreatinJumpsAlongDottedLines();
+            SavingLargePointCoordinates();
+            SavingEndsCoordinatesOfDottedLines();
+        }
+        public static void DrawShip(Ship ship, bool isThatHostsShip)
+        {
+            switch (ship.type)
+            {
+                case 1: { DrawTriangleShip(ship, isThatHostsShip); } break;
+                case 2: { DrawRectangleShip(ship, isThatHostsShip); } break;
+                case 3: { DrawCircleShip(ship, isThatHostsShip); } break;
+            }
         }
         public static void DrawWhiteRectangle(int numOfShip, bool isThatHostsShip)
         {

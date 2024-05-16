@@ -39,12 +39,17 @@ namespace Game
 
             return (short)(rnd.Next() % x + 1);
         }
-
-        public static string SavePath { get { return savePath; } }
-        public static void MovingOfShip(ref Ship ship, ref short shipInCenter, string message) 
+        public static void SetShipOnSpiral(ref Ship ship, bool isThatHostsShip)
+        {
+            ship.position = currentPointOnMap;
+            Display.position[currentPointOnMap].busy = true;
+            Display.DrawShip(ship, isThatHostsShip);
+            currentPointOnMap--;
+        }
+        public static void MovingOfShip(ref Ship ship, ref short shipInCenter, string message)
         {
             Display.position[ship.position].busy = false;
-            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship,ref shipInCenter, message);
+            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship, ref shipInCenter, message);
             else
             {
                 ship.position -= ship.speed;
@@ -55,7 +60,11 @@ namespace Game
                 }
                 Display.position[ship.position].busy = true;
             }
-        } 
+        }
+        public static string SavePath { get { return savePath; } }
+        
+
+
         public static bool MaxSppeed(Ship ship)
         {
             if (ship.type == 1 && ship.speed == 4 ||
@@ -64,19 +73,7 @@ namespace Game
 
             return false;
         }
-        public static void SetShipOnSpiral(ref Ship ship, bool isThatHostsShip)
-        {
-            ship.position = currentPointOnMap;
-            Display.position[currentPointOnMap].busy = true;
-            switch (ship.type) 
-            {
-                case 1: { Display.DrawTriangleShip(ship, isThatHostsShip); } break;
-                case 2: { Display.DrawRectangleShip(ship, isThatHostsShip); } break;
-                case 3: { Display.DrawCircleShip(ship, isThatHostsShip); } break;
-            }
-            currentPointOnMap--;
-        }
-        public static void WhoGoesFirst( Enemy enemy,ref bool greenGoesFirst)
+        public static void WhoGoesFirst(Enemy enemy,ref bool greenGoesFirst)
         {
             Random rnd = new Random();
             string message;

@@ -497,48 +497,40 @@ namespace Warp_6
                     Save_List.Visible = false;
                     ActionItemsEnabled(true);
 
-                    bool onPosition = false;
                     string gamePhase = ""; 
                     string save = Gameplay.SavePath + Save_List.SelectedItem + ".txt";
 
                     Gameplay.DownloadingDataInShips(playerOne, enemy, save, ref gamePhase);
                     Display.DrawMapAndShips(playerOne.ships, enemy.ships);
-                    for (short i = 0; i < 9; i++)
-                    {
-                        if (playerOne.ships[i].inGame && playerOne.ships[i].position == -1) { onPosition = true; break; }
-                    }
-
+                    
                     PlayerOneShipsCenter_Textbox.Text = playerOne.shipInCerter.ToString();
                     PlayerTwoShipsCenter_Textbox.Text = enemy.shipInCerter.ToString();
 
-
-                    if (onPosition)
+                    for (short i = 0; i < 9; i++) ShipRadioButtons_OnOff(i, false);
+                    
+                    switch (gamePhase)
                     {
-                        PositionButtonVisible(true, false);
-                        bool on;
-                        for (short i = 0; i < 9; i++)
-                        {
-                            if (playerOne.ships[i].position == -1) on = true;
-                            else on = false;
-                            ShipRadioButtons_OnOff(i, on);
-                        }
+                        case "1":
+                            {
+                                PositionButtonVisible(true, false);
+                                ActionItemsVisible(false);
+                                for (short i = 0; i < 9; i++) if (playerOne.ships[i].position == -1) ShipRadioButtons_OnOff(i, true);
+                                
+                            } break; 
+                        case "2":
+                            {  
+                                PositionButtonVisible(true, true);
+                                ActionItemsVisible(false);
+                            } break; 
+                        case "3": 
+                            {
+                                PositionButtonVisible(false, false);
+                                ActionItemsVisible(true);
+                                for (short i = 0; i < 9; i++) if (playerOne.ships[i].inGame) ShipRadioButtons_OnOff(i, true);
+                                ShowSpeed_Textbox.Text = "";
+                            } break; 
                     }
-                    else
-                    {
-                        if (!step)
-                        { 
-                            PositionButtonVisible(true, true);
-                            ActionItemsVisible(false);
-                        }
-                        else
-                        {
-                            PositionButtonVisible(false, false);
-                            ActionItemsVisible(true);
 
-                            for (short i = 0; i < 9; i++) ShipRadioButtons_OnOff(i, playerOne.ships[i].inGame);
-                            ShowSpeed_Textbox.Text = "";
-                        }
-                    }
                     Display.ImageRefresh();
                 }
             }
