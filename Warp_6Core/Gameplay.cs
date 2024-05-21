@@ -1,69 +1,20 @@
-﻿using Drawing;
-using Players;
+﻿using Warp_6Core;
 using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Game
+namespace Warp_6Core
 {
     class Gameplay
     {
         private static string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
         public static short currentPointOnMap = 125;//Переменная показывающая позицию на которую будет выставлен корабль в начале
-
-        private static void ShipOutOfGame(ref Ship ship, ref short shipInCenter, string message)
-        {
-            shipInCenter++;
-            ship.inGame = false;
-            string winOrLoss;
-            if (message.Contains("Вы победили!")) winOrLoss = "Победа!";
-            else winOrLoss = "Проигрыш...";
-            if (shipInCenter == 6)
-            {
-                DialogResult result = MessageBox.Show(message, winOrLoss, MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes) Application.Restart();
-                else Application.Exit();
-            }
-        }
-        private static short SettingOfShipSpeed(Ship ship)
-        {
-            Random rnd = new Random();
-            short x = 0;
-
-            switch (ship.type)
-            {
-                case 1: x = 4; break;
-                case 2: x = 6; break;
-                case 3: x = 8; break;
-            }
-
-            return (short)(rnd.Next() % x + 1);
-        }
-        public static void SetShipOnSpiral(ref Ship ship, bool isThatHostsShip)
-        {
-            ship.position = currentPointOnMap;
-            Display.position[currentPointOnMap].busy = true;
-            Display.DrawShip(ship, isThatHostsShip);
-            currentPointOnMap--;
-        }
-        public static void MovingOfShip(ref Ship ship, ref short shipInCenter, string message)
-        {
-            Display.position[ship.position].busy = false;
-            if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship, ref shipInCenter, message);
-            else
-            {
-                ship.position -= ship.speed;
-                while (Display.position[ship.position].busy && ship.inGame)
-                {
-                    if (Display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message);
-                    else ship.position = Display.position[ship.position].jump;
-                }
-                Display.position[ship.position].busy = true;
-            }
-        }
         public static string SavePath { get { return savePath; } }
-        
 
+        static void foo<T>(T id)
+        {
+
+        }
 
         public static bool MaxSppeed(Ship ship)
         {
@@ -81,25 +32,25 @@ namespace Game
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
                 short NumOfShip = enemy.list[0];
-                SetShipOnSpiral( ref enemy.ships[NumOfShip], false);
-                Display.DrawWhiteRectangle(NumOfShip, true);
+                //SetShipOnSpiral( ref enemy.ships[NumOfShip], false);
+                Warp_6Core.Display.DrawWhiteRectangle(NumOfShip, true);
                 enemy.list.RemoveAt(0);
                 greenGoesFirst = false;
             }
             else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
 
-            Display.ImageRefresh();
+            Warp_6Core.Display.ImageRefresh();
             MessageBox.Show(message, "Кто начинает");
         }
         public static void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
         {
             for (short i = 0; i < 9; i++)
             {
-                playerOne[i].speed = SettingOfShipSpeed(playerOne[i]);//Задание скорости корабля
+                playerOne[i].SetSpeed(); ;//Задание скорости корабля
                 playerOne[i].inGame = true;
                 playerOne[i].position = -1;
 
-                playerTwo[i].speed = SettingOfShipSpeed(playerTwo[i]);//Задание скорости корабля
+                playerTwo[i].SetSpeed();//Задание скорости корабля
                 playerTwo[i].inGame = true;
                 playerTwo[i].position = -1;
             }
@@ -130,19 +81,19 @@ namespace Game
         {
             StreamReader SaveFile = new StreamReader(savePath);
 
-            for (short i = 0; i < 126; i++) Display.position[i].busy = false;
+            for (short i = 0; i < 126; i++) Warp_6Core.Display.position[i].busy = false;
 
             for (short i = 0; i < 9; i++)
             {
                 PlayerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (PlayerOne.ships[i].position > -1) Display.position[PlayerOne.ships[i].position].busy = true;
+                if (PlayerOne.ships[i].position > -1) Warp_6Core.Display.position[PlayerOne.ships[i].position].busy = true;
 
                 enemy.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 enemy.ships[i].position = short.Parse(SaveFile.ReadLine());
                 enemy.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (enemy.ships[i].position > -1) Display.position[enemy.ships[i].position].busy = true;
+                if (enemy.ships[i].position > -1) Warp_6Core.Display.position[enemy.ships[i].position].busy = true;
             }
 
             PlayerOne.shipInCerter = short.Parse(SaveFile.ReadLine());

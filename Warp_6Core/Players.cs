@@ -1,84 +1,10 @@
-﻿using Drawing;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
-namespace Players
-{
-    public class Ship : IComparable<Ship>
-    {
-        public Ship(short type, short index)
-        {
-            this.type = type;
-            this.index = index;
-            position = -1;
-        }
-        public short index;
-        public short position;
-        public short type;
-        public short speed;
-        public bool inGame;
-        //private void ShipOutOfGame(ref short shipInCenter, string message)
-        //{
-        //    shipInCenter++;
-        //    inGame = false;
-        //    string winOrLoss;
-        //    if (message.Contains("Вы победили!")) winOrLoss = "Победа!";
-        //    else winOrLoss = "Проигрыш...";
-        //    if (shipInCenter == 6)
-        //    {
-        //        DialogResult result = MessageBox.Show(message, winOrLoss, MessageBoxButtons.YesNo);
-        //        if (result == DialogResult.Yes) Application.Restart();
-        //        else Application.Exit();
-        //    }
-        //}
-        //private short SettingOfShipSpeed()
-        //{
-        //    Random rnd = new Random();
-        //    short x = 0;
 
-        //    switch (type)
-        //    {
-        //        case 1: x = 4; break;
-        //        case 2: x = 6; break;
-        //        case 3: x = 8; break;
-        //    }
-
-        //    return (short)(rnd.Next() % x + 1);
-        //}
-        //public static void SetShipOnSpiral(ref Ship ship, ref short currentPointOnMap, bool isThatHostsShip)
-        //{
-        //    ship.position = currentPointOnMap;
-        //    Display.position[currentPointOnMap].busy = true;
-        //    Display.DrawShip(ship, isThatHostsShip);
-        //    currentPointOnMap--;
-        //}
-        //public static void MovingOfShip(ref Ship ship, ref short shipInCenter, string message)
-        //{
-        //    Display.position[ship.position].busy = false;
-        //    if ((ship.position - ship.speed) < 0) ShipOutOfGame(ref ship, ref shipInCenter, message);
-        //    else
-        //    {
-        //        ship.position -= ship.speed;
-        //        while (Display.position[ship.position].busy && ship.inGame)
-        //        {
-        //            if (Display.position[ship.position].jump == -1) ShipOutOfGame(ref ship, ref shipInCenter, message);
-        //            else ship.position = Display.position[ship.position].jump;
-        //        }
-        //        Display.position[ship.position].busy = true;
-        //    }
-        //}
-        public int CompareTo(Ship? s)
-        {
-            if (s is null) throw new ArgumentException("Некорректное значение параметра");
-            return speed.CompareTo(s.speed);
-        }
-    }
+namespace Warp_6Core
+{ 
     class Player
     {
         public Player(bool brush)
@@ -180,16 +106,6 @@ namespace Players
             return false;
         }
 
-        
-        // 2 Вывод корабля в центр через 1 прыжок
-        // 3 Вывод корабля в центр на прямую
-        // 4 Ход с n прыжками
-        // 5 Ход с 1 прыжком
-        // 6 Увеличить скорость
-        // 7 Уменьшить скорость
-        // 8 Обычный ход
-        // 9 Рандомный ход
-
         List<Ship> foo(Ship[] ships)
         {
             List<Ship> listBuf = new List<Ship>();
@@ -216,7 +132,6 @@ namespace Players
             return list;
         }
         
-        // 1 Вывод корабля в центр через n прыжков
 
         public short RandomStep()
         {
