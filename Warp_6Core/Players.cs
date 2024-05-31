@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace Warp_6Core
 { 
     class Player
@@ -131,7 +130,6 @@ namespace Warp_6Core
 
             return list;
         }
-        
 
         public short RandomStep()
         {

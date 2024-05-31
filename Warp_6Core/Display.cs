@@ -26,7 +26,7 @@ namespace Warp_6Core
     static class Display
     {
         private const double TURN = 3.11;//Коффициент задающий поворот спирали и точек по единичной окружности
-        private const short VERTICALSHEAR = 20;//Сдвиг всей картинки относительно оси Y 
+        private const short VERTICALSHEAR = 60;//Сдвиг всей картинки относительно оси Y 
         private const double KOF = 12;//Коффициент задающий ширину между витками спирали и точек
         private const short FONTSMALL = 12;//Шрифт меленькой цифры на фигуре
         private const short FONTBIG = 25;//Шрифт большой цифры на фигуре
@@ -183,9 +183,9 @@ namespace Warp_6Core
                 if (PlayerTwoShips[i].inGame) DrawCircleShip(PlayerTwoShips[i], false);
             }
         }
-        private static void DrawPlayersShips(Ship[] Ships, bool isThatHostsShip)
+        private static void DrawPlayersShips(Ship[] ships, bool isThatHostsShip)
         {
-            for (int i = 0; i < 9; i++) DrawShip(Ships[i], isThatHostsShip);
+            for (short i = 0; i < 9; i++) if (ships[i].inGame) DrawShip(ships[i], isThatHostsShip);
         }
         private static void DrawMap()
         {
@@ -198,7 +198,7 @@ namespace Warp_6Core
 
             BlackPen.DashStyle = DashStyle.Dash;
 
-            DrawCircle(pictureBox.Size.Width / 2, pictureBox.Size.Height / 2 - 8, radius);
+            DrawCircle(pictureBox.Size.Width / 2, pictureBox.Size.Height / 2 - 8 + VERTICALSHEAR, radius);
 
             radius = 4;
             //Отрисовывание сприрали 
@@ -229,7 +229,7 @@ namespace Warp_6Core
             PointF[] points = new PointF[3];
 
             float xOfPoint = (float)x;
-            float yOfPoint = (float)y + 20;
+            float yOfPoint = (float)y + VERTICALSHEAR;
 
             for (int i = 0; i < 3; i++)
             {

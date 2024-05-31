@@ -1,6 +1,6 @@
 ﻿namespace Warp_6
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             OnPosition_Button = new System.Windows.Forms.Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             Go_RadioButton = new System.Windows.Forms.RadioButton();
@@ -60,18 +60,20 @@
             NewGame_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             SaveGame_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             DownloadGame_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            GameExit_Buttom = new System.Windows.Forms.Button();
-            NewGame_Buttom = new System.Windows.Forms.Button();
-            DownloadGame_Buttom = new System.Windows.Forms.Button();
+            GameExit_Button = new System.Windows.Forms.Button();
+            NewGame_Button = new System.Windows.Forms.Button();
+            DownloadGame_Button = new System.Windows.Forms.Button();
             SaveName_Label = new System.Windows.Forms.Label();
             SaveName_Textbox = new System.Windows.Forms.TextBox();
             СreateSave_Button = new System.Windows.Forms.Button();
             InvalidСharacters_Label = new System.Windows.Forms.Label();
-            LoadingTheSelectedSave_Buttom = new System.Windows.Forms.Button();
+            LoadingTheSelectedSave_Button = new System.Windows.Forms.Button();
             pictureBox = new System.Windows.Forms.PictureBox();
             Save_List = new System.Windows.Forms.ListBox();
             Code = new System.Windows.Forms.TextBox();
             PlayerTwoStep_Texbox = new System.Windows.Forms.TextBox();
+            GameWithPerson_Button = new System.Windows.Forms.Button();
+            GameWithAI_Button = new System.Windows.Forms.Button();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -320,7 +322,7 @@
             // 
             ShipInCenter_Label.AutoSize = true;
             ShipInCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            ShipInCenter_Label.Location = new System.Drawing.Point(129, 781);
+            ShipInCenter_Label.Location = new System.Drawing.Point(118, 841);
             ShipInCenter_Label.Name = "ShipInCenter_Label";
             ShipInCenter_Label.Size = new System.Drawing.Size(302, 39);
             ShipInCenter_Label.TabIndex = 19;
@@ -331,7 +333,7 @@
             // 
             PlayerOneShipsCenter_Label.AutoSize = true;
             PlayerOneShipsCenter_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            PlayerOneShipsCenter_Label.Location = new System.Drawing.Point(173, 846);
+            PlayerOneShipsCenter_Label.Location = new System.Drawing.Point(162, 906);
             PlayerOneShipsCenter_Label.Name = "PlayerOneShipsCenter_Label";
             PlayerOneShipsCenter_Label.Size = new System.Drawing.Size(105, 39);
             PlayerOneShipsCenter_Label.TabIndex = 20;
@@ -342,7 +344,7 @@
             // 
             PlayerTwoShipsCenter_Lebel.AutoSize = true;
             PlayerTwoShipsCenter_Lebel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            PlayerTwoShipsCenter_Lebel.Location = new System.Drawing.Point(71, 909);
+            PlayerTwoShipsCenter_Lebel.Location = new System.Drawing.Point(60, 969);
             PlayerTwoShipsCenter_Lebel.Name = "PlayerTwoShipsCenter_Lebel";
             PlayerTwoShipsCenter_Lebel.Size = new System.Drawing.Size(207, 39);
             PlayerTwoShipsCenter_Lebel.TabIndex = 21;
@@ -354,7 +356,7 @@
             PlayerOneShipsCenter_Textbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystem;
             PlayerOneShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
             PlayerOneShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            PlayerOneShipsCenter_Textbox.Location = new System.Drawing.Point(294, 842);
+            PlayerOneShipsCenter_Textbox.Location = new System.Drawing.Point(283, 902);
             PlayerOneShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             PlayerOneShipsCenter_Textbox.Name = "PlayerOneShipsCenter_Textbox";
             PlayerOneShipsCenter_Textbox.ReadOnly = true;
@@ -369,7 +371,7 @@
             PlayerTwoShipsCenter_Textbox.AcceptsReturn = true;
             PlayerTwoShipsCenter_Textbox.BackColor = System.Drawing.Color.White;
             PlayerTwoShipsCenter_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            PlayerTwoShipsCenter_Textbox.Location = new System.Drawing.Point(294, 909);
+            PlayerTwoShipsCenter_Textbox.Location = new System.Drawing.Point(283, 969);
             PlayerTwoShipsCenter_Textbox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             PlayerTwoShipsCenter_Textbox.Name = "PlayerTwoShipsCenter_Textbox";
             PlayerTwoShipsCenter_Textbox.ReadOnly = true;
@@ -383,7 +385,7 @@
             // 
             Step_Button.BackColor = System.Drawing.SystemColors.Control;
             Step_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            Step_Button.Location = new System.Drawing.Point(156, 692);
+            Step_Button.Location = new System.Drawing.Point(129, 726);
             Step_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Step_Button.Name = "Step_Button";
             Step_Button.Size = new System.Drawing.Size(268, 58);
@@ -455,42 +457,42 @@
             DownloadGame_ToolStripMenuItem.Visible = false;
             DownloadGame_ToolStripMenuItem.Click += DownloadGame_ToolStripMenuItem_Click;
             // 
-            // GameExit_Buttom
+            // GameExit_Button
             // 
-            GameExit_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            GameExit_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F);
-            GameExit_Buttom.Location = new System.Drawing.Point(780, 565);
-            GameExit_Buttom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            GameExit_Buttom.Name = "GameExit_Buttom";
-            GameExit_Buttom.Size = new System.Drawing.Size(360, 66);
-            GameExit_Buttom.TabIndex = 28;
-            GameExit_Buttom.Text = "Выйти из игры";
-            GameExit_Buttom.UseVisualStyleBackColor = false;
-            GameExit_Buttom.Click += GameExit_Buttom_Click;
+            GameExit_Button.BackColor = System.Drawing.SystemColors.Control;
+            GameExit_Button.Font = new System.Drawing.Font("Segoe UI", 20F);
+            GameExit_Button.Location = new System.Drawing.Point(780, 640);
+            GameExit_Button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            GameExit_Button.Name = "GameExit_Button";
+            GameExit_Button.Size = new System.Drawing.Size(360, 66);
+            GameExit_Button.TabIndex = 28;
+            GameExit_Button.Text = "Выйти из игры";
+            GameExit_Button.UseVisualStyleBackColor = false;
+            GameExit_Button.Click += GameExit_Button_Click;
             // 
-            // NewGame_Buttom
+            // NewGame_Button
             // 
-            NewGame_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            NewGame_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F);
-            NewGame_Buttom.Location = new System.Drawing.Point(780, 369);
-            NewGame_Buttom.Name = "NewGame_Buttom";
-            NewGame_Buttom.Size = new System.Drawing.Size(360, 66);
-            NewGame_Buttom.TabIndex = 34;
-            NewGame_Buttom.Text = "Новая игра";
-            NewGame_Buttom.UseVisualStyleBackColor = false;
-            NewGame_Buttom.Click += NewGame_Buttom_Click;
+            NewGame_Button.BackColor = System.Drawing.SystemColors.Control;
+            NewGame_Button.Font = new System.Drawing.Font("Segoe UI", 20F);
+            NewGame_Button.Location = new System.Drawing.Point(780, 444);
+            NewGame_Button.Name = "NewGame_Button";
+            NewGame_Button.Size = new System.Drawing.Size(360, 66);
+            NewGame_Button.TabIndex = 34;
+            NewGame_Button.Text = "Новая игра";
+            NewGame_Button.UseVisualStyleBackColor = false;
+            NewGame_Button.Click += NewGame_Button_Click;
             // 
-            // DownloadGame_Buttom
+            // DownloadGame_Button
             // 
-            DownloadGame_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            DownloadGame_Buttom.Font = new System.Drawing.Font("Segoe UI", 20F);
-            DownloadGame_Buttom.Location = new System.Drawing.Point(780, 468);
-            DownloadGame_Buttom.Name = "DownloadGame_Buttom";
-            DownloadGame_Buttom.Size = new System.Drawing.Size(360, 66);
-            DownloadGame_Buttom.TabIndex = 35;
-            DownloadGame_Buttom.Text = "Загрузить игру";
-            DownloadGame_Buttom.UseVisualStyleBackColor = false;
-            DownloadGame_Buttom.Click += DownloadGame_Buttom_Click;
+            DownloadGame_Button.BackColor = System.Drawing.SystemColors.Control;
+            DownloadGame_Button.Font = new System.Drawing.Font("Segoe UI", 20F);
+            DownloadGame_Button.Location = new System.Drawing.Point(780, 543);
+            DownloadGame_Button.Name = "DownloadGame_Button";
+            DownloadGame_Button.Size = new System.Drawing.Size(360, 66);
+            DownloadGame_Button.TabIndex = 35;
+            DownloadGame_Button.Text = "Загрузить игру";
+            DownloadGame_Button.UseVisualStyleBackColor = false;
+            DownloadGame_Button.Click += DownloadGame_Button_Click;
             // 
             // SaveName_Label
             // 
@@ -532,18 +534,18 @@
             InvalidСharacters_Label.Text = "Недопустимые символы: \\ / : * ? \" < > |";
             InvalidСharacters_Label.Visible = false;
             // 
-            // LoadingTheSelectedSave_Buttom
+            // LoadingTheSelectedSave_Button
             // 
-            LoadingTheSelectedSave_Buttom.BackColor = System.Drawing.SystemColors.Control;
-            LoadingTheSelectedSave_Buttom.Font = new System.Drawing.Font("Segoe UI", 15F);
-            LoadingTheSelectedSave_Buttom.Location = new System.Drawing.Point(1278, 587);
-            LoadingTheSelectedSave_Buttom.Name = "LoadingTheSelectedSave_Buttom";
-            LoadingTheSelectedSave_Buttom.Size = new System.Drawing.Size(186, 44);
-            LoadingTheSelectedSave_Buttom.TabIndex = 41;
-            LoadingTheSelectedSave_Buttom.Text = "Загрузить";
-            LoadingTheSelectedSave_Buttom.UseVisualStyleBackColor = false;
-            LoadingTheSelectedSave_Buttom.Visible = false;
-            LoadingTheSelectedSave_Buttom.Click += LoadingTheSelectedSave_Buttom_Click;
+            LoadingTheSelectedSave_Button.BackColor = System.Drawing.SystemColors.Control;
+            LoadingTheSelectedSave_Button.Font = new System.Drawing.Font("Segoe UI", 15F);
+            LoadingTheSelectedSave_Button.Location = new System.Drawing.Point(1278, 662);
+            LoadingTheSelectedSave_Button.Name = "LoadingTheSelectedSave_Button";
+            LoadingTheSelectedSave_Button.Size = new System.Drawing.Size(186, 44);
+            LoadingTheSelectedSave_Button.TabIndex = 41;
+            LoadingTheSelectedSave_Button.Text = "Загрузить";
+            LoadingTheSelectedSave_Button.UseVisualStyleBackColor = false;
+            LoadingTheSelectedSave_Button.Visible = false;
+            LoadingTheSelectedSave_Button.Click += LoadingTheSelectedSave_Button_Click;
             // 
             // pictureBox
             // 
@@ -558,7 +560,7 @@
             // Save_List
             // 
             Save_List.FormattingEnabled = true;
-            Save_List.Location = new System.Drawing.Point(1156, 171);
+            Save_List.Location = new System.Drawing.Point(1156, 246);
             Save_List.Name = "Save_List";
             Save_List.Size = new System.Drawing.Size(404, 404);
             Save_List.TabIndex = 36;
@@ -581,24 +583,52 @@
             PlayerTwoStep_Texbox.TabIndex = 45;
             PlayerTwoStep_Texbox.Visible = false;
             // 
-            // Form1
+            // GameWithPerson_Button
+            // 
+            GameWithPerson_Button.BackColor = System.Drawing.SystemColors.Control;
+            GameWithPerson_Button.Font = new System.Drawing.Font("Segoe UI", 20F);
+            GameWithPerson_Button.Location = new System.Drawing.Point(780, 261);
+            GameWithPerson_Button.Name = "GameWithPerson_Button";
+            GameWithPerson_Button.Size = new System.Drawing.Size(360, 66);
+            GameWithPerson_Button.TabIndex = 46;
+            GameWithPerson_Button.Text = "Сетевая игра";
+            GameWithPerson_Button.UseVisualStyleBackColor = false;
+            GameWithPerson_Button.Visible = false;
+            GameWithPerson_Button.Click += GameWithPerson_Button_Click;
+            // 
+            // GameWithAI_Button
+            // 
+            GameWithAI_Button.BackColor = System.Drawing.SystemColors.Control;
+            GameWithAI_Button.Font = new System.Drawing.Font("Segoe UI", 20F);
+            GameWithAI_Button.Location = new System.Drawing.Point(780, 352);
+            GameWithAI_Button.Name = "GameWithAI_Button";
+            GameWithAI_Button.Size = new System.Drawing.Size(360, 66);
+            GameWithAI_Button.TabIndex = 47;
+            GameWithAI_Button.Text = "Игра с ИИ";
+            GameWithAI_Button.UseVisualStyleBackColor = false;
+            GameWithAI_Button.Visible = false;
+            GameWithAI_Button.Click += GameWithAI_Buttom_Click;
+            // 
+            // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(GameWithAI_Button);
+            Controls.Add(GameWithPerson_Button);
             Controls.Add(PlayerTwoStep_Texbox);
             Controls.Add(Code);
-            Controls.Add(LoadingTheSelectedSave_Buttom);
+            Controls.Add(LoadingTheSelectedSave_Button);
             Controls.Add(InvalidСharacters_Label);
             Controls.Add(СreateSave_Button);
             Controls.Add(SaveName_Textbox);
             Controls.Add(SaveName_Label);
             Controls.Add(OnPosition_Button);
             Controls.Add(Save_List);
-            Controls.Add(DownloadGame_Buttom);
-            Controls.Add(NewGame_Buttom);
-            Controls.Add(GameExit_Buttom);
+            Controls.Add(DownloadGame_Button);
+            Controls.Add(NewGame_Button);
+            Controls.Add(GameExit_Button);
             Controls.Add(AutoPosChB);
             Controls.Add(Speed_Lable);
             Controls.Add(Step_Button);
@@ -614,9 +644,10 @@
             Controls.Add(MoreSpeed_Button);
             Controls.Add(pictureBox);
             Controls.Add(menuStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            Name = "Form1";
+            Name = "MainForm";
             Text = "Гипер 6";
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
             Load += Form1_Load;
@@ -664,18 +695,20 @@
         private System.Windows.Forms.ToolStripMenuItem NewGame_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveGame_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DownloadGame_ToolStripMenuItem;
-        private System.Windows.Forms.Button GameExit_Buttom;
-        private System.Windows.Forms.Button NewGame_Buttom;
-        private System.Windows.Forms.Button DownloadGame_Buttom;
+        private System.Windows.Forms.Button GameExit_Button;
+        private System.Windows.Forms.Button NewGame_Button;
+        private System.Windows.Forms.Button DownloadGame_Button;
         private System.Windows.Forms.Label SaveName_Label;
         private System.Windows.Forms.TextBox SaveName_Textbox;
         private System.Windows.Forms.Button СreateSave_Button;
         private System.Windows.Forms.Label InvalidСharacters_Label;
-        private System.Windows.Forms.Button LoadingTheSelectedSave_Buttom;
+        private System.Windows.Forms.Button LoadingTheSelectedSave_Button;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.ListBox Save_List;
         private System.Windows.Forms.TextBox Code;
         private System.Windows.Forms.TextBox PlayerTwoStep_Texbox;
+        private System.Windows.Forms.Button GameWithPerson_Button;
+        private System.Windows.Forms.Button GameWithAI_Button;
     }
 }
 

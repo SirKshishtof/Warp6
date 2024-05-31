@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing.Design;
 
 namespace Warp_6Core
 {
@@ -9,13 +10,10 @@ namespace Warp_6Core
     {
         private static string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
         public static short currentPointOnMap = 125;//Переменная показывающая позицию на которую будет выставлен корабль в начале
-        public static string SavePath { get { return savePath; } }
-
-        static void foo<T>(T id)
-        {
-
-        }
-
+        //public static string SavePath { get { return savePath; } }
+        public static DirectoryInfo directoryInfo = new DirectoryInfo(savePath);
+        public static void CreateDirectory() => Directory.CreateDirectory(savePath);
+        public static bool FileExists(string saveName) => File.Exists(savePath + saveName +".txt");
         public static bool MaxSppeed(Ship ship)
         {
             if (ship.type == 1 && ship.speed == 4 ||
@@ -31,15 +29,31 @@ namespace Warp_6Core
             if (rnd.Next() % 2 != 0)
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
+                
                 short NumOfShip = enemy.list[0];
-                //SetShipOnSpiral( ref enemy.ships[NumOfShip], false);
-                Warp_6Core.Display.DrawWhiteRectangle(NumOfShip, true);
+                enemy.ships[NumOfShip].SetOnSpiral(ref currentPointOnMap, false);
                 enemy.list.RemoveAt(0);
+                Display.DrawWhiteRectangle(NumOfShip, true);
+                
                 greenGoesFirst = false;
             }
             else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
 
-            Warp_6Core.Display.ImageRefresh();
+            Display.ImageRefresh();
+            MessageBox.Show(message, "Кто начинает");
+        }
+        public static void WhoGoesFirst(ref bool greenGoesFirst)
+        {
+            Random rnd = new Random();
+            string message;
+            if (rnd.Next() % 2 != 0)
+            {
+                message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
+                greenGoesFirst = false;
+            }
+            else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
+
+            Display.ImageRefresh();
             MessageBox.Show(message, "Кто начинает");
         }
         public static void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
@@ -57,7 +71,7 @@ namespace Warp_6Core
         }
         public static void SaveInformationAboutShips(Player playerOne, Enemy enemy, string SaveName, string gamePhase)
         {
-            StreamWriter SaveFile = new StreamWriter(savePath + SaveName);
+            StreamWriter SaveFile = new StreamWriter(savePath + SaveName + ".txt");
 
             for (int i = 0; i < 9; i++)
             {
@@ -77,23 +91,23 @@ namespace Warp_6Core
             SaveFile.WriteLine(gamePhase);
             SaveFile.Close();
         }
-        public static void DownloadingDataInShips(Player PlayerOne, Enemy enemy, string savePath, ref string gamePhase)
+        public static void DownloadingDataInShips(Player PlayerOne, Enemy enemy, string SaveName, ref string gamePhase)
         {
-            StreamReader SaveFile = new StreamReader(savePath);
+            StreamReader SaveFile = new StreamReader(savePath + SaveName+".txt");
 
-            for (short i = 0; i < 126; i++) Warp_6Core.Display.position[i].busy = false;
+            for (short i = 0; i < 126; i++) Display.position[i].busy = false;
 
             for (short i = 0; i < 9; i++)
             {
                 PlayerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (PlayerOne.ships[i].position > -1) Warp_6Core.Display.position[PlayerOne.ships[i].position].busy = true;
+                if (PlayerOne.ships[i].position > -1) Display.position[PlayerOne.ships[i].position].busy = true;
 
                 enemy.ships[i].speed = short.Parse(SaveFile.ReadLine());
                 enemy.ships[i].position = short.Parse(SaveFile.ReadLine());
                 enemy.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-                if (enemy.ships[i].position > -1) Warp_6Core.Display.position[enemy.ships[i].position].busy = true;
+                if (enemy.ships[i].position > -1) Display.position[enemy.ships[i].position].busy = true;
             }
 
             PlayerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
@@ -109,30 +123,5 @@ namespace Warp_6Core
             gamePhase = SaveFile.ReadLine();
             SaveFile.Close();
         }
-        //public static void DownloadingDataInShips(string savePath, Player playerOne, Player playerTwo, ref bool startGame)
-        //{
-        //    StreamReader SaveFile = new StreamReader(savePath);
-
-        //    for (short i = 0; i < 126; i++) Display.position[i].busy = false;
-
-        //    for (short i = 0; i < 9; i++)
-        //    {
-        //        playerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
-        //        playerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
-        //        playerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-        //        if (playerOne.ships[i].position > -1) Display.position[playerOne.ships[i].position].busy = true;
-
-        //        playerTwo.ships[i].speed = short.Parse(SaveFile.ReadLine());
-        //        playerTwo.ships[i].position = short.Parse(SaveFile.ReadLine());
-        //        playerTwo.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
-        //        if (playerTwo.ships[i].position > -1) Display.position[playerTwo.ships[i].position].busy = true;
-        //    }
-
-        //    playerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
-        //    playerTwo.shipInCerter = short.Parse(SaveFile.ReadLine());
-        //    currentPointOnMap = short.Parse(SaveFile.ReadLine());
-        //    startGame = bool.Parse(SaveFile.ReadLine());
-        //    SaveFile.Close();
-        //}
     }
 }
