@@ -9,7 +9,7 @@ namespace Warp_6Core
     class Gameplay
     {
         private static string savePath = Directory.GetCurrentDirectory() + "\\Save\\";
-        public static short currentPointOnMap = 125;//Переменная показывающая позицию на которую будет выставлен корабль в начале
+        public static sbyte currentPointOnMap = 125;//Переменная показывающая позицию на которую будет выставлен корабль в начале
         //public static string SavePath { get { return savePath; } }
         public static DirectoryInfo directoryInfo = new DirectoryInfo(savePath);
         public static void CreateDirectory() => Directory.CreateDirectory(savePath);
@@ -58,7 +58,7 @@ namespace Warp_6Core
         }
         public static void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
         {
-            for (short i = 0; i < 9; i++)
+            for (sbyte i = 0; i < 9; i++)
             {
                 playerOne[i].SetSpeed(); ;//Задание скорости корабля
                 playerOne[i].inGame = true;
@@ -99,27 +99,27 @@ namespace Warp_6Core
 
             for (short i = 0; i < 9; i++)
             {
-                PlayerOne.ships[i].speed = short.Parse(SaveFile.ReadLine());
-                PlayerOne.ships[i].position = short.Parse(SaveFile.ReadLine());
+                PlayerOne.ships[i].speed = sbyte.Parse(SaveFile.ReadLine());
+                PlayerOne.ships[i].position = sbyte.Parse(SaveFile.ReadLine());
                 PlayerOne.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
                 if (PlayerOne.ships[i].position > -1) Display.position[PlayerOne.ships[i].position].busy = true;
 
-                enemy.ships[i].speed = short.Parse(SaveFile.ReadLine());
-                enemy.ships[i].position = short.Parse(SaveFile.ReadLine());
+                enemy.ships[i].speed = sbyte.Parse(SaveFile.ReadLine());
+                enemy.ships[i].position = sbyte.Parse(SaveFile.ReadLine());
                 enemy.ships[i].inGame = bool.Parse(SaveFile.ReadLine());
                 if (enemy.ships[i].position > -1) Display.position[enemy.ships[i].position].busy = true;
             }
 
-            PlayerOne.shipInCerter = short.Parse(SaveFile.ReadLine());
-            enemy.shipInCerter = short.Parse(SaveFile.ReadLine());
-            short listCount = short.Parse(SaveFile.ReadLine());
+            PlayerOne.shipInCerter = sbyte.Parse(SaveFile.ReadLine());
+            enemy.shipInCerter = sbyte.Parse(SaveFile.ReadLine());
+            short listCount = sbyte.Parse(SaveFile.ReadLine());
             enemy.list.Clear();
             while (listCount > 0)
             {
-                enemy.list.Add(short.Parse(SaveFile.ReadLine()));
+                enemy.list.Add(sbyte.Parse(SaveFile.ReadLine()));
                 listCount--;
             }
-            currentPointOnMap = short.Parse(SaveFile.ReadLine());
+            currentPointOnMap = sbyte.Parse(SaveFile.ReadLine());
             gamePhase = SaveFile.ReadLine();
             SaveFile.Close();
         }

@@ -9,18 +9,18 @@ namespace Warp_6Core
 {
     public class Ship : IComparable<Ship>
     {
-        public Ship(short type, short index)
+        public Ship(sbyte type, sbyte index)
         {
             this.type = type;
             this.index = index;
             position = -1;
         }
-        public short index;
-        public short position;
-        public short type;
-        public short speed;
+        public sbyte index;
+        public sbyte position;
+        public sbyte type;
+        public sbyte speed;
         public bool inGame;
-        private void OutOfGame(ref short shipInCenter, string message)
+        private void OutOfGame(ref sbyte shipInCenter, string message)
         {
             shipInCenter++;
             inGame = false;
@@ -34,7 +34,7 @@ namespace Warp_6Core
                 else Application.Exit();
             }
         }
-        public void Move(ref short shipInCenter, string message)
+        public void Move(ref sbyte shipInCenter, string message)
         {
             Display.position[position].busy = false;
             if ((position - speed) < 0) OutOfGame(ref shipInCenter, message);
@@ -61,9 +61,9 @@ namespace Warp_6Core
                 case 3: x = 8; break;
             }
 
-            speed = (short)(rnd.Next() % x + 1);
+            speed = (sbyte)(rnd.Next() % x + 1);
         }
-        public void SetOnSpiral(ref short currentPointOnMap, bool isThatHostsShip)
+        public void SetOnSpiral(ref sbyte currentPointOnMap, bool isThatHostsShip)
         {
             position = currentPointOnMap;
             Display.position[currentPointOnMap].busy = true;

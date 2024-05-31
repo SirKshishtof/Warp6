@@ -10,28 +10,28 @@ namespace Warp_6Core
         {
             this.brush = brush;
             shipInCerter = 0;
-            for (short i = 0; i < 4; i++) ships[i] = new Ship(1, i);
+            for (sbyte i = 0; i < 4; i++) ships[i] = new Ship(1, i);
 
-            for (short i = 4; i < 7; i++) ships[i] = new Ship(2, i);
+            for (sbyte i = 4; i < 7; i++) ships[i] = new Ship(2, i);
 
-            for (short i = 7; i < 9; i++) ships[i] = new Ship(3, i);
+            for (sbyte i = 7; i < 9; i++) ships[i] = new Ship(3, i);
         }
         public Ship[] ships = new Ship[9];
-        public short shipInCerter;
+        public sbyte shipInCerter;
         public bool brush;
     }
     class Enemy (bool brush) : Player (brush)
     {
-        public List<short> list = new List<short>();
+        public List<sbyte> list = new List<sbyte>();
         
         public void EnemyShipSorting()
         {
             if (list.Count != 0) { list.Clear(); }
-            short count = -1;
+            sbyte count = -1;
             int max = 0;
             int[] index = new int[9];
 
-            for (short i = 0; i < 4; i++)
+            for (sbyte i = 0; i < 4; i++)
             {
                 if (ships[i].speed > max)
                 {
@@ -39,23 +39,23 @@ namespace Warp_6Core
                     count = i;
                 }
             }
-            for (int i = 0; i < 4; i++)
+            for (sbyte i = 0; i < 4; i++)
             {
                 if (i != count)
                 {
                     ships[i].inGame = false;
                 }
             }
-            for (int i = 0; i < 9; i++)
+            for (sbyte i = 0; i < 9; i++)
             {
                 if (ships[i].inGame) { index[i] = ships[i].speed; }
                 else { index[i] = 0; }
             }
 
-            for (int i = 0; i < 9; i++)
+            for (sbyte i = 0; i < 9; i++)
             {
                 max = 0;
-                for (short j = 0; j < 9; j++)
+                for (sbyte j = 0; j < 9; j++)
                 {
                     if (index[j] > max)
                     {
@@ -67,9 +67,9 @@ namespace Warp_6Core
             }
 
             max = 0;
-            for (int i = 0; i < 3; i++)
+            for (sbyte i = 0; i < 3; i++)
             {
-                for (short j = 0; j < 4; j++)
+                for (sbyte j = 0; j < 4; j++)
                 {
                     if (ships[j].speed >= max && !ships[j].inGame)
                     {
@@ -81,7 +81,7 @@ namespace Warp_6Core
                 list.Add(count);
                 max = 0;
             }
-            for (int i = 0; i < 9; i++)
+            for (sbyte i = 0; i < 9; i++)
             {
                 ships[i].inGame = true;
             }

@@ -20,7 +20,7 @@ namespace Warp_6Core
 
         public double x;
         public double y;
-        public short jump;
+        public sbyte jump;
         public bool busy;
     }
     static class Display
@@ -28,8 +28,8 @@ namespace Warp_6Core
         private const double TURN = 3.11;//Коффициент задающий поворот спирали и точек по единичной окружности
         private const short VERTICALSHEAR = 60;//Сдвиг всей картинки относительно оси Y 
         private const double KOF = 12;//Коффициент задающий ширину между витками спирали и точек
-        private const short FONTSMALL = 12;//Шрифт меленькой цифры на фигуре
-        private const short FONTBIG = 25;//Шрифт большой цифры на фигуре
+        private const sbyte FONTSMALL = 12;//Шрифт меленькой цифры на фигуре
+        private const sbyte FONTBIG = 25;//Шрифт большой цифры на фигуре
 
         private static Graphics graphics;
         private static Graphics graph_bitmap;
@@ -44,8 +44,8 @@ namespace Warp_6Core
 
         private static void CreatinJumpsAlongDottedLines()
         {
-            short indexJumpTo = 0;//Показывает индексы точек, НА которые происходит прыжок
-            short indexPos = 6; //Показывает индексы точек, С которых происходит прыжок
+            sbyte indexJumpTo = 0;//Показывает индексы точек, НА которые происходит прыжок
+            sbyte indexPos = 6; //Показывает индексы точек, С которых происходит прыжок
 
             //Сохранение прыжков по пунктирным линиям
             for (short i = 2; i < 7; i++)

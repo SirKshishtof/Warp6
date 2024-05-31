@@ -18,9 +18,9 @@ namespace Warp_6
             shipRadioButtons[index].Enabled = false;
             shipRadioButtons[index].BackColor = Color.WhiteSmoke;
         }
-        short ShipSelection()
+        sbyte ShipSelection()
         {
-            for (short i = 0; i < 9; i++)
+            for (sbyte i = 0; i < 9; i++)
             {
                 if (shipRadioButtons[i].Checked) return i;
             }

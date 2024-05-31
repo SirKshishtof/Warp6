@@ -3,40 +3,32 @@
   "WorkspaceRootPath": "D:\\Zlowolf\\Coursework\\W6\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\display.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\display.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\display.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\gameplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\gameplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\netform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\netform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\netform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\netform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\ship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\ship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\networking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\networking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\players.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\players.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|D:\\Zlowolf\\Coursework\\W6\\warp_6core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|d:\\zlowolf\\coursework\\w6\\warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{13ABBB11-5913-42DC-9D97-E9C1D4CE9DCA}|Warp_6Core\\Warp_6Core.csproj|solutionrelative:warp_6core\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,20 +38,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 240,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Gameplay.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Gameplay.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
-              "RelativeToolTip": "Warp_6Core\\Gameplay.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAA1wEcAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T09:09:04.778Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -68,94 +48,87 @@
               "RelativeDocumentMoniker": "Warp_6Core\\Display.cs",
               "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Display.cs",
               "RelativeToolTip": "Warp_6Core\\Display.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
+              "ViewState": "AQIAAOIAAAAAAAAAAAAQwC8AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-24T05:55:54.528Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Ship.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ship.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Ship.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ship.cs",
-              "RelativeToolTip": "Warp_6Core\\Ship.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T03:44:45.966Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Main_Form.cs [Design]",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Main_Form.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Main_Form.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Main_Form.cs [Design]",
-              "RelativeToolTip": "Warp_6Core\\Main_Form.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T07:00:33.674Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Class1.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\Class1.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Class1.cs",
-              "RelativeToolTip": "Warp_6Core\\Class1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T03:07:34.28Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Main_Form.cs",
               "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Main_Form.cs",
               "RelativeDocumentMoniker": "Warp_6Core\\Main_Form.cs",
               "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Main_Form.cs",
               "RelativeToolTip": "Warp_6Core\\Main_Form.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAowOoAAAAjAAAA",
+              "ViewState": "AQIAAIYAAAAAAAAAAAAwwL8AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T04:03:28.197Z",
+              "WhenOpened": "2024-05-31T07:56:57.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Main_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Main_Form.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Main_Form.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Main_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "RelativeToolTip": "Warp_6Core\\Main_Form.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-31T07:56:55.496Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Players.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Players.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Players.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Players.cs",
+              "RelativeToolTip": "Warp_6Core\\Players.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAwwBYAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-31T07:56:49.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Gameplay.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Gameplay.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Gameplay.cs",
+              "RelativeToolTip": "Warp_6Core\\Gameplay.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAADwAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T09:09:04.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Ship.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ship.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Ship.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Ship.cs",
+              "RelativeToolTip": "Warp_6Core\\Ship.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAkwEEAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T03:44:45.966Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "NetForm.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\NetForm.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\NetForm.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\NetForm.cs",
-              "RelativeToolTip": "Warp_6Core\\NetForm.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAYwBUAAAA6AAAA",
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Class1.cs",
+              "RelativeDocumentMoniker": "Warp_6Core\\Class1.cs",
+              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Class1.cs",
+              "RelativeToolTip": "Warp_6Core\\Class1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBQAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T02:55:20.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "NetForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\NetForm.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\NetForm.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\NetForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "RelativeToolTip": "Warp_6Core\\NetForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T09:20:31.865Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "NetWorking.cs",
-              "DocumentMoniker": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\NetWorking.cs",
-              "RelativeDocumentMoniker": "Warp_6Core\\NetWorking.cs",
-              "ToolTip": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\NetWorking.cs",
-              "RelativeToolTip": "Warp_6Core\\NetWorking.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T06:50:13.426Z"
+              "WhenOpened": "2024-05-24T03:07:34.28Z",
+              "EditorCaption": ""
             }
           ]
         }

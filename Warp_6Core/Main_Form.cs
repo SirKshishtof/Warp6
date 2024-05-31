@@ -189,7 +189,7 @@ namespace Warp_6
         private void Step_Button_Click(object sender, EventArgs e)
         {
             Step_Button.Enabled = false;
-            short numOfShip = ShipSelection();
+            sbyte numOfShip = ShipSelection();
             bool playerMadeStep = false;
             if (numOfShip != -1)
             {
