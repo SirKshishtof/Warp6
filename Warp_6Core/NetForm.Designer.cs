@@ -48,7 +48,6 @@
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(GoBack_Button);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "NetForm";
             Text = "Form1";
             ResumeLayout(false);

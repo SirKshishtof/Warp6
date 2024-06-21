@@ -21,8 +21,10 @@ namespace Warp_6Core
 
         private void GoBack_Button_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = new MainForm();
-            mainForm.Show();
+            MainForm.startGame = true;
+            Close();
+            //Hide();
         }
     }
 }
+//

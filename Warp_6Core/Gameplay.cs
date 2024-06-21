@@ -22,39 +22,32 @@ namespace Warp_6Core
 
             return false;
         }
-        public static void WhoGoesFirst(Enemy enemy,ref bool greenGoesFirst)
+        public static void WhoGoesFirst(Bot enemy,ref bool greenGoesFirst)
         {
             Random rnd = new Random();
             string message;
             if (rnd.Next() % 2 != 0)
             {
                 message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
-                
+
                 short NumOfShip = enemy.list[0];
                 enemy.ships[NumOfShip].SetOnSpiral(ref currentPointOnMap, false);
                 enemy.list.RemoveAt(0);
                 Display.DrawWhiteRectangle(NumOfShip, true);
-                
+
                 greenGoesFirst = false;
             }
             else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
 
             Display.ImageRefresh();
             MessageBox.Show(message, "Кто начинает");
+
         }
-        public static void WhoGoesFirst(ref bool greenGoesFirst)
+        public static bool WhoGoesFirst()
         {
             Random rnd = new Random();
-            string message;
-            if (rnd.Next() % 2 != 0)
-            {
-                message = "О нет! Противник прибыл раньше вас! Вы ходите вторым.";
-                greenGoesFirst = false;
-            }
-            else message = "Вам повезло! Противник еще не прибыл! Вы ходите первым.";
-
-            Display.ImageRefresh();
-            MessageBox.Show(message, "Кто начинает");
+            if (rnd.Next() % 2 != 0) return false;
+            else return true; 
         }
         public static void InitializationAllShips(Ship[] playerOne, Ship[] playerTwo)
         {
@@ -69,7 +62,7 @@ namespace Warp_6Core
                 playerTwo[i].position = -1;
             }
         }
-        public static void SaveInformationAboutShips(Player playerOne, Enemy enemy, string SaveName, string gamePhase)
+        public static void SaveInformationAboutShips(Player playerOne, Bot enemy, string SaveName, string gamePhase)
         {
             StreamWriter SaveFile = new StreamWriter(savePath + SaveName + ".txt");
 
@@ -91,7 +84,7 @@ namespace Warp_6Core
             SaveFile.WriteLine(gamePhase);
             SaveFile.Close();
         }
-        public static void DownloadingDataInShips(Player PlayerOne, Enemy enemy, string SaveName, ref string gamePhase)
+        public static void DownloadingDataInShips(Player PlayerOne, Bot enemy, string SaveName, ref string gamePhase)
         {
             StreamReader SaveFile = new StreamReader(savePath + SaveName+".txt");
 

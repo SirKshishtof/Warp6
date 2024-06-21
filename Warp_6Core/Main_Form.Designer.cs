@@ -74,6 +74,7 @@
             PlayerTwoStep_Texbox = new System.Windows.Forms.TextBox();
             GameWithPerson_Button = new System.Windows.Forms.Button();
             GameWithAI_Button = new System.Windows.Forms.Button();
+            SequenceOfSteps_Label = new System.Windows.Forms.Label();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -609,12 +610,23 @@
             GameWithAI_Button.Visible = false;
             GameWithAI_Button.Click += GameWithAI_Buttom_Click;
             // 
+            // SequenceOfSteps_Label
+            // 
+            SequenceOfSteps_Label.AutoSize = true;
+            SequenceOfSteps_Label.Location = new System.Drawing.Point(523, 43);
+            SequenceOfSteps_Label.Name = "SequenceOfSteps_Label";
+            SequenceOfSteps_Label.Size = new System.Drawing.Size(50, 20);
+            SequenceOfSteps_Label.TabIndex = 48;
+            SequenceOfSteps_Label.Text = "label1";
+            SequenceOfSteps_Label.Visible = false;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(SequenceOfSteps_Label);
             Controls.Add(GameWithAI_Button);
             Controls.Add(GameWithPerson_Button);
             Controls.Add(PlayerTwoStep_Texbox);
@@ -642,14 +654,15 @@
             Controls.Add(ShowSpeed_Textbox);
             Controls.Add(LessSpeed_Button);
             Controls.Add(MoreSpeed_Button);
-            Controls.Add(pictureBox);
             Controls.Add(menuStrip1);
+            Controls.Add(pictureBox);
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "MainForm";
             Text = "Гипер 6";
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            Activated += MainForm_Activated;
             Load += Form1_Load;
             GroupAction.ResumeLayout(false);
             GroupAction.PerformLayout();
@@ -709,6 +722,7 @@
         private System.Windows.Forms.TextBox PlayerTwoStep_Texbox;
         private System.Windows.Forms.Button GameWithPerson_Button;
         private System.Windows.Forms.Button GameWithAI_Button;
+        private System.Windows.Forms.Label SequenceOfSteps_Label;
     }
 }
 

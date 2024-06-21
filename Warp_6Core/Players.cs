@@ -6,9 +6,8 @@ namespace Warp_6Core
 { 
     class Player
     {
-        public Player(bool brush)
+        public Player()
         {
-            this.brush = brush;
             shipInCerter = 0;
             for (sbyte i = 0; i < 4; i++) ships[i] = new Ship(1, i);
 
@@ -16,12 +15,17 @@ namespace Warp_6Core
 
             for (sbyte i = 7; i < 9; i++) ships[i] = new Ship(3, i);
         }
+
         public Ship[] ships = new Ship[9];
         public sbyte shipInCerter;
         public bool brush;
     }
-    class Enemy (bool brush) : Player (brush)
+    class Bot: Player 
     {
+        public Bot()
+        {
+            brush = false;
+        }
         public List<sbyte> list = new List<sbyte>();
         
         public void EnemyShipSorting()
@@ -131,31 +135,57 @@ namespace Warp_6Core
             return list;
         }
 
-        public short RandomStep()
+        public byte RandomStep()
         {
             Random rnd = new Random();
-            List<short> shipsInGame = new List<short>();
-
-            for (short i = 0; i < 9; i++) if (ships[i].inGame) shipsInGame.Add(i);
+            List<byte> shipsInGame = new List<byte>();
+            const byte DROPRATE_STEP = 10; 
+            const byte DROPRATE_SPEED = 2;
+            for (byte i = 0; i < 9; i++) if (ships[i].inGame) shipsInGame.Add(i);
 
             short index = shipsInGame[rnd.Next() % shipsInGame.Count()];
-            short action = (short)(rnd.Next() % 10);
+            short action = (short)(rnd.Next() % DROPRATE_STEP);
 
-            for (short j = 0; j < 20; j++)
-            {
-                if (action > 1) return (short)(index * 100);
+            while(true)
+            { 
+                if (action > 1) return (byte)(index);
                 else
                 {
-                    short inc_dec = (short)(rnd.Next() % 2);
+                    short inc_dec = (short)(rnd.Next() % DROPRATE_SPEED);
 
-                    if (inc_dec == 0) if (ships[index].speed > 1) return (short)((index * 100) + (10));
-                        else if (!MaxSppeed(index)) return (short)((index * 100) + (11));
+                    if (inc_dec == 0) if (ships[index].speed > 1) return (byte)(index + 100);
+                    else if (!MaxSppeed(index)) return (byte)(index + 110);
                 }
                 index = shipsInGame[rnd.Next() % shipsInGame.Count()];
-                action = (short)(rnd.Next() % 2);
+                action = (short)(rnd.Next() % DROPRATE_STEP);
             }
-            return -1;
         }
+
+        //public byte RandomStep()
+        //{
+        //    Random rnd = new Random();
+        //    List<short> shipsInGame = new List<short>();
+
+        //    for (short i = 0; i < 9; i++) if (ships[i].inGame) shipsInGame.Add(i);
+
+        //    short index = shipsInGame[rnd.Next() % shipsInGame.Count()];
+        //    short action = (short)(rnd.Next() % 10);
+
+        //    for (short j = 0; j < 20; j++)
+        //    {
+        //        if (action > 1) return (byte)(index * 100);
+        //        else
+        //        {
+        //            short inc_dec = (short)(rnd.Next() % 2);
+
+        //            if (inc_dec == 0) if (ships[index].speed > 1) return (byte)((index * 100) + (10));
+        //                else if (!MaxSppeed(index)) return (byte)((index * 100) + (11));
+        //        }
+        //        index = shipsInGame[rnd.Next() % shipsInGame.Count()];
+        //        action = (short)(rnd.Next() % 2);
+        //    }
+        //    return 255;
+        //}
     }
 }
 

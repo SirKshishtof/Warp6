@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Numerics;
 using System.Windows.Forms;
+using Warp_6Core;
 
 namespace Warp_6Core
 { 
@@ -26,7 +28,7 @@ namespace Warp_6Core
     static class Display
     {
         private const double TURN = 3.11;//Коффициент задающий поворот спирали и точек по единичной окружности
-        private const short VERTICALSHEAR = 60;//Сдвиг всей картинки относительно оси Y 
+        private const short VERTICALSHEAR = 35;//Сдвиг всей картинки относительно оси Y
         private const double KOF = 12;//Коффициент задающий ширину между витками спирали и точек
         private const sbyte FONTSMALL = 12;//Шрифт меленькой цифры на фигуре
         private const sbyte FONTBIG = 25;//Шрифт большой цифры на фигуре
@@ -128,7 +130,7 @@ namespace Warp_6Core
         private static float PolarToY(float pi)//перевод полярной координаты в координату Y
         {
             double p = pi * KOF;
-            float y = (float)(p * Math.Sin(pi + TURN) + pictureBox.Size.Height / 2 - 25);
+            float y = (float)(p * Math.Sin(pi + TURN) + pictureBox.Size.Height / 2);
             return y;
         }
         private static float X_GetCoord(Ship Ship) => (float)position[Ship.position].x;//получение координаты х корабля
@@ -198,7 +200,9 @@ namespace Warp_6Core
 
             BlackPen.DashStyle = DashStyle.Dash;
 
-            DrawCircle(pictureBox.Size.Width / 2, pictureBox.Size.Height / 2 - 8 + VERTICALSHEAR, radius);
+            x = PolarToX(pi);
+            y = PolarToY(pi);
+            DrawCircle(x, y + VERTICALSHEAR, radius);//Отрисовка Большоко круга в центре
 
             radius = 4;
             //Отрисовывание сприрали 
@@ -339,11 +343,17 @@ namespace Warp_6Core
             graphics.DrawImage(bitmap, 0, 0, pictureBox.Size.Width, pictureBox.Size.Height);
 
         }
-        public static void DrawMapAndShips(Ship[] playerOneShips, Ship[] PlayerTwoShips)
+        public static void DrawMapAndAllShips<T>(Player playerOne,T playerTwo) where T : Player
         {
             DrawMap();
-            DrawPlayersShips(playerOneShips,true);
-            DrawPlayersShips(PlayerTwoShips, false);
+            DrawPlayersShips(playerOne.ships, playerOne.brush);
+            DrawPlayersShips(playerTwo.ships, playerTwo.brush);
+            DrawImage();
+        }
+        public static void DrawMapAndShips<T>(T player) where T : Player
+        {
+            DrawMap();
+            DrawPlayersShips(player.ships, player.brush);
             DrawImage();
         }
         public static void ImageRefresh()

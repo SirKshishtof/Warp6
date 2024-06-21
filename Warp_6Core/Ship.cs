@@ -13,7 +13,6 @@ namespace Warp_6Core
         {
             this.type = type;
             this.index = index;
-            position = -1;
         }
         public sbyte index;
         public sbyte position;
