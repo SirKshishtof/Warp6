@@ -187,11 +187,22 @@ namespace Warp_6
         }
         void SequencOfSteps(bool isYourStep, bool brush)
         {
-            if (isYourStep) SequenceOfSteps_Label.Text = "Ваш ход";
-            else SequenceOfSteps_Label.Text = "Ход соперника";
+            if (isYourStep)
+            {
+                SequenceOfSteps_Label.Text = "Ваш ход";
 
-            if (brush) SequenceOfSteps_Label.BackColor = Color.LimeGreen;
-            else SequenceOfSteps_Label.BackColor = Color.Gold;
+                if (brush) SequenceOfSteps_Label.BackColor = Color.LimeGreen;
+                else SequenceOfSteps_Label.BackColor = Color.Gold;
+            }
+            else
+            {
+                SequenceOfSteps_Label.Text = "Ход соперника";
+                if (!brush) SequenceOfSteps_Label.BackColor = Color.LimeGreen;
+                else SequenceOfSteps_Label.BackColor = Color.Gold;
+            }
+
+            //if (brush) SequenceOfSteps_Label.BackColor = Color.LimeGreen;
+            //else SequenceOfSteps_Label.BackColor = Color.Gold;
         }
         void EnemyStep<T>(T player, byte playerStep) where T : Player
         {
@@ -501,7 +512,7 @@ namespace Warp_6
         }
         private void GameWithAI_Buttom_Click(object sender, EventArgs e)
         {
-            playerOne.brush = true; 
+            playerOne.brush = true;
             StartGameMenu();
             Gameplay.InitializationAllShips(playerOne.ships, enemy.ships);
             enemy.EnemyShipSorting();
@@ -701,6 +712,14 @@ namespace Warp_6
                 //Display.DrawMapAndAllShips(playerOne, playerTwo);
                 //Gameplay.WhoGoesFirst(ref greenGoesFirst);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if ((i % 2) != 0) { SequencOfSteps(true, true); }
+            else { SequencOfSteps(false, true); }
+            i++;
+            Code.Text = i+"";
         }
     }
 }//792 //776//737//688//628//443

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HoTwvkHlY5GNavfvkIA0d/WG20nCFmaRx9SYlMZS5xRGeAjf2yRYZOpTaPjHIghm2YgfUDd6lE3/N620amcP6Q==",
+  "dgSpecHash": "Nwr+oAxpUu490EBnECqUVvQYkMsRfZczKvcWSdeVXN4HwGYVBWlLvvyOT1dHG0i+oldao47ncGjzzA2tf0+nkg==",
   "success": true,
-  "projectFilePath": "D:\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
+  "projectFilePath": "D:\\Это база\\Zlowolf\\Coursework\\W6\\Warp_6Core\\Warp_6Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wessy\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
   ],

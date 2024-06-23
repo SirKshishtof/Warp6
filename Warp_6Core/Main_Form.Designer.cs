@@ -75,6 +75,7 @@
             GameWithPerson_Button = new System.Windows.Forms.Button();
             GameWithAI_Button = new System.Windows.Forms.Button();
             SequenceOfSteps_Label = new System.Windows.Forms.Label();
+            button1 = new System.Windows.Forms.Button();
             GroupAction.SuspendLayout();
             GroupShip.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -613,12 +614,21 @@
             // SequenceOfSteps_Label
             // 
             SequenceOfSteps_Label.AutoSize = true;
-            SequenceOfSteps_Label.Location = new System.Drawing.Point(523, 43);
+            SequenceOfSteps_Label.Location = new System.Drawing.Point(523, 65);
             SequenceOfSteps_Label.Name = "SequenceOfSteps_Label";
             SequenceOfSteps_Label.Size = new System.Drawing.Size(50, 20);
             SequenceOfSteps_Label.TabIndex = 48;
             SequenceOfSteps_Label.Text = "label1";
-            SequenceOfSteps_Label.Visible = false;
+            // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(441, 125);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(94, 29);
+            button1.TabIndex = 49;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // MainForm
             // 
@@ -626,6 +636,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.White;
             ClientSize = new System.Drawing.Size(1902, 1055);
+            Controls.Add(button1);
             Controls.Add(SequenceOfSteps_Label);
             Controls.Add(GameWithAI_Button);
             Controls.Add(GameWithPerson_Button);
@@ -723,6 +734,7 @@
         private System.Windows.Forms.Button GameWithPerson_Button;
         private System.Windows.Forms.Button GameWithAI_Button;
         private System.Windows.Forms.Label SequenceOfSteps_Label;
+        private System.Windows.Forms.Button button1;
     }
 }
 
